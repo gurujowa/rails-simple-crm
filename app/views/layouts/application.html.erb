@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>社内顧客DB</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+  <script src="/bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="navbar-inverse navbar">
+    <div class="navbar-inner">
+      <div class="container" style="width: auto;">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">顧客DB</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><%= link_to "検索画面" ,controller: "companies", action: "index"%></li>
+            <li><%= link_to "ログイン", controller: "users", action: "current" %></li>
+            <li><%= link_to "ステータス管理", controller: "statuses" %></li>
+          </ul>
+          <ul class="nav pull-right">
+                      <li><a href="/current">ユーザー名：<%= session[:current_layout_user] %></a></li>
+          </ul>
+          <!-- /.nav-collapse -->
+      </div>
+    </div><!-- /navbar-inner -->
+  </div>
+
+<%= yield %>
+
+</body>
+</html>

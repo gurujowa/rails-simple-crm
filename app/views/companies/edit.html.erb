@@ -1,0 +1,25 @@
+<h1>編集</h1>
+
+<%= render 'form' %>
+<table class="table table-striped">
+ <tr>
+ 	<th>カラム</th>
+ 	<th>値</th>
+ </tr>
+ <tr>
+ 	<td>作成者</td>
+ 	<td><%=@company.created_by%></td>
+ </tr>
+ <tr>
+ 	<td>作成日</td>
+ 	<td><%=@company.created_at%></td>
+ </tr>
+ <tr>
+ 	<td>更新者</td>
+ 	<td><%=@company.updated_by%></td>
+ </tr>
+  <tr>
+ 	<td>更新日</td>
+ 	<td><%=@company.updated_at%></td>
+ </tr>
+</table>

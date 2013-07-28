@@ -1,0 +1,29 @@
+<h1>検索結果</h1>
+<%= notice %>
+<table id="company" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>params[:company] %>">
+<thead>
+  <tr>
+    <th class="client_name">会社名</th>
+    <th class="rank">ステータス</th>
+    <th>担当者</th>
+    <th>更新日</th>
+    <th>次回アプローチ</th>
+    <th>営業マン</th>
+    <th class="contact">コンタクト</th>
+  </tr>
+</thead>
+<tbody>
+  <% @datas.each do |company| %>
+    <tr>
+      <td class="client_name"></td>
+      <td class="rank"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
+
