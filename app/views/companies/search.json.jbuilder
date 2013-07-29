@@ -16,7 +16,8 @@ end
         sales_person,
 #        company.created_by,
 #        company.updated_by,
-        company.getContact
+        company.getContact,
+        '<input type="checkbox" name="check' + company.id.to_s + '" value="' + company.id.to_s + '">'
 ]
 end
 

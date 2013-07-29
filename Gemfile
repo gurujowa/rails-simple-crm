@@ -4,9 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
-#group :development, :test do
-  gem 'sqlite3'
-#end
+gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -37,10 +35,11 @@ group :doc do
 end
 
 gem 'pdfkit'
+gem 'validates_email_format_of'
+
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'
 
-gem 'validates_email_format_of'
 gem 'will_paginate'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -52,5 +51,5 @@ gem 'will_paginate'
 # gem 'capistrano', group: :development
 
 # Use debugger
-gem 'debugger', group: [:development, :test]
+#gem 'debugger', group: [:development, :test]
 

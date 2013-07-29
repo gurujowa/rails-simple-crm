@@ -16,6 +16,33 @@ class CompaniesController < ApplicationController
     end
   end
   
+ def pdf
+    ids = []
+    params.each do |p|
+      if ( p[0].include?("check") )
+        ids.push(p[1])
+      end
+    end
+
+    @companies = Company.find(ids)
+    if (@companies.length > 21)
+      flash[:error] = '２２個以上を印刷することはできません'
+      redirect_to :action=> 'search', :company => session[:last_search_url]
+      return 
+    end
+    respond_to do |format|
+      format.html { 
+        render :layout => "pdf.html"
+      }
+      format.pdf {
+        html = render_to_string(:layout => "pdf.html", :formats => [:html])
+        kit = PDFKit.new(html)
+        send_data(kit.to_pdf, :filename => "ラベル.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+      }
+    end
+  end
+
   def new
     @company = Company.new
   end

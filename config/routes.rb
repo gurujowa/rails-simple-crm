@@ -10,6 +10,9 @@ Mycrm::Application.routes.draw do
   end
   
   get 'companies/contact_delete/:id' => 'companies#contact_delete'
+  get 'companies_pdf' => 'companies#pdf'
+  get 'companies_label' => 'companies#label'
+   
   
   get 'current' => 'users#current'
   get 'login' => 'users#login'

@@ -3,12 +3,19 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
         $( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'})
-        $('#company').dataTable
+        $('#label').click( ->
+          sData = $('input', oTable.fnGetNodes()).serialize()
+          console.log(sData)
+          if sData == "" 
+            alert("チェックがありません")
+            return false
+          w = window.open()
+          w.location.href = "/companies_pdf?" + sData
+          return false 
+        )
+        oTable = $('#company').dataTable
           sPaginationType: "full_numbers"
           bJQueryUI: true
-          sDom: '<"H"Tfr>t<"F"ip>'
-          oTableTools:
-            sSwfPath: "/assets/swf/copy_csv_xls_pdf.swf"
           bProcessing: true
           bServerSide: true
           bStateSave:  false
@@ -24,8 +31,10 @@ jQuery ->
             "sInfo": "TOTAL_TOTAL_ _START_/_END_"
             "sSearch": "検索："
           aoColumnDefs:[
-            sWidth: "50px", aTargets:["rank"]
-            sWidth: "50%", bSortable: false ,aTargets:["contact"]
+            {sWidth: "200px", aTargets:["client_name"]},
+            {sWidth: "70px", aTargets:["rank"]},
+            {sWidth: "50%", bSortable: false ,aTargets:["contact"]},
+            {sWidth: "20px", bSortable: false, aTargets:["check"]}
            ]
 
-           
+         

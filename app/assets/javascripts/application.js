@@ -15,7 +15,5 @@
 //= require jquery.ui.datepicker
 //= require jquery.ui.datepicker-ja
 //= require dataTables/jquery.dataTables
-//= require dataTables/extras/TableTools.min
-//= require dataTables/extras/ZeroClipboard
 //= require_tree .
 

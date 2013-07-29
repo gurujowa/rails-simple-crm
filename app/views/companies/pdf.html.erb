@@ -1,0 +1,16 @@
+<div class="container" style="width: 1200px">
+<div class="row">
+<% @companies.each do |c| %>
+<div style="margin:0; height: 242px;width:33%;float:left;">
+	<div style="margin-top:30px;margin-left:30px;">
+	〒<%= c.zipcode %><br>
+	<%= c.prefecture%><%= c.city%><%= c.address%><br><%= c.building%><br>
+		<div style="margin-top:30px;">
+		<%= c.client_name %><br>
+		<span style="font-size:x-large"><%= c.client_person %> 様</span>
+		</div>
+	</div>
+	</div>
+<% end %>
+</div>
+</div>

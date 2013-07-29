@@ -1,5 +1,15 @@
-<h1>検索結果</h1>
-<%= notice %>
+    <h1>検索結果</h1>
+    <div class="btn-group dropup" style="float:right">
+      <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+        チェックしたものを <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="#" id="label" data-source="<%= url_for(:action => 'pdf') %>">ラベル印刷</a>
+        </li>
+      </ul>
+    </div>
+<%= flash_notifications %>
 <table id="company" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>params[:company] %>">
 <thead>
   <tr>
@@ -10,13 +20,15 @@
     <th>次回アプローチ</th>
     <th>営業マン</th>
     <th class="contact">コンタクト</th>
+    <th class="check">CH</th>
   </tr>
 </thead>
 <tbody>
   <% @datas.each do |company| %>
     <tr>
-      <td class="client_name"></td>
-      <td class="rank"></td>
+      <td></td>
+      <td></td>
+      <td></td>
       <td></td>
       <td></td>
       <td></td>
@@ -26,4 +38,3 @@
   <% end %>
 </tbody>
 </table>
-
