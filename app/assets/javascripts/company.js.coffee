@@ -10,7 +10,7 @@ jQuery ->
             alert("チェックがありません")
             return false
           w = window.open()
-          w.location.href = "/companies_pdf?" + sData
+          w.location.href = "/companies_pdf.pdf?" + sData
           return false 
         )
         oTable = $('#company').dataTable

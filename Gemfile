@@ -34,6 +34,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+
 gem 'pdfkit'
 gem 'validates_email_format_of'
 
