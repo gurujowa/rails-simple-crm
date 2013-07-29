@@ -3,7 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
         $( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'})
-#        $('.datetimepicker').datetimepicker({language: 'ja'})
         $('#company').dataTable
           sPaginationType: "full_numbers"
           bJQueryUI: true
