@@ -13,6 +13,28 @@ jQuery ->
           w.location.href = "/companies_pdf.pdf?" + sData
           return false 
         )
+        
+        $('#up_postsend').click( ->
+          sData = $('input', oTable.fnGetNodes()).serialize()
+          console.log(sData)
+          if sData == "" 
+            alert("チェックがありません")
+            return false
+          $.ajax '/up_postsend',
+            type: 'GET'
+            dataType: 'json'
+            timeout: 1000
+            data : sData
+            error:(jqXHR, textStatus, errorThrown) ->
+              alert(errorThrown)
+            success: (data, textStatus, jqXHR) ->
+              noty(
+                text: data["text"]
+                type: data["type"]
+              )
+          return false 
+        )
+        
         oTable = $('#company').dataTable
           sPaginationType: "full_numbers"
           bJQueryUI: true

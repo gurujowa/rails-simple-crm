@@ -17,14 +17,7 @@ class CompaniesController < ApplicationController
   end
   
  def pdf
-    ids = []
-    params.each do |p|
-      if ( p[0].include?("check") )
-        ids.push(p[1])
-      end
-    end
-
-    @companies = Company.find(ids)
+    @companies = Company.find(checkbox_append(params))
     if (@companies.length > 21)
       flash[:error] = '２２個以上を印刷することはできません'
       redirect_to :action=> 'search', :company => session[:last_search_url]
@@ -41,6 +34,24 @@ class CompaniesController < ApplicationController
         return # to avoid double render call
       }
     end
+  end
+  
+  def up_postsend
+    @companies = Company.find(checkbox_append(params))
+    
+    begin
+      @companies.each do |c|
+        c.status_id = 14
+        c.save!
+      end
+    rescue => e
+      logger.fatal "up_postsend error  ||" + e.message
+      render :json => {'text' => e.message, 'type' => 'error'}
+      return
+    end
+
+    render :json => {'text' => 'ステータスの変更が完了しました', 'type' => 'alert'}
+    return
   end
 
   def new
@@ -91,6 +102,17 @@ class CompaniesController < ApplicationController
     @company.destroy
     flash[:notice] = '会社情報を削除しました'
     redirect_to :action=> 'search', :company => session[:last_search_url]
+  end
+  
+  private
+  def checkbox_append(params)
+    ids = []
+    params.each do |p|
+      if ( p[0].include?("check") )
+        ids.push(p[1])
+      end
+    end
+    return ids
   end
   
     private
