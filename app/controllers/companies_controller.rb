@@ -57,6 +57,15 @@ class CompaniesController < ApplicationController
     end
   end
   
+  # DELETE /statuses/1
+  # DELETE /statuses/1.json
+  def destroy
+    @company = Company.find(params[:id])
+    @company.destroy
+    flash[:notice] = '会社情報を削除しました'
+    redirect_to :action=> 'search', :company => session[:last_search_url]
+  end
+  
     private
     # Use callbacks to share common setup or constraints between actions.
     def check_user

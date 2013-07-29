@@ -1,6 +1,8 @@
 <h1>編集</h1>
 
 <%= render 'form' %>
+<%= link_to '削除する', @company, method: :delete, data: { confirm: '本当に削除しますか' } ,  :class=>"btn"%>
+
 <table class="table table-striped">
  <tr>
  	<th>カラム</th>
