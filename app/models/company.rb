@@ -9,6 +9,7 @@ class Company < ActiveRecord::Base
   validates :fax, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}
   validates :mail,  :email_format => {:message => ' メールアドレスの形式が不適切です', :allow_blank=>true} 
   validates :client_name, presence: true, length: {maximum: 50}
+  validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
   validates :bill,  :numericality => true, :allow_nil => true
 
   def getAddress
