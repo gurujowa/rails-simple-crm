@@ -40,6 +40,7 @@ gem 'validates_email_format_of'
 
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
 gem 'jquery-ui-rails'
+gem 'lazy_high_charts'
 
 gem 'will_paginate'
 # Use ActiveModel has_secure_password

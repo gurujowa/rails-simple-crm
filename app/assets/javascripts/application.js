@@ -16,4 +16,3 @@
 //= require jquery.ui.datepicker-ja
 //= require dataTables/jquery.dataTables
 //= require_tree .
-

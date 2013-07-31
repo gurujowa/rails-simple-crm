@@ -1,10 +1,12 @@
 Mycrm::Application.routes.draw do
 
-  resources :statuses
+  get "graphs/index"
+  get "graphs/created"
 
+
+  resources :statuses
   resources :users
-  resources :contacts, :only => [:destroy]  
-  
+  resources :contacts, :only => [:destroy]    
   resources :companies, except: [:show] do
     collection { get "search"}
   end

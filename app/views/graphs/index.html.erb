@@ -1,0 +1,10 @@
+<script src="/highcharts/js/highcharts.js"></script>
+<h1>レポートグラフ</h1>
+<div class="row-fluid">
+	<div class="span1">
+		<%= render 'sidebar' %>
+    </div>
+    <div class="span5">
+    	<%= high_chart("sample", @h) %>
+    </div>
+</div>

@@ -1,3 +1,4 @@
+
 <h1>会社検索</h1>
 
 <%= form_for(@company, :url => { :action => 'search'}, :html => {:method => 'GET'}) do |form|%>
@@ -5,8 +6,9 @@
 ステータス <%= form.select :status_id , options_from_statuses() %><br>
 都道府県 <%= form.text_field :prefecture %>　市町村 <%= form.text_field :city %><br>
 営業マン<%= form.select :sales_person , options_from_users() %><br>
-作成者 <%= form.select :created_by , options_from_users() %><br>
-更新者<%= form.select :updated_by , options_from_users() %>
+作成者 <%= form.select :created_by , options_from_users() %> 作成日 <%= form.text_field :created_at, 'data-format' => 'yyyy-MM-dd', :class=>"datepicker" %><br>
+更新者<%= form.select :updated_by , options_from_users() %> 更新日<%= form.text_field :updated_at, 'data-format' => 'yyyy-MM-dd', :class=>"datepicker" %><br>
+
 <br>
 <%= submit_tag "検索する", :class=>"btn btn-primary" %>
 </form>

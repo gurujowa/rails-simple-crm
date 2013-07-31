@@ -50,6 +50,12 @@ class CompaniesDatatable
     if p_comp['updated_by'].present?
       companies = companies.where(:updated_by => p_comp['updated_by'])
     end
+    if p_comp['created_at'].present?
+      companies = companies.where(:created_at => Date.parse(p_comp['created_at']).beginning_of_day..Date.parse(p_comp['created_at']).end_of_day)
+    end
+    if p_comp['updated_at'].present?
+      companies = companies.where(:updated_at => Date.parse(p_comp['updated_at']).beginning_of_day..Date.parse(p_comp['updated_at']).end_of_day)
+    end
     
     
     return companies
