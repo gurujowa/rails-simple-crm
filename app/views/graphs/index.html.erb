@@ -1,10 +1,13 @@
 <script src="/highcharts/js/highcharts.js"></script>
 <h1>レポートグラフ</h1>
 <div class="row-fluid">
-	<div class="span1">
+	<div class="span2">
 		<%= render 'sidebar' %>
     </div>
     <div class="span5">
-    	<%= high_chart("sample", @h) %>
+    	<%= high_chart("day_created", @day_created) %>
+    </div>
+    <div class="span5">
+    	<%= high_chart("week_created", @week_created) %>
     </div>
 </div>
