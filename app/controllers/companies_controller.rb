@@ -18,6 +18,9 @@ class CompaniesController < ApplicationController
   
  def pdf
     @companies = Company.find(checkbox_append(params))
+    if (params["junban"].present?)
+      params["junban"].to_i.times{ @companies.unshift(Company.new)}
+    end
     if (@companies.length > 21)
       flash[:error] = '２２個以上を印刷することはできません'
       redirect_to :action=> 'search', :company => session[:last_search_url]
@@ -25,9 +28,12 @@ class CompaniesController < ApplicationController
     end
     respond_to do |format|
       format.html { 
+        @format_html_flg = true
+        @checkbox_params = checkbox_append(params)
         render :layout => "pdf.html"
       }
       format.pdf {
+        @format_html_flg = false
         html = render_to_string(:layout => "pdf.html", :formats => [:html])
         kit = PDFKit.new(html)
         send_data(kit.to_pdf, :filename => "ラベル.pdf", :type => 'application/pdf')
