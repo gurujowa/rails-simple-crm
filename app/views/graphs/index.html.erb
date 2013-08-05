@@ -5,9 +5,12 @@
 		<%= render 'sidebar' %>
     </div>
     <div class="span5">
-    	<%= high_chart("day_created", @day_created) %>
+    	<%= high_chart("day_created", @day_created) %><br>
+    	<%= high_chart("rank_stacking", @rank_stacking) %>
     </div>
     <div class="span5">
-    	<%= high_chart("week_created", @week_created) %>
+    	<%= high_chart("week_created", @week_created) %><br>
+    	<%= high_chart("closing", @closing) %>
     </div>
+
 </div>
