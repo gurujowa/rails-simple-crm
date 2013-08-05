@@ -101,19 +101,21 @@ class GraphsController < ApplicationController
     data = sort_by_key(data)
 
     graph = LazyHighCharts::HighChart.new("graph") do |f|
+ 
       f.ｙAxis(
+      :min => 2,
       :title => {:text => '登録数'}, 
-      :stackLabels => {:enabled => true} 
       )
-      f.chart(:type => "column")
+      f.yAxis(:stackLabels => {:enabled => true} )
+      f.chart(:type => "column", :height => "600")
       f.title(:text => "ランク積み上げ(FAX)")
+      f.legend(:enabled => false)
       f.xAxis(:categories => sort_by_key(column).keys)
       data.each do |d|
         f.series(:name => d[0], :data => sort_by_key(d[1]).values, :stack => "male")
       end
-      f.plot_options(:column => {
-        :stacking => "normal"
-      })
+      f.plot_options(:column => {:stacking => "normal" ,       :dataLabels => { :enabled => true, :color => "white"}}
+      )
     end
     
     return graph
