@@ -93,7 +93,7 @@ class CompaniesController < ApplicationController
     @company.updated_by = session[:current_user].name
     
     if @company.save
-      @log = Log.new(:company_id => @company.id, :status_id => @company.status_id, , :created_by => @company.created_by)
+      @log = Log.new(:company_id => @company.id, :status_id => @company.status_id,  :created_by => @company.created_by)
       @log.save!
       flash[:notice] = '会社情報が変更されました。'
       redirect_to :action=> 'search', :company => session[:last_search_url]
