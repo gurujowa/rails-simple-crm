@@ -44,6 +44,9 @@ class CompaniesDatatable
     if p_comp['status_id'].present?
       companies = companies.where(:status_id => p_comp['status_id'])
     end
+    if p_comp['lead'].present?
+      companies = companies.where(:lead => p_comp['lead'])
+    end
     if p_comp['created_by'].present?
       companies = companies.where(:created_by => p_comp['created_by'])
     end
