@@ -11,7 +11,7 @@
       </ul>
     </div>
 <%= flash_notifications %>
-<table id="company" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>params[:company] %>">
+<table id="company" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>params[:company], :rank => params[:rank] %>">
 <thead>
   <tr>
     <th class="client_name">会社名</th>
