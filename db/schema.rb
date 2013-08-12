@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726110620) do
+ActiveRecord::Schema.define(version: 20130812025027) do
 
   create_table "companies", force: true do |t|
     t.datetime "created_at"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20130726110620) do
     t.string   "sales_person"
     t.date     "approach_day"
     t.integer  "bill"
+    t.integer  "chance"
   end
 
   add_index "companies", ["city"], name: "index_companies_on_city"

@@ -1,5 +1,6 @@
 class Company < ActiveRecord::Base
   has_many :contact, :dependent => :destroy
+  belongs_to :status
   accepts_nested_attributes_for :contact,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? }
 
   validates :status_id, presence: true  

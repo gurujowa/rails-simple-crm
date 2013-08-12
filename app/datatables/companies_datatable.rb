@@ -43,6 +43,9 @@ class CompaniesDatatable
     end
     if p_comp['status_id'].present?
       companies = companies.where(:status_id => p_comp['status_id'])
+    elsif params[:rank].present?
+      status_array = Status.find_all_by_rank(params['rank'])
+      companies = companies.where(:status_id => status_array)
     end
     if p_comp['lead'].present?
       companies = companies.where(:lead => p_comp['lead'])
