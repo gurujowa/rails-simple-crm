@@ -14,5 +14,11 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require jquery.ui.datepicker-ja
+//= require bootstrap-switch.min
+//= require jquery.cookie
+//= require noty/jquery.noty
+//= require noty/layouts/top
+//= require noty/themes/default
+//= require bootstrap.min
 //= require dataTables/jquery.dataTables
 //= require_tree .

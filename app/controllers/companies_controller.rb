@@ -2,6 +2,7 @@ class CompaniesController < ApplicationController
   before_action :check_user
   def index
     @company = Company.new
+    @statuses = Status.find_all_by_active(true)
   end
 
   def search
@@ -10,6 +11,9 @@ class CompaniesController < ApplicationController
       session[:last_search_url] = params[:company]
       
       @datatables = CompaniesDatatable.new(view_context)
+      @company = Company.new
+      @statuses = Status.find_all_by_active(true)
+      @company.assign_attributes(company_params)
     rescue => e
       logger.fatal "Model Error from company/search  ||" + e.message
       render :text => e
@@ -68,7 +72,7 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    @company.created_by = session[:current_user].name
+    @company.created_by = session[:current_user].id
 
       if @company.save
         @log = Log.new(:company_id => @company.id, :status_id => @company.status_id, :created_by => session[:current_user].name)
@@ -90,7 +94,7 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:id])
     @company.assign_attributes(company_params)
-    @company.updated_by = session[:current_user].name
+    @company.updated_by = session[:current_user].id
     
     if @company.save
       @log = Log.new(:company_id => @company.id, :status_id => @company.status_id,  :created_by => session[:current_user].name)
@@ -133,6 +137,7 @@ class CompaniesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
       params.require(:company).permit(:client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
-      :city, :address, :building, :sales_person,:approach_day, :chance,  :lead,:bill, contact_attributes: [:id, :memo])
+      :city, :address, :building, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
+      :bill, contact_attributes: [:id, :memo])
   end
 end

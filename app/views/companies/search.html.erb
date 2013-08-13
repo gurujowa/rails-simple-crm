@@ -1,4 +1,4 @@
-    <h1>検索結果</h1>
+    <h4>検索結果</h4>
     <div class="btn-group dropup" style="float:right">
       <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
         チェックしたものを <span class="caret"></span>
@@ -11,31 +11,24 @@
       </ul>
     </div>
 <%= flash_notifications %>
+<div class="row-fluid">
+<div class="span2">
+<%= render(:partial => "search_form") %>
+<table id="toggle_table" class="table table-bordered">
+</table>
+</div>
+<div class="span10">
 <table id="company" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>params[:company], :rank => params[:rank] %>">
 <thead>
   <tr>
-    <th class="client_name">会社名</th>
-    <th class="rank">ステータス</th>
-    <th>担当者</th>
-    <th>更新日</th>
-    <th>次回アプローチ</th>
-    <th>営業マン</th>
-    <th class="contact">コンタクト</th>
-    <th class="check">CH</th>
   </tr>
 </thead>
 <tbody>
   <% @datas.each do |company| %>
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
     </tr>
   <% end %>
 </tbody>
 </table>
+</div>
+</div>

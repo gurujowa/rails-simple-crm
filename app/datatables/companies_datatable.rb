@@ -76,7 +76,7 @@ class CompaniesDatatable
   end
 
   def sort_column
-    sort_hash = {0 => "client_name" , 1 => "status_id", 2 => "client_person", 3 => "updated_at", 4=>"approach_day", 5=>"sales_person"}
+    sort_hash = {0 => "client_name" , 1 => "status_id", 2 => "client_person", 3 => "updated_at", 4=>"approach_day", 5=>"sales_person", 6=>"bill", 7=>"chance",8 => "lead", 9 => "created_by", 10 => "updated_by"}
     if params[:iSortCol_0].present?
       sort_column = sort_hash.fetch(params[:iSortCol_0].to_i)
     else

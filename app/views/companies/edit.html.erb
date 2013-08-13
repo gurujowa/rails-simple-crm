@@ -10,7 +10,7 @@
  </tr>
  <tr>
  	<td>作成者</td>
- 	<td><%=@company.created_by%></td>
+ 	<td><%=User.find(@company.created_by).name%></td>
  </tr>
  <tr>
  	<td>作成日</td>
@@ -18,7 +18,7 @@
  </tr>
  <tr>
  	<td>更新者</td>
- 	<td><%=@company.updated_by%></td>
+ 	<td><%=User.find(@company.updated_by).name%></td>
  </tr>
   <tr>
  	<td>更新日</td>
