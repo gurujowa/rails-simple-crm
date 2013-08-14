@@ -66,7 +66,7 @@ class CompaniesController < ApplicationController
 
   def new
     @company = Company.new
-    @company.contact.build
+    @company.contact.build(:created_by => session[:current_user])
   end
 
 
@@ -87,7 +87,7 @@ class CompaniesController < ApplicationController
   
   def edit
     @company = Company.find(params[:id])
-    @company.contact.build
+    @company.contact.build(:created_by => session[:current_user].id)
   end
   
 
@@ -138,6 +138,6 @@ class CompaniesController < ApplicationController
   def company_params
       params.require(:company).permit(:client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
       :city, :address, :building, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
-      :bill, contact_attributes: [:id, :memo])
+      :bill, contact_attributes: [:id, :memo, :created_by])
   end
 end

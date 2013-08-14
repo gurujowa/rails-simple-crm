@@ -43,6 +43,7 @@ gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
 
 gem 'will_paginate'
+gem 'whenever', :require => false
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

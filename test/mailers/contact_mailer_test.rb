@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class ContactsTest < ActionMailer::TestCase
+class ContactMailerTest < ActionMailer::TestCase
   test "today" do
-    mail = Contacts.today
+    mail = ContactMailer.today
     assert_equal "Today", mail.subject
     assert_equal ["to@example.org"], mail.to
     assert_equal ["from@example.com"], mail.from

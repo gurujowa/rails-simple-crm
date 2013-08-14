@@ -12,4 +12,11 @@ module ApplicationHelper
       return javascript_tag "var n = noty({text: '" + message  + "', type: '" + color + "', timeout: 2000});"
     end
   end
+  
+  def simple_date(time)
+    if time.present?
+      return time.strftime("%Y年%m月%d日")
+    end
+  end
+
 end

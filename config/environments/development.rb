@@ -29,7 +29,10 @@ Mycrm::Application.configure do
   config.assets.debug = true
   config.assets.compress = false
   
-config.action_mailer.raise_delivery_errors = true
-config.action_mailer.delivery_method = :file
-config.action_mailer.file_settings = { :location => Rails.root.join('tmp/mail') }
+#config.action_mailer.raise_delivery_errors = true
+#config.action_mailer.delivery_method = :file
+#config.action_mailer.file_settings = { :location => Rails.root.join('tmp/mail') }
+
+config.action_mailer.default_url_options = { :host => "localhost", :port => 3000 }
+config.action_mailer.delivery_method = :smtp
 end
