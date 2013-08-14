@@ -6,18 +6,17 @@ class CompaniesController < ApplicationController
   end
 
   def search
-    begin
       @datas = Company.paginate(:page => params[:page],:order => 'created_at desc', :per_page => 10)
       session[:last_search_url] = params[:company]
       
       @datatables = CompaniesDatatable.new(view_context)
       @company = Company.new
       @statuses = Status.find_all_by_active(true)
-      @company.assign_attributes(company_params)
-    rescue => e
-      logger.fatal "Model Error from company/search  ||" + e.message
-      render :text => e
-    end
+      if (params[:company].present?)
+        @company.assign_attributes(company_params)
+      end
+      @company_params =  @company.attributes.to_hash
+  #    raise @company_params.inspect
   end
   
  def pdf
@@ -136,7 +135,7 @@ class CompaniesController < ApplicationController
   
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
-      params.require(:company).permit(:client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
+      params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
       :city, :address, :building, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
       :bill, contact_attributes: [:id, :memo, :created_by])
   end

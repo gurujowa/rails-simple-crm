@@ -18,7 +18,7 @@
 </table>
 </div>
 <div class="span10">
-<table id="company" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>params[:company], :rank => params[:rank] %>">
+<table id="company" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>@company_params, :rank => params[:rank] %>">
 <thead>
   <tr>
   </tr>

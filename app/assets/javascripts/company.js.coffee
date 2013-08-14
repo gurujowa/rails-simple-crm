@@ -62,7 +62,8 @@ jQuery ->
     aoColumns: companytable.getColumnDefs()
   $("form.search_form").submit(->
     $.removeCookie("SpryMedia_DataTables_company_search", { path: '/companies/' })
-    )
+    return true
+  )
   $('.label-toggle-switch').on('switch-change', (e, data)-> 
       oTable = $('#company').dataTable()
       switch_column = data.el.context.id
