@@ -27,7 +27,22 @@ class Company < ActiveRecord::Base
     return address
   end
   
- 
+  def getCreatedBy()
+    if(self.created_by.present?)
+      User.find(@company.created_by).name
+    else
+      return ""
+    end
+  end
+  
+   def getUpdatedBy()
+    if(self.updated_by.present?)
+      User.find(@company.updated_by).name
+    else
+      return ""
+    end
+  end
+  
   
   def getContact
     con_str = "<ul>"
