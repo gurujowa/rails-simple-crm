@@ -24,6 +24,10 @@ class CompanyTable
        value: "作成者"
      updated_by:
        value: "更新者"
+     tel:
+       value: "電話番号"
+     fax:
+       value: "FAX"
      contact:
        value: "コンタクト"
        define: {sWidth: "40%", bSortable: false ,aTargets:["contact"]}

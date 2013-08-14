@@ -14,6 +14,8 @@ comp = @datatables.getCompanies.map do |company|
         company.lead,
         get_user_name(company.created_by),
         get_user_name(company.updated_by),
+        company.tel,
+        company.fax,
         company.getContact,
         '<input type="checkbox" name="check' + company.id.to_s + '" value="' + company.id.to_s + '">'
 ]
