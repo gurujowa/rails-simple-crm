@@ -4,6 +4,6 @@ class ContactMailer < ActionMailer::Base
   def today(contacts)
     @contacts = contacts
 
-    mail(:to => "antenna@yourbright.co.jp", :subjects => "本日のコンタクト内容")
+    mail(:to => "antenna@yourbright.co.jp", :subject => "本日のコンタクト内容")
   end
 end

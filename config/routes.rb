@@ -1,5 +1,9 @@
 Mycrm::Application.routes.draw do
 
+  resources :task_types
+
+  resources :tasks
+
   get "graphs/index"
   get "graphs/created"
 

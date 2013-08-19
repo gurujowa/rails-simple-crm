@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  type: 1
+  duedate: 2013-08-16
+  name: MyString
+  assignee: 1
+  created_by: 1
+  note: MyString
+
+two:
+  type: 1
+  duedate: 2013-08-16
+  name: MyString
+  assignee: 1
+  created_by: 1
+  note: MyString

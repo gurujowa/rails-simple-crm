@@ -1,0 +1,7 @@
+User.create(:name => '飛田 紗那')
+User.create(:name => '藤本 清也')
+User.create(:name => '真野 亮太')
+User.create(:name => '山下 勇登')
+User.create(:name => '田崎 薫子')
+User.create(:name => '山下 美和')
+User.create(:name => '福田 豊')

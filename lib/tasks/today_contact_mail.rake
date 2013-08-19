@@ -7,6 +7,8 @@ namespace :mail do
       contacts = Contact.where("STRFTIME('%Y-%m-%d %H:%M:%S', created_at) > ?", beginning).all
       
       puts beginning
-      ContactMailer.today(contacts).deliver
+      if (contacts.present?)         
+        ContactMailer.today(contacts).deliver
+      end
   end
 end

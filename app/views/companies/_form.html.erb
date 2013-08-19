@@ -51,7 +51,9 @@
 <div class="controls">
     <% contact_index = 1 %>
 	<%= form.fields_for :contact do |c| %>
-      <%= contact_index %> <%= c.text_area :memo, :rows => "6",  :class=>"span9" %><br>&nbsp;&nbsp;&nbsp;担当者：<%= c.object.getCreatedBy() %>, 作成日: <%= simple_date(c.object.created_at) %><br>
+      <%= contact_index %> 
+      <%= c.text_area :memo, :rows => "6",  :class=>"span9" %><br>
+      &nbsp;&nbsp;&nbsp;担当者：<%= c.object.getCreatedBy() %>, 作成日: <%= simple_date(c.object.created_at) %><br>
       <%= c.hidden_field :created_by%>
       <% contact_index += 1%>
 	<% end %>

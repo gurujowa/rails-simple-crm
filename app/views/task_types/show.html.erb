@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @task_type.name %>
+</p>
+
+<p>
+  <strong>Default due:</strong>
+  <%= @task_type.default_due %>
+</p>
+
+<p>
+  <strong>Default assignee:</strong>
+  <%= @task_type.default_assignee %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @task_type.group %>
+</p>
+
+<%= link_to 'Edit', edit_task_type_path(@task_type) %> |
+<%= link_to 'Back', task_types_path %>

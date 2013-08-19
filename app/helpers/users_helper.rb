@@ -6,10 +6,7 @@ module UsersHelper
         return options
       end
       
-      def select_user
-        
-      end
-      
+
       def get_user_name(id)
         if id.present?
           user = User.find(id)

@@ -23,7 +23,7 @@ CSV.foreach('db/status.csv') do |row|
   Status.create(:id =>row[1], :name => row[0], :rank => row[2] , :active => row[3])
 end
 
-User.create(:name => '飛田 紗那')
-User.create(:name => '藤本 清也')
-User.create(:name => '真野 亮太')
-User.create(:name => '山下 勇登')
+CSV.foreach('db/logs.csv') do |row|
+  Log.create(:id =>row[0], :company_id => row[1], :status_id => row[2], :created_at => row[3], :created_by => row[4] )
+end
+

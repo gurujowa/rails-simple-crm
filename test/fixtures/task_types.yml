@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  default_due: 1
+  default_assignee: 1
+  group: MyString
+
+two:
+  name: MyString
+  default_due: 1
+  default_assignee: 1
+  group: MyString

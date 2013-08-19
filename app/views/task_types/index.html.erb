@@ -1,0 +1,33 @@
+<h1>Listing task_types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Default due</th>
+      <th>Default assignee</th>
+      <th>Group</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @task_types.each do |task_type| %>
+      <tr>
+        <td><%= task_type.name %></td>
+        <td><%= task_type.default_due %></td>
+        <td><%= task_type.default_assignee %></td>
+        <td><%= task_type.group %></td>
+        <td><%= link_to 'Show', task_type %></td>
+        <td><%= link_to 'Edit', edit_task_type_path(task_type) %></td>
+        <td><%= link_to 'Destroy', task_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task type', new_task_type_path %>

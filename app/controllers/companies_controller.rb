@@ -16,7 +16,6 @@ class CompaniesController < ApplicationController
         @company.assign_attributes(company_params)
       end
       @company_params =  @company.attributes.to_hash
-  #    raise @company_params.inspect
   end
   
  def pdf
@@ -65,7 +64,7 @@ class CompaniesController < ApplicationController
 
   def new
     @company = Company.new
-    @company.contact.build(:created_by => session[:current_user])
+    @company.contact.build(:created_by => session[:current_user].id)
   end
 
 
@@ -79,6 +78,7 @@ class CompaniesController < ApplicationController
         flash[:notice] = @company.client_name + 'を追加しました。'
         redirect_to :action => "new" 
       else
+        @company.contact.build(:created_by => session[:current_user].id)
         render action: 'new'
       end
   end
@@ -87,6 +87,8 @@ class CompaniesController < ApplicationController
   def edit
     @company = Company.find(params[:id])
     @company.contact.build(:created_by => session[:current_user].id)
+    @task = Task.new
+    @task_types = TaskType.all
   end
   
 
@@ -130,6 +132,8 @@ class CompaniesController < ApplicationController
     def check_user
       if session[:current_user] == nil
         redirect_to :controller => "users", :action=>"current"
+      else
+        @current_user = session[:current_user]
       end
     end
   
