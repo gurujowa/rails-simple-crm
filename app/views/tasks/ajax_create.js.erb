@@ -1,0 +1,7 @@
+<% if @error.present? %>
+noty({text:"<%= @task.errors.full_messages.to_sentence %>",type: "error",timeout: 2000});
+<% else %>
+noty({text:"タスクの作成をしました",type: "success",timeout: 2000});
+$("#new_task").modal("hide");
+$("#task_list_table tbody").append("<tr class='info last'><td><%= @task.duedate.strftime("%Y-%m-%d") %></td><td><%=@task.progress_id%></td><td><%= @task.task_type.name %></td></tr>");
+<% end %>

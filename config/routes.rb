@@ -19,6 +19,7 @@ Mycrm::Application.routes.draw do
   get 'companies_pdf' => 'companies#pdf'
   get 'companies_label' => 'companies#label'
   get 'up_postsend' => 'companies#up_postsend'
+  post 'create_task' => 'tasks#ajax_create'
    
   
   get 'current' => 'users#current'

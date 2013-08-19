@@ -25,9 +25,9 @@ class NewTaskModal
   constructor:  (e)->
     now = new Date()
     nowms = now.getTime()
-    console.log(e)
     $('#task_duedate').val($(e).data("due"))
     $('#task_name').val($(e).data("name"))
     $('#task_type_id').val($(e).data("type"))
     $('#task_assignee').val($(e).data("assignee"))
     $('#new_task').modal()
+

@@ -4,11 +4,11 @@
   	
     <div class="task">
       <h4>タスク一覧</h4>
-      <table class="table table-bordered table-hover">
+      <table class="table table-bordered table-hover" id="task_list_table">
         <thead>
           <tr>
             <th>期日 </th>
-            <th>ステータス</th>
+            <th>ST</th>
             <th>タイプ</th>
           </tr>
         </thead>
@@ -16,8 +16,8 @@
         	<% @company.task.each do |t|%>
           <tr class="info">
             <td><%= t.duedate %></td>
-            <td><%= t.status_id%></td>
-            <td><%= t.type_id%></td>
+            <td><%= t.progress_id%></td>
+            <td><%= t.task_type.name%></td>
           </tr>
           <% end %>
         </tbody>

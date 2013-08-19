@@ -34,8 +34,20 @@ class TasksController < ApplicationController
         format.json { render action: 'show', status: :created, location: @task }
       else
         format.html { render action: 'new' }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.json { render json: "aaaaaa", status: :unprocessable_entity }
       end
+    end
+  end
+  
+  def ajax_create
+    @task = Task.new(task_params)
+    @task.created_by = session[:current_user].id
+    if @task.save
+      logger.debug("DDDDDATE = " + @task.duedate.strftime("%Y-%m-%d"))
+    else
+      logger.fatal(@task.errors.full_messages.to_sentence)
+      @error = true
+
     end
   end
 
@@ -80,6 +92,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:type_id, :company_id,:duedate, :name, :assignee, :created_by, :note)
+      params.require(:task).permit(:type_id, :company_id,:duedate, :name, :assignee, :created_by, :progress_id, :note)
     end
 end
