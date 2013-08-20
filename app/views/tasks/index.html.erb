@@ -24,7 +24,7 @@
         <td><%= get_user_name(task.assignee) %></td>
         <td><%= task.company.client_name %></td>
         <td><%= get_user_name(task.created_by) %></td>
-        <td><%= task.progress_id %></td>
+        <td><%= task.getProgress() %></td>
         <td><%= task.note %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

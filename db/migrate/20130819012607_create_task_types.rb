@@ -4,7 +4,7 @@ class CreateTaskTypes < ActiveRecord::Migration
       t.string :name
       t.integer :default_due
       t.integer :default_assignee
-      t.string :group
+      t.string :tag
 
       t.timestamps
     end

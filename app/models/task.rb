@@ -10,4 +10,28 @@ class Task < ActiveRecord::Base
   validates :progress_id, presence: true,:numericality => true
   validates :company_id, presence: true,:numericality => true
  
+  def getProgress
+    progress = TaskProgress.new
+    name = progress.getNameById(self.progress_id)
+  end
+  
+  def getProgressList
+    progress = TaskProgress.new
+    return  progress.getIdValList()
+  end
+  
+  def getBootstrapColor
+    progress = TaskProgress.new
+    if (progress.getSymbol(self.progress_id) == :finish) 
+      return "muted"
+    elsif (self.duedate < Date.today)
+      return "error"
+    elsif (progress.getSymbol(self.progress_id) == :planning)
+      return "info"
+    elsif (progress.getSymbol(self.progress_id) == :canceled)
+      return "warning"
+    else
+      return "success"
+    end
+  end
 end

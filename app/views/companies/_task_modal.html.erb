@@ -10,7 +10,6 @@
     <input type="hidden" name="type_id" />
     <%= f.hidden_field(:type_id) %>
     <%= f.hidden_field(:company_id, :value => @company.id) %>
-    <%= f.hidden_field(:progress_id, :value => 1) %>
   </div>
   <div class="field">
     <label>期日</label>
@@ -25,15 +24,18 @@
     <%= f.select :assignee , options_from_users(@task.assignee) %>
   </div>
   <div class="field">
+    <label>ステータス</label>
+    <%= f.select :progress_id , options_for_select(@task.getProgressList, 1) %>
+  </div>
+  <div class="field">
     <label>メモ</label>
     <%= f.text_area :note %>
   </div>
 
-
   </div>
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal">キャンセル</button>
-    <%= f.submit%>
+    <%= f.submit "作成する", :class => "btn btn-primary"%>
   </div>
 <% end %>
 </div>

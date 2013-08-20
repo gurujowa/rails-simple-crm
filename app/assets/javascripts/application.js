@@ -21,4 +21,5 @@
 //= require noty/themes/default
 //= require bootstrap.min
 //= require dataTables/jquery.dataTables
+//= require jquery.balloon.min
 //= require_tree .

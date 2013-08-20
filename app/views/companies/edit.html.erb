@@ -1,7 +1,14 @@
 <h1>編集</h1>
+<% @company.task.each do |t|%>
+<%=javascript_tag "$(function() { $('#balloon_" + t.id.to_s + "').balloon({position: 'right', contents: $('#balloon_popup_" + t.id.to_s + "').clone().show()}); });" %>
+<div id="balloon_popup_<%= t.id.to_s %>" style="display:none;">
+	<%= select :task_status,:name,options_for_select(@task.getProgressList, t.progress_id),{},
+	 { :onchange => "task_change(this)" ,:class => "task_status_select", :id => "task_status_" + t.id.to_s , :data => {:id => t.id.to_s}}%><br>
+メモ： <%= t.note %>
+</div>
+<% end %>
 <div class="row-fluid">
   <div class="span3">
-  	
     <div class="task">
       <h4>タスク一覧</h4>
       <table class="table table-bordered table-hover" id="task_list_table">
@@ -14,28 +21,30 @@
         </thead>
         <tbody>
         	<% @company.task.each do |t|%>
-          <tr class="info">
+          <tr id="task_tr_<%= t.id.to_s %>" class="<%= t.getBootstrapColor %>">
             <td><%= t.duedate %></td>
-            <td><%= t.progress_id%></td>
-            <td><%= t.task_type.name%></td>
+            <td id="task_progress_<%= t.id.to_s %>"><%= t.getProgress()%></td>
+            <td id="balloon_<%= t.id.to_s %>"><%= t.task_type.name%></td>
           </tr>
           <% end %>
         </tbody>
       </table>
+      
     </div>
+
 
     <div class="well">
     	<h4>新規タスク作成</h4>
         <% @task_types.each do |t| %>    	
-    	<% if t.group == "フォロー" && defined?(@follow_index) == nil %>
+    	<% if t.tag == "フォロー" && defined?(@follow_index) == nil %>
     	<h5>フォロー系</h5>
     	<% @follow_index = true %>
     	<%end%>
-    	<% if t.group == "作成系" && defined?(@create_index) == nil %>
+    	<% if t.tag == "作成系" && defined?(@create_index) == nil %>
     	<h5>作成系</h5>
     	<% @create_index = true %>
     	<%end%>
-    	<% if t.group == "汎用系" && defined?(@general_index) == nil %>
+    	<% if t.tag == "汎用系" && defined?(@general_index) == nil %>
     	<h5>汎用系</h5>
     	<% @general_index = true %>
     	<%end%>

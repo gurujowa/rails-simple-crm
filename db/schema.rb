@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20130819012607) do
     t.string   "name"
     t.integer  "default_due"
     t.integer  "default_assignee"
-    t.string   "group"
+    t.string   "tag"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

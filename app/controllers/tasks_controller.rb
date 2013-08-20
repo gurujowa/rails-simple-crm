@@ -12,6 +12,19 @@ class TasksController < ApplicationController
   # GET /tasks/1.json
   def show
   end
+  
+  def status_change
+    @task = Task.find(params[:id])
+    @task.progress_id = params[:selected]
+    
+    if @task.save
+      render :json => {'text' => 'ステータスの変更が完了しました', 'type' => 'alert', 
+        'status_name' => @task.getProgress(), 'color' => @task.getBootstrapColor()}
+    else
+      render :json => {'text' => @task.errors.full_messages.to_sentence, 'type' => 'error'}
+    end
+    
+  end
 
   # GET /tasks/new
   def new
@@ -43,7 +56,6 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.created_by = session[:current_user].id
     if @task.save
-      logger.debug("DDDDDATE = " + @task.duedate.strftime("%Y-%m-%d"))
     else
       logger.fatal(@task.errors.full_messages.to_sentence)
       @error = true

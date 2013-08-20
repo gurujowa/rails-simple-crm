@@ -1,12 +1,10 @@
 Mycrm::Application.routes.draw do
 
   resources :task_types
-
   resources :tasks
 
   get "graphs/index"
   get "graphs/created"
-
 
   resources :statuses
   resources :users
@@ -20,6 +18,7 @@ Mycrm::Application.routes.draw do
   get 'companies_label' => 'companies#label'
   get 'up_postsend' => 'companies#up_postsend'
   post 'create_task' => 'tasks#ajax_create'
+  get 'task_status_change' => 'tasks#status_change'
    
   
   get 'current' => 'users#current'

@@ -88,7 +88,7 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @company.contact.build(:created_by => session[:current_user].id)
     @task = Task.new
-    @task_types = TaskType.all
+    @task_types = TaskType.order("tag").all
   end
   
 

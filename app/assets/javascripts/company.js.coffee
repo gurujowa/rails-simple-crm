@@ -1,4 +1,3 @@
-
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
@@ -6,8 +5,9 @@ jQuery ->
   $( ".datepicker" ).datepicker({dateFormat: 'yy-mm-dd'})
   companytable = new CompanyTable $()
   companytable.init()
+   
   
-  $('#label').click( ->
+  $('#label').click ->
     sData = $('input', oTable.fnGetNodes()).serialize()
     console.log(sData)
     if sData == "" 
@@ -16,9 +16,8 @@ jQuery ->
     w = window.open()
     w.location.href = "/companies_pdf?" + sData
     return false 
-  )
   
-  $('#up_postsend').click( ->
+  $('#up_postsend').click ->
     sData = $('input', oTable.fnGetNodes()).serialize()
     console.log(sData)
     if sData == "" 
@@ -39,7 +38,6 @@ jQuery ->
         )
         oTable.fnReloadAjax()
     return false 
-  )
   
   oTable = $('#company').dataTable
     sPaginationType: "full_numbers"
@@ -70,4 +68,3 @@ jQuery ->
       oTable.fnSetColumnVis( companytable.getColumnIndex(switch_column), data.value)
       $.cookie(data.el.context.id, data.value)
   )
-
