@@ -1,14 +1,13 @@
 <h1>Listing statuses</h1>
 
-<table>
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
       <th>Name</th>
       <th>Rank</th>
       <th>Active</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>DM配信</th>
+      <th>Ch</th>
     </tr>
   </thead>
 
@@ -17,10 +16,9 @@
       <tr>
         <td><%= status.name %></td>
         <td><%= status.rank %></td>
-        <td><%= status.active %></td>
-        <td><%= link_to 'Show', status %></td>
-        <td><%= link_to 'Edit', edit_status_path(status) %></td>
-        <td><%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="<% if status.active ==true %>info<%else%>warning<%end%>"><%= status.active %></td>
+        <td class="<% if status.dm_st ==true %>info<%else%>warning<%end%>"><%= status.dm_st %></td>
+        <td><%= link_to 'Show', status %><%= link_to 'Edit', edit_status_path(status) %><%= link_to 'Destroy', status, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
