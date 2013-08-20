@@ -23,12 +23,6 @@
 <label class="control-label">データ元</label><div class="controls"> <%= form.select :lead , options %></div>
 </div>
 <div class="control-group">
-<label class="control-label">次回アプローチ</label>
-<div class="controls"> 
-	<%= form.text_field :approach_day, 'data-format' => 'yyyy-MM-dd hh:mm:ss', :class=>"datepicker" %>
-	</div>
-</div>
-<div class="control-group">
 <label class="control-label">ステータス </label>
 <div class="controls"><%= form.select :status_id, options_from_statuses(@company.status_id) %>
 </div></div>

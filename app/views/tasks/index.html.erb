@@ -3,30 +3,28 @@
 <table id="tasks_datatable" class="display">
   <thead>
     <tr>
+      <th>名前</th>
       <th>タスクの種類</th>
       <th>期日</th>
-      <th>名前</th>
       <th>担当者</th>
       <th>会社名</th>
       <th>作成者</th>
       <th>ステータス</th>
       <th>メモ</th>
-      <th>Edit</th>
     </tr>
   </thead>
 
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
+        <td><%= link_to task.name, '/companies/' + task.company_id.to_s + '/edit' %></td>
         <td><%= task.task_type.name %></td>
         <td><%= task.duedate %></td>
-        <td><%= task.name %></td>
         <td><%= get_user_name(task.assignee) %></td>
         <td><%= task.company.client_name %></td>
         <td><%= get_user_name(task.created_by) %></td>
         <td><%= task.getProgress() %></td>
         <td><%= task.note %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
