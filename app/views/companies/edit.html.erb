@@ -4,6 +4,8 @@
 <div id="balloon_popup_<%= t.id.to_s %>" style="display:none;">
 	<%= select :task_status,:name,options_for_select(@task.getProgressList, t.progress_id),{},
 	 { :onchange => "task_change(this)" ,:class => "task_status_select", :id => "task_status_" + t.id.to_s , :data => {:id => t.id.to_s}}%><br>
+担当者：<%= get_user_name(t.assignee)%><br>
+作成者：<%= get_user_name(t.created_by)%><br>
 メモ： <%= t.note %>
 </div>
 <% end %>
@@ -16,15 +18,15 @@
           <tr>
             <th>期日 </th>
             <th>ST</th>
-            <th>タイプ</th>
+            <th>名前</th>
           </tr>
         </thead>
         <tbody>
         	<% @company.task.each do |t|%>
           <tr id="task_tr_<%= t.id.to_s %>" class="<%= t.getBootstrapColor %>">
-            <td><%= t.duedate %></td>
+            <td><%= t.duedate.strftime("%m/%d") %></td>
             <td id="task_progress_<%= t.id.to_s %>"><%= t.getProgress()%></td>
-            <td id="balloon_<%= t.id.to_s %>"><%= t.task_type.name%></td>
+            <td id="balloon_<%= t.id.to_s %>"><%= t.name%></td>
           </tr>
           <% end %>
         </tbody>
