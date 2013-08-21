@@ -95,6 +95,7 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @company.assign_attributes(company_params)
     @company.updated_by = session[:current_user].id
+    @task_types = TaskType.order("tag").all
     
     if @company.save
       @log = Log.new(:company_id => @company.id, :status_id => @company.status_id,  :created_by => session[:current_user].name)
