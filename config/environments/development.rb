@@ -8,6 +8,7 @@ Mycrm::Application.configure do
 
   # Do not eager load code on boot.
   config.eager_load = false
+  config.wkhtmltopdf = 'C:\wkhtmltopdf\wkhtmltopdf.exe'
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
@@ -35,4 +36,8 @@ Mycrm::Application.configure do
 
 config.action_mailer.default_url_options = { :host => "localhost", :port => 3000 }
 config.action_mailer.delivery_method = :smtp
+end
+
+PDFKit.configure do |config|
+   config.wkhtmltopdf = 'C:\wkhtmltopdf\wkhtmltopdf.exe'
 end

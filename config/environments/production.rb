@@ -13,6 +13,7 @@ Mycrm::Application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -77,4 +78,8 @@ Mycrm::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+end
+
+PDFKit.configure do |config|
+   config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
 end
