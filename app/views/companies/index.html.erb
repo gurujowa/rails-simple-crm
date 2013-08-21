@@ -8,19 +8,41 @@
 				<tr>
 					<th>会社名</th>
 					<th>ステータス</th>
+					<th>名前</th>
 					<th>期日</th>
 				</tr>
 			</thead>
 			<tbody>
+				<% @not_complite_tasks.each do |t|%>
 				<tr>
-					<td>会社</td>
-					<td>すて</td>
-					<td>おい</td>
+					<td><%= link_to t.company.client_name, {action: "edit", id: t.company_id} %></td>
+					<td><%= t.getProgress()%></td>
+					<td><%= t.name%></td>
+					<td><%= t.duedate%></td>
 				</tr>
+				<%end%>
 			</tbody>
 		</table>
 	</div>
 	<div class="span6 well">
 		<h5>タスクがない会社</h5>		
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>会社名</th>
+					<th>ステータス</th>
+					<th>最終更新日</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @companies2.each do |c|%>
+				<tr>
+					<td><%= link_to c["client_name"] ,{action: "edit", id: c["id"]} %></td>
+					<td><%= c["status"]%></td>
+					<td><%= c["up_at"]%></td>
+				</tr>
+				<%end%>
+			</tbody>
+		</table>
 	</div>
 </div>

@@ -1,5 +1,6 @@
 class TaskProgress
   attr_reader :list
+  @@id_list = {finish: 4, waiting: 3, canceled: 5, planning: 1, active: 2}
   
   def initialize
     @list = {finish: "完了", waiting: "確認待", canceled: "Cancel", planning: "開始前", active: "進行中"}
@@ -10,8 +11,8 @@ class TaskProgress
     return @id_list.key(id)
   end
 
-  def getId(symbol)
-    return @id_list[symbol]
+  def self.getId(symbol)
+    return @@id_list[symbol]
   end
 
   

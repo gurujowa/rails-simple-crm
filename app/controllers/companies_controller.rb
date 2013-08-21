@@ -1,7 +1,19 @@
 class CompaniesController < ApplicationController
   before_action :check_user
   def index
-      @not_complite_tasks = Task.where.not(progress_id: 1).all
+      @not_complite_tasks = Task.where.not(progress_id: TaskProgress.getId(:finish)).
+      where(assignee: session[:current_user].id).all
+      
+      hash = Company.connection.select_all('
+      SELECT companies.id,companies.client_name,statuses.name as status, strftime("%Y-%m-%d",companies.updated_at) as up_at
+      FROM companies 
+      LEFT JOIN tasks ON tasks.company_id = companies.id
+      INNER JOIN statuses ON statuses.id = companies.status_id
+      WHERE ((Not ((statuses.rank)="X" Or (statuses.rank)="Z")) AND ((tasks.id) Is Null) AND up_at >= "2013-07-17" )
+      GROUP BY companies.client_name, companies.updated_at
+      order by up_at desc;
+      ')
+      @companies2 = hash
   end
 
   def search
