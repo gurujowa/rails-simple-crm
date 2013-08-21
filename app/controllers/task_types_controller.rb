@@ -69,6 +69,6 @@ class TaskTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_type_params
-      params.require(:task_type).permit(:name, :default_due, :default_assignee, :group)
+      params.require(:task_type).permit(:name, :default_due, :default_assignee, :tag)
     end
 end
