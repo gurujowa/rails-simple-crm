@@ -76,14 +76,14 @@ class CompaniesController < ApplicationController
   def new
     @company = Company.new
     @company.contact.build(:created_by => session[:current_user].id)
-    self.set_default_form
+    set_default_form
   end
 
 
   def create
     @company = Company.new(company_params)
     @company.created_by = session[:current_user].id
-    self.set_default_form
+    set_default_form
 
 
       if @company.save
@@ -110,7 +110,7 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @company.assign_attributes(company_params)
     @company.updated_by = session[:current_user].id
-    self.set_default_form
+    set_default_form
 
     
     if @company.save
