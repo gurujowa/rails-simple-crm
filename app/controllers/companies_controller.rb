@@ -1,8 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :check_user
   def index
-    @company = Company.new
-    @statuses = Status.find_all_by_active(true)
+      @not_complite_tasks = Task.where.not(progress_id: 1).all
   end
 
   def search

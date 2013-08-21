@@ -9,6 +9,11 @@ class TaskProgress
   def getSymbol(id)
     return @id_list.key(id)
   end
+
+  def getId(symbol)
+    return @id_list[symbol]
+  end
+
   
   def getNameById(id)
     symbol = @id_list.key(id)
