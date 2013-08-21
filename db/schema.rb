@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130820055950) do
+ActiveRecord::Schema.define(version: 20130821091257) do
 
   create_table "companies", force: true do |t|
     t.datetime "created_at"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20130820055950) do
     t.string   "tel"
     t.string   "fax"
     t.string   "mail"
-    t.integer  "status_id",     null: false
+    t.integer  "status_id",                 null: false
     t.string   "client_person"
     t.string   "zipcode"
     t.string   "prefecture"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20130820055950) do
     t.date     "approach_day"
     t.integer  "bill"
     t.integer  "chance"
+    t.integer  "industry_id",   default: 1, null: false
   end
 
   add_index "companies", ["city"], name: "index_companies_on_city"
@@ -49,6 +50,12 @@ ActiveRecord::Schema.define(version: 20130820055950) do
     t.integer  "company_id"
     t.text     "memo"
     t.string   "created_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "industries", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

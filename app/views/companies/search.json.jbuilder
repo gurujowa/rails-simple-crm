@@ -9,6 +9,7 @@ comp = @datatables.getCompanies.map do |company|
         company.updated_at.strftime('%Y/%m/%d'),
         company.approach_day,
         get_user_name(company.sales_person),
+        company.industry.name,
         company.bill,
         company.chance,
         company.lead,

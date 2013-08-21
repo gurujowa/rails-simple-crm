@@ -14,6 +14,8 @@ class CompanyTable
        value: "次回"
      sales_person:
        value: "営業マン"
+     industry_id:
+       value: "業種"
      bill:
        value: "売上見込"
      chance:

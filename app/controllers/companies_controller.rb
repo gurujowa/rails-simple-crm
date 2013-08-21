@@ -76,12 +76,15 @@ class CompaniesController < ApplicationController
   def new
     @company = Company.new
     @company.contact.build(:created_by => session[:current_user].id)
+    self.set_default_form
   end
 
 
   def create
     @company = Company.new(company_params)
     @company.created_by = session[:current_user].id
+    self.set_default_form
+
 
       if @company.save
         @log = Log.new(:company_id => @company.id, :status_id => @company.status_id, :created_by => session[:current_user].name)
@@ -98,8 +101,8 @@ class CompaniesController < ApplicationController
   def edit
     @company = Company.find(params[:id])
     @company.contact.build(:created_by => session[:current_user].id)
-    @task = Task.new
-    @task_types = TaskType.order("tag").all
+    set_default_form
+
   end
   
 
@@ -107,8 +110,8 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @company.assign_attributes(company_params)
     @company.updated_by = session[:current_user].id
-    @task = Task.new
-    @task_types = TaskType.order("tag").all
+    self.set_default_form
+
     
     if @company.save
       @log = Log.new(:company_id => @company.id, :status_id => @company.status_id,  :created_by => session[:current_user].name)
@@ -127,6 +130,14 @@ class CompaniesController < ApplicationController
     @company.destroy
     flash[:notice] = '会社情報を削除しました'
     redirect_to :action=> 'search', :company => session[:last_search_url]
+  end
+  
+  private
+  def set_default_form()
+    @task = Task.new
+    @task_types = TaskType.order("tag").all
+    @industries = Industry.all
+
   end
   
   private
@@ -153,7 +164,7 @@ class CompaniesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
       params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
-      :city, :address, :building, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
+      :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
       :bill, contact_attributes: [:id, :memo, :created_by])
   end
 end

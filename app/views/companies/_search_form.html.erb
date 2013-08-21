@@ -9,7 +9,8 @@
 <%= form.select :created_by , options_from_users(@company.created_by),{:prompt => "< 作成者 >", :include_blank => true},{:class => "input-medium"} %><br>
 <%= form.text_field :created_at, {'data-format' => 'yyyy-MM-dd', :class=>"datepicker input-small", :placeholder => "作成日"} %><br>
 <%= form.select :updated_by , options_from_users(@company.updated_by),{:prompt => "< 更新者 >", :include_blank => true}, {:class => "input-medium"} %><br>
-<%= form.text_field :updated_at, {'data-format' => 'yyyy-MM-dd', :placeholder => "更新日", :class=>"datepicker input-medium"} %>
+<%= form.text_field :updated_at, {'data-format' => 'yyyy-MM-dd', :placeholder => "更新日", :class=>"datepicker input-medium"} %><br>
+<%= form.collection_select(:industry_id,Industry.all, :id, :name, {:prompt => "< 業種 >", :include_blank => true} , {:class => "input-medium"} ) %>
 <br>
 <%= submit_tag "検索する", :class=>"btn btn-primary" %><%= link_to "新規作成", {:action=> "new"} , {:class=>"btn"}%>
 

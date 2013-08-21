@@ -35,6 +35,9 @@ class CompaniesDatatable
     if p_comp['prefecture'].present?
       companies = companies.where("prefecture like ?","%" + p_comp['prefecture'] + "%")
     end
+    if p_comp['industry_id'].present?
+      companies = companies.where(:industry_id => p_comp['industry_id'])
+    end
     if p_comp['city'].present?
       companies = companies.where("city like ?","%" + p_comp['city'] + "%")
     end

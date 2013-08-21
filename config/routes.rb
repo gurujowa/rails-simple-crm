@@ -1,5 +1,7 @@
 Mycrm::Application.routes.draw do
 
+  resources :industries
+
   resources :task_types
   resources :tasks
 
