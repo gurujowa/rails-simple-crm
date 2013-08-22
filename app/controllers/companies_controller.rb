@@ -1,8 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :check_user
   def index
-      @not_complite_tasks = Task.where.not(progress_id: TaskProgress.getId(:finish)).
-      where(assignee: session[:current_user].id).all
+      @not_complite_tasks = Task.where.not(progress_id: TaskProgress.getId(:finish)).all
       
       hash = Company.connection.select_all('
       SELECT companies.id,companies.client_name,statuses.name as status, strftime("%Y-%m-%d",companies.updated_at) as up_at
