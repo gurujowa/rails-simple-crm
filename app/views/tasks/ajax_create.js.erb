@@ -2,6 +2,6 @@
 noty({text:"<%= @task.errors.full_messages.to_sentence %>",type: "error",timeout: 2000});
 <% else %>
 noty({text:"タスクの作成をしました",type: "success",timeout: 2000});
-$("#new_task").modal("hide");
-$("#task_list_table tbody").append("<tr class='<%= @task.getBootstrapColor()%> last'><td><%= @task.duedate.strftime("%Y-%m-%d") %></td><td><%=@task.getProgress()%></td><td><%= @task.task_type.name %></td></tr>");
+$("#new_task_modal").modal("hide");
+$("#task_list_table tbody").append("<tr id='task_tr_<%= @task.id.to_s %>' class='<%= @task.getBootstrapColor()%> last'><td><%= @task.duedate.strftime("%Y-%m-%d") %></td><td><%=@task.getProgress()%></td><td><%= @task.task_type.name %></td></tr>");
 <% end %>

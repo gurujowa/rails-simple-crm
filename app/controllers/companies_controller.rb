@@ -88,6 +88,13 @@ class CompaniesController < ApplicationController
       if @company.save
         @log = Log.new(:company_id => @company.id, :status_id => @company.status_id, :created_by => session[:current_user].name)
         @log.save!
+
+        if(params[:new_task][:name]).present?
+          @new_task = Task.new(new_task_params)
+          @new_task.created_by = session[:current_user].id
+          @new_task.company_id = @company.id
+          @new_task.save!
+        end
         flash[:notice] = @company.client_name + 'を追加しました。'
         redirect_to :action => "new" 
       else
@@ -165,5 +172,10 @@ class CompaniesController < ApplicationController
       params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
       :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
       :bill, contact_attributes: [:id, :memo, :created_by])
+  end
+  
+  private
+  def new_task_params
+      params.require(:new_task).permit(:name, :duedate, :assignee, :progress_id, :type_id , :note)
   end
 end

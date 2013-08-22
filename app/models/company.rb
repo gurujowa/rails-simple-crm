@@ -6,12 +6,15 @@ class Company < ActiveRecord::Base
   accepts_nested_attributes_for :contact,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? }
 
   validates :status_id, presence: true  
+  validates :chance, presence: true  
   validates :lead, presence: true
+  validates :industry_id, presence: true
   validates :sales_person, presence: true
   validates :tel, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}
   validates :fax, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}
   validates :mail,  :email_format => {:message => ' メールアドレスの形式が不適切です', :allow_blank=>true} 
   validates :client_name, presence: true, length: {maximum: 50}
+  validates :prefecture, presence: true, length: {maximum: 4, :message => '都道府県は４文字以内で入力してください'}
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
   validates :bill,  :numericality => true, :allow_nil => true
 

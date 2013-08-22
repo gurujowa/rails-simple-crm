@@ -1,3 +1,33 @@
 <h1>新規作成</h1>
 <%= flash_notifications %>
-<%= render 'form' %>
+
+<%= form_for(@company, :html => {:class => 'form-horizontal well'}) do |form|%>
+  <%= hidden_field_tag 'new_task[duedate]'%>
+  <%= hidden_field_tag 'new_task[type_id]'%>
+  <%= hidden_field_tag 'new_task[assignee]'%>
+  <%= hidden_field_tag 'new_task[progress_id]'%>
+  <%= hidden_field_tag 'new_task[name]'%>
+  <%= hidden_field_tag 'new_task[note]'%>
+  <%= render :partial => 'form', :locals => {:form => form} %>
+<% end %>
+
+<div class="well" id="new_task_detail" style="display:none;">
+	<table class="table table-bordered">
+		<tr>
+			<th>名前</th>
+			<th>期日</th>
+			<th>担当者</th>
+			<th>進行状況</th>
+			<th>メモ</th>
+		</tr>
+		<tr>
+			<td id="td_task_name"></td>
+			<td id="td_task_duedate"></td>
+			<td id="td_task_assignee"></td>
+			<td id="td_task_progress_id"></td>
+			<td id="td_task_note"></td>
+		</tr>
+	</table>
+</div>
+<%= render 'task_type_button'%>
+<%= render :partial => "task_modal", :locals => {:form_id => "new_task_form"} %>

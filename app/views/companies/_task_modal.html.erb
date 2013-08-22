@@ -1,10 +1,10 @@
-<div id="new_task" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="new_task_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">タスク作成</h3>
   </div>
   <div class="modal-body">
-  <%= form_for(@task, :url => "/create_task", :remote => true) do |f| %>
+  <%= form_for(@task, :url => "/create_task", :remote => true, :html => {:id => form_id}) do |f| %>
 
   <div class="field">
     <input type="hidden" name="type_id" />

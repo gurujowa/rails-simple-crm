@@ -1,0 +1,23 @@
+    <div class="well">
+    	<h4>新規タスク作成</h4>
+        <% @task_types.each do |t| %>    	
+    	<% if t.tag == "フォロー" && defined?(@follow_index) == nil %>
+    	<h5>フォロー系</h5>
+    	<% @follow_index = true %>
+    	<%end%>
+    	<% if t.tag == "作成系" && defined?(@create_index) == nil %>
+    	<h5>作成系</h5>
+    	<% @create_index = true %>
+    	<%end%>
+    	<% if t.tag == "汎用系" && defined?(@general_index) == nil %>
+    	<h5>汎用系</h5>
+    	<% @general_index = true %>
+    	<%end%>
+
+
+    	<a role="button" data-name="<%= t.name %>" data-type="<%= t.id %>" 
+    	data-due="<%= t.getDueDate() %>" 
+    	data-assignee="<%= t.getDefaultAssignee(@current_user) %>" 
+    	class="btn task-button" data-toggle="modal"><%= t.name %></a>
+    	<% end %>
+    </div>
