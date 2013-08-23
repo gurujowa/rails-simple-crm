@@ -1,0 +1,50 @@
+<div class="row-fluid">
+	<div class="span6 well">
+		<h5>自分が担当者の未完了のタスク</h5>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>会社名</th>
+					<th>ステータス</th>
+					<th>名前</th>
+					<th>期日</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% if @not_complite.present? %>
+				<% @not_complite.each do |t|%>
+				<tr>
+					<td><%= link_to t.company.client_name, {action: "edit", id: t.company_id} %></td>
+					<td><%= t.getProgress()%></td>
+					<td><%= t.name%></td>
+					<td><%= t.duedate%></td>
+				</tr>
+				<%end%>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+	<div class="span6 well">
+		<h5>タスクがない会社</h5>		
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>会社名</th>
+					<th>ステータス</th>
+					<th>最終更新日</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% if @not_task.present? %>
+				<% @not_task.each do |c|%>
+				<tr>
+					<td><%= link_to c["client_name"] ,{action: "edit", id: c["id"]} %></td>
+					<td><%= c["status"]%></td>
+					<td><%= c["up_at"]%></td>
+				</tr>
+				<%end%>
+				<%end%>
+			</tbody>
+		</table>
+	</div>
+</div>
