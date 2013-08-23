@@ -37,7 +37,7 @@ class CompaniesController < ApplicationController
       
       @datatables = CompaniesDatatable.new(view_context)
       @company = Company.new
-      @statuses = Status.find_all_by_active(true)
+      @statuses = Status.order(:rank).find_all_by_active(true)
       if (params[:company].present?)
         @company.assign_attributes(company_params)
       end

@@ -8,12 +8,12 @@ module StatusesHelper
   
   def options_from_statuses(selected = nil, show_deprecated = false)
     if show_deprecated == true
-      collection = Status.all.unshift(Status.new)
+      collection = Status.order(:rank).all
     else 
-      collection = Status.where(active: true).order("rank DESC").unshift(Status.new)
+      collection = Status.where(active: true).order(:rank)
     end
-    options = collection.map do |element|
-      [element.send('name'), element.send('id')]
+    options = collection.map do |e|
+      [e.send('rank') + " - " + e.send('name'), e.send('id')]
     end
     selected, disabled = extract_selected_and_disabled(selected)
     select_deselect = {}
