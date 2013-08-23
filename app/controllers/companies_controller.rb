@@ -8,7 +8,7 @@ class CompaniesController < ApplicationController
       FROM companies 
       LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE ((Not ((statuses.rank)="X" Or (statuses.rank)="Z")) AND ((tasks.id) Is Null) AND up_at >= "2013-07-02" )
+      WHERE ((Not ((statuses.rank)="X" Or (statuses.rank)="Z")) AND ((tasks.id) Is Null)  )
       GROUP BY companies.client_name, companies.updated_at
       order by up_at desc;
       ')
@@ -22,7 +22,6 @@ class CompaniesController < ApplicationController
       INNER JOIN statuses ON statuses.id = companies.status_id
       WHERE (Not ( statuses.rank ="X" Or statuses.rank ="Z"))
       AND (tasks.id) Is Null 
-      AND up_at >= "2013-07-02" 
       AND companies.sales_person = ' + session[:current_user].id.to_s + '
       GROUP BY companies.client_name, companies.updated_at
       order by up_at desc;
