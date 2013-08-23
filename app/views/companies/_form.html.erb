@@ -26,7 +26,7 @@
 </div>
 <div class="control-group">
 <label class="control-label">ステータス </label>
-<div class="controls"><%= form.select :status_id, options_from_statuses(@company.status_id) %>
+<div class="controls"><%= form.select :status_id, options_from_statuses(@company.status_id), :include_blank => true %>
 </div></div>
 
 <div class="control-group">

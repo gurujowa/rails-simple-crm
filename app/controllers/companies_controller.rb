@@ -34,6 +34,11 @@ class CompaniesController < ApplicationController
   def search
       @datas = Company.paginate(:page => params[:page],:order => 'created_at desc', :per_page => 10)
       session[:last_search_url] = params[:company]
+      session[:last_search_rank] = params[:rank]
+      if params[:last_rank].present? then
+        params[:rank] = params[:last_rank]
+      end
+      
       
       @datatables = CompaniesDatatable.new(view_context)
       @company = Company.new
@@ -51,7 +56,7 @@ class CompaniesController < ApplicationController
     end
     if (@companies.length > 21)
       flash[:error] = '２２個以上を印刷することはできません'
-      redirect_to :action=> 'search', :company => session[:last_search_url]
+      redirect_to :action=> 'search', :company => session[:last_search_url], :last_rank => session[:last_search_rank]
       return 
     end
     respond_to do |format|
@@ -139,7 +144,7 @@ class CompaniesController < ApplicationController
       @log = Log.new(:company_id => @company.id, :status_id => @company.status_id,  :created_by => session[:current_user].name)
       @log.save!
       flash[:notice] = '会社情報が変更されました。'
-      redirect_to :action=> 'search', :company => session[:last_search_url]
+      redirect_to :action=> 'search', :company => session[:last_search_url], :last_rank => session[:last_search_rank]
     else
       render "edit"
     end
@@ -151,7 +156,7 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @company.destroy
     flash[:notice] = '会社情報を削除しました'
-    redirect_to :action=> 'search', :company => session[:last_search_url]
+    redirect_to :action=> 'search', :company => session[:last_search_url], :last_rank => session[:last_search_rank]
   end
   
   private
