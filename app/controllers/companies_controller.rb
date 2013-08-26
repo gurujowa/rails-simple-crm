@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :check_user
   def index
-      @not_complite = Task.where.not(progress_id: TaskProgress.getId(:finish)).all
+      @not_complite = Task.where.not(progress_id: TaskProgress.getId(:finish)).order("duedate desc").all
       
       @not_task = Company.connection.select_all('
       SELECT companies.id,companies.client_name,statuses.name as status, strftime("%Y-%m-%d",companies.updated_at) as up_at
@@ -13,7 +13,8 @@ class CompaniesController < ApplicationController
       order by up_at desc;
       ')
 
-      @not_complite_current = Task.where.not(progress_id: TaskProgress.getId(:finish)).where(assignee: session[:current_user].id).all
+      @not_complite_current = Task.where.not(progress_id: TaskProgress.getId(:finish)).
+      where(assignee: session[:current_user].id).order("duedate desc").all
       
       @not_task_current = Company.connection.select_all('
       SELECT companies.id,companies.client_name,statuses.name as status, strftime("%Y-%m-%d",companies.updated_at) as up_at
