@@ -83,7 +83,8 @@ class TasksController < ApplicationController
     @task.destroy
     respond_to do |format|
       format.html { redirect_to tasks_url }
-      format.json { head :no_content }
+      format.json { render json: @task }
+      format.js {}
     end
   end
   

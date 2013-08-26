@@ -6,7 +6,8 @@
 	 { :onchange => "task_change(this)" ,:class => "task_status_select", :id => "task_status_" + t.id.to_s , :data => {:id => t.id.to_s}}%><br>
 担当者：<%= get_user_name(t.assignee)%><br>
 作成者：<%= get_user_name(t.created_by)%><br>
-メモ： <%= t.note %>
+メモ： <%= t.note %><br>
+<%= link_to 'Edit', edit_task_path(t) %> / <%= link_to '削除', t, :confirm => '本当に削除しますか', :class => "destroy", :method => :delete, :remote => true %>
 </div>
 <% end %>
 <div class="row-fluid">

@@ -16,23 +16,23 @@
     <%= f.select :type_id , options_task_type(@task.type_id) %>
   </div>
   <div class="field">
-    <%= f.label :duedate %><br>
+    期日<br>
     <%= f.text_field :duedate, 'data-format' => 'yyyy-MM-dd hh:mm:ss', :class=>"datepicker" %>
   </div>
   <div class="field">
-    <%= f.label :name %><br>
+    名前<br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :company_id %><br>
+    会社ID<br>
     <%= f.text_field :company_id %>
   </div>
   <div class="field">
-    <%= f.label :assignee %><br>
+    担当者<br>
     <%= f.select :assignee , options_from_users(@task.assignee) %>
   </div>
   <div class="field">
-    <%= f.label :note %><br>
+    メモ<br>
     <%= f.text_field :note %>
   </div>
   <div class="actions">
