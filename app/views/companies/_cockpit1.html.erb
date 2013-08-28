@@ -31,6 +31,7 @@
 				<tr>
 					<th>会社名</th>
 					<th>ステータス</th>
+					<th>営業マン</th>
 					<th>最終更新日</th>
 				</tr>
 			</thead>
@@ -40,6 +41,7 @@
 				<tr>
 					<td><%= link_to c["client_name"] ,{action: "edit", id: c["id"]} %></td>
 					<td><%= c["status"]%></td>
+					<td><%= get_user_name(c["sales_person"])%></td>
 					<td><%= c["up_at"]%></td>
 				</tr>
 				<%end%>

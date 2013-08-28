@@ -1,0 +1,21 @@
+de:
+  payday:
+    status: 
+      overdue: ÜBERFÄLLIG
+      paid: BEZAHLT
+    invoice: 
+      bill_to: Rechnung an
+      ship_to: Versenden an
+      invoice_no: "Rechnungsnr.:"
+      due_date: "Fälligkeit:"
+      paid_date: "Zahlungsdatum:"
+      subtotal: "Zwischensumme:"
+      shipping: "Versand:"
+      tax: "Steuern:"
+      total: "Gesamt:"
+      notes: "Anmerkungen"
+    line_item: 
+      description: Beschreibung
+      unit_price: Stückpreis
+      quantity: Menge
+      amount: Betrag

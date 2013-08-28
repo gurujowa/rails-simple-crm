@@ -4,7 +4,7 @@ class CompaniesController < ApplicationController
       @not_complite = Task.where.not(progress_id: TaskProgress.getId(:finish)).order("duedate desc").all
       
       @not_task = Company.connection.select_all('
-      SELECT companies.id,companies.client_name,statuses.name as status, strftime("%Y-%m-%d",companies.updated_at) as up_at
+      SELECT companies.id,companies.client_name,statuses.name as status, companies.sales_person as sales_person, strftime("%Y-%m-%d",companies.updated_at) as up_at
       FROM companies 
       LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
@@ -28,8 +28,19 @@ class CompaniesController < ApplicationController
       order by up_at desc;
       ')
 
-
-
+  end
+  
+  def invoice
+    invoice = Payday::Invoice.new(:invoice_number => 12)
+    invoice.line_items << Payday::LineItem.new(:price => 20, :quantity => 5, :description => "てすと")
+    invoice.line_items << Payday::LineItem.new(:price => 10, :quantity => 3, :description => "Shirts")
+    invoice.line_items << Payday::LineItem.new(:price => 5, :quantity => 200, :description => "Hats")
+    respond_to do |format|
+      format.html
+      format.pdf do
+        send_data invoice.render_pdf, :filename => "請求書.pdf", :type => "application/pdf", :disposition => "inline"
+      end
+    end
   end
 
   def search
@@ -48,6 +59,7 @@ class CompaniesController < ApplicationController
         @company.assign_attributes(company_params)
       end
       @company_params =  @company.attributes.to_hash
+      
   end
   
  def pdf
