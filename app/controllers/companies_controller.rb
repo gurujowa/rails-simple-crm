@@ -27,6 +27,20 @@ class CompaniesController < ApplicationController
       GROUP BY companies.client_name, companies.updated_at
       order by up_at Asc;
       ')
+      
+      @uncomplite = Company.connection.select_all('
+      SELECT companies.id,companies.client_name,statuses.name as status, 
+      companies.sales_person as sales_person, 
+      strftime("%Y-%m-%d",companies.updated_at) as up_at
+      
+      FROM companies 
+      LEFT JOIN tasks ON tasks.company_id = companies.id
+      INNER JOIN statuses ON statuses.id = companies.status_id
+      WHERE statuses.rank IN ("B","C","D","E") AND tasks.id Is Null
+      GROUP BY companies.client_name, companies.updated_at
+      order by up_at ASC;
+      ')
+
 
   end
   
@@ -142,7 +156,6 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @company.contact.build(:created_by => session[:current_user].id)
     set_default_form
-
   end
   
 
