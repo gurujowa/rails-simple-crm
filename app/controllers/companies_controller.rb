@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :check_user
   def index
-      @not_complite = Task.where.not(progress_id: TaskProgress.getId(:finish)).order("duedate desc").all
+      @not_complite = Task.where.not(progress_id: TaskProgress.getId(:finish)).order("duedate asc").all
       
       @not_task = Company.connection.select_all('
       SELECT companies.id,companies.client_name,statuses.name as status, companies.sales_person as sales_person, strftime("%Y-%m-%d",companies.updated_at) as up_at
@@ -14,7 +14,7 @@ class CompaniesController < ApplicationController
       ')
 
       @not_complite_current = Task.where.not(progress_id: TaskProgress.getId(:finish)).
-      where(assignee: session[:current_user].id).order("duedate desc").all
+      where(assignee: session[:current_user].id).order("duedate asc").all
       
       @not_task_current = Company.connection.select_all('
       SELECT companies.id,companies.client_name,statuses.name as status, strftime("%Y-%m-%d",companies.updated_at) as up_at
@@ -25,7 +25,7 @@ class CompaniesController < ApplicationController
       AND (tasks.id) Is Null 
       AND companies.sales_person = ' + session[:current_user].id.to_s + '
       GROUP BY companies.client_name, companies.updated_at
-      order by up_at desc;
+      order by up_at Asc;
       ')
 
   end

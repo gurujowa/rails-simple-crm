@@ -24,6 +24,10 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    進捗状況<br>
+    <%= f.select :progress_id , options_for_select(@task.getProgressList, 1) %>
+  </div>
+  <div class="field">
     会社ID<br>
     <%= f.text_field :company_id %>
   </div>

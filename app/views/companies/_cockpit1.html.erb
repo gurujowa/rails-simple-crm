@@ -6,6 +6,7 @@
 				<tr>
 					<th>会社名</th>
 					<th>ステータス</th>
+					<th>担当者</th>
 					<th>名前</th>
 					<th>期日</th>
 				</tr>
@@ -16,6 +17,7 @@
 				<tr>
 					<td><%= link_to t.company.client_name, {action: "edit", id: t.company_id} %></td>
 					<td><%= t.getProgress()%></td>
+					<td><%= get_user_name(t.assignee)%></td>
 					<td><%= t.name%></td>
 					<td><%= t.duedate%></td>
 				</tr>
