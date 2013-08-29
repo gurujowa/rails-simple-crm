@@ -16,7 +16,7 @@
 				<tr>
 					<td><%= link_to c["client_name"] ,{action: "edit", id: c["comp_id"]} %></td>
 					<td><%= c["status"]%></td>
-					<td><%= c["sales_person"]%></td>
+					<td><%= get_user_name(c["sales_person"])%></td>
 					<td><%= c["up_at"]%></td>
 				</tr>
 				<%end%><%end%>
