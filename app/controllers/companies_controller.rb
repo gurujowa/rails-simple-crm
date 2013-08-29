@@ -29,16 +29,15 @@ class CompaniesController < ApplicationController
       ')
       
       @uncomplite = Company.connection.select_all('
-      SELECT companies.id,companies.client_name,statuses.name as status, 
+      SELECT companies.id as comp_id,companies.client_name,statuses.name as status, 
       companies.sales_person as sales_person, 
       strftime("%Y-%m-%d",companies.updated_at) as up_at
-      
       FROM companies 
-      LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE statuses.rank IN ("B","C","D","E") AND tasks.id Is Null
+      WHERE statuses.rank IN ("B","C","D","E") 
+      AND NOT EXISTS(select id from tasks where tasks.company_id = comp_id and tasks.progress_id in (1,2,3))
       GROUP BY companies.client_name, companies.updated_at
-      order by up_at ASC;
+      order by up_at DESC;
       ')
 
 
