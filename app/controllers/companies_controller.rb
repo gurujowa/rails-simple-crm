@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
       INNER JOIN statuses ON statuses.id = companies.status_id
       WHERE statuses.rank IN ("B","C","D","E") AND tasks.id Is Null
       GROUP BY companies.client_name, companies.updated_at
-      order by up_at desc;
+      order by up_at ASC;
       ')
 
       @not_complite_current = Task.where.not(progress_id: TaskProgress.getId(:finish)).
