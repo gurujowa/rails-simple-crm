@@ -19,7 +19,9 @@
 //= require noty/jquery.noty
 //= require noty/layouts/top
 //= require noty/themes/default
-//= require bootstrap.min
+//= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require jquery.balloon.min
+//= require bootstrap-editable
+//= require bootstrap-editable-rails
 //= require_tree .

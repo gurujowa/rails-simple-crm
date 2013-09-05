@@ -1,7 +1,8 @@
 class CompaniesController < ApplicationController
   before_action :check_user
   def index
-      @not_complite = Task.where.not(progress_id: TaskProgress.getId(:finish)).order("duedate asc").all
+      @not_complite = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
+      order("duedate asc").all
       
       @not_task = Company.connection.select_all('
       SELECT companies.id,companies.client_name,statuses.name as status, companies.sales_person as sales_person, strftime("%Y-%m-%d",companies.updated_at) as up_at
@@ -13,7 +14,7 @@ class CompaniesController < ApplicationController
       order by up_at ASC;
       ')
 
-      @not_complite_current = Task.where.not(progress_id: TaskProgress.getId(:finish)).
+      @not_complite_current = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
       where(assignee: session[:current_user].id).order("duedate asc").all
       
       @not_task_current = Company.connection.select_all('
@@ -39,8 +40,6 @@ class CompaniesController < ApplicationController
       GROUP BY companies.client_name, companies.updated_at
       order by up_at DESC;
       ')
-
-
   end
   
   def invoice
@@ -154,6 +153,7 @@ class CompaniesController < ApplicationController
   def edit
     @company = Company.find(params[:id])
     @company.contact.build(:created_by => session[:current_user].id)
+    @course = Course.where(company_id: params[:id])
     set_default_form
   end
   

@@ -1,5 +1,11 @@
+$.fn.editable.defaults.mode = "inline"
+
 jQuery ->
   $('.balloon').balloon({contents: $('#balloon_popup').clone().show(), position: "right"})
+  $(".edit_in_place").editable({
+    inputclass: 'input-xlarge'
+    name: 'name'
+    })
 
   $('form#new_task_form').submit ->
     $('#new_task_detail').show()

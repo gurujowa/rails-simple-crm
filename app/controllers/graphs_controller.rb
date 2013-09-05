@@ -49,7 +49,7 @@ class GraphsController < ApplicationController
      where m_cre > "2013-07-28"
      group by m_cre
      order by m_cre desc
-     limit 8')
+     limit 30')
 
     column = []
     data = []
@@ -149,7 +149,7 @@ class GraphsController < ApplicationController
      where strftime("%Y-%m-%d", created_at) > "2013-07-28"
      group by w_cre
      order by w_cre desc
-     limit 8')
+     limit 20')
 
     column = []
     data = []

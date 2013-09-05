@@ -35,7 +35,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-
+gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'bootstrap-editable-rails'
 gem 'pdfkit'
 gem 'validates_email_format_of'
 gem 'prawn'

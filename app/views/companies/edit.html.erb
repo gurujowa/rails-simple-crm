@@ -1,68 +1,21 @@
 <h1>編集</h1>
-<% @company.task.each do |t|%>
-<%=javascript_tag "$(function() { $('#balloon_" + t.id.to_s + "').balloon({position: 'right', contents: $('#balloon_popup_" + t.id.to_s + "').clone().show()}); });" %>
-<div id="balloon_popup_<%= t.id.to_s %>" style="display:none;">
-	<%= select :task_status,:name,options_for_select(@task.getProgressList, t.progress_id),{},
-	 { :onchange => "task_change(this)" ,:class => "task_status_select", :id => "task_status_" + t.id.to_s , :data => {:id => t.id.to_s}}%><br>
-担当者：<%= get_user_name(t.assignee)%><br>
-作成者：<%= get_user_name(t.created_by)%><br>
-メモ： <%= t.note %><br>
-<%= link_to 'Edit', edit_task_path(t) %> / <%= link_to '削除', t, :confirm => '本当に削除しますか', :class => "destroy", :method => :delete, :remote => true %>
-</div>
+<% if flash[:notice].present? then%>
+ <%= javascript_tag "noty({text: '" + flash[:notice] + "' ,type: 'notice',timeout: 2000});" %>
 <% end %>
-<div class="row-fluid">
-  <div class="span3">
-    <div class="task">
-      <h4>タスク一覧</h4>
-      <table class="table table-bordered table-hover" id="task_list_table">
-        <thead>
-          <tr>
-            <th>期日 </th>
-            <th>ST</th>
-            <th>名前</th>
-          </tr>
-        </thead>
-        <tbody>
-        	<% @company.task.each do |t|%>
-          <tr id="task_tr_<%= t.id.to_s %>" class="<%= t.getBootstrapColor %>">
-            <td><%= t.duedate.strftime("%m/%d") %></td>
-            <td id="task_progress_<%= t.id.to_s %>"><%= t.getProgress()%></td>
-            <td id="balloon_<%= t.id.to_s %>"><%= t.name%></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-      
+<% if flash[:alert].present? then%>
+ <%= javascript_tag 'noty({text: "' + flash[:alert] + '" ,type: "error",timeout: 2000});' %>
+<% end %>
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs" id="edit_tab">
+    <li<% unless flash[:edit_tab].present? then %> class="active"<% end %> ><a href="#edit_tab1" data-toggle="tab" id="edit_tab1_link">会社情報</a></li>
+    <li<% if flash[:edit_tab].present? then %> class="active"<% end %>><a href="#edit_tab2" data-toggle="tab" id="edit_tab2_link">カリキュラム</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane <% unless flash[:edit_tab].present? then %>active<% end %>" id="edit_tab1">
+      <%= render "edit1"%>
     </div>
-  <%= render 'task_type_button'%>
+    <div class="tab-pane<% if flash[:edit_tab].present? then %>active<% end %>" id="edit_tab2">
+      <%= render "edit2"%>
+    </div>
   </div>
-  <div class="span9">
-  	<%= form_for(@company, :html => {:class => 'form-horizontal well'}) do |form|%>
-  	<%= render :partial => 'form', :locals => {:form => form} %>
-    <% end %>
-    <%= link_to '削除する', @company, method: :delete, data: { confirm: '本当に削除しますか' } ,  :class=>"btn"%>
 </div>
-</div>
-<table class="table table-striped">
-  <tr>
-    <th>カラム</th>
-    <th>値</th>
-  </tr>
-  <tr>
-    <td>作成者</td>
-    <td><%= @company.getCreatedBy()%></td>
-  </tr>
-  <tr>
-    <td>作成日</td>
-    <td><%= @company.created_at%></td>
-  </tr>
-  <tr>
-    <td>更新者</td>
-    <td><%= @company.getUpdatedBy()%></td>
-  </tr>
-  <tr>
-    <td>更新日</td>
-    <td><%= @company.updated_at%></td>
-  </tr>
-</table>
-<%= render :partial => "task_modal", :locals => {:form_id => "edit_task_form"} %>

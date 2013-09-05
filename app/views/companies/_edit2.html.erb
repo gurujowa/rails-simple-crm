@@ -1,0 +1,34 @@
+<div class="row-fluid">
+<table class="table table-bordered table-striped">
+<tr>
+  <th>ID</Th>
+  <th>コース名</Th>
+  <th>発注書</Th>
+  <th>書籍送付</Th>
+  <th>レジュメ送付</Th>
+  <th>３点セット</Th>
+  <th>実施報告書</th>
+  <th>編集</th>
+</tr>
+<% @course.each do |c|%>
+<tr>
+  <td><%= c.id %></td>
+  <td><a class="edit_in_place" href="#" data-type="text"  data-resource="course" data-url="/courses/update/<%= c.id %>"><%= c.name %></a></td>
+  <td><%= check_img(c, "order_flg") %></td>
+  <td><%= check_img(c, "book_flg") %></td>
+  <td><%= check_img(c, "resume_flg") %></td>
+  <td><%= check_img(c, "report_flg") %></td>
+  <td><%= check_img(c, "end_report_flg") %></td>
+  <td><a href="/">編集する</a></td>
+</tr>
+<% end %>
+<tr>
+	<td colspan="8">
+		<form action="<%= url_for(:controller => "courses" , :action => "create") %>">
+			コース名<input type="text" name="course[name]" /><input type="submit" value="新規作成" class="btn">
+			<input type="hidden" name="course[company_id]" value="<%= @company.id %>" />
+	    </form>
+	</td>
+</tr>
+</table>
+</div>

@@ -17,8 +17,11 @@
  *= require dataTables/extras/TableTools
  *= require dataTables/src/demo_table_jui
  *= require bootstrap-switch
- *= require bootstrap.min
+ *= require bootstrap-editable
  */
+
+@import "bootstrap";             
+@import "bootstrap-responsive";    
 
 body { padding: 10px; }
 

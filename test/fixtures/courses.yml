@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  company_id: 1
+  order_flg: false
+  book_flg: false
+  resume_flg: false
+  report_flg: false
+  end_report_flg: false
+
+two:
+  name: MyString
+  company_id: 1
+  order_flg: false
+  book_flg: false
+  resume_flg: false
+  report_flg: false
+  end_report_flg: false

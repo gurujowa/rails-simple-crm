@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130826100202) do
+ActiveRecord::Schema.define(version: 20130904050749) do
 
   create_table "companies", force: true do |t|
     t.datetime "created_at"
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 20130826100202) do
     t.integer  "company_id"
     t.text     "memo"
     t.string   "created_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "courses", force: true do |t|
+    t.string   "name",                           null: false
+    t.integer  "company_id",                     null: false
+    t.boolean  "order_flg",      default: false, null: false
+    t.boolean  "book_flg",       default: false, null: false
+    t.boolean  "resume_flg",     default: false, null: false
+    t.boolean  "report_flg",     default: false, null: false
+    t.boolean  "end_report_flg", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
