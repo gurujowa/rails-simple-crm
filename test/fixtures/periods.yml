@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  day: 2013-09-05
+  start_time: 2013-09-05 15:18:06
+  end_time: 2013-09-05 15:18:06
+  break_start: 2013-09-05 15:18:06
+  break_end: 2013-09-05 15:18:06
+  teacher_id: 1
+
+two:
+  day: 2013-09-05
+  start_time: 2013-09-05 15:18:06
+  end_time: 2013-09-05 15:18:06
+  break_start: 2013-09-05 15:18:06
+  break_end: 2013-09-05 15:18:06
+  teacher_id: 1

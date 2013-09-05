@@ -19,7 +19,7 @@
   <td><%= check_img(c, "resume_flg") %></td>
   <td><%= check_img(c, "report_flg") %></td>
   <td><%= check_img(c, "end_report_flg") %></td>
-  <td><a href="/">編集する</a></td>
+  <td><%= link_to "コマ編集", :controller => "courses", :action => "edit", :id => c.id%></td>
 </tr>
 <% end %>
 <tr>

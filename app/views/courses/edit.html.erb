@@ -1,0 +1,29 @@
+<% @course.errors.full_messages.each do |msg|%>
+<li><%= msg %></li>
+<% end %>
+
+<%= form_for @course do |f| %>
+
+  <table class="table table-bordered table-striped">
+  	<tr>
+  		<th>日付</th>
+  		<th>開始時刻</th>
+  		<th>終了時刻</th>
+  		<th>休憩開始</th>
+  		<th>休憩終了</th>
+  		<th>講師</th>
+  		<th>メモ</th>
+  	</tr>
+  <%= f.fields_for :periods do |c| %>
+  <tr>
+  	<td><%= c.text_field :day , :class=>"datepicker input-small" %></td>
+  	<td><%= c.text_field :start_time , :class=>"start_timepicker input-mini" %></td>
+  	<td><%= c.text_field :end_time , :class=>"end_timepicker input-mini" %></td>
+  	<td><%= c.text_field :break_start , :class=>"break_start_timepicker input-mini" %></td>
+  	<td><%= c.text_field :break_end , :class=>"break_end_timepicker input-mini" %></td>
+  	<td><%= c.text_field :teacher_id%></td>
+  	<td><%= c.text_field :memo%></td>
+  </tr>
+  <% end %>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

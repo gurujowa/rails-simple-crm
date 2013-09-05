@@ -6,6 +6,12 @@ jQuery ->
     inputclass: 'input-xlarge'
     name: 'name'
     })
+    
+  $("#edit_tab a[data-toggle=\"tab\"]").on "shown", (e) -> 
+    localStorage.setItem "lastEditTab", $(e.target).attr("id")
+  lastTab = localStorage.getItem("lastEditTab")
+  $("#" + lastTab).tab "show"  if lastTab
+
 
   $('form#new_task_form').submit ->
     $('#new_task_detail').show()

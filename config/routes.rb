@@ -1,9 +1,9 @@
 Mycrm::Application.routes.draw do
 
   resources :industries
-
   resources :task_types
   resources :tasks
+  resources :courses
 
   get "graphs/index"
   get "graphs/created"
@@ -11,18 +11,23 @@ Mycrm::Application.routes.draw do
   resources :statuses
   resources :users
   resources :contacts, :only => [:destroy]    
+
+  #コース
+  get 'courses/create' => 'courses#create'  
+  put 'courses/update/:id' => 'courses#up_name'  
+  get 'courses/update/:id/:type' => 'courses#up_bool'
+
+  #会社名
   resources :companies, except: [:show] do
     collection { get "search"}
   end
-
-  get 'courses/create' => 'courses#create'  
-  put 'courses/update/:id' => 'courses#up_name'  
-  get 'courses/update/:id/:type' => 'courses#up_bool'  
   get 'companies/contact_delete/:id' => 'companies#contact_delete'
   get 'companies_pdf' => 'companies#pdf'
   get 'invoice' => 'companies#invoice'
   get 'companies_label' => 'companies#label'
   get 'up_postsend' => 'companies#up_postsend'
+  
+  #タスク
   post 'create_task' => 'tasks#ajax_create'
   get 'task_status_change' => 'tasks#status_change'
    

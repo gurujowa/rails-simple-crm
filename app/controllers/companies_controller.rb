@@ -130,7 +130,6 @@ class CompaniesController < ApplicationController
     @company.created_by = session[:current_user].id
     set_default_form
 
-
       if @company.save
         @log = Log.new(:company_id => @company.id, :status_id => @company.status_id, :created_by => session[:current_user].name)
         @log.save!

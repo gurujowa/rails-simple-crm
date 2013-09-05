@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130904050749) do
+ActiveRecord::Schema.define(version: 20130905062145) do
 
   create_table "companies", force: true do |t|
     t.datetime "created_at"
@@ -95,6 +95,19 @@ ActiveRecord::Schema.define(version: 20130904050749) do
     t.string   "created_by"
   end
 
+  create_table "periods", force: true do |t|
+    t.date     "day",         null: false
+    t.time     "start_time",  null: false
+    t.time     "end_time",    null: false
+    t.time     "break_start"
+    t.time     "break_end"
+    t.integer  "teacher_id"
+    t.integer  "course_id"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "statuses", force: true do |t|
     t.string   "name"
     t.string   "rank"
@@ -124,6 +137,18 @@ ActiveRecord::Schema.define(version: 20130904050749) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "teachers", force: true do |t|
+    t.string   "first_name",                null: false
+    t.string   "last_name",                 null: false
+    t.string   "first_kana",                null: false
+    t.string   "last_kana",                 null: false
+    t.integer  "work_possible", default: 0, null: false
+    t.string   "genre"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

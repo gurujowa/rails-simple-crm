@@ -7,14 +7,14 @@
 <% end %>
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs" id="edit_tab">
-    <li<% unless flash[:edit_tab].present? then %> class="active"<% end %> ><a href="#edit_tab1" data-toggle="tab" id="edit_tab1_link">会社情報</a></li>
-    <li<% if flash[:edit_tab].present? then %> class="active"<% end %>><a href="#edit_tab2" data-toggle="tab" id="edit_tab2_link">カリキュラム</a></li>
+    <li class="active"><a href="#edit_tab1" data-toggle="tab" id="edit_tab1_link">会社情報</a></li>
+    <li><a href="#edit_tab2" data-toggle="tab" id="edit_tab2_link">カリキュラム</a></li>
   </ul>
   <div class="tab-content">
-    <div class="tab-pane <% unless flash[:edit_tab].present? then %>active<% end %>" id="edit_tab1">
+    <div class="tab-pane active" id="edit_tab1">
       <%= render "edit1"%>
     </div>
-    <div class="tab-pane<% if flash[:edit_tab].present? then %>active<% end %>" id="edit_tab2">
+    <div class="tab-pane" id="edit_tab2">
       <%= render "edit2"%>
     </div>
   </div>

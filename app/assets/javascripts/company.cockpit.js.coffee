@@ -20,8 +20,6 @@ jQuery ->
       sSearch: "検索："
 
   $("#cockpit_tab a[data-toggle=\"tab\"]").on "shown", (e) -> 
-    #save the latest tab; use cookies if you like 'em better:
     localStorage.setItem "lastTab", $(e.target).attr("id")
-  #go to the latest tab, if it exists:
   lastTab = localStorage.getItem("lastTab")
   $("#" + lastTab).tab "show"  if lastTab

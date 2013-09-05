@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  first_kana: MyString
+  last_kana: MyString
+  work_possible: 1
+  genre: MyString
+
+two:
+  first_name: MyString
+  last_name: MyString
+  first_kana: MyString
+  last_kana: MyString
+  work_possible: 1
+  genre: MyString

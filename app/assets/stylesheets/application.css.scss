@@ -11,13 +11,11 @@
  *= require_self
  *= require_tree .
  *= require dataTables/jquery.dataTables
- *= require jquery.ui.core
- *= require jquery.ui.datepicker
- *= require jquery.ui.theme
  *= require dataTables/extras/TableTools
  *= require dataTables/src/demo_table_jui
  *= require bootstrap-switch
  *= require bootstrap-editable
+ *= require jquery.timepicker
  */
 
 @import "bootstrap";             
