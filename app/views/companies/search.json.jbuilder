@@ -7,7 +7,6 @@ comp = @datatables.getCompanies.map do |company|
         get_status_name(company.status_id),
         company.client_person,
         company.updated_at.strftime('%Y/%m/%d'),
-        company.approach_day,
         get_user_name(company.sales_person),
         company.industry.name,
         company.bill,

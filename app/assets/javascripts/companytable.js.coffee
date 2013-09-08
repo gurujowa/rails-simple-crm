@@ -10,8 +10,6 @@ class CompanyTable
        value: "担当者"
      updated_at:
        value: "更新日"
-     approach_day:
-       value: "次回"
      sales_person:
        value: "営業マン"
      industry_id:

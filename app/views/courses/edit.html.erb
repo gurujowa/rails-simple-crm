@@ -1,10 +1,19 @@
+<ul class="breadcrumb">
+    <li><a href="/">Home</a> <span class="divider">/</span></li>
+    <li><%= link_to @course.company.client_name, edit_company_path(@course.company)%> <span class="divider">/</span></li>
+    <li class="active"><%= @course.name%></li>
+</ul>
+
+
+<%= form_for @course do |f| %>
+<ul>
 <% @course.errors.full_messages.each do |msg|%>
 <li><%= msg %></li>
 <% end %>
+</ul>
 
-<%= form_for @course do |f| %>
-
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped" id="periods_table">
+  	<thead>
   	<tr>
   		<th>日付</th>
   		<th>開始時刻</th>
@@ -12,18 +21,28 @@
   		<th>休憩開始</th>
   		<th>休憩終了</th>
   		<th>講師</th>
+  		<th>合計時間</th>
   		<th>メモ</th>
   	</tr>
+  	</thead>
+  <tbody class="add_fields">
   <%= f.fields_for :periods do |c| %>
-  <tr>
-  	<td><%= c.text_field :day , :class=>"datepicker input-small" %></td>
-  	<td><%= c.text_field :start_time , :class=>"start_timepicker input-mini" %></td>
-  	<td><%= c.text_field :end_time , :class=>"end_timepicker input-mini" %></td>
-  	<td><%= c.text_field :break_start , :class=>"break_start_timepicker input-mini" %></td>
-  	<td><%= c.text_field :break_end , :class=>"break_end_timepicker input-mini" %></td>
-  	<td><%= c.text_field :teacher_id%></td>
-  	<td><%= c.text_field :memo%></td>
-  </tr>
+    <%= render :partial => "period_fields", :locals => { :f => c, :delete_flg => true} %>
   <% end %>
-  <p><%= f.submit "Submit" %></p>
+  </tbody>
+  </table>
+  <p><%= link_to_add_fields "追加", f, :periods %>
+  	<button value="再計算" class="btn btn-info" id ="calc_button">再計算</button>
+  	<%= f.submit "保存する", :class => "btn btn-primary" %>
+  	</p>
 <% end %>
+<div class="row-fluid">
+  <div class="span6">
+  <div class="well">
+  	コース合計時間: <span id="total_course_time">ERROR</span>
+  </div>
+  </div>
+  <div class="span6">
+    <div id='period_calendar'></div>
+  </div>
+</div>

@@ -35,6 +35,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'fullcalendar-rails'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-editable-rails'
 gem 'pdfkit'

@@ -1,10 +1,4 @@
 <h1>編集</h1>
-<% if flash[:notice].present? then%>
- <%= javascript_tag "noty({text: '" + flash[:notice] + "' ,type: 'notice',timeout: 2000});" %>
-<% end %>
-<% if flash[:alert].present? then%>
- <%= javascript_tag 'noty({text: "' + flash[:alert] + '" ,type: "error",timeout: 2000});' %>
-<% end %>
 <div class="tabbable"> <!-- Only required for left/right tabs -->
   <ul class="nav nav-tabs" id="edit_tab">
     <li class="active"><a href="#edit_tab1" data-toggle="tab" id="edit_tab1_link">会社情報</a></li>

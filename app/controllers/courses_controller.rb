@@ -2,17 +2,18 @@ class CoursesController < ApplicationController
   
   def edit
     @course = Course.find(params[:id])
-    3.times {@course.periods.build}
   end
   
   def update
     @course = Course.find(params[:id])
     @course.assign_attributes(course_params)
+
     
     if @course.save
-      flash[:notice] = '会社情報が変更されました。'
+      flash[:notice] = 'コース情報を変更しました'
       redirect_to :action=> 'edit', :id => params[:id]
     else
+      flash[:alert] = '入力内容にエラーがあります'
       render "edit"
     end
   end
@@ -81,7 +82,7 @@ class CoursesController < ApplicationController
   private
   def course_params
     params.require(:course).permit(:name, :company_id, :order_flg, :book_flg, :report_flg, 
-    :end_report_flg, periods_attributes: [:id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id, :memo])
+    :end_report_flg, periods_attributes: [:id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id, :memo, :_destroy])
   end
 
 end

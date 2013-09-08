@@ -24,6 +24,8 @@
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
 //= require jquery.timepicker.min
+//= require fullcalendar
+//= require gcal
 //= require_tree .
 
 $.fn.datepicker.dates['ja'] = {
@@ -36,5 +38,16 @@ $.fn.datepicker.dates['ja'] = {
 		format: "yyyy/mm/dd"
 	};
 $(function(){
-$( ".datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'});
+  $( ".datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'});
 });
+
+function remove_fields(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest("tr").hide();
+}
+
+function add_fields(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g")
+  $("tbody.add_fields").append(content.replace(regexp, new_id));
+}

@@ -8,6 +8,16 @@ module CoursesHelper
     return tag.html_safe    
   end
   
+  def time_input(builder, name, required)
+    value = builder.object.read_attribute(name)
+    
+    hash = {:class=>name + "picker course_timepicker input-mini"}
+    hash.store(:required, true) if required == true
+    hash.store(:value, value.strftime("%H:%M")) if value.present?
+    
+    builder.text_field(name , hash)
+  end
+  
   def check_img_src(bool)
     if bool == true
       return "/img/check.png"

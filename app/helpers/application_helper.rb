@@ -1,22 +1,28 @@
 module ApplicationHelper
-  def flash_notifications
-    message = flash[:error] || flash[:notice]
-    if (flash[:error].present?) 
-      color = "error"
-    else
-      color = "alert"
-    end
-    
-    if message
-      type = flash.keys[0].to_s
-      return javascript_tag "var n = noty({text: '" + message  + "', type: '" + color + "', timeout: 2000});"
-    end
-  end
   
   def simple_date(time)
     if time.present?
       return time.strftime("%Y年%m月%d日")
     end
   end
+  
+  def convert_min(minute)
+    if(minute.present?)
+     return (minute / 60).floor.to_s + "時間" + (minute % 60).floor.to_s + "分"
+    else
+     return 0
+    end
+  end
 
+  def link_to_remove_fields(name, f)
+    f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", :class => "btn btn-warning")
+  end
+  
+  def link_to_add_fields(name, f, association)
+    new_object = f.object.class.reflect_on_association(association).klass.new
+    fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+      render(association.to_s.singularize + "_fields", :f => builder, :delete_flg => false)
+    end
+    link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", :class => "btn", :id => "add_field_button")
+  end
 end

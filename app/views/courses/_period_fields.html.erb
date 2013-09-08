@@ -1,0 +1,11 @@
+  <tr>
+  	<td><%= f.text_field :day , :class=>"datepicker input-small course_datepicker", :required => true %></td>
+  	<td><%= time_input(f, "start_time", true) %></td>
+  	<td><%= time_input(f, "end_time", true) %></td>
+  	<td><%= time_input(f, "break_start", false) %></td>
+  	<td><%= time_input(f, "break_end", false) %></td>
+  	<td><%= f.text_field :teacher_id , :required => true %></td>
+  	<td class="total_period_time"></td>
+  	<td><%= f.text_field :memo%></td>
+  	<td><% if delete_flg == true%><%= link_to_remove_fields "削除", f  %><%end%></td>
+  </tr>

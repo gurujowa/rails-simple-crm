@@ -5,9 +5,14 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  
 </head>
 <body>
+  <% if flash[:notice].present? then%>
+    <%= javascript_tag "noty({text: '" + flash[:notice] + "' ,type: 'notice',timeout: 2000});" %>
+  <% end %>
+  <% if flash[:alert].present? then%>
+    <%= javascript_tag 'noty({text: "' + flash[:alert] + '" ,type: "error",timeout: 2000});' %>
+  <% end %>
 <div class="container-fluid">
 <div class="navbar-inverse navbar">
     <div class="navbar-inner">
