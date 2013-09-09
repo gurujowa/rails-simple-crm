@@ -3,6 +3,16 @@ jQuery ->
   calcTime()
   calendarRender()
 
+  $('.period_img').on 'click' ,  ->
+    hidden_value = $(this).parent().find('.period_hidden').val()
+    if (hidden_value == "t")
+      $(this).attr("src", "/img/cross.png")
+      $(this).parent().find('.period_hidden').val("f")
+    else if (hidden_value == "f")
+      $(this).attr("src", "/img/check.png")
+      $(this).parent().find('.period_hidden').val("t")
+    else
+      alert("チェックの状況が正しくありません。管理者を呼んでください")
   $('#calc_button').on 'click', ->
     calcTime()
     calendarRender("render")
