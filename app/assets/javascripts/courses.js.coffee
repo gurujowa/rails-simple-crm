@@ -14,6 +14,7 @@ jQuery ->
      $(".end_timepicker").eq(-1).val($(".end_timepicker").eq(-2).val())
      $(".break_startpicker").eq(-1).val($(".break_startpicker").eq(-2).val())
      $(".break_endpicker").eq(-1).val($(".break_endpicker").eq(-2).val())
+     $(".select_teacher_id").eq(-1).val($(".select_teacher_id").eq(-2).val())
      $( ".course_datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'})
 
 calendarRender = (method) ->

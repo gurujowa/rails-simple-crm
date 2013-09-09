@@ -1,17 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  first_name: MyString
-  last_name: MyString
+  first_kanji: MyString
+  last_kanji: MyString
   first_kana: MyString
   last_kana: MyString
   work_possible: 1
   genre: MyString
+  memo: MyText
 
 two:
-  first_name: MyString
-  last_name: MyString
+  first_kanji: MyString
+  last_kanji: MyString
   first_kana: MyString
   last_kana: MyString
   work_possible: 1
   genre: MyString
+  memo: MyText

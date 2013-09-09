@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130905062145) do
+ActiveRecord::Schema.define(version: 20130908121717) do
 
   create_table "companies", force: true do |t|
     t.datetime "created_at"
@@ -140,15 +140,23 @@ ActiveRecord::Schema.define(version: 20130905062145) do
   end
 
   create_table "teachers", force: true do |t|
-    t.string   "first_name",                null: false
-    t.string   "last_name",                 null: false
-    t.string   "first_kana",                null: false
-    t.string   "last_kana",                 null: false
-    t.integer  "work_possible", default: 0, null: false
+    t.string   "first_kanji",                 null: false
+    t.string   "last_kanji",                  null: false
+    t.string   "first_kana",                  null: false
+    t.string   "last_kana",                   null: false
+    t.integer  "work_possible",   default: 0, null: false
     t.string   "genre"
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "orientation_flg"
+    t.boolean  "profile_flg"
+    t.boolean  "photo_flg"
+    t.boolean  "regist_flg"
+    t.boolean  "contract_flg"
+    t.integer  "bill"
+    t.string   "tel"
+    t.string   "email"
   end
 
   create_table "users", force: true do |t|

@@ -4,7 +4,7 @@
   	<td><%= time_input(f, "end_time", true) %></td>
   	<td><%= time_input(f, "break_start", false) %></td>
   	<td><%= time_input(f, "break_end", false) %></td>
-  	<td><%= f.text_field :teacher_id , :required => true %></td>
+  	<td><%= f.select :teacher_id , options_teachers(f.object.teacher_id),{:include_blank => true}, :class => "select_teacher_id" %></td>
   	<td class="total_period_time"></td>
   	<td><%= f.text_field :memo%></td>
   	<td><% if delete_flg == true%><%= link_to_remove_fields "削除", f  %><%end%></td>

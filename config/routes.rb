@@ -1,10 +1,11 @@
 Mycrm::Application.routes.draw do
 
+  resources :teachers
+
   resources :industries
   resources :task_types
   resources :tasks
   resources :courses
-
   get "graphs/index"
   get "graphs/created"
 

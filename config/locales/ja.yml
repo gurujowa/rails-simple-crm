@@ -38,3 +38,19 @@ ja:
       unit_price: Unit Price
       quantity: Quantity
       amount: Amount
+  activerecord:
+    models:
+      teacher: 講師
+    attributes: #一覧画面で必要
+      teacher:  #モデル毎に階層化しておく。
+        first_kanji: 名（漢字）
+        last_kanji: 姓（漢字）
+        first_kana: 名（かな）
+        last_kana: 姓（かな）
+        work_possible: 仕事可能
+        genre: ジャンル
+        bill: 単価（時間）
+        tel: 電話番号
+        memo: メモ 
+        created_at: 作成日
+        　        updated_at: 更新日
