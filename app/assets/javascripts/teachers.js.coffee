@@ -6,7 +6,7 @@ jQuery ->
     sPaginationType: "full_numbers"
     bJQueryUI: true
     bProcessing: true
-    bStateSave:  true
+    bStateSave:  false
     iDisplayLength: 100
     bSort: true
     bDeferRender: true

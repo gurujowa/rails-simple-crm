@@ -40,12 +40,12 @@ jQuery ->
   $.ajax '/task_status_change',
     type: 'GET'
     dataType: 'json'
-    timeout: 1000
+    timeout: 3000
     data : {id: id, selected: $(e).children(':selected').val()}
     error:(jqXHR, textStatus, errorThrown) ->
       alert(errorThrown)
     success: (data, textStatus, jqXHR) ->
-      noty(text: data["text"],type: data["type"],timeout: 2000)
+      noty(text: data["text"],type: data["type"],timeout: 5000)
       $('#task_progress_' + id).text(data["status_name"])
       $('#task_tr_' + id).removeClass()
       $('#task_tr_' + id).addClass(data["color"])
