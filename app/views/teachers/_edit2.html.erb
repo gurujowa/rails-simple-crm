@@ -1,0 +1,27 @@
+<table class="teachers_datatable">
+  <thead>
+    <tr>
+      <th>名前（漢字）</th>
+      <th>名前（かな）</th>
+      <th>オリエンテーション</th>
+      <th>プロフィール</th>
+      <th>写真画像</th>
+      <th>講師登録書</th>
+      <th>誓約書</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= teacher.last_kanji %> <%= teacher.first_kanji %></td>
+        <td><%= teacher.last_kana %> <%= teacher.first_kana %></td>
+        <td><%= check_teacher_img(teacher, "orientation_flg") %></td>
+        <td><%= check_teacher_img(teacher, "profile_flg") %></td>
+        <td><%= check_teacher_img(teacher, "photo_flg") %></td>
+        <td><%= check_teacher_img(teacher, "regist_flg") %></td>
+        <td><%= check_teacher_img(teacher, "contract_flg") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

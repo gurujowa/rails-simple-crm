@@ -1,19 +1,21 @@
 Mycrm::Application.routes.draw do
 
   resources :teachers
+  get 'teachers/update/:id/:type' => 'teachers#up_bool'
+
 
   resources :industries
   resources :task_types
-  resources :tasks
-  resources :courses
-  get "graphs/index"
-  get "graphs/created"
-
   resources :statuses
   resources :users
   resources :contacts, :only => [:destroy]    
 
+  get "graphs/index"
+  get "graphs/created"
+
+
   #コース
+  resources :courses
   get 'courses/create' => 'courses#create'  
   put 'courses/update/:id' => 'courses#up_name'  
   get 'courses/update/:id/:type' => 'courses#up_bool'
@@ -29,6 +31,7 @@ Mycrm::Application.routes.draw do
   get 'up_postsend' => 'companies#up_postsend'
   
   #タスク
+  resources :tasks
   post 'create_task' => 'tasks#ajax_create'
   get 'task_status_change' => 'tasks#status_change'
    

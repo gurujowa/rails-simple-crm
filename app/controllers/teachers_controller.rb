@@ -3,7 +3,7 @@ class TeachersController < ApplicationController
 
   # GET /teachers
   def index
-    @teachers = Teacher.all
+    @teachers = Teacher.order("last_kana ASC, first_kana ASC")
   end
 
   # GET /teachers/1
@@ -37,6 +37,22 @@ class TeachersController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+  
+  def up_bool
+    teacher = Teacher.find(params[:id])
+    type = params[:type]
+    
+    set_value = reverse_bool(teacher.read_attribute(type))
+    teacher[type] = set_value
+        
+    if teacher.save
+      @teacher = teacher
+      @type = type
+      @bool = set_value
+    else
+       render json: teacher.errors, status: :unprocessable_entity
+    end    
   end
 
   # DELETE /teachers/1

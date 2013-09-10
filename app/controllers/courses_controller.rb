@@ -67,16 +67,6 @@ class CoursesController < ApplicationController
     end    
   end
 
-  private
-  def reverse_bool(flag)
-    if flag.equal?(true)
-      return false
-    elsif flag.equal?(false)
-      return true
-    else
-      raise "型があっていません"
-    end
-  end
 
   private
   def course_params
