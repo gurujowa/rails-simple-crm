@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130909040611) do
+ActiveRecord::Schema.define(version: 20130910024421) do
 
   create_table "companies", force: true do |t|
     t.datetime "created_at"
@@ -96,9 +96,9 @@ ActiveRecord::Schema.define(version: 20130909040611) do
   end
 
   create_table "periods", force: true do |t|
-    t.date     "day",         null: false
-    t.time     "start_time",  null: false
-    t.time     "end_time",    null: false
+    t.date     "day",                         null: false
+    t.time     "start_time",                  null: false
+    t.time     "end_time",                    null: false
     t.time     "break_start"
     t.time     "break_end"
     t.integer  "teacher_id"
@@ -106,8 +106,8 @@ ActiveRecord::Schema.define(version: 20130909040611) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "resume_flg"
-    t.boolean  "report_flg"
+    t.boolean  "resume_flg",  default: false, null: false
+    t.boolean  "report_flg",  default: false, null: false
   end
 
   create_table "statuses", force: true do |t|

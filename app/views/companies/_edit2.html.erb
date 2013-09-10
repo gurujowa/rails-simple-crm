@@ -5,9 +5,7 @@
   <th>コース名</Th>
   <th>発注書</Th>
   <th>書籍送付</Th>
-  <th>レジュメ送付</Th>
   <th>３点セット</Th>
-  <th>実施報告書</th>
   <th>コース時間</th>
   <th>編集</th>
 </tr>
@@ -17,9 +15,7 @@
   <td><a class="edit_in_place" href="#" data-type="text"  data-resource="course" data-url="/courses/update/<%= c.id %>"><%= c.name %></a></td>
   <td><%= check_course_img(c, "order_flg") %></td>
   <td><%= check_course_img(c, "book_flg") %></td>
-  <td><%= check_course_img(c, "resume_flg") %></td>
   <td><%= check_course_img(c, "report_flg") %></td>
-  <td><%= check_course_img(c, "end_report_flg") %></td>
   <td><%= convert_min(c.getTotalTime) %></td>
   <td><%= link_to "コマ編集", :controller => "courses", :action => "edit", :id => c.id%></td>
 </tr>

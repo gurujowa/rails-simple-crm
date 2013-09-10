@@ -8,7 +8,6 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @course.assign_attributes(course_params)
 
-    
     if @course.save
       flash[:notice] = 'コース情報を変更しました'
       redirect_to :action=> 'edit', :id => params[:id]

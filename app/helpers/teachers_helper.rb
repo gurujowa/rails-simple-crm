@@ -5,6 +5,11 @@ module TeachersHelper
         return options
     end
     
+    def get_work_possible(int)
+        w = {"仕事可能" => 0, "微妙" => 1, "仕事不可" => 2}
+        return w.key(int)     
+    end
+    
     def options_work_possible(default = nil)
         w = {"仕事可能" => 0, "微妙" => 1, "仕事不可" => 2}
         options = options_for_select(w)

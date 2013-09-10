@@ -3,12 +3,13 @@ jQuery ->
   calcTime()
   calendarRender()
 
-  $('.period_img').on 'click' ,  ->
+  $(document).on 'click' , '.period_img',  ->
+    console.log(this)
     hidden_value = $(this).parent().find('.period_hidden').val()
     if (hidden_value == "t")
       $(this).attr("src", "/img/cross.png")
       $(this).parent().find('.period_hidden').val("f")
-    else if (hidden_value == "f")
+    else if (hidden_value == "f" or hidden_value == "false")
       $(this).attr("src", "/img/check.png")
       $(this).parent().find('.period_hidden').val("t")
     else

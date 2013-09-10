@@ -20,7 +20,7 @@
       <tr>
         <td><%= teacher.last_kanji %> <%= teacher.first_kanji %></td>
         <td><%= teacher.last_kana %> <%= teacher.first_kana %></td>
-        <td><%= teacher.work_possible %></td>
+        <td><%= get_work_possible(teacher.work_possible) %></td>
         <td><%= teacher.genre %></td>
         <td><%= teacher.bill %></td>
         <td><%= teacher.tel %></td>
