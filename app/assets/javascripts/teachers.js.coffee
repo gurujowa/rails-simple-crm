@@ -5,6 +5,7 @@ jQuery ->
   oTable = $('.teachers_datatable').dataTable
     sPaginationType: "full_numbers"
     bJQueryUI: true
+    aaSorting: [[ 1, "asc" ]]
     bProcessing: true
     bStateSave:  false
     iDisplayLength: 100
