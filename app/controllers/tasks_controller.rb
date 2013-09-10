@@ -1,11 +1,23 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, :only => [:show, :edit, :update, :destroy]
   before_action :check_user
 
   # GET /tasks
   # GET /tasks.json
   def index
     @tasks = Task.all
+  end
+
+  def usershow
+    @tasks = Task.joins(:company).where(assignee: session[:current_user].id ).
+    where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
+    order("companies.status_id asc, companies.client_name asc, tasks.duedate asc")
+
+    respond_to do |format|
+      format.html
+      format.csv { render text: @tasks.to_csv.tosjis }
+    end
+
   end
 
   # GET /tasks/1
@@ -87,14 +99,6 @@ class TasksController < ApplicationController
       format.js {}
     end
   end
-  
-      private
-    # Use callbacks to share common setup or constraints between actions.
-    def check_user
-      if session[:current_user] == nil
-        redirect_to :controller => "users", :action=>"current"
-      end
-    end
   
 
   private

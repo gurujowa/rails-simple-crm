@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :check_user
+
   def index
       @not_complite = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
       order("duedate asc").all
@@ -203,15 +204,6 @@ class CompaniesController < ApplicationController
     return ids
   end
   
-    private
-    # Use callbacks to share common setup or constraints between actions.
-    def check_user
-      if session[:current_user] == nil
-        redirect_to :controller => "users", :action=>"current"
-      else
-        @current_user = session[:current_user]
-      end
-    end
   
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params

@@ -1,20 +1,34 @@
-<h1>teachers 一覧</h1>
+<h1>講師 一覧</h1>
 
-<%= link_to '新規追加', new_teacher_path, :class => 'btn' %>
+<table class="teachers_datatable">
+  <thead>
+    <tr>
+      <th>名前（漢字）</th>
+      <th>名前（かな）</th>
+      <th>仕事可能</th>
+      <th>ジャンル</th>
+      <th>単価</th>
+      <th>電話</th>
+      <th>メール</th>
+      <th>メモ</th>
+      <th>CH</th>
+    </tr>
+  </thead>
 
-<div class="tabbable">
- <ul class="nav nav-tabs">
-  <li class="active"><a href="#tab1" data-toggle="tab">詳細情報</a></li>
-  <li><a href="#tab2" data-toggle="tab">講師登録状況</a></li>
- </ul>
- <div id="my-tab-content" class="tab-content">
-  <div class="tab-pane active" id="tab1">
-   <%= render 'edit1' %>
-  </div>
-  <div class="tab-pane" id="tab2">
-   <%= render 'edit2' %>
-  </div>
- </div>
-</div>
-
-
+  <tbody>
+    <% @teachers.each do |teacher| %>
+      <tr>
+        <td><%= teacher.last_kanji %> <%= teacher.first_kanji %></td>
+        <td><%= teacher.last_kana %> <%= teacher.first_kana %></td>
+        <td><%= get_work_possible(teacher.work_possible) %></td>
+        <td><%= teacher.genre %></td>
+        <td><%= teacher.bill %></td>
+        <td><%= teacher.tel %></td>
+        <td><%= teacher.email %></td>
+        <td><%= teacher.memo %></td>
+        <td><%= link_to '編集', edit_teacher_path(teacher), :class => "btn" %>
+        	<%= link_to '削除', teacher, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

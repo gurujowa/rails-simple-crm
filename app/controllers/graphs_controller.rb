@@ -1,4 +1,6 @@
 class GraphsController < ApplicationController
+  before_action :check_user
+
   def index
     @day_created = make_day_created
     @week_created = make_week_created

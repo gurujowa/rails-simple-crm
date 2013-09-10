@@ -6,6 +6,10 @@ class TeachersController < ApplicationController
     @teachers = Teacher.order("last_kana ASC, first_kana ASC")
   end
 
+  def flag
+    @teachers = Teacher.order("last_kana ASC, first_kana ASC")
+  end
+
   # GET /teachers/1
   def show
   end

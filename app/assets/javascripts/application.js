@@ -39,6 +39,8 @@ $.fn.datepicker.dates['ja'] = {
 	};
 $(function(){
   $( ".datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'});
+  $('.dropdown-toggle').dropdown();
+  $('.navbar li.dropdown').hover( function(){ $(this).addClass('open').find('ul').stop(true,true).hide().slideDown('fast'); }, function(){ $(this).removeClass('open').find('ul').stop(true,true).slideUp('fast'); } ); $('.navbar li.dropdown li').unbind('mouseover').unbind('mouseout');
 });
 
 function remove_fields(link) {

@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController  
+  before_action :check_user
   
   def edit
     @course = Course.find(params[:id])

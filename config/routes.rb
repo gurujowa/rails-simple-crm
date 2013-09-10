@@ -2,6 +2,7 @@ Mycrm::Application.routes.draw do
 
   resources :teachers
   get 'teachers/update/:id/:type' => 'teachers#up_bool'
+  get 'teachers_flag' => 'teachers#flag'
 
 
   resources :industries
@@ -32,6 +33,7 @@ Mycrm::Application.routes.draw do
   
   #タスク
   resources :tasks
+  get 'usertasks' => 'tasks#usershow'
   post 'create_task' => 'tasks#ajax_create'
   get 'task_status_change' => 'tasks#status_change'
    

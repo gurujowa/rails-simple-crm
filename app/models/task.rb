@@ -34,4 +34,14 @@ class Task < ActiveRecord::Base
       return "success"
     end
   end
+  
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << ["ステータス","会社名","名前","期限","進捗","メモ"]
+      all.each do |row|
+        csv << [row.company.status.name,row.company.client_name,row.name,row.duedate,row.getProgress(),row.note]
+      end
+    end
+  end
+  
 end
