@@ -1,0 +1,32 @@
+<h1>コース 一覧</h1>
+
+<div class="row-fluid">
+<div class="span2">
+<table id="courses_toggle_table" class="table table-bordered">
+</table>
+</div>
+<div class="span10">
+<table id="courses_datatable">
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |b| %>
+      <tr>
+        <td><%= b.id %></td>
+        <td><%= link_to b.company.client_name, {controller: "companies", action: "edit", id: b.company_id} %></td>
+        <td><%= b.name %></td>
+        <td><%= check_course_img(b, "order_flg") %></td>
+        <td><%= check_course_img(b, "book_flg") %></td>
+        <td><%= check_course_img(b, "report_flg") %></td>
+        <td><%= convert_min(b.getTotalTime) %></td>
+        <td><%= b.getStartDate %></td>
+        <td><%= b.getEndDate %></td>
+        <td><%= link_to '編集', edit_course_path(b), :class => "btn" %>
+        	<%= link_to '削除', b, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

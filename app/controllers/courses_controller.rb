@@ -1,6 +1,10 @@
 class CoursesController < ApplicationController  
   before_action :check_user
   
+  def index
+    @courses = Course.all    
+  end
+  
   def edit
     @course = Course.find(params[:id])
   end

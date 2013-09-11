@@ -1,4 +1,8 @@
 class CompanyTable
+   property:
+     toggle_table: "#companies_toggle_table"
+     datatable: "#companies_datatable"
+     table_id: "companies"
    column:
      client_name:
        value: "会社名"
@@ -34,49 +38,10 @@ class CompanyTable
      check: 
        value: "CH"
        define: {sWidth: "20px", bSortable: false, aTargets:["check"]}
-   getColumnDefs: ->
-     array = new Array
-     for key, val of this.column
-       if val.define == undefined
-         val.define = {}
-       if ($.cookie("switch-" + key) == "true")
-         val.define.bVisible = true
-       else
-         val.define.bVisible = false
-
-       array.push(val.define)
-     return array
-   switchState: ->
-     for key, val of this.column
-       if($.cookie('switch-' + key) == "true")
-         $('#toggle-' + key).bootstrapSwitch('setState', true)
-       else
-         $('#toggle-' + key).bootstrapSwitch('setState', false)       
-
-   getColumnIndex: (switch_column)->
-     i = 0
-     for key,val of this.column
-       if (switch_column.indexOf(key) != -1)
-         return i
-       i++
-     return false
-   appendToggle: ->
-     for key,val of this.column
-       $("#toggle_table").append(
-         $("<tr></tr>")
-         .append($("<td></td>").text(val.value))
-         .append($('<td></td>').html('<input id="switch-'+key+'" type="checkbox" checked>'))
-       )
-       $("#switch-" + key).wrap('<div id="toggle-'+key+'" class="label-toggle-switch make-switch switch-small" />').parent().bootstrapSwitch()
-     
-   appendDataTable: ->
-     for key,val of this.column    
-       $("#company thead:first tr:first").append("<th>" + val.value + "</th>")
-       $("#company tbody:first tr:first").append("<td></td>")
-   init: ->
-     this.appendDataTable()
-     this.appendToggle()
-     this.switchState()
+   constructor: ->
+     table = new DataTable(this.property, this.column)
+     oTable = table.initTable({sAjaxSource: $(this.property.datatable).data('source'), bServerSide: true})
+     return table
 
 
 window.CompanyTable = CompanyTable

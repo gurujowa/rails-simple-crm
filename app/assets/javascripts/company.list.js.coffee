@@ -2,9 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  companytable = new CompanyTable $()
-  companytable.init()
-   
+  oTable = new CompanyTable()
   
   $('#label').click ->
     sData = $('input', oTable.fnGetNodes()).serialize()
@@ -38,32 +36,7 @@ jQuery ->
         oTable.fnReloadAjax()
     return false 
   
-  oTable = $('#company').dataTable
-    sPaginationType: "full_numbers"
-    bJQueryUI: true
-    bProcessing: true
-    bServerSide: true
-    bStateSave:  true
-    iDisplayLength: 100
-    bSort: true
-    bDeferRender: true
-    bAutoWidth: false
-    sAjaxSource: $('#company').data('source')
-    oLanguage: 
-      sLengthMenu: "表示行数 _MENU_ 件"
-      oPaginate: 
-        "sNext": "次",
-        "sPrevious": "前"
-      sInfo: "TOTAL_TOTAL_ _START_/_END_"
-      sSearch: "検索："
-    aoColumns: companytable.getColumnDefs()
   $("form.search_form").submit(->
     $.removeCookie("SpryMedia_DataTables_company_search", { path: '/companies/' })
     return true
-  )
-  $('.label-toggle-switch').on('switch-change', (e, data)-> 
-      oTable = $('#company').dataTable()
-      switch_column = data.el.context.id
-      oTable.fnSetColumnVis( companytable.getColumnIndex(switch_column), data.value)
-      $.cookie(data.el.context.id, data.value)
   )

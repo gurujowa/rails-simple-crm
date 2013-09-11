@@ -1,4 +1,6 @@
 jQuery ->
+  table = new CourseTable()
+
   pickerReady()
   calcTime()
   calendarRender()

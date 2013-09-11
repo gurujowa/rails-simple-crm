@@ -17,4 +17,27 @@ class Course < ActiveRecord::Base
     
     total
   end
+  
+  def getStartDate
+    periods = self.periods
+    array = []
+    
+    periods.each do |p|
+      array.push(p.day)
+    end
+    array.sort[0]
+  end
+
+  def getEndDate
+    periods = self.periods
+    array = []
+    
+    periods.each do |p|
+      array.push(p.day)
+    end
+    sorted = array.sort {|a, b| b <=> a }
+    sorted[0]
+  end
+
+
 end
