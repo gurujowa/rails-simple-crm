@@ -37,10 +37,10 @@ class DataTable
      for key, val of this.column
        if val.define == undefined
          val.define = {}
-       if (this.getCookieId(key) == "true")
-         val.define.bVisible = true
-       else
+       if (this.getCookieId(key) == "false")
          val.define.bVisible = false
+       else
+         val.define.bVisible = true
        array.push(val.define)
      return array
    getColumnIndex: (switch_column)->
