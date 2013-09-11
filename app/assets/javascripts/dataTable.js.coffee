@@ -19,10 +19,10 @@ class DataTable
    switchState: ->
      for key, val of this.column 
        toggle_id = "#toggle-" + this.property.table_id + '-' + key
-       if(this.getCookieId(key) == "true")
-         $(toggle_id).bootstrapSwitch('setState', true)
-       else
+       if(this.getCookieId(key) == "false")
          $(toggle_id).bootstrapSwitch('setState', false)       
+       else
+         $(toggle_id).bootstrapSwitch('setState', true)
 
    init: ->
      this.appendToggle()
