@@ -21,7 +21,10 @@
           <ul class="nav">
             <li><a href="/">コクピット</a></li>
             <li><%= link_to "会社" ,controller: "companies", action: "search"%></li>
-            <li class="dropdown"><%= link_to "タスク", "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} %>
+            <li class="dropdown"><%= link_to "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>
+            	タスク
+            	<b class='caret'></b>
+            	<% end %>
              <ul class="dropdown-menu">
                <li><%= link_to "全体タスク" , {controller: "tasks", action: "index"}%></li>
                <li><%= link_to "各個人タスク", {:controller => "tasks", :action => "usershow"}%></li>
@@ -31,7 +34,10 @@
             </li>
             <li><%= link_to "ステータス", controller: "statuses" %></li>
             <li class="dropdown">
-            	<%= link_to "講師", "#" , {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} %>
+            	<%= link_to "#" , {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>
+             	講師
+            	<b class='caret'></b>
+            	<% end %>
             	<ul class="dropdown-menu">
             		<li><%= link_to "詳細", {controller: "teachers", action: "index"}%></li>
             		<li><%= link_to "登録状況", {controller: "teachers", action: "flag"}%></li>
