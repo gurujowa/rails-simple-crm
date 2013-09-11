@@ -15,11 +15,24 @@ module TeachersHelper
 
     
     def get_work_possible(int)
-        Teacher.work_possible_hash.key(int)
+       flag = Teacher.work_possible_hash.key(int)
+       if (flag == :possible)
+         return "<img src='/img/check.png' /><span style='display:none'>a</span>".html_safe
+       elsif (flag == :subtle)
+         return "<img src='/img/question.png' /><span style='display:none'>b</span>".html_safe
+       elsif (flag == :impossible)
+         return "<img src='/img/cross.png' /><span style='display:none'>c</span>".html_safe
+       else
+         raise "正しいwork_possible ではありません。 int = " + int
+       end
     end
     
     def options_work_possible(default = nil)
-        options_for_select(Teacher.work_possible_hash)    
+        options_for_select(work_possible_string)    
+    end
+
+    def work_possible_string
+      {"◯" => 0, "△" => 1, "✗" => 2}
     end
 
 end

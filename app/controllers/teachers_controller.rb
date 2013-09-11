@@ -7,7 +7,7 @@ class TeachersController < ApplicationController
   end
 
   def flag
-    @teachers = Teacher.where.not(work_possible: Teacher.work_possible_hash["仕事不可"] ).order("last_kana ASC, first_kana ASC")
+    @teachers = Teacher.where.not(work_possible: Teacher.work_possible_hash[:impossible] ).order("last_kana ASC, first_kana ASC")
   end
 
   # GET /teachers/1
