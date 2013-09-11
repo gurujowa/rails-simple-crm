@@ -13,11 +13,11 @@
 <div class="row-fluid">
 <div class="span2">
 <%= render(:partial => "search_form") %>
-<table id="toggle_table" class="table table-bordered">
+<table id="companies_toggle_table" class="table table-bordered">
 </table>
 </div>
 <div class="span10">
-<table id="company" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>@company_params, :rank => params[:rank] %>">
+<table id="companies_datatable" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>@company_params, :rank => params[:rank] %>">
 <thead>
   <tr>
   </tr>
