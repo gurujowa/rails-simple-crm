@@ -1,4 +1,7 @@
 class Contact < ActiveRecord::Base
+
+  validates :memo, presence: true
+  validates :con_type, presence: true
   belongs_to :company, :autosave => true
   
   def getCreatedBy()

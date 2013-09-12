@@ -172,6 +172,7 @@ class CompaniesController < ApplicationController
       flash[:notice] = '会社情報が変更されました。'
       redirect_to :action=> 'search', :company => session[:last_search_url], :last_rank => session[:last_search_rank]
     else
+      @company.contact.build(:created_by => session[:current_user].id)
       render "edit"
     end
   end
@@ -209,7 +210,7 @@ class CompaniesController < ApplicationController
   def company_params
       params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
       :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
-      :bill, contact_attributes: [:id, :memo, :created_by])
+      :bill, contact_attributes: [:id, :memo, :created_by, :con_type])
   end
   
   private

@@ -19,6 +19,7 @@
  *= require bootstrap-editable
  *= require jquery.timepicker
  *= require fullcalendar
+ *= require icheck/square/aero
  */
 
 @import "bootstrap";             
@@ -44,3 +45,6 @@ input.input-medium {
 	height: 20px;
 }
 
+div.iradio_square-aero, label{
+  display:inline-block;
+}

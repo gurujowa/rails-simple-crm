@@ -26,7 +26,22 @@
 //= require jquery.timepicker.min
 //= require fullcalendar
 //= require gcal
+//= require jquery.icheck
 //= require_tree .
+
+function icheck(){
+  if($(".icheck").length > 0){
+    $(".icheck").each(function(){
+      var $el = $(this);
+      var opt = {
+        checkboxClass: 'icheckbox_square-aero',
+        radioClass: 'iradio_square-aero',
+      }
+      $el.iCheck(opt);
+    });
+  }
+}
+
 
 $.fn.datepicker.dates['ja'] = {
 		days: ["日曜", "月曜", "火曜", "水曜", "木曜", "金曜", "土曜", "日曜"],
@@ -40,6 +55,7 @@ $.fn.datepicker.dates['ja'] = {
 $(function(){
   $( ".datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'});
   $('.dropdown-toggle').dropdown();
+  icheck();
 });
 
 function remove_fields(link) {

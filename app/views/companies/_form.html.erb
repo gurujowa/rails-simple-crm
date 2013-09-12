@@ -61,15 +61,25 @@
 <label class="control-label">コンタクト </label>
 <div class="controls">
     <% contact_index = 1 %>
+    <table class="table">
 	<%= form.fields_for :contact do |c| %>
-      <%= contact_index %> 
-      <%= c.text_area :memo, :rows => "6",  :class=>"span9" %><br>
+	  <tr>
+	  	<td><%= contact_index %></td>
+        <td style="width:100px;">
+            <%= c.radio_button :con_type, 1 , :class =>"icheck"%><%= c.label "con_type_1", "荷電" %><br>
+            <%= c.radio_button :con_type, 2 , :class =>"icheck"%><%= c.label "con_type_2", "アポイント" %><br>
+            <%= c.radio_button :con_type, 3 , :class =>"icheck"%><%= c.label "con_type_3", "その他" %>
+        </td>
+        <td><%= c.text_area :memo, :rows => "6" , :style =>"width:100%" %><br>
       &nbsp;&nbsp;&nbsp;担当者：<%= c.object.getCreatedBy() %>, 作成日: <%= simple_date(c.object.created_at) %><br>
       <%= c.hidden_field :created_by%>
-      <% contact_index += 1%>
+      <% contact_index += 1%></td>
+      </tr>
 	<% end %>
-
+</table>
 </div></div>
+
+
 
 <div class="form-actions">
 <%= submit_tag "編集する", :class=>"btn btn-primary" %>

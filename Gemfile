@@ -35,6 +35,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'icheck-rails'
 gem 'fullcalendar-rails'
 gem 'rails-i18n', '~> 4.0.0.pre' # For 4.0.x
 gem 'bootstrap-sass', '~> 2.3.2.2'
