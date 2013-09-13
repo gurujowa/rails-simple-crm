@@ -1,0 +1,36 @@
+<h1>見込み高い案件</h1>
+
+<%= link_to "CSV出力", {:action => "usershow", :format => "csv"}, { :class => "btn" }%>
+
+| 表示営業マン<%= select_tag "sales_person_change" , options_from_users(params[:id]), :include_blank => true %>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>見込み度</th>
+      <th>会社名</th>
+      <th>初回アポ日</th>
+      <th>提案見積日</th>
+      <th>契約日</th>
+      <th>入金日</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  	<% key = 1%>
+    <% @companies.each do |c| %>
+      <tr>
+        <td><%= key.to_s%><%key += 1%></td>
+        <td><%= c.chance %></td>
+        <td><%= c.client_name %></td>
+        <td><%= c.appoint_plan %></td>
+        <td><%= c.proposed_plan %></td>
+        <td><%= c.contract_plan %></td>
+        <td><%= c.payment_plan %></td>
+        <td><%= c.status.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

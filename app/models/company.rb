@@ -49,17 +49,25 @@ class Company < ActiveRecord::Base
     end
   end
   
-  
-  def getContact
-    con_str = "<ul>"
-    contact.each do |d|
-      if d.memo != nil
-        con_str << "<li>"
-        con_str.concat(d.memo)
-        con_str << "</li>"
+  def getContactMemo
+    array = []
+    self.contact.each do |c|
+      if c.memo != nil
+        array.push(c.memo)
       end
     end
-    con_str << "</ul>"
-    return con_str
+    return array
   end
+  
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << ["ランク","見込み度", "会社名","初回アポ日","提案見積日","契約日","入金日","ステータス","コンタクト"]
+      key = 1
+      all.each do |row|
+        csv << [key, row.chance, row.client_name, row.appoint_plan, row.proposed_plan, row.contract_plan, row.payment_plan, row.status.name,row.getContactMemo.join(",")]
+        key += 1
+      end
+    end
+  end
+
 end

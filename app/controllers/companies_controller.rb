@@ -43,6 +43,22 @@ class CompaniesController < ApplicationController
       ')
   end
   
+  def usershow
+    if (!params[:id].present?)
+      params[:id] = session[:current_user].id
+    end
+    @companies = Company.where(sales_person: params[:id] ).
+    where.not(status_id: 19).
+    order("companies.chance desc, companies.status_id asc, companies.id asc").
+    limit(20)
+
+    respond_to do |format|
+      format.html
+      format.csv { render text: @companies.to_csv.tosjis }
+    end
+  end
+
+  
   def invoice
     invoice = Payday::Invoice.new(:invoice_number => 12)
     invoice.line_items << Payday::LineItem.new(:price => 20, :quantity => 5, :description => "てすと")
@@ -205,12 +221,13 @@ class CompaniesController < ApplicationController
     return ids
   end
   
+
   
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
       params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
       :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
-      :bill, contact_attributes: [:id, :memo, :created_by, :con_type])
+      :bill, :appoint_plan, :proposed_plan, :contract_plan, :payment_plan, contact_attributes: [:id, :memo, :created_by, :con_type])
   end
   
   private

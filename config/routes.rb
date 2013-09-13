@@ -28,6 +28,8 @@ Mycrm::Application.routes.draw do
   end
   get 'companies/contact_delete/:id' => 'companies#contact_delete'
   get 'companies/pdf' => 'companies#pdf'
+  get 'companies/usershow/:id' => 'companies#usershow'
+  get 'companies/usershow' => 'companies#usershow'
   get 'companies/invoice' => 'companies#invoice'
   get 'companies/label' => 'companies#label'
   get 'up_postsend' => 'companies#up_postsend'

@@ -20,7 +20,13 @@
         <div class="nav-collapse">
           <ul class="nav">
             <li><a href="/">コクピット</a></li>
-            <li><%= link_to "会社" ,controller: "companies", action: "search"%></li>
+            <li class="dropdown"><%= link_to "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>
+            	会社<b class='caret'></b><% end %>
+             <ul class="dropdown-menu">
+               <li><%= link_to "会社検索" , {controller: "companies", action: "search"}%></li>
+               <li><%= link_to "見込み度高い案件", {controller: "companies", action: "usershow"}%></li>
+             </ul>
+            </li>
             <li class="dropdown"><%= link_to "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>
             	コース<b class='caret'></b><% end %>
              <ul class="dropdown-menu">
@@ -28,8 +34,6 @@
                <li><%= link_to "カレンダー", {controller: "courses", action: "calendar"}%></li>
              </ul>
             </li>
-
-
             <li class="dropdown"><%= link_to "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>
             	タスク
             	<b class='caret'></b>

@@ -57,7 +57,20 @@
 <br>
 </div></div>
 <div class="control-group">
-<label class="control-label">請求予定</label><div class="controls"> <%= form.text_field :bill%></div>
+<label class="control-label">予定日</label>
+<div class="controls">
+	<table class="table">
+	<tr>
+	  <td>初回アポ</td><td> <%= form.text_field :appoint_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"%></td>
+	</tr><tr>
+	  <td>提案見積日</td><td> <%= form.text_field :proposed_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"%></td>	  
+	</tr><tr>
+	  <td>契約日</td><td> <%= form.text_field :contract_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"%></td>	  
+	</tr><tr>
+	  <td>入金日</td><td> <%= form.text_field :payment_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"%></td>	  
+	</tr>
+	</table>
+	</div>
 </div>
 <div class="control-group">
 <label class="control-label">コンタクト </label>

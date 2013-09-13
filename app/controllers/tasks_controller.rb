@@ -17,7 +17,6 @@ class TasksController < ApplicationController
       format.html
       format.csv { render text: @tasks.to_csv.tosjis }
     end
-
   end
 
   # GET /tasks/1

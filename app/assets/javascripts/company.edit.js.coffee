@@ -7,6 +7,17 @@ jQuery ->
     name: 'name'
     })
     
+  $("#company_appoint_plan").on 'changeDate', (ev)->
+    current =  ev.date
+    if(!$("#company_proposed_plan").val())
+      $("#company_proposed_plan").val(moment(ev.date).add('days',7).format('L'))
+    if(!$("#company_contract_plan").val())
+      $("#company_contract_plan").val(moment(ev.date).add('days',21).format('L'))
+    if(!$("#company_payment_plan").val())
+      $("#company_payment_plan").val(moment(ev.date).add('days',30).format('L'))
+
+      
+    
   $("#edit_tab a[data-toggle=\"tab\"]").on "shown", (e) -> 
     localStorage.setItem "lastEditTab", $(e.target).attr("id")
   lastTab = localStorage.getItem("lastEditTab")
