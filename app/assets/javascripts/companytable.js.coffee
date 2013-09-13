@@ -41,7 +41,7 @@ class CompanyTable
    constructor: ->
      table = new DataTable(this.property, this.column)
      oTable = table.initTable({sAjaxSource: $(this.property.datatable).data('source'), bServerSide: true})
-     return table
+     return oTable
 
 
 window.CompanyTable = CompanyTable

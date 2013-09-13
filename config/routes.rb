@@ -16,7 +16,8 @@ Mycrm::Application.routes.draw do
 
 
   #コース
-  resources :courses
+  resources :courses, :except => [:show]
+  get 'courses/calendar' => 'courses#calendar'  
   get 'courses/create' => 'courses#create'  
   put 'courses/update/:id' => 'courses#up_name'  
   get 'courses/update/:id/:type' => 'courses#up_bool'
@@ -26,9 +27,9 @@ Mycrm::Application.routes.draw do
     collection { get "search"}
   end
   get 'companies/contact_delete/:id' => 'companies#contact_delete'
-  get 'companies_pdf' => 'companies#pdf'
-  get 'invoice' => 'companies#invoice'
-  get 'companies_label' => 'companies#label'
+  get 'companies/pdf' => 'companies#pdf'
+  get 'companies/invoice' => 'companies#invoice'
+  get 'companies/label' => 'companies#label'
   get 'up_postsend' => 'companies#up_postsend'
   
   #タスク

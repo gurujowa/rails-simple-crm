@@ -7,6 +7,7 @@ class Period < ActiveRecord::Base
   validates :break_end, :presence => {if:  Proc.new {self.break_start.present?} , message: "休憩開始が入力されている場合、空には出来ません"}
   validates :resume_flg,  :inclusion => {:in => [true, false]}
   validates :report_flg,  :inclusion => {:in => [true, false]}
+  belongs_to :teacher
 
   def getTotal
     b_time = 0

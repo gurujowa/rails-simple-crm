@@ -3,7 +3,8 @@ jQuery ->
 
   pickerReady()
   calcTime()
-  calendarRender()
+  periodCalendarRender()
+  courseCalendarRender()
 
   $(document).on 'click' , '.period_img',  ->
     console.log(this)
@@ -30,7 +31,7 @@ jQuery ->
      $(".select_teacher_id").eq(-1).val($(".select_teacher_id").eq(-2).val())
      $( ".course_datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'})
 
-calendarRender = (method) ->
+periodCalendarRender = (method) ->
   calendar_settings = $.fn.fullcalendar
   calendar_settings.eventSources = new Array
   calendar_settings.eventSources[0] ={
@@ -52,6 +53,12 @@ calendarRender = (method) ->
     $('#period_calendar').fullCalendar('destroy')
   $('#period_calendar').fullCalendar(calendar_settings)
 
+
+courseCalendarRender = (method) ->
+  calendar_settings = $.fn.fullcalendar
+  $.getJSON "/courses/calendar.json", (json)->
+    calendar_settings.eventSources = json.eventSources
+    $('#course_calendar').fullCalendar(calendar_settings)
 
 
 calcTime = ->

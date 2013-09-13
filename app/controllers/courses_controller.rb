@@ -9,6 +9,11 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
   end
   
+  def calendar
+    @courses = Course.all
+    @periods = Period.all
+  end
+  
   def update
     @course = Course.find(params[:id])
     @course.assign_attributes(course_params)

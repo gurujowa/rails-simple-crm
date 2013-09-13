@@ -6,12 +6,11 @@ jQuery ->
   
   $('#label').click ->
     sData = $('input', oTable.fnGetNodes()).serialize()
-    console.log(sData)
     if sData == "" 
       alert("チェックがありません")
       return false
     w = window.open()
-    w.location.href = "/companies_pdf?" + sData
+    w.location.href = "/companies/pdf?" + sData
     return false 
   
   $('#up_postsend').click ->

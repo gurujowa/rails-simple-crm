@@ -5,7 +5,17 @@ class Course < ActiveRecord::Base
   
   validates :name, presence: true  
   validates :company_id, presence: true  
+  
+  @@color = ["MidnightBlue","DarkViolet","Crimson","Navy","Black","Green","DarkRed","Gray","Sienna","DarkMagenta"]
 
+  def color
+    key = self.id % 10
+    return @@color[key]
+  end
+  
+  def text_color
+    return "white"
+  end
 
   def getTotalTime
     periods = self.periods
