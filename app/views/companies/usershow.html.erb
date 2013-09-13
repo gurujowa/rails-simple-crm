@@ -4,7 +4,7 @@
 
 | 表示営業マン<%= select_tag "sales_person_change" , options_from_users(params[:id]), :include_blank => true %>
 
-<table class="table table-bordered table-striped">
+<table style="border-collapse:collapse;" class="table table-bordered table-striped">
   <thead>
     <tr>
       <th>ID</th>
@@ -21,7 +21,7 @@
   <tbody>
   	<% key = 1%>
     <% @companies.each do |c| %>
-      <tr>
+      <tr <%= key == 5 ? 'class=big_border' : nil %>>
         <td><%= key.to_s%><%key += 1%></td>
         <td><%= c.chance %></td>
         <td><%= c.client_name %></td>
