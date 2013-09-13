@@ -52,7 +52,9 @@
 		<td><%= form.text_field :building %></td>
     </tr>
 </table>
-<a class="btn" onClick='location.href = "http://www.google.co.jp/search?q=" + $("#company_prefecture").val() + $("#company_city").val() + $("#company_address").val() + " 郵便番号"'>郵便番号検索</a><br>
+<a class="btn" onClick='window.open("http://www.google.co.jp/search?q=" + $("#company_prefecture").val() + $("#company_city").val() + $("#company_address").val() + " 郵便番号","_blank")'>郵便番号検索</a>
+<a class="btn" onClick='window.open("http://maps.google.co.jp/maps?q=" + $("#company_prefecture").val() + $("#company_city").val() + $("#company_address").val(),"_blank")'>Google Map</a>
+<br>
 </div></div>
 <div class="control-group">
 <label class="control-label">請求予定</label><div class="controls"> <%= form.text_field :bill%></div>
