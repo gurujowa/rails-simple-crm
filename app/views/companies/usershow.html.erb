@@ -24,7 +24,7 @@
       <tr <%= key == 5 ? 'class=big_border' : nil %>>
         <td><%= key.to_s%><%key += 1%></td>
         <td><%= c.chance %></td>
-        <td><%= c.client_name %></td>
+        <td><%= link_to c.client_name , {action: "edit", id: c.id} %></td>
         <td><%= c.appoint_plan %></td>
         <td><%= c.proposed_plan %></td>
         <td><%= c.contract_plan %></td>

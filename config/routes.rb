@@ -1,5 +1,7 @@
 Mycrm::Application.routes.draw do
 
+  resources :teacher_orders
+
   resources :teachers
   get 'teachers/update/:id/:type' => 'teachers#up_bool'
   get 'teachers_flag' => 'teachers#flag'

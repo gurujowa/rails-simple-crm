@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   belongs_to :company
+  belongs_to :teacher_order
   has_many :periods, :dependent => :destroy
   accepts_nested_attributes_for :periods,:allow_destroy => true
   

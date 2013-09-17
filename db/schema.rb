@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130913075820) do
+ActiveRecord::Schema.define(version: 20130914044205) do
 
   create_table "companies", force: true do |t|
     t.datetime "created_at"
@@ -60,15 +60,16 @@ ActiveRecord::Schema.define(version: 20130913075820) do
   end
 
   create_table "courses", force: true do |t|
-    t.string   "name",                           null: false
-    t.integer  "company_id",                     null: false
-    t.boolean  "order_flg",      default: false, null: false
-    t.boolean  "book_flg",       default: false, null: false
-    t.boolean  "resume_flg",     default: false, null: false
-    t.boolean  "report_flg",     default: false, null: false
-    t.boolean  "end_report_flg", default: false, null: false
+    t.string   "name",                             null: false
+    t.integer  "company_id",                       null: false
+    t.boolean  "order_flg",        default: false, null: false
+    t.boolean  "book_flg",         default: false, null: false
+    t.boolean  "resume_flg",       default: false, null: false
+    t.boolean  "report_flg",       default: false, null: false
+    t.boolean  "end_report_flg",   default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "teacher_order_id"
   end
 
   create_table "industries", force: true do |t|
@@ -144,6 +145,19 @@ ActiveRecord::Schema.define(version: 20130913075820) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "teacher_orders", force: true do |t|
+    t.integer  "teacher_id"
+    t.integer  "unit_price"
+    t.text     "memo"
+    t.boolean  "invoice_flg"
+    t.boolean  "payment_flg"
+    t.text     "payment_term"
+    t.date     "order_date"
+    t.date     "payment_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "teachers", force: true do |t|

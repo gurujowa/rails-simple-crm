@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Teacher:</strong>
+  <%= @teacher_order.teacher_id %>
+</p>
+
+<p>
+  <strong>Unit price:</strong>
+  <%= @teacher_order.unit_price %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @teacher_order.memo %>
+</p>
+
+<p>
+  <strong>Invoice flg:</strong>
+  <%= @teacher_order.invoice_flg %>
+</p>
+
+<p>
+  <strong>Payment flg:</strong>
+  <%= @teacher_order.payment_flg %>
+</p>
+
+<p>
+  <strong>Payment term:</strong>
+  <%= @teacher_order.payment_term %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @teacher_order.memo %>
+</p>
+
+<p>
+  <strong>Order date:</strong>
+  <%= @teacher_order.order_date %>
+</p>
+
+<p>
+  <strong>Payment date:</strong>
+  <%= @teacher_order.payment_date %>
+</p>
+
+<%= link_to 'Edit', edit_teacher_order_path(@teacher_order) %> |
+<%= link_to 'Back', teacher_orders_path %>

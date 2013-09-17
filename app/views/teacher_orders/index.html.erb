@@ -1,0 +1,38 @@
+<h1>講師発注管理  一覧</h1>
+
+<table id="teacher_orders_datatable" class="default_datatables">
+  <thead>
+    <tr>
+      <th>講師</th>
+      <th>単価</th>
+      <th>メモ</th>
+      <th>請求書受領</th>
+      <th>支払い完了</th>
+      <th>特記事項</th>
+      <th>請求書発行日</th>
+      <th>請求書受領日</th>
+      <th>CH</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teacher_orders.each do |teacher_order| %>
+      <tr>
+        <td><%= teacher_order.teacher_id %></td>
+        <td><%= teacher_order.unit_price %></td>
+        <td><%= teacher_order.memo %></td>
+        <td><%= teacher_order.invoice_flg %></td>
+        <td><%= teacher_order.payment_flg %></td>
+        <td><%= teacher_order.payment_term %></td>
+        <td><%= teacher_order.order_date %></td>
+        <td><%= teacher_order.payment_date %></td>
+        <td><%= link_to '編集', edit_teacher_order_path(teacher_order), :class => "btn" %>
+        	<%= link_to '削除', teacher_order, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新規追加', new_teacher_order_path, :class => 'btn' %>
