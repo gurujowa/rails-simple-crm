@@ -26,6 +26,8 @@
 //= require jquery.timepicker.min
 //= require fullcalendar
 //= require moment.min
+//= require select2
+//= require select2_locale_ja
 //= require jquery.icheck
 //= require_tree .
 
@@ -109,6 +111,7 @@ $(function(){
   $( ".datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'});
   $('.dropdown-toggle').dropdown();
   icheck();
+
 });
 
 function remove_fields(link) {
@@ -119,5 +122,5 @@ function remove_fields(link) {
 function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g")
-  $("tbody.add_fields").append(content.replace(regexp, new_id));
+  $(".add_fields").append(content.replace(regexp, new_id));
 }

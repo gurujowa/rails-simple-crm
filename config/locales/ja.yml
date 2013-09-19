@@ -20,27 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ja:
-  payday:
-    status:
-      paid: 支払額
-      overdue: OVERDUE
-    invoice:
-      bill_to: Bill To
-      ship_to: Ship To
-      invoice_no: "Invoice #:"
-      due_date: "Due Date:"
-      paid_date: "Paid Date:"
-      subtotal: "Subtotal:"
-      tax: "Tax:"
-      total: "Total:"
-    line_item:
-      description: Description
-      unit_price: Unit Price
-      quantity: Quantity
-      amount: Amount
   activerecord:
     models:
       teacher: 講師
+      teacher_order: 講師発注
     attributes: #一覧画面で必要
       teacher:  #モデル毎に階層化しておく。
         first_kanji: 名（漢字）
@@ -51,6 +34,14 @@ ja:
         genre: ジャンル
         bill: 単価（時間）
         tel: 電話番号
-        memo: メモ 
+        memo: メモ
         created_at: 作成日
-        　        updated_at: 更新日
+      teacher_order:  #モデル毎に階層化しておく。
+        teacher_id: 講師
+        unit_price: 単価
+        memo: メモ
+        invoice_flg: 請求書受領
+        payment_flg: 支払い完了
+        payment_term: 特記事項
+        order_date: 発注日
+        payment_date: 支払日

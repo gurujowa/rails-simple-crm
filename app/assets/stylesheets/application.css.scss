@@ -18,6 +18,7 @@
  *= require bootstrap-switch
  *= require bootstrap-editable
  *= require jquery.timepicker
+ *= require select2
  *= require fullcalendar
  *= require icheck/square/aero
  */
@@ -44,6 +45,8 @@ box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
 input.input-medium {
 	height: 20px;
 }
+
+.hide { display: none; }
 
 div.iradio_square-aero, label{
   display:inline-block;

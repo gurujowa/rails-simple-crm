@@ -17,11 +17,11 @@ module TeachersHelper
     def get_work_possible(int)
        flag = Teacher.work_possible_hash.key(int)
        if (flag == :possible)
-         return "<img src='/img/check.png' /><span style='display:none'>a</span>".html_safe
+         return "<img src='/img/check-m.png' /><span style='display:none'>a</span>".html_safe
        elsif (flag == :subtle)
          return "<img src='/img/question.png' /><span style='display:none'>b</span>".html_safe
        elsif (flag == :impossible)
-         return "<img src='/img/cross.png' /><span style='display:none'>c</span>".html_safe
+         return "<img src='/img/cross-m.png' /><span style='display:none'>c</span>".html_safe
        else
          raise "正しいwork_possible ではありません。 int = " + int
        end

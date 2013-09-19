@@ -26,11 +26,5 @@ module CoursesHelper
     builder.text_field(name , hash)
   end
   
-  def check_img_src(bool)
-    if bool == true
-      return "/img/check.png"
-    else
-      return "/img/cross.png"
-    end
-  end
+
 end

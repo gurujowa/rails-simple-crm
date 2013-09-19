@@ -18,11 +18,11 @@
   <tbody>
     <% @teacher_orders.each do |teacher_order| %>
       <tr>
-        <td><%= teacher_order.teacher_id %></td>
+        <td><%= teacher_order.teacher.name %></td>
         <td><%= teacher_order.unit_price %></td>
         <td><%= teacher_order.memo %></td>
-        <td><%= teacher_order.invoice_flg %></td>
-        <td><%= teacher_order.payment_flg %></td>
+        <td><%= check_m_img(teacher_order.invoice_flg) %></td>
+        <td><%= check_m_img(teacher_order.payment_flg) %></td>
         <td><%= teacher_order.payment_term %></td>
         <td><%= teacher_order.order_date %></td>
         <td><%= teacher_order.payment_date %></td>

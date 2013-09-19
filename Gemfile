@@ -30,11 +30,22 @@ end
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+group :development do
+  # エラー画面をわかりやすく整形してくれる
+  gem 'better_errors'
+
+  # better_errorsの画面上にirb/pry(PERL)を表示する
+  gem 'binding_of_caller'
+end
+
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
+gem "select2-rails"
+gem "simple_form", "~> 3.0.0.rc"
 gem 'icheck-rails'
 gem 'fullcalendar-rails'
 gem 'rails-i18n', '~> 4.0.0.pre' # For 4.0.x
@@ -42,7 +53,6 @@ gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-editable-rails'
 gem 'pdfkit'
 gem 'validates_email_format_of'
-gem 'prawn'
 gem 'money'
 gem 'prawn-svg'
 gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'

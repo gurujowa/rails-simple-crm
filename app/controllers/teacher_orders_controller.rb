@@ -1,5 +1,6 @@
 class TeacherOrdersController < ApplicationController
   before_action :set_teacher_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_default_form, only: [:edit, :update, :new, :create]
 
   # GET /teacher_orders
   def index
@@ -50,9 +51,17 @@ class TeacherOrdersController < ApplicationController
     def set_teacher_order
       @teacher_order = TeacherOrder.find(params[:id])
     end
+    
+  private
+   def set_default_form
+      @select_courses = Course.all
+      @select_companies = Company.joins(:course).group(:client_name)     
+      @teachers = Teacher.where.not(work_possible:Teacher.work_possible_hash[:impossible]).order("last_kana ASC")
+   end
 
     # Only allow a trusted parameter "white list" through.
     def teacher_order_params
-      params.require(:teacher_order).permit(:teacher_id, :unit_price, :memo, :invoice_flg, :payment_flg, :payment_term, :memo, :order_date, :payment_date)
+      params.require(:teacher_order).permit(
+      :teacher_id, :unit_price, :memo, :invoice_flg, :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
     end
 end

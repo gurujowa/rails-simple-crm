@@ -25,4 +25,29 @@ module ApplicationHelper
     end
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", :class => "btn", :id => "add_field_button")
   end
+  
+  def check_img_src(bool)
+    if bool == true
+      return "/img/check.png"
+    else
+      return "/img/cross.png"
+    end
+  end
+  
+  
+  def check_m_img(bool)
+    if bool === true
+      src =  "/img/check-m.png"
+      order = "a"
+    elsif bool === false
+      src = "/img/cross-m.png"
+      order = "b"
+    else
+      raise "type Error check_m_img"
+    end   
+
+    img_tag =  "<img src='" + src + "'/> <span style='display:none'>" + order + "</span>"    
+    return img_tag.html_safe
+  end
+
 end

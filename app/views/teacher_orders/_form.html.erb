@@ -1,53 +1,12 @@
-<%= form_for(@teacher_order,:html => {:class => "form-horizontal"}) do |f| %>
-  <% if @teacher_order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@teacher_order.errors.count, "error") %> prohibited this teacher_order from being saved:</h2>
-
-      <ul>
-      <% @teacher_order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="control-group">
-    <%= f.label :teacher_id , :class => "control-label" %>
-    <div class="controls"><%= f.number_field :teacher_id %></div>
-  </div>
-  <div class="control-group">
-    <%= f.label :unit_price , :class => "control-label" %>
-    <div class="controls"><%= f.number_field :unit_price %></div>
-  </div>
-  <div class="control-group">
-    <%= f.label :memo , :class => "control-label" %>
-    <div class="controls"><%= f.number_field :memo %></div>
-  </div>
-  <div class="control-group">
-    <%= f.label :invoice_flg , :class => "control-label" %>
-    <div class="controls"><%= f.check_box :invoice_flg %></div>
-  </div>
-  <div class="control-group">
-    <%= f.label :payment_flg , :class => "control-label" %>
-    <div class="controls"><%= f.check_box :payment_flg %></div>
-  </div>
-  <div class="control-group">
-    <%= f.label :payment_term , :class => "control-label" %>
-    <div class="controls"><%= f.text_area :payment_term %></div>
-  </div>
-  <div class="control-group">
-    <%= f.label :memo , :class => "control-label" %>
-    <div class="controls"><%= f.text_area :memo %></div>
-  </div>
-  <div class="control-group">
-    <%= f.label :order_date , :class => "control-label" %>
-    <div class="controls"><%= f.date_select :order_date %></div>
-  </div>
-  <div class="control-group">
-    <%= f.label :payment_date , :class => "control-label" %>
-    <div class="controls"><%= f.date_select :payment_date %></div>
-  </div>
-  <div class="actions">
-    <%= f.submit :class => "btn btn-primary", :value => "保存する" %>
-  </div>
+<%= simple_form_for @teacher_order, :html => {:class => 'form-horizontal'} do |f| %>
+    <%= f.input :teacher_id do %>
+    <%= f.select :teacher_id, options_from_collection_for_select(@teachers, :id, :name) %>
+    <% end %>
+    <%= f.input :unit_price %>
+    <%= f.association :courses, input_html: { class: 'with-select2' }, label_method: :to_select_label %>
+    <%= f.input :invoice_flg %>
+    <%= f.input :payment_flg %>
+    <%= f.input :payment_term %>
+    <%= f.input :memo %>
+    <%= f.button :submit %>
 <% end %>
