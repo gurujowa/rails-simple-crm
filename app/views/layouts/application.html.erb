@@ -24,13 +24,15 @@
             	会社<b class='caret'></b><% end %>
              <ul class="dropdown-menu">
                <li><%= link_to "会社検索" , {controller: "companies", action: "search"}%></li>
+               <li><%= link_to "新規追加" , {controller: "companies", action: "new"}%></li>
                <li><%= link_to "見込み度高い案件", {controller: "companies", action: "usershow"}%></li>
              </ul>
             </li>
             <li class="dropdown"><%= link_to "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>
             	コース<b class='caret'></b><% end %>
              <ul class="dropdown-menu">
-               <li><%= link_to "コース一覧" , {controller: "courses", action: "index"}%></li>
+               <li><%= link_to "コース検索" , {controller: "courses", action: "index"}%></li>
+               <li><%= link_to '新規追加', new_course_path%></li>
                <li><%= link_to "カレンダー", {controller: "courses", action: "calendar"}%></li>
              </ul>
             </li>
@@ -39,9 +41,9 @@
             	<b class='caret'></b>
             	<% end %>
              <ul class="dropdown-menu">
-               <li><%= link_to "全体タスク" , {controller: "tasks", action: "index"}%></li>
+               <li><%= link_to "タスク検索" , {controller: "tasks", action: "index"}%></li>
+               <li><%= link_to '新規追加', new_task_path%></li>
                <li><%= link_to "各個人タスク", {:controller => "tasks", :action => "usershow"}%></li>
-               <li><%= link_to '新しいタスク', new_task_path%></li>
                <li><%= link_to 'タスクタイプの変更', {:controller => "task_types"}%></li>
              </ul>
             </li>
@@ -52,11 +54,19 @@
             	<b class='caret'></b>
             	<% end %>
             	<ul class="dropdown-menu">
-            		<li><%= link_to "詳細", {controller: "teachers", action: "index"}%></li>
+            		<li><%= link_to "講師検索", {controller: "teachers", action: "index"}%></li>
+                    <li><%= link_to '新規追加', new_teacher_path %></li>
             		<li><%= link_to "登録ステータス", {controller: "teachers", action: "flag"}%></li>
-            		<li><%= link_to "発注管理", {controller: "teacher_orders", action: "index"}%></li>
-            		<li><%= link_to '新規追加', new_teacher_path %></li>
             	</ul>
+            </li>
+            <li class="dropdown">
+              <%= link_to "#" , {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>
+                  発注管理
+                  <b class='caret'></b>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li><%= link_to "講師発注", {controller: "teacher_orders", action: "index"}%></li>
+              </ul>
             </li>
             <li><%= link_to "グラフ", controller: "graphs" %></li>
           </ul>
