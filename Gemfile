@@ -70,8 +70,13 @@ gem 'whenever', :require => false
 # Use unicorn as the app server
 # gem 'unicorn'
 
+# Gemfile
 # Use Capistrano for deployment
-# gem 'capistrano', group: :development
+group :development do
+  # capistrano
+  gem 'capistrano'
+  gem 'capistrano_colors'
+end
 
 # Use debugger
 #gem 'debugger', group: [:development, :test]
