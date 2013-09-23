@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130914044205) do
+ActiveRecord::Schema.define(version: 20130921054639) do
+
+  create_table "client_orders", force: true do |t|
+    t.integer  "company_id",                   null: false
+    t.integer  "price",                        null: false
+    t.boolean  "invoice_flg",  default: false, null: false
+    t.boolean  "payment_flg",  default: false, null: false
+    t.date     "invoice_date"
+    t.date     "payment_date"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "companies", force: true do |t|
     t.datetime "created_at"

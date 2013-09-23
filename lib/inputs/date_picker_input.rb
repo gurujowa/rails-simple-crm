@@ -4,6 +4,6 @@ class DatePickerInput < SimpleForm::Inputs::Base
   end
 
   def input_options
-    { :dateFormat => "yy/mm/dd"}
+    { :dateFormat => "yy/mm/dd", :class => "datepicker"}
   end
 end
