@@ -42,6 +42,11 @@ class CompaniesController < ApplicationController
       order by up_at DESC;
       ')
   end
+
+  def name
+    @companies = Company.where("client_name like :search", search: "%#{params[:q]}%")
+
+  end
   
   def usershow
     if (!params[:id].present?)

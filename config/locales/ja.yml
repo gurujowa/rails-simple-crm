@@ -44,4 +44,11 @@ ja:
         payment_flg: 支払い完了
         payment_term: 特記事項
         order_date: 発注日
-        payment_date: 支払日
+      client_order:  #モデル毎に階層化しておく。
+        company_id: 会社
+        price: 価格
+        invoice_flg: 請求書送付
+        payment_flg: 支払い確認
+        invoice_date: 請求書送付日
+        payment_date: 支払い日
+        memo: メモ

@@ -19,7 +19,7 @@ jQuery ->
     if sData == "" 
       alert("チェックがありません")
       return false
-    $.ajax '/up_postsend',
+    $.ajax '/companies/up_postsend',
       type: 'GET'
       dataType: 'json'
       timeout: 1000

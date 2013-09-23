@@ -28,16 +28,21 @@ Mycrm::Application.routes.draw do
 
   #会社名
   resources :companies, except: [:show] do
-    collection { get "search"}
+    collection do
+      get "search"
+      get "invoice"
+      get "label"
+      get "usershow"
+      get "pdf"
+      get "name"
+      get "up_postsend"
+    end
+    
+    member do
+      get 'contact_delete'
+    end
   end
-  get 'companies/contact_delete/:id' => 'companies#contact_delete'
-  get 'companies/pdf' => 'companies#pdf'
-  get 'companies/usershow/:id' => 'companies#usershow'
-  get 'companies/usershow' => 'companies#usershow'
-  get 'companies/invoice' => 'companies#invoice'
-  get 'companies/label' => 'companies#label'
-  get 'up_postsend' => 'companies#up_postsend'
-  
+
   #タスク
   resources :tasks
   get 'usertasks' => 'tasks#usershow'
