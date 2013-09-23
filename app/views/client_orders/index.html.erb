@@ -1,0 +1,36 @@
+<h1>クライアント発注 一覧</h1>
+
+<table class="default_datatables">
+  <thead>
+    <tr>
+      <th>会社名</th>
+      <th>価格</th>
+      <th>請求書受領</th>
+      <th>支払い</th>
+      <th>請求書予定日</th>
+      <th>支払予定日</th>
+      <th>メモ</th>
+      <th>CH</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @client_orders.each do |client_order| %>
+      <tr>
+        <td><%= client_order.company.client_name %></td>
+        <td><%= client_order.price %></td>
+        <td><%= check_m_img client_order.invoice_flg %></td>
+        <td><%= check_m_img client_order.payment_flg %></td>
+        <td><%= client_order.invoice_date %></td>
+        <td><%= client_order.payment_date %></td>
+        <td><%= client_order.memo %></td>
+        <td><%= link_to '編集', edit_client_order_path(client_order), :class => "btn" %>
+        	<%= link_to '削除', client_order, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新規追加', new_client_order_path, :class => 'btn' %>

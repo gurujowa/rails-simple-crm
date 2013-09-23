@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @client_order.company_id %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @client_order.price %>
+</p>
+
+<p>
+  <strong>Invoice flg:</strong>
+  <%= @client_order.invoice_flg %>
+</p>
+
+<p>
+  <strong>Payment flg:</strong>
+  <%= @client_order.payment_flg %>
+</p>
+
+<p>
+  <strong>Invoice date:</strong>
+  <%= @client_order.invoice_date %>
+</p>
+
+<p>
+  <strong>Payment date:</strong>
+  <%= @client_order.payment_date %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @client_order.memo %>
+</p>
+
+<%= link_to 'Edit', edit_client_order_path(@client_order) %> |
+<%= link_to 'Back', client_orders_path %>

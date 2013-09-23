@@ -55,7 +55,7 @@ gem 'pdfkit'
 gem 'validates_email_format_of'
 gem 'money'
 gem 'prawn-svg'
-gem 'jquery-datatables-rails', github: 'rweng/jquery-datatables-rails'
+gem 'jquery-datatables-rails'
 gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
 
