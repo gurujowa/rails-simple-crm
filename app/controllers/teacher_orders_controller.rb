@@ -18,6 +18,8 @@ class TeacherOrdersController < ApplicationController
 
   # GET /teacher_orders/1/edit
   def edit
+    @collection_courses.where(company_id: @teacher_order.courses.first.company_id)
+    @collection_courses.concat(@teacher_order.courses)
   end
 
   # POST /teacher_orders
@@ -33,6 +35,10 @@ class TeacherOrdersController < ApplicationController
 
   # PATCH/PUT /teacher_orders/1
   def update
+    @collection_courses.where(company_id: @teacher_order.courses.first.company_id)
+    @collection_courses.concat(@teacher_order.courses)
+
+
     if @teacher_order.update(teacher_order_params)
       redirect_to teacher_orders_url, notice: 'Teacher order was successfully updated.'
     else
@@ -57,6 +63,7 @@ class TeacherOrdersController < ApplicationController
       @select_courses = Course.all
       @select_companies = Company.joins(:course).group(:client_name)     
       @teachers = Teacher.where.not(work_possible:Teacher.work_possible_hash[:impossible]).order("last_kana ASC")
+      @collection_courses = Course.where("teacher_order_id is null")
    end
 
     # Only allow a trusted parameter "white list" through.
