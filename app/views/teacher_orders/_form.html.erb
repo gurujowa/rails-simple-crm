@@ -1,8 +1,12 @@
 <%= simple_form_for @teacher_order, :html => {:class => 'form-horizontal'} do |f| %>
     <%= f.input :teacher_id, collection: @teachers %>
     <%= f.input :unit_price %>
-    <%= f.association :courses, collection: Course.where(:teacher_order_id => nil) ,
-         input_html: { class: 'with-select2' }, label_method: :to_select_label, hint: "別の発注にて入力されたコースは表示されません" %>
+    <%= f.association :courses,
+      collection: Course.where("teacher_order_id is null or company_id = ?", @teacher_order.courses.first.company_id) , 
+      selected: @teacher_order.courses.map{|i| i.id} , 
+      label_method: :to_select_label,
+      hint: "別の発注にて入力されたコースは表示されません",
+      input_html: { class: 'with-select2' } %>
     <%= f.input :invoice_flg %>
     <%= f.input :payment_flg %>
     <%= f.input :payment_term %>
