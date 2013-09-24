@@ -3,4 +3,4 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
  $("#sales_person_change").on "change", ->
-  location.href = "/companies/usershow/" + $(this).val()
+  location.href = "/companies/" + $(this).val() + "/usershow"

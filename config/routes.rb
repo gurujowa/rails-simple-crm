@@ -40,6 +40,7 @@ Mycrm::Application.routes.draw do
     
     member do
       get 'contact_delete'
+      get "usershow"
     end
   end
 
