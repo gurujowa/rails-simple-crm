@@ -18,7 +18,7 @@ class TeacherOrdersController < ApplicationController
 
   # GET /teacher_orders/1/edit
   def edit
-    @collection_courses.where(company_id: @teacher_order.courses.first.company_id)
+    @collection_courses = @collection_courses.where("company_id = ?",@teacher_order.courses.first.company_id)
     @collection_courses.concat(@teacher_order.courses)
   end
 
@@ -35,7 +35,7 @@ class TeacherOrdersController < ApplicationController
 
   # PATCH/PUT /teacher_orders/1
   def update
-    @collection_courses.where(company_id: @teacher_order.courses.first.company_id)
+    @collection_courses = @collection_courses.where("company_id = ?",@teacher_order.courses.first.company_id)
     @collection_courses.concat(@teacher_order.courses)
 
 
@@ -48,27 +48,27 @@ class TeacherOrdersController < ApplicationController
 
   # DELETE /teacher_orders/1
   def destroy
+    Course.where(teacher_order_id: @teacher_order.id).update_all("teacher_order_id = null")
     @teacher_order.destroy
     redirect_to teacher_orders_url, notice: 'Teacher order was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_teacher_order
-      @teacher_order = TeacherOrder.find(params[:id])
-    end
+  def set_teacher_order
+    @teacher_order = TeacherOrder.find(params[:id])
+  end
     
   private
-   def set_default_form
-      @select_courses = Course.all
-      @select_companies = Company.joins(:course).group(:client_name)     
-      @teachers = Teacher.where.not(work_possible:Teacher.work_possible_hash[:impossible]).order("last_kana ASC")
-      @collection_courses = Course.where("teacher_order_id is null")
-   end
+  def set_default_form
+    @select_courses = Course.all
+    @select_companies = Company.joins(:course).group(:client_name)     
+    @teachers = Teacher.where.not(work_possible:Teacher.work_possible_hash[:impossible]).order("last_kana ASC")
+    @collection_courses = Course.where("teacher_order_id is null")
+  end
 
     # Only allow a trusted parameter "white list" through.
-    def teacher_order_params
-      params.require(:teacher_order).permit(
-      :teacher_id, :unit_price, :memo, :invoice_flg, :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
-    end
+  def teacher_order_params
+    params.require(:teacher_order).permit(
+    :teacher_id, :unit_price, :memo, :invoice_flg, :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
+  end
 end
