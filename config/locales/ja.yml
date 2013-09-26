@@ -38,10 +38,14 @@ ja:
         created_at: 作成日
       teacher_order:  #モデル毎に階層化しておく。
         teacher_id: 講師
-        unit_price: 単価
+        unit_price: 単価（時間あたり)
+        additional_price: 追加費用
         memo: メモ
         invoice_flg: 請求書受領
         payment_flg: 支払い完了
+        text_flg: テキスト持ち込み
+        students: 予定受講人数
+        description: 研修内容概要
         payment_term: 特記事項
         order_date: 発注日
       client_order:  #モデル毎に階層化しておく。

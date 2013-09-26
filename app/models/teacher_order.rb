@@ -17,6 +17,31 @@ class TeacherOrder < ActiveRecord::Base
     end
   end
 
+  def total_period
+    ind = 0
+    self.courses.each do |c|
+      c.periods.each do |p|
+        ind += 1
+      end
+    end
+
+    return ind
+  end
+
+  def total_time
+    total_time = 0
+    self.courses.each do |c|
+      total_time += c.getTotalTime
+    end
+    return total_time
+  end
+
+  def total_price
+    total_hour = self.total_time / 60
+    price = total_hour * unit_price
+    return (price + self.additional_price).to_i
+  end
+
   def start_date
     Period.where(:course_id => self.course_ids).order(:day).first.day
   end

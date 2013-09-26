@@ -9,7 +9,45 @@ class TeacherOrdersController < ApplicationController
 
   # GET /teacher_orders/1
   def show
+    report = Report.new "gyoumu.xls"
+
+    company = @teacher_order.courses.first.company
+    price_string = "金" + @teacher_order.unit_price.to_s + "/1h  X  " + (@teacher_order.total_time / 60).to_s + "h"
+    if @teacher_order.additional_price.present?
+      price_string << " + " + @teacher_order.additional_price.to_s + "円"
+    end
+
+    report.cell("F5","平成25年1月1日")
+    report.cell("B7",@teacher_order.teacher.name)
+    report.cell("D15",@teacher_order.id)
+    report.cell("D17",company.full_address)
+    report.cell("D18",company.client_name)
+    report.cell("D19",company.tel)
+    report.cell("D20",company.client_person)
+    report.cell("D21",company.full_address)
+    report.cell("D24",@teacher_order.start_date.strftime("%Y年%m月%d日") + "から")
+    report.cell("D25",@teacher_order.end_date.strftime("%Y年%m月%d日") + "まで")
+    report.cell("F24","全" + @teacher_order.total_period.to_s + "回")
+    report.cell("D26",price_string)
+    report.cell("D31",@teacher_order.students.to_s + "名")
+    report.cell("D32",@teacher_order.description)
+    ind = 1
+    @teacher_order.courses.each do |courses|
+      courses.periods.each do |c|
+        index_string =  "[ " + (ind).to_s + " ]"
+        value_string =  c.day.strftime("%Y年%m月%d日") + " " + c.start_time.strftime("%R") + "～" + c.end_time.strftime("%R")
+        report.cell("C"+(34+ind).to_s, index_string)
+        report.cell("D"+(34+ind).to_s, value_string)
+        ind += 1
+      end
+    end
+
+
+    send_file report.write  , :type=>"application/ms-excel", :filename => "name.xls"
+
   end
+
+
 
   # GET /teacher_orders/new
   def new
@@ -69,6 +107,9 @@ class TeacherOrdersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
   def teacher_order_params
     params.require(:teacher_order).permit(
-    :teacher_id, :unit_price, :memo, :invoice_flg, :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
+    :teacher_id,:additional_price, :unit_price, :memo, :invoice_flg, :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
   end
+
+
+
 end

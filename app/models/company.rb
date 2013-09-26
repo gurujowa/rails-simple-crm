@@ -32,6 +32,24 @@ class Company < ActiveRecord::Base
     end
     return address
   end
+
+  def full_address
+    address = ""
+    if self.prefecture != nil
+      address.concat(self.prefecture)    
+    end
+    if self.city != nil
+      address.concat(self.city)
+    end
+    if self.address != nil
+      address.concat(self.address)
+    end
+    if self.building != nil
+      address.concat(" ").concat(self.building)
+    end
+    return address
+
+  end
   
   def getCreatedBy()
     if self.created_by.present?

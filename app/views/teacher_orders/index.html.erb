@@ -8,11 +8,11 @@
       <th>開始日</th>
       <th>終了日</th>
       <th>単価</th>
+      <th>合計時間</th>
+      <th>合計金額</th>
       <th>メモ</th>
       <th>請求書受領</th>
       <th>支払い完了</th>
-      <th>請求書発行日</th>
-      <th>請求書受領日</th>
       <th>CH</th>
     </tr>
   </thead>
@@ -24,13 +24,14 @@
         <td><%= teacher_order.teacher.name %></td>
         <td><%= teacher_order.start_date %></td>
         <td><%= teacher_order.end_date %></td>
-        <td><%= teacher_order.unit_price %></td>
+        <td><%= number_to_currency(teacher_order.unit_price) %></td>
+        <td><%= convert_min(teacher_order.total_time) %></td>
+        <td><%= number_to_currency(teacher_order.total_price) %></td>
         <td><%= teacher_order.memo %></td>
         <td><%= check_m_img(teacher_order.invoice_flg) %></td>
         <td><%= check_m_img(teacher_order.payment_flg) %></td>
-        <td><%= teacher_order.order_date %></td>
-        <td><%= teacher_order.payment_date %></td>
         <td><%= link_to '編集', edit_teacher_order_path(teacher_order), :class => "btn" %>
+            <%= link_to '依頼書', teacher_order_path(teacher_order), :class => "btn" %>
         	<%= link_to '削除', teacher_order, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn" %></td>
       </tr>
     <% end %>
