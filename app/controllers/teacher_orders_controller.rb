@@ -17,8 +17,8 @@ class TeacherOrdersController < ApplicationController
       price_string << " + " + @teacher_order.additional_price.to_s + "円"
     end
 
-    report.cell("F5","平成25年1月1日")
-    report.cell("B7",@teacher_order.teacher.name)
+    report.cell("F5",Date.today.strftime('%Y年%m月%d日'))
+    report.cell("B7",@teacher_order.teacher.name + "様")
     report.cell("D15",@teacher_order.id)
     report.cell("D17",company.full_address)
     report.cell("D18",company.client_name)
@@ -42,8 +42,9 @@ class TeacherOrdersController < ApplicationController
       end
     end
 
+    filename = "【" + @teacher_order.teacher.name + "】講師依頼書_" + Date.today.strftime('%Y%m%d') + "_" + company.client_name + ".xls"
 
-    send_file report.write  , :type=>"application/ms-excel", :filename => "name.xls"
+    send_file report.write  , :type=>"application/ms-excel", :filename => filename
 
   end
 
@@ -107,7 +108,7 @@ class TeacherOrdersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
   def teacher_order_params
     params.require(:teacher_order).permit(
-    :teacher_id,:additional_price, :unit_price, :memo, :invoice_flg, :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
+    :teacher_id,:additional_price, :unit_price, :memo, :invoice_flg,:students, :description, :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
   end
 
 
