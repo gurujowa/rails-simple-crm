@@ -1,6 +1,6 @@
 <div class="container" style="width: 1200px">
 	<% if @format_html_flg.present? %>
-	  <%= form_tag "/companies_pdf.pdf", :method=>"get" do %>
+   <%= form_tag({action: "pdf", format: "pdf"}, :method=>"get") do %>
 	    <% @checkbox_params.each do |c| %>
 	      <%= hidden_field_tag("check"+c.to_s, c) %>
 	    <% end %>
