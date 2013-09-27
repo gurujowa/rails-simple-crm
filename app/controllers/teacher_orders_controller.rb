@@ -44,11 +44,20 @@ class TeacherOrdersController < ApplicationController
 
     filename = "【" + @teacher_order.teacher.name + "】講師依頼書_" + Date.today.strftime('%Y%m%d') + "_" + company.client_name + ".xls"
 
+    @teacher_order.update_attributes!({:order_date => Date.today})
     send_file report.write  , :type=>"application/ms-excel", :filename => filename
-
   end
 
 
+  def flag
+    @to = TeacherOrder.find(params[:id])
+
+    if (@to.update_attributes({params[:type] => Date.today}))
+      render_noty :success, "フラグの変更が完了しました。", %Q{$('#td_teacher_order_#{params[:type]}_#{params[:id]}').html("#{Date.today.strftime("%Y-%m-%d")}")}
+    else
+      render_noty :error, @to.errors.full_messages
+    end
+  end
 
   # GET /teacher_orders/new
   def new

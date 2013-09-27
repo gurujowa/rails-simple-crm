@@ -3,4 +3,5 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-   $(".with-select2").select2()
+  $(".with-select2").select2()
+

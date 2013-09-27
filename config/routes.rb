@@ -2,17 +2,18 @@ Mycrm::Application.routes.draw do
 
   resources :client_orders
 
-  resources :teacher_orders
+  resources :teacher_orders do
+    member do
+      get 'flag/:type' , :action => "flag"
+    end
+  end
 
   resources :teachers
   get 'teachers/update/:id/:type' => 'teachers#up_bool'
   get 'teachers_flag' => 'teachers#flag'
 
 
-  resources :industries
-  resources :task_types
-  resources :statuses
-  resources :users
+  resources :industries, :task_types, :statuses, :users
   resources :contacts, :only => [:destroy]    
 
   get "graphs/index"

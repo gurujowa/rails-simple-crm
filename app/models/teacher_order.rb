@@ -3,6 +3,7 @@ class TeacherOrder < ActiveRecord::Base
   belongs_to :teacher
   validates :unit_price, presence: true, numericality: {only_integer: true, greater_than: 1000}
   validates :teacher_id, presence: true
+  validates :description, presence: true
   validates :courses, presence: true
   validate :check_company_name
 

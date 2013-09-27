@@ -7,7 +7,6 @@ jQuery ->
   courseCalendarRender()
 
   $(document).on 'click' , '.period_img',  ->
-    console.log(this)
     hidden_value = $(this).parent().find('.period_hidden').val()
     if (hidden_value == "t")
       $(this).attr("src", "/img/cross.png")
