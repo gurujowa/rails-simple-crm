@@ -8,6 +8,7 @@ class Period < ActiveRecord::Base
   validates :resume_flg,  :inclusion => {:in => [true, false]}
   validates :report_flg,  :inclusion => {:in => [true, false]}
   belongs_to :teacher
+  belongs_to :course
 
   def getTotal
     b_time = 0
@@ -18,4 +19,13 @@ class Period < ActiveRecord::Base
     c_min = time / 60
     c_min
   end
+
+  def start_time
+    return Time.local day.year, day.month, day.day, read_attribute(:start_time).hour ,read_attribute(:start_time).min
+  end
+
+  def end_time
+    return Time.local day.year, day.month, day.day, read_attribute(:end_time).hour ,read_attribute(:end_time).min
+  end
+
 end

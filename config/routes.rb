@@ -21,11 +21,15 @@ Mycrm::Application.routes.draw do
 
 
   #コース
-  resources :courses, :except => [:show]
-  get 'courses/calendar' => 'courses#calendar'  
-  get 'courses/create' => 'courses#create'  
-  put 'courses/update/:id' => 'courses#up_name'  
-  get 'courses/update/:id/:type' => 'courses#up_bool'
+  resources :courses, :except => [:show] do
+    collection do
+      get 'calendar'
+      get 'create'
+      put 'update/:id' => 'courses#up_name'  
+      get 'update/:id/:type' => 'courses#up_bool'
+      get 'google'
+    end
+  end
 
   #会社名
   resources :companies, except: [:show] do

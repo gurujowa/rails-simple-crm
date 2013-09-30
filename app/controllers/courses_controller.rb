@@ -77,6 +77,15 @@ class CoursesController < ApplicationController
     end    
   end
 
+  # DELETE /statuses/1
+  # DELETE /statuses/1.json
+  def destroy
+    @course = Course.find(params[:id])
+    @course.destroy
+    flash[:notice] = 'コース情報を削除しました'
+    redirect_to :action=> 'index'
+  end
+
 
   private
   def course_params

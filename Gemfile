@@ -65,6 +65,8 @@ gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'will_paginate'
 gem 'business_time'
+gem "google_calendar"
+#gem "google-api-client"
 gem 'whenever', :require => false
 
 # Use ActiveModel has_secure_password
