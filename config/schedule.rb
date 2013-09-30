@@ -5,6 +5,7 @@
 
 every 1.day, :at => '6:00 pm' do
   rake "mail:contact"
+  rake "calendar:google"
 end
 
 # Example:
