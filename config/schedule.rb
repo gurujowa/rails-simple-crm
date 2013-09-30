@@ -6,6 +6,7 @@
 every 1.day, :at => '6:00 pm' do
   rake "mail:contact"
   rake "calendar:google"
+  command "backup perform --trigger crm_backup --config_file config/backup.rb --data-path db --log-path log --tmp-path tmp"
 end
 
 # Example:

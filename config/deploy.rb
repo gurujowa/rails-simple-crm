@@ -9,6 +9,10 @@ set :deploy_to, "/var/www/html/rails-crm/"
 role :app, "192.168.1.145"
 role :db, "192.168.1.145", :primary => true
 
+#wheneberの設定
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+
 after 'deploy', 'deploy:symlink_shared'
 
 
