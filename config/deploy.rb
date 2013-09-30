@@ -7,6 +7,7 @@ set :scm, :git # You can set :scm explicitly or Capistrano will make an intellig
 set :deploy_to, "/var/www/html/rails-crm/"
 
 role :app, "192.168.1.145"
+role :db, "192.168.1.145", :primary => true
 
 after 'deploy', 'deploy:symlink_shared'
 

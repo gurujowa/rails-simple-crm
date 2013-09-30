@@ -31,11 +31,12 @@ gem 'jbuilder', '~> 1.2'
 group :development do
   # エラー画面をわかりやすく整形してくれる
   gem 'better_errors'
-  gem 'capistrano'
-  gem 'capistrano_colors'
-
   # better_errorsの画面上にirb/pry(PERL)を表示する
   gem 'binding_of_caller'
+
+  #capistano
+  gem 'capistrano'
+  gem 'capistrano_colors'
 end
 
 
@@ -68,6 +69,7 @@ gem 'business_time'
 gem "google_calendar"
 #gem "google-api-client"
 gem 'whenever', :require => false
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
