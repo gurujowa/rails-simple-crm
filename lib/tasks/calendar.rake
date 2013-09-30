@@ -20,10 +20,10 @@ namespace :calendar do
             e.start_time = p.start_time
             e.end_time = p.end_time
         end
+        p.update_attributes(:google_flg => true)
         puts event
       end
 
-      Period.where(google_flg: false).update_all(google_flg: true)
       puts "コースカレンダー 終了"
   end
 end
