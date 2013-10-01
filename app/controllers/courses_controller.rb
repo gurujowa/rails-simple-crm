@@ -37,6 +37,10 @@ class CoursesController < ApplicationController
      redirect_to :controller => "companies", :action => "edit", :id => @course.company_id
   end
 
+  def new
+    @course = Course.new
+  end
+
   def up_name
     @course = Course.find(params[:id])
     

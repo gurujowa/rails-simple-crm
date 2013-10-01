@@ -24,7 +24,6 @@ Mycrm::Application.routes.draw do
   resources :courses, :except => [:show] do
     collection do
       get 'calendar'
-      get 'create'
       put 'update/:id' => 'courses#up_name'  
       get 'update/:id/:type' => 'courses#up_bool'
       get 'google'
