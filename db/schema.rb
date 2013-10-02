@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130930021913) do
+ActiveRecord::Schema.define(version: 20131001021021) do
 
   create_table "client_orders", force: true do |t|
     t.integer  "company_id",                   null: false
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20130930021913) do
     t.datetime "updated_at"
     t.boolean  "resume_flg",  default: false, null: false
     t.boolean  "report_flg",  default: false, null: false
-    t.boolean  "google_flg",  default: false, null: false
+    t.string   "google_id"
   end
 
   create_table "statuses", force: true do |t|
