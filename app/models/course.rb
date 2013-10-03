@@ -1,6 +1,7 @@
 class Course < ActiveRecord::Base
   belongs_to :company
-  belongs_to :teacher_order
+  has_many :teacher_order_courses
+  has_many :teacher_order, through: :teacher_order_courses
   has_many :periods, :dependent => :destroy
   accepts_nested_attributes_for :periods, :allow_destroy => true
 
@@ -51,7 +52,7 @@ class Course < ActiveRecord::Base
   end
 
   def to_select_label
-     return self.company.client_name + "-" + self.name
+     return %Q{#{self.company.client_name} - #{self.name}(#{self.getStartDate}/#{self.getEndDate})}
   end
 
 end

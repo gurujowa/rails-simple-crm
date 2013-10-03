@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  bill: 1
+  sent: 1
+  start_date: 2013-10-03
+  memo: MyString
+
+two:
+  name: MyString
+  bill: 1
+  sent: 1
+  start_date: 2013-10-03
+  memo: MyString

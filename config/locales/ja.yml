@@ -36,6 +36,12 @@ ja:
         tel: 電話番号
         memo: メモ
         created_at: 作成日
+      campaign:
+        name: キャンペーン名
+        bill: 費用
+        sent: 送信件数
+        start_date: 開始日
+        memo: メモ
       course:
         company_id: 会社名
         name: コース名

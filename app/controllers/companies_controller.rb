@@ -230,7 +230,7 @@ class CompaniesController < ApplicationController
   def company_params
       params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
       :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
-      :bill, :appoint_plan, :proposed_plan, :contract_plan, :payment_plan, contact_attributes: [:id, :memo, :created_by, :con_type])
+      :bill, :campaign_id, :appoint_plan, :proposed_plan, :contract_plan, :payment_plan, contact_attributes: [:id, :memo, :created_by, :con_type])
   end
   
   private

@@ -3,10 +3,12 @@ class Company < ActiveRecord::Base
   has_many :task, :dependent => :destroy  
   has_many :course, :dependent => :destroy
   belongs_to :status
+  belongs_to :campaign
   belongs_to :industry
   accepts_nested_attributes_for :contact,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
 
   validates :status_id, presence: true  
+  validates :campaign_id, presence: true  
   validates :chance, presence: true  
   validates :lead, presence: true
   validates :industry_id, presence: true

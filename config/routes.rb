@@ -1,5 +1,7 @@
 Mycrm::Application.routes.draw do
 
+  resources :campaigns
+
   resources :client_orders
 
   resources :teacher_orders do

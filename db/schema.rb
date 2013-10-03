@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131001021021) do
+ActiveRecord::Schema.define(version: 20131003051816) do
+
+  create_table "campaigns", force: true do |t|
+    t.string   "name"
+    t.integer  "bill",       null: false
+    t.integer  "sent",       null: false
+    t.date     "start_date"
+    t.string   "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "client_orders", force: true do |t|
     t.integer  "company_id",                   null: false
@@ -52,8 +62,10 @@ ActiveRecord::Schema.define(version: 20131001021021) do
     t.date     "appoint_plan"
     t.date     "contract_plan"
     t.date     "proposed_plan"
+    t.integer  "campaign_id",               null: false
   end
 
+  add_index "companies", ["campaign_id"], name: "index_companies_on_campaign_id"
   add_index "companies", ["city"], name: "index_companies_on_city"
   add_index "companies", ["client_name"], name: "index_companies_on_client_name"
   add_index "companies", ["created_at"], name: "index_companies_on_created_at"
@@ -72,16 +84,15 @@ ActiveRecord::Schema.define(version: 20131001021021) do
   end
 
   create_table "courses", force: true do |t|
-    t.string   "name",                             null: false
-    t.integer  "company_id",                       null: false
-    t.boolean  "order_flg",        default: false, null: false
-    t.boolean  "book_flg",         default: false, null: false
-    t.boolean  "resume_flg",       default: false, null: false
-    t.boolean  "report_flg",       default: false, null: false
-    t.boolean  "end_report_flg",   default: false, null: false
+    t.string   "name",                           null: false
+    t.integer  "company_id",                     null: false
+    t.boolean  "order_flg",      default: false, null: false
+    t.boolean  "book_flg",       default: false, null: false
+    t.boolean  "resume_flg",     default: false, null: false
+    t.boolean  "report_flg",     default: false, null: false
+    t.boolean  "end_report_flg", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "teacher_order_id"
   end
 
   create_table "industries", force: true do |t|
@@ -158,6 +169,11 @@ ActiveRecord::Schema.define(version: 20131001021021) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "teacher_order_courses", force: true do |t|
+    t.integer "teacher_order_id"
+    t.integer "course_id"
   end
 
   create_table "teacher_orders", force: true do |t|

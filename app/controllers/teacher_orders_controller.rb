@@ -32,15 +32,13 @@ class TeacherOrdersController < ApplicationController
     report.cell("D31",@teacher_order.students.to_s + "名")
     report.cell("D32",@teacher_order.description)
     ind = 1
-    @teacher_order.courses.each do |courses|
-      courses.periods.each do |c|
+    @teacher_order.course_where.each do |c|
         index_string =  "[ " + (ind).to_s + " ]"
         value_string =  c.day.strftime("%Y年%m月%d日") + " " + c.start_time.strftime("%R") + "～" + c.end_time.strftime("%R")
         report.cell("C"+(34+ind).to_s, index_string)
         report.cell("D"+(34+ind).to_s, value_string)
         ind += 1
       end
-    end
 
     filename = "【" + @teacher_order.teacher.name + "】講師依頼書_" + Date.today.strftime('%Y%m%d') + "_" + company.client_name + ".xls"
 
@@ -66,8 +64,6 @@ class TeacherOrdersController < ApplicationController
 
   # GET /teacher_orders/1/edit
   def edit
-    @collection_courses = @collection_courses.where("company_id = ?",@teacher_order.courses.first.company_id)
-    @collection_courses.concat(@teacher_order.courses)
   end
 
   # POST /teacher_orders
@@ -83,10 +79,6 @@ class TeacherOrdersController < ApplicationController
 
   # PATCH/PUT /teacher_orders/1
   def update
-    @collection_courses = @collection_courses.where("company_id = ?",@teacher_order.courses.first.company_id)
-    @collection_courses.concat(@teacher_order.courses)
-
-
     if @teacher_order.update(teacher_order_params)
       redirect_to teacher_orders_url, notice: 'Teacher order was successfully updated.'
     else
@@ -96,7 +88,6 @@ class TeacherOrdersController < ApplicationController
 
   # DELETE /teacher_orders/1
   def destroy
-    Course.where(teacher_order_id: @teacher_order.id).update_all("teacher_order_id = null")
     @teacher_order.destroy
     redirect_to teacher_orders_url, notice: 'Teacher order was successfully destroyed.'
   end
@@ -109,17 +100,15 @@ class TeacherOrdersController < ApplicationController
   private
   def set_default_form
     @select_courses = Course.all
-    @select_companies = Company.joins(:course).group(:client_name)     
-    @teachers = Teacher.where.not(work_possible:Teacher.work_possible_hash[:impossible]).order("last_kana ASC")
-    @collection_courses = Course.where("teacher_order_id is null")
+    @select_companies = Company.joins(:course).group(:client_name)
+    @teachers = Teacher.where.not(work_possible: Teacher.work_possible_hash[:impossible]).order("last_kana ASC")
   end
 
     # Only allow a trusted parameter "white list" through.
   def teacher_order_params
     params.require(:teacher_order).permit(
-    :teacher_id,:additional_price, :unit_price, :memo, :invoice_flg,:students, :description, :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
+    :teacher_id,:additional_price, :unit_price, :memo, :invoice_flg,:students, :description,
+    :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
   end
-
-
 
 end

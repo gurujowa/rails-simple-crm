@@ -22,8 +22,8 @@ class CompanyTable
        value: "売上見込"
      chance:
        value: "見込み度"
-     lead:
-       value: "データ元"
+     campaign_id:
+       value: "新規獲得元"
      created_by:
        value: "作成者"
      updated_by:

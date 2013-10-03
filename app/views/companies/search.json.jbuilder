@@ -11,7 +11,7 @@ comp = @datatables.getCompanies.map do |company|
         company.industry.name,
         company.bill,
         company.chance,
-        company.lead,
+        company.campaign.name,
         get_user_name(company.created_by),
         get_user_name(company.updated_by),
         company.tel,

@@ -20,6 +20,10 @@ class Period < ActiveRecord::Base
     c_min
   end
 
+  def total_time
+     getTotal
+  end
+
   def start_time
     return Time.local day.year, day.month, day.day, read_attribute(:start_time).hour ,read_attribute(:start_time).min
   end

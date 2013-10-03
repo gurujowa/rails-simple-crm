@@ -50,8 +50,8 @@ class CompaniesDatatable
       status_array = Status.find_all_by_rank(params['rank'])
       companies = companies.where(:status_id => status_array)
     end
-    if p_comp['lead'].present?
-      companies = companies.where(:lead => p_comp['lead'])
+    if p_comp['campaign_id'].present?
+      companies = companies.where(:campaign_id => p_comp['campaign_id'])
     end
     if p_comp['created_by'].present?
       companies = companies.where(:created_by => p_comp['created_by'])

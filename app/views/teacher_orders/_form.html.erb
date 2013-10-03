@@ -3,10 +3,8 @@
     <%= f.input :unit_price %>
     <%= f.input :additional_price  %>
     <%= f.association :courses,
-      collection: @collection_courses ,
-      selected: @teacher_order.courses.map{|i| i.id} ,
+      selected: @teacher_order.courses.map{|i| i.id},
       label_method: :to_select_label,
-      hint: "別の発注にて入力されたコースは表示されません",
       input_html: { class: 'with-select2' } 
     %>
     <%= f.input :students %>
