@@ -10,7 +10,6 @@ class Company < ActiveRecord::Base
   validates :status_id, presence: true  
   validates :campaign_id, presence: true  
   validates :chance, presence: true  
-  validates :lead, presence: true
   validates :industry_id, presence: true
   validates :sales_person, presence: true
   validates :tel, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}

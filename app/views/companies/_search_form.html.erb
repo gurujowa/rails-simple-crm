@@ -5,7 +5,7 @@
 <%= form.text_field :prefecture, {:class => "input-medium", :placeholder => "都道府県"} %><br>
 <%= form.text_field :city, {:class => "input-medium", :placeholder => "市町村"} %><br>
 <%= form.select :sales_person , options_from_users(@company.sales_person),{:prompt => "< 営業マン >", :include_blank => true}, {:class => "input-medium"} %><br>
-<%= form.collection_select :campaign_id , Campaign.all, :id, :name, :include_blank => true, :class => "input-medium" %><br>
+<%= form.collection_select :campaign_id , Campaign.all, :id, :name, { :prompt => " < 新規獲得元 > " ,:include_blank => true}, :class => "input-medium" %><br>
 <%= form.select :created_by , options_from_users(@company.created_by),{:prompt => "< 作成者 >", :include_blank => true},{:class => "input-medium"} %><br>
 <%= form.text_field :created_at, {'data-format' => 'yyyy-MM-dd', :class=>"datepicker input-small", :placeholder => "作成日"} %><br>
 <%= form.select :updated_by , options_from_users(@company.updated_by),{:prompt => "< 更新者 >", :include_blank => true}, {:class => "input-medium"} %><br>
