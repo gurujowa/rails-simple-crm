@@ -1,29 +1,31 @@
-<p id="notice"><%= notice %></p>
+<h1>新規獲得一覧</h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @campaign.name %>
-</p>
+<table class="default_datatables">
+  <thead>
+    <tr>
+      <th>会社名</th>
+      <th>ステータス</th>
+      <th>営業マン</th>
+      <th>初回アポイント日</th>
+      <th>契約日</th>
+      <th>見込み度</th>
+      <th style="width:50%">コンタクト</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @companies.each do |c| %>
+      <tr>
+        <td><%= c.client_name %></td>
+        <td><%= c.status.name %></td>
+        <td><%= get_user_name(c.sales_person) %></td>
+        <td><%= c.appoint_plan %></td>
+        <td><%= c.contract_plan %></td>
+        <td><%= c.chance %></td>
+        <td><%= contactAsHtml(c) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-<p>
-  <strong>Bill:</strong>
-  <%= @campaign.bill %>
-</p>
+<br>
 
-<p>
-  <strong>Sent:</strong>
-  <%= @campaign.sent %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @campaign.start_date %>
-</p>
-
-<p>
-  <strong>Memo:</strong>
-  <%= @campaign.memo %>
-</p>
-
-<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
-<%= link_to 'Back', campaigns_path %>

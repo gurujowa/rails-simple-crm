@@ -77,6 +77,10 @@ class Company < ActiveRecord::Base
     end
     return array
   end
+
+  def contact_memo
+     getContactMemo
+  end
   
   def self.to_csv
     CSV.generate do |csv|

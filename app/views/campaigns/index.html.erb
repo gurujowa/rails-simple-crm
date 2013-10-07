@@ -6,6 +6,9 @@
       <th>名前</th>
       <th>費用</th>
       <th>送信件数</th>
+      <th>登録会社数</th>
+      <th>コンバージョン率</th>
+      <th>CPA</th>
       <th>開始日</th>
       <th>メモ</th>
       <th>CH</th>
@@ -18,9 +21,12 @@
         <td><%= campaign.name %></td>
         <td><%= number_to_currency campaign.bill %></td>
         <td><%= campaign.sent %></td>
+        <td><%= campaign.reaction %></td>
+        <td><%= number_to_percentage(campaign.conversion) %></td>
+        <td><%= number_to_currency campaign.cpa %></td>
         <td><%= campaign.start_date %></td>
         <td><%= campaign.memo %></td>
-        <td><%= link_to '編集', edit_campaign_path(campaign), :class => "btn" %>
+        <td><%= link_to '表示', campaign, :class => "btn" %><%= link_to '編集', edit_campaign_path(campaign), :class => "btn" %>
         	<%= link_to '削除', campaign, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn" %></td>
       </tr>
     <% end %>

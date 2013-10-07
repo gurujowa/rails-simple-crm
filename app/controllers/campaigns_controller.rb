@@ -8,6 +8,8 @@ class CampaignsController < ApplicationController
 
   # GET /campaigns/1
   def show
+     @campaign = Campaign.find(params[:id])
+     @companies = @campaign.companies
   end
 
   # GET /campaigns/new
