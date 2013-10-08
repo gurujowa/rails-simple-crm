@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131008040931) do
+ActiveRecord::Schema.define(version: 20131008045851) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -105,7 +105,6 @@ ActiveRecord::Schema.define(version: 20131008040931) do
   end
 
   create_table "estimates", force: true do |t|
-    t.string   "title",                      null: false
     t.integer  "company_id",                 null: false
     t.date     "expired"
     t.integer  "tax_rate",   default: 0,     null: false

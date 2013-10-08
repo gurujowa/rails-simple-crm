@@ -3,7 +3,6 @@
 <table id="estimates_datatable" class="default_datatables">
   <thead>
     <tr>
-      <th>件名</th>
       <th>会社名</th>
       <th>期日</th>
       <th>合計金額</th>
@@ -18,7 +17,6 @@
   <tbody>
     <% @estimates.each do |estimate| %>
       <tr>
-        <td><%= estimate.title %></td>
         <td><%= estimate.company.client_name %></td>
         <td><%= estimate.expired %></td>
         <td><%= estimate.total_price %></td>

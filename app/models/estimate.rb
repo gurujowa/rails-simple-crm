@@ -1,9 +1,8 @@
 class Estimate < ActiveRecord::Base
   belongs_to :company
   has_many :estimate_lines, :dependent => :destroy
-  accepts_nested_attributes_for :estimate_lines, :allow_destroy => true
+  accepts_nested_attributes_for :estimate_lines, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }
 
-  validates :title, presence: true
   validates :company_id, presence: true
   validates :tax_rate, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than: 10}
 
