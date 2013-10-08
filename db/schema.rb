@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007080205) do
+ActiveRecord::Schema.define(version: 20131008040931) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -130,9 +130,9 @@ ActiveRecord::Schema.define(version: 20131007080205) do
   end
 
   create_table "periods", force: true do |t|
-    t.date     "day",                         null: false
-    t.time     "start_time",                  null: false
-    t.time     "end_time",                    null: false
+    t.date     "day",                           null: false
+    t.time     "start_time",                    null: false
+    t.time     "end_time",                      null: false
     t.time     "break_start"
     t.time     "break_end"
     t.integer  "teacher_id"
@@ -140,9 +140,10 @@ ActiveRecord::Schema.define(version: 20131007080205) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "resume_flg",  default: false, null: false
-    t.boolean  "report_flg",  default: false, null: false
+    t.boolean  "resume_flg",    default: false, null: false
+    t.boolean  "report_flg",    default: false, null: false
     t.string   "google_id"
+    t.boolean  "equipment_flg", default: false, null: false
   end
 
   create_table "statuses", force: true do |t|
