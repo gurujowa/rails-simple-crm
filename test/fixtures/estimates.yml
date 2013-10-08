@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  company_id: 
+  expired: 2013-10-07
+  tax_flg: false
+  send_flg: false
+  memo: MyText
+
+two:
+  title: MyString
+  company_id: 
+  expired: 2013-10-07
+  tax_flg: false
+  send_flg: false
+  memo: MyText

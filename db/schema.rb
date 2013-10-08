@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131003051816) do
+ActiveRecord::Schema.define(version: 20131007080205) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
     t.integer  "bill",       null: false
     t.integer  "sent",       null: false
     t.date     "start_date"
-    t.string   "memo"
+    t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -95,23 +95,28 @@ ActiveRecord::Schema.define(version: 20131003051816) do
     t.datetime "updated_at"
   end
 
+  create_table "estimate_lines", force: true do |t|
+    t.string   "name",        null: false
+    t.integer  "unit_price",  null: false
+    t.integer  "quantity",    null: false
+    t.integer  "estimate_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "estimates", force: true do |t|
+    t.string   "title",                      null: false
+    t.integer  "company_id",                 null: false
+    t.date     "expired"
+    t.integer  "tax_rate",   default: 0,     null: false
+    t.boolean  "send_flg",   default: false, null: false
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "industries", force: true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "invoices", force: true do |t|
-    t.string   "bill_to"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "line_items", force: true do |t|
-    t.decimal  "price"
-    t.string   "description"
-    t.integer  "quantity"
-    t.integer  "invoice_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

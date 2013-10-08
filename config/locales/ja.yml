@@ -68,3 +68,10 @@ ja:
         invoice_date: 請求書送付日
         payment_date: 支払い日
         memo: メモ
+      estimate:  #モデル毎に階層化しておく。
+        company_id: 会社
+        expired: 期日
+        title: 件名
+        tax_rate: 消費税
+        send_flg: 発行フラグ
+        memo: メモ

@@ -1,7 +1,9 @@
 Mycrm::Application.routes.draw do
 
-  resources :campaigns
+  resources :estimates
 
+  resources :campaigns
+  resources :invoices
   resources :client_orders
 
   resources :teacher_orders do
@@ -47,6 +49,7 @@ Mycrm::Application.routes.draw do
     member do
       get 'contact_delete'
       get "usershow"
+      get "find"
     end
   end
 

@@ -1,0 +1,45 @@
+<%= simple_form_for(@estimate, :html => {:class => "form-horizontal"}) do |f| %>
+  <%= f.error_notification %>
+    <%= f.input :title %>
+    <%= f.input :company_id , input_html: { class: 'input-xxlarge' } %>
+    <%= f.input :expired, as: :date_picker %>
+    <%= f.input :tax_rate, as: :radio_buttons, collection: [["税抜",5], ["税込",0]] %>
+    <%= f.input :memo %>
+
+<table class="table table-striped table-bordered">
+    <thead>
+       <tr>
+          <th>品名</th>
+          <th>単価</th>
+          <th>人数</th>
+          <th>合計金額</th>
+          <th>CH</th>
+       </tr>
+  	</thead>
+     <tbody class="add_fields">
+     <%= f.fields_for :estimate_lines do |c| %>
+       <%= render :partial => "estimate_line_fields", :locals => { :f => c, :delete_flg => true} %>
+     <% end %>
+  </tbody>
+     <tr>
+        <td colspan="3">&nbsp;</td>
+        <td><b>小計</b></td>
+        <td class="estimate_tax_trigger_amount"><%= number_to_currency @estimate.total_price %></td>
+      </tr>
+     <tr>
+        <td colspan="3">&nbsp;</td>
+        <td><b>消費税(<span id="estimate_tax_rate"><%= @estimate.tax_rate %></span>%)</b></td>
+        <td class="estimate_tax"> <%= number_to_currency @estimate.tax_price %></td>
+      </tr>
+     <tr>
+        <td colspan="3">&nbsp;</td>
+        <td><b>合計</b></td>
+        <td class="estimate_total_price"><%= number_to_currency @estimate.tax_include_price %></td>
+      </tr>
+</table>
+   <%= link_to_add_fields "追加", f, :estimate_lines %>
+  <button  class="btn btn-info" id ="estimate_calc_button">再計算(まだ使えません)</button>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

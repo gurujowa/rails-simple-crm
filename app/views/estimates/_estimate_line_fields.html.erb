@@ -1,0 +1,7 @@
+  <tr>
+     <td><%= f.text_field :name %></td>
+  	<td><%= f.text_field :unit_price %></td>
+  	<td><%= f.text_field :quantity %></td>
+    <td class="estimate_line_total_price"><%= number_to_currency f.object.total_price %></td>
+  	<td><% if delete_flg == true%><%= link_to_remove_fields "削除", f  %><%end%></td>
+  </tr>

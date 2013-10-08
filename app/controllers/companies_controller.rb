@@ -44,8 +44,12 @@ class CompaniesController < ApplicationController
   end
 
   def name
-    @companies = Company.where("client_name like :search", search: "%#{params[:q]}%")
+    @companies = Company.joins(:status).where("client_name like :search", search: "%#{params[:q]}%").where(:statuses => {rank:  ["A".."K"]}).
+       order("statuses.rank asc")
+  end
 
+  def find
+    @company = Company.find(params[:id])
   end
   
   def usershow
@@ -61,19 +65,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  
-  def invoice
-    invoice = Payday::Invoice.new(:invoice_number => 12)
-    invoice.line_items << Payday::LineItem.new(:price => 20, :quantity => 5, :description => "てすと")
-    invoice.line_items << Payday::LineItem.new(:price => 10, :quantity => 3, :description => "Shirts")
-    invoice.line_items << Payday::LineItem.new(:price => 5, :quantity => 200, :description => "Hats")
-    respond_to do |format|
-      format.html
-      format.pdf do
-        send_data invoice.render_pdf, :filename => "請求書.pdf", :type => "application/pdf", :disposition => "inline"
-      end
-    end
-  end
 
   def search
       @datas = Company.paginate(:page => params[:page],:order => 'created_at desc', :per_page => 10)
