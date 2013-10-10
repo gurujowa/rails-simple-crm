@@ -38,7 +38,7 @@ class CourseAlert
     period_flg_check c, 7.days.since, :resume_flg, "レジュメが届いていないコマがあります。"
   end
   def period_equipment_flg_check c
-    period_flg_check c, 7.days.since, :equipment_flg, "レジュメが届いていないコマがあります。"
+    period_flg_check c, 7.days.since, :equipment_flg, "備品が揃っていないコマがあります。"
   end
   def period_report_flg_check c
     period_flg_check c, 2.days.ago, :report_flg, "実施報告書が届いていないコマがあります。"
