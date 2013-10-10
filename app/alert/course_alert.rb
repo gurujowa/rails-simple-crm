@@ -19,6 +19,15 @@ class CourseAlert
     period_report_flg_check course
   end
 
+  def self.check_all
+      courses = Course.all
+      alert = self.new
+      courses.each do |c|
+        alert.check c
+      end
+      alert
+  end
+
   def errors
     @errors
   end

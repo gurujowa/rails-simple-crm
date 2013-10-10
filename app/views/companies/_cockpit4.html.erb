@@ -1,0 +1,20 @@
+<div class="row-fluid">
+	<div class="span12 well">
+		<h5>コースの未完了タスク</h5>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>メッセージ</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% if @course_alert.present? %>
+				<% @course_alert.errors.each do |c|%>
+				<tr>
+					<td><%= c %></td>
+				</tr>
+				<%end%><%end%>
+			</tbody>
+		</table>
+	</div>
+</div>
