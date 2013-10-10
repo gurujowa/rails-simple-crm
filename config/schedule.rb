@@ -5,10 +5,12 @@
 
 every 1.day, :at => '6:00 pm' do
   rake "mail:contact"
+  rake "mail:course_alert"
 end
 
 every 1.day, :at => '6:00 am' do
   rake "calendar:google"
+  rake "mail:course_alert"
   command "backup perform --trigger crm_backup --config_file config/backup.rb --data-path db --log-path log --tmp-path tmp"
 end
 

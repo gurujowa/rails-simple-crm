@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131008045851) do
+ActiveRecord::Schema.define(version: 20131010073051) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 20131008045851) do
     t.boolean  "report_flg",    default: false, null: false
     t.string   "google_id"
     t.boolean  "equipment_flg", default: false, null: false
+    t.boolean  "attend_flg",    default: false, null: false
   end
 
   create_table "statuses", force: true do |t|

@@ -8,6 +8,7 @@
   	<td class="total_period_time"></td>
   	<td><%= check_period_img(f, "resume_flg") %></td>
   	<td><%= check_period_img(f, "equipment_flg")  %></td>
+  	<td><%= check_period_img(f, "attend_flg")  %></td>
   	<td><%= check_period_img(f, "report_flg")  %></td>
   	<td><%= f.text_field :memo%></td>
   	<td><% if delete_flg == true%><%= link_to_remove_fields "削除", f  %><%end%></td>

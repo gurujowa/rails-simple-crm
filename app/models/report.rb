@@ -2,6 +2,7 @@ class Report
   
   def initialize name
     path = Rails.root.join('config').join('spreadsheet').join(name).to_s
+    Spreadsheet.client_encoding = 'UTF-8'
     @book = Spreadsheet.open path
     @sheet = @book.worksheet(0)
     @name = name

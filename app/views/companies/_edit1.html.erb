@@ -34,6 +34,8 @@
       
     </div>
   <%= render 'task_type_button'%>
+  <%= render :partial => 'sheet_button', :locals => {:company => @company}%>
+
   </div>
   <div class="span9">
   	<%= form_for(@company, :html => {:class => 'form-horizontal well'}) do |form|%>

@@ -30,6 +30,14 @@ class Course < ActiveRecord::Base
     total
   end
 
+  def start_date
+    getStartDate
+  end
+
+  def end_date
+    getEndDate
+  end
+
   def getStartDate
     periods = self.periods
     array = []

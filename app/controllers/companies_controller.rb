@@ -43,6 +43,19 @@ class CompaniesController < ApplicationController
       ')
   end
 
+  def client_sheet
+    @company = Company.find(params[:id])
+    report = Report.new "client_sheet.xls"
+    report.cell "A1",@company.client_name + "様"
+    report.cell "F3",%Q{担当：#{session[:current_user].name}}
+    report.cell "B4",%Q{担当：#{@company.client_person}様}
+    report.cell "B5",@company.full_address
+    report.cell "E6",@company.tel
+
+    send_file report.write  , :type=>"application/ms-excel", :filename => "client_sheet.xls"
+
+  end
+
   def name
     @companies = Company.joins(:status).where("client_name like :search", search: "%#{params[:q]}%").where(:statuses => {rank:  ["A".."K"]}).
        order("statuses.rank asc")
