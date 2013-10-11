@@ -25,8 +25,8 @@
         <td class="level1" data-pk="<%= c.id %>"><%= key.to_s%><%key += 1%></td>
         <td><%= c.chance %></td>
         <td><%= link_to c.client_name , {action: "edit", id: c.id} %></td>
-        <td><%= c.appoint_plan %><% if c.appoint_contact.present?%> <br>(実績:<%= c.appoint_contact.updated_at.strftime("%Y/%m/%d")%>)<% end %></td>
-        <td><%= c.proposed_plan %><% if c.proposed_contact.present?%> <br>(実績:<%= c.proposed_contact.updated_at.strftime("%Y/%m/%d")%>)<% end %></td>
+        <td><%= c.appoint_plan %><% if c.appoint_contact.present?%> <br>(実績:<%= c.appoint_contact.created_at.strftime("%Y/%m/%d")%>)<% end %></td>
+        <td><%= c.proposed_plan %><% if c.proposed_contact.present?%> <br>(実績:<%= c.proposed_contact.created_at.strftime("%Y/%m/%d")%>)<% end %></td>
         <td><%= c.contract_plan %></td>
         <td><%= c.payment_plan %></td>
         <td><%= c.status.name %></td>
