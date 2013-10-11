@@ -4,3 +4,6 @@
 jQuery ->
  $("#sales_person_change").on "change", ->
   location.href = "/companies/" + $(this).val() + "/usershow"
+ $("table#usershow-table td.level1").on "click", ->
+   pk = $(this).data("pk")
+   $(".tr-contact-"+pk).toggle()

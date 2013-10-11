@@ -1,0 +1,39 @@
+class ContactType
+  @@list = {tel: [1,"荷電"], appoint: [2,"アポイント"], other: [3, "その他"], first_appoint: [4, "初回アポ"], proposal: [5,"提案・見積"]}
+  @@map = nil
+
+
+  def self.all
+    unless @@map.present?
+      @@map = @@list.map{|id, val| self.new(val[0],val[1])}
+    end
+    @@map
+  end
+
+  def self.id_search id
+    found = nil
+    self.all.each do |c|
+      if c.id == id
+        found = c
+      end
+    end
+    found
+  end
+
+  def self.id symbol
+    type = @@list[symbol]
+    return type[0]
+  end
+
+  attr_reader :id, :name
+
+  def initialize(id, name)
+    @id = id
+    @name = name
+  end
+
+  def to_s
+    @name
+  end
+  
+end

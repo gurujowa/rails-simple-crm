@@ -5,7 +5,7 @@ module CompaniesHelper
 
   def contactAsHtml(company)
     con_str = "<ul>".html_safe
-    company.contact.each do |d|
+    company.contacts.each do |d|
       if d.memo != nil
         con_str << "<li>".html_safe
         con_str.concat(d.memo)

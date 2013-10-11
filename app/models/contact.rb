@@ -11,5 +11,10 @@ class Contact < ActiveRecord::Base
       return ""
     end
   end
+
+  def type
+    t = self.read_attribute(:con_type)
+    return ContactType.id_search(t)
+  end
   
 end

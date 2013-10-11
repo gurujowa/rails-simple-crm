@@ -1,12 +1,12 @@
 class Company < ActiveRecord::Base
-  has_many :contact, :dependent => :destroy
+  has_many :contacts, :dependent => :destroy
   has_many :task, :dependent => :destroy  
   has_many :course, :dependent => :destroy
   has_many :estimate
   belongs_to :status
   belongs_to :campaign
   belongs_to :industry
-  accepts_nested_attributes_for :contact,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
+  accepts_nested_attributes_for :contacts,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
 
   validates :status_id, presence: true  
   validates :campaign_id, presence: true  
@@ -34,6 +34,7 @@ class Company < ActiveRecord::Base
     end
     return address
   end
+
 
   def full_address
     address = ""
@@ -71,7 +72,7 @@ class Company < ActiveRecord::Base
   
   def getContactMemo
     array = []
-    self.contact.each do |c|
+    self.contacts.each do |c|
       if c.memo != nil
         array.push(c.memo)
       end
@@ -82,6 +83,36 @@ class Company < ActiveRecord::Base
   def contact_memo
      getContactMemo
   end
+
+  def appoint_contact
+    unless self.contacts
+      return nil
+    end
+
+    found = nil
+    self.contacts.each do |c|
+      if c.con_type == ContactType.id(:first_appoint)
+        found = c
+      end
+    end
+    found
+  end
+
+  def proposed_contact
+    unless self.contacts
+      return nil
+    end
+
+    found = nil
+    self.contacts.each do |c|
+      if c.con_type == ContactType.id(:proposal)
+        found = c
+      end
+    end
+    found
+  end
+
+
   
   def self.to_csv
     CSV.generate do |csv|
