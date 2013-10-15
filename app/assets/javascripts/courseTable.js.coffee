@@ -17,6 +17,8 @@ class CourseTable
        value: "書籍送付"
      report_flg:
        value: "３点セット"
+     end_form_flg:
+       value: "支給申請"
      total_time:
        value: "コース時間"
      start_date:

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010073051) do
+ActiveRecord::Schema.define(version: 20131015101043) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20131010073051) do
     t.boolean  "end_report_flg", default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "end_form_flg",   default: false, null: false
   end
 
   create_table "estimate_lines", force: true do |t|

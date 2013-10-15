@@ -12,6 +12,7 @@ class CourseAlert
     order_flg_check course
     book_flg_check course
     report_flg_check course
+    end_form_flg_check course
 
     period_resume_flg_check course
     period_equipment_flg_check course
@@ -42,6 +43,9 @@ class CourseAlert
   def report_flg_check(c)
     course_flg_check c, 7.days.since, c.report_flg, "３点セットフラグがオフになっています。"
   end
+  def end_form_flg_check(c)
+    course_end_check c, 30.days.ago, c.end_form_flg, "支給申請が完了していません。"
+  end
 
   def period_resume_flg_check c
     period_flg_check c, 7.days.since, :resume_flg, "レジュメが届いていないコマがあります。"
@@ -56,6 +60,16 @@ class CourseAlert
     period_flg_check c, 2.days.ago, :attend_flg, "出欠表が届いていないコマがあります。"
   end
 
+
+  def course_end_check(c, compare, flg, message)
+    if c.end_date >= compare
+      return false
+    end
+
+    if flg == false
+      push_error  c, message
+    end
+  end
 
   def course_flg_check(c, compare, flg, message)
     if c.start_date >= compare
@@ -86,12 +100,54 @@ class CourseAlert
 
 
   def push_error c, message, day = nil
-    message = %Q{#{message} 会社名：#{c.company.client_name}, コース名：#{c.name}, ID: #{c.id}}
-    if day.present?
-      message << %Q{, 日付:#{day}}
-    end
+#    message = %Q{#{message} 会社名：#{c.company.client_name}, コース名：#{c.name}, ID: #{c.id}}
+#    if day.present?
+#      message << %Q{, 日付:#{day}}
+#    end
+    message = CourseAlertMessage.new c, message
+    message.day = day
     @errors.push message
   end
 
 
+end
+
+class CourseAlertMessage
+  attr_accessor :course, :day, :message
+
+  def initialize course, message
+    @course = course
+    @message = message
+  end
+
+
+  def client_name
+    @course.company.client_name
+  end
+
+
+  def start_date
+    if @day.present?
+      return @day
+    else
+      @course.start_date
+    end
+  end
+
+  def end_date
+    if @day.present?
+      return @day
+    else
+      @course.end_date
+    end
+  end
+
+  def to_s
+    message = %Q{#{@message} 会社名：#{@course.company.client_name}, コース名：#{@course.name}, ID: #{@course.id}}
+    if day.present?
+      message << %Q{, 日付:#{@day}}
+    end
+
+    message
+  end
 end

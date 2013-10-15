@@ -4,6 +4,10 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
+					<th>会社名</th>
+					<th>コース名</th>
+					<th>開始日</th>
+					<th>終了日</th>
 					<th>メッセージ</th>
 				</tr>
 			</thead>
@@ -11,7 +15,11 @@
 				<% if @course_alert.present? %>
 				<% @course_alert.errors.each do |c|%>
 				<tr>
-					<td><%= c %></td>
+          <td><%= link_to c.client_name, {controller: "companies", action: "edit", id: c.course.company.id} %></td>
+					<td><%= link_to c.course.name, {controller: "courses", action: "edit", id: c.course.id} %></td>
+					<td><%= c.start_date %></td>
+          <td><%= c.end_date %></td>
+					<td><%= c.message %></td>
 				</tr>
 				<%end%><%end%>
 			</tbody>

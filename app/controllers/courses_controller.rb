@@ -71,6 +71,9 @@ class CoursesController < ApplicationController
     when "report_flg"
       @course.report_flg = reverse_bool(@course.report_flg)
       @bool = @course.report_flg
+    when "end_form_flg"
+      @course.end_form_flg = reverse_bool(@course.end_form_flg)
+      @bool = @course.end_form_flg
     else
       raise "どのフラグを立てていいかがわかりません"
     end
