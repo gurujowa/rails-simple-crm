@@ -21,6 +21,12 @@ class CompaniesDatatable
     @companies ||= fetch_companies
   end
 
+  def all
+    c = fetch_companies
+    c.page(1)
+    c.per_page(10000)
+  end
+
   def fetch_companies
     companies = Company.order("#{sort_column} #{sort_direction}")
     companies = companies.page(page).per_page(per_page)
@@ -44,12 +50,14 @@ class CompaniesDatatable
     if p_comp['sales_person'].present?
       companies = companies.where(:sales_person => p_comp['sales_person'])
     end
+
     if p_comp['status_id'].present?
       companies = companies.where(:status_id => p_comp['status_id'])
     elsif params[:rank].present?
       status_array = Status.find_all_by_rank(params['rank'])
       companies = companies.where(:status_id => status_array)
     end
+
     if p_comp['campaign_id'].present?
       companies = companies.where(:campaign_id => p_comp['campaign_id'])
     end

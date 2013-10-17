@@ -12,7 +12,9 @@
 <%= form.text_field :updated_at, {'data-format' => 'yyyy-MM-dd', :placeholder => "更新日", :class=>"datepicker input-medium"} %><br>
 <%= form.collection_select(:industry_id,Industry.all, :id, :name, {:selected => "" , :prompt => "< 業種 >", :include_blank => true} , {:class => "input-medium"} ) %>
 <br>
-<%= submit_tag "検索する", :class=>"btn btn-primary" %><%= link_to "新規作成", {:action=> "new"} , {:class=>"btn"}%>
+<%= submit_tag "検索する", :class=>"btn btn-primary" %>
+<%= submit_tag "CSV", {:class=>"btn"} %>
+<%= link_to "新規作成", {:action=> "new"} , {:class=>"btn"}%>
 
 </form>
 <% end %>

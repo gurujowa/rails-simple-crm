@@ -112,17 +112,17 @@ class Company < ActiveRecord::Base
     found
   end
 
-
-  
   def self.to_csv
     CSV.generate do |csv|
-      csv << ["ランク","見込み度", "会社名","初回アポ日","提案見積日","契約日","入金日","ステータス","コンタクト"]
+      csv << self.column_names.concat(["ランク"])
       key = 1
       all.each do |row|
-        csv << [key, row.chance, row.client_name, row.appoint_plan, row.proposed_plan, row.contract_plan, row.payment_plan, row.status.name,row.getContactMemo.join(",")]
+        csv << row.attributes.map{|a| a[1]}.concat([row.status.rank])
         key += 1
       end
     end
   end
+
+  
 
 end

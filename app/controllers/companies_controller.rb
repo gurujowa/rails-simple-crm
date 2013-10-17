@@ -82,22 +82,26 @@ class CompaniesController < ApplicationController
 
 
   def search
-      @datas = Company.paginate(:page => params[:page],:order => 'created_at desc', :per_page => 10)
-      session[:last_search_url] = params[:company]
-      session[:last_search_rank] = params[:rank]
-      if params[:last_rank].present? then
-        params[:rank] = params[:last_rank]
-      end
-      
-      
-      @datatables = CompaniesDatatable.new(view_context)
-      @company = Company.new
-      @statuses = Status.order(:rank).find_all_by_active(true)
-      if (params[:company].present?)
-        @company.assign_attributes(company_params)
-      end
-      @company_params =  @company.attributes.to_hash
-      
+    @datas = Company.paginate(:page => params[:page],:order => 'created_at desc', :per_page => 10)
+    session[:last_search_url] = params[:company]
+    session[:last_search_rank] = params[:rank]
+    if params[:last_rank].present? then
+      params[:rank] = params[:last_rank]
+    end
+
+    @datatables = CompaniesDatatable.new(view_context)
+    @company = Company.new
+    @statuses = Status.order(:rank).find_all_by_active(true)
+    if (params[:company].present?)
+      @company.assign_attributes(company_params)
+    end
+    @company_params =  @company.attributes.to_hash
+    if params["commit"] == "CSV"
+      send_data @datatables.all.to_csv.tosjis,
+             :type => 'text/csv; charset=shift_jis; header=present',
+              :disposition => "attachment; filename=companies_#{Time.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv"
+      return
+    end
   end
   
  def pdf
