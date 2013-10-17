@@ -15,7 +15,7 @@ class Campaign < ActiveRecord::Base
   end
 
   def cpa
-      if self.companies.length.present? 
+      if self.companies.length != 0
         return self.bill / self.companies.length 
       else
         return 0
