@@ -11,7 +11,7 @@ namespace :mail do
       end
   end
 
-  task :course_test => :environment do |task,args|
+  task :course_alert_test => :environment do |task,args|
       puts "コースアラートの取得開始"
       courses = Course.all
       alert = CourseAlert.new
@@ -21,6 +21,22 @@ namespace :mail do
 
       alert.errors.each do |e|
         puts e
+      end
+  end
+
+  task :course_end => :environment do |task, args|
+      puts "コース終了時のメール開始"
+
+      courses = Course.all
+      ended_courses = []
+      courses.each do |c|
+        if c.end_date == Date.today
+          ended_courses.push c
+        end
+      end
+
+      if ended_courses.length != 0
+        AlertMailer.end(ended_courses).deliver
       end
   end
 

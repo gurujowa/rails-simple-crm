@@ -19,6 +19,10 @@ class Course < ActiveRecord::Base
     return "white"
   end
 
+  def total_time
+    getTotalTime
+  end
+
   def getTotalTime
     periods = self.periods
     total = 0
