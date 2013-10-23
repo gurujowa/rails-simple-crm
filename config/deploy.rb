@@ -6,23 +6,21 @@ set :branch, 'master'
 set :deploy_to, '/var/www/html/rails-crm2'
 set :git_https_username, "gurujowa"
 set :git_https_password, "ma3gbuib"
-set :keep_releases, 10
+set :keep_releases, 2
 #set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 #set :normalize_asset_timestamps, false
 #set :user, "yamashita"
 #set :use_sudo, false
-#set :deploy_to, "/var/www/html/rails-crm/"
 
 
 #wheneber‚ÌÝ’è
 #set :whenever_command, "bundle exec whenever"
 #require "whenever/capistrano"
 
-after 'deploy', 'deploy:symlink_shared'
-
-
+#after 'deploy', 'deploy:symlink_shared'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 
@@ -30,10 +28,10 @@ after 'deploy', 'deploy:symlink_shared'
 # set :log_level, :debug
 # set :pty, true
 
-# set :linked_files, %w{config/database.yml}
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+#task :db_setup, :roles => [:db] do
+#  run "mkdir -p -m 775 #{shared_path}/db"
+#end
 
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 namespace :deploy do
 

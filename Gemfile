@@ -37,7 +37,6 @@ group :development do
   #capistano
   gem 'capistrano', '~>3.0.0'
   gem 'capistrano-rails', :require => true
-  #gem 'capistrano-rbenv', github: "capistrano/rbenv"
   gem 'capistrano-bundler', :require => true
 end
 
