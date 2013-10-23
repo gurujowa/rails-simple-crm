@@ -37,8 +37,8 @@ group :development do
   #capistano
   gem 'capistrano', '~>3.0.0'
 #  gem 'capistrano-rvm', '~> 0.0.2'
-  gem 'capistrano-rails', :require => true
-  gem 'capistrano-bundler', :require => true
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
 end
 
 

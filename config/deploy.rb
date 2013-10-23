@@ -3,7 +3,7 @@ set :application, "rails-simple-crm"
 set :repo_url,  "https://github.com/gurujowa/rails-simple-crm.git"
 set :scm, :git
 set :branch, 'master'
-set :deploy_to, '/var/www/html/rails-crm2'
+set :deploy_to, '/var/www/html/rails-crm'
 set :git_https_username, "gurujowa"
 set :git_https_password, "ma3gbuib"
 set :keep_releases, 10
@@ -40,9 +40,9 @@ namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
-       within release_path do
-         execute :rake, 'cache:clear'
-       end
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+
     end
   end
 
