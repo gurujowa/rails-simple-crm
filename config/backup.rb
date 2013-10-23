@@ -2,9 +2,9 @@
 
 
 database_yml = File.expand_path('../database.yml',  __FILE__)
-email_yml = File.expand_path('../../shared/email.yml',  __FILE__)
+email_yml = File.expand_path('../config/shared/email.yml',  __FILE__)
 p email_yml
-backup_yml = File.expand_path('../../shared/backup.yml',  __FILE__)
+backup_yml = File.expand_path('../config/shared/backup.yml',  __FILE__)
 
 RAILS_ENV    = ENV['RAILS_ENV'] || 'development'
 

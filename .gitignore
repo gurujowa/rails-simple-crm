@@ -6,7 +6,6 @@ capybara-*.html
 .idea/*
 /.bundle
 /vendor/bundle
-/shared/*
 /log/*
 /tmp/*
 /db/*.sqlite3
@@ -19,3 +18,4 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 config/database.yml
+config/shared/*

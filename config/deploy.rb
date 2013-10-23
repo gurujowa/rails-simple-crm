@@ -7,8 +7,8 @@ set :deploy_to, '/var/www/html/rails-crm2'
 set :git_https_username, "gurujowa"
 set :git_https_password, "ma3gbuib"
 set :keep_releases, 2
-#set :linked_files, %w{config/database.yml}
-set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{config/database.yml}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system config/shared}
 set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 #set :normalize_asset_timestamps, false

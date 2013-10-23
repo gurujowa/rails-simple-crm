@@ -19,4 +19,4 @@ module CrmApi
 
 end
 
-CrmApi::Config.load("#{Rails.root}/shared/calendar.yml")
+CrmApi::Config.load("#{Rails.root}/config/shared/calendar.yml")
