@@ -62,7 +62,7 @@
             		<li><%= link_to "登録ステータス", {controller: "teachers", action: "flag"}%></li>
             	</ul>
             </li>
-            <li><%= link_to "グラフ", controller: "graphs" %></li>
+            <li><%= link_to "グラフ", controller: "graphs", action: "action" %></li>
           </ul>
           <ul class="nav pull-right">
                       <li><a href="/current">ユーザー名：<%= session[:current_layout_user] %></a></li>

@@ -1,5 +1,5 @@
 class ContactType
-  @@list = {tel: [1,"荷電"], appoint: [2,"アポイント"], other: [3, "その他"], first_appoint: [4, "初回アポ"], proposal: [5,"提案・見積"]}
+  @@list = {tel: [1,"荷電"], appoint: [2,"アポあり訪問"], visit: [6, "アポなし訪問"], other: [3, "その他"], first_appoint: [4, "初回アポ"], proposal: [5,"提案・見積"]}
   @@map = nil
 
 

@@ -22,6 +22,7 @@ Mycrm::Application.routes.draw do
 
   get "graphs/index"
   get "graphs/created"
+  get "graphs/action"
 
 
   #コース

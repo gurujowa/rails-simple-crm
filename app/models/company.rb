@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
   has_many :task, :dependent => :destroy  
   has_many :course, :dependent => :destroy
   has_many :estimate
+
   belongs_to :status
   belongs_to :campaign
   belongs_to :industry

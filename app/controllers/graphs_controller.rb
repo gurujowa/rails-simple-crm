@@ -6,11 +6,11 @@ class GraphsController < ApplicationController
     @week_created = make_week_created
     @rank_stacking = make_rank_stacking
     @closing = make_closing
-    
   end
 
-  def created
-
+  def action
+    @contacts = Contact.joins(:company).select("contacts.created_at, companies.sales_person, contacts.con_type,  count(*) as count").where("contacts.con_type is not null")
+    .group("date(contacts.created_at), companies.sales_person, contacts.con_type").having('date(contacts.created_at) >= ?', '2013-09-01')
   end
   
   private
@@ -44,7 +44,7 @@ class GraphsController < ApplicationController
     return graph
   end
   
-    def make_day_created
+  def make_day_created
      hash = Company.connection.select_all(
     'select strftime("%Y-%m-%d", created_at) m_cre, count(id) as count
      from companies
@@ -130,7 +130,6 @@ class GraphsController < ApplicationController
       else
         data[key] = 1
       end     
-
   end
   
   private

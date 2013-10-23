@@ -1,0 +1,21 @@
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="/assets/gchart_renderers.js"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart", "charteditor"]})
+ $(function(){
+  var derivers = $.pivotUtilities.derivers;
+  var renderers = $.extend($.pivotUtilities.renderers, $.pivotUtilities.gchart_renderers);
+  $.getJSON("/graphs/action.json", function(mps) {
+    $("#output").pivot(mps,
+      { rows: ["sales_person","type"], cols: ["created"] }
+    );
+    $("#output_graph").pivotUI(mps,
+      { renderers: renderers,rows: ["type"], cols: ["sales_person"], rendererName: "Bar Chart" }
+    );
+  });
+});
+        </script>
+
+        <div id="output" style="margin: 30px;"></div>
+        <div id="output_graph" style="margin: 30px;"></div>
+
