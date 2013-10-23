@@ -6,14 +6,11 @@ set :branch, 'master'
 set :deploy_to, '/var/www/html/rails-crm2'
 set :git_https_username, "gurujowa"
 set :git_https_password, "ma3gbuib"
-set :keep_releases, 2
+set :keep_releases, 10
 set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system config/shared}
-set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 #set :normalize_asset_timestamps, false
-#set :user, "yamashita"
-#set :use_sudo, false
 
 
 #wheneber‚ÌÝ’è
@@ -27,10 +24,6 @@ set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :format, :pretty
 # set :log_level, :debug
 # set :pty, true
-
-#task :db_setup, :roles => [:db] do
-#  run "mkdir -p -m 775 #{shared_path}/db"
-#end
 
 
 namespace :deploy do
@@ -47,15 +40,10 @@ namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+       within release_path do
+         execute :rake, 'cache:clear'
+       end
     end
-  end
-
-  desc "Symlink shared configs and folders on each release."
-  task :symlink_shared do
-    run "ln -nfs #{shared_path}/shared_config/ #{release_path}/shared"
   end
 
   after :finishing, 'deploy:cleanup'
