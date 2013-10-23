@@ -1,44 +1,65 @@
+
 set :application, "rails-simple-crm"
-set :normalize_asset_timestamps, false
-set :user, "yamashita"
-set :use_sudo, false
-set :repository,  "https://github.com/gurujowa/rails-simple-crm.git"
-set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-set :deploy_to, "/var/www/html/rails-crm/"
+set :repo_url,  "https://github.com/gurujowa/rails-simple-crm.git"
+set :scm, :git
+set :branch, 'master'
+set :deploy_to, '/var/www/html/rails-crm2'
+set :git_https_username, "gurujowa"
+set :git_https_password, "ma3gbuib"
+set :keep_releases, 10
+#set :linked_files, %w{config/database.yml}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-role :app, "192.168.1.145"
-role :db, "192.168.1.145", :primary => true
+#set :normalize_asset_timestamps, false
+#set :user, "yamashita"
+#set :use_sudo, false
+#set :deploy_to, "/var/www/html/rails-crm/"
 
-#wheneberã®è¨­å®š
-set :whenever_command, "bundle exec whenever"
-require "whenever/capistrano"
+
+#wheneber‚ÌÝ’è
+#set :whenever_command, "bundle exec whenever"
+#require "whenever/capistrano"
 
 after 'deploy', 'deploy:symlink_shared'
 
 
-namespace :db do
-  task :setup, :roles => [:db] do
-    run "mkdir -p -m 775 #{shared_path}/db"
-  end
-end
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-# if you want to clean up old releases on each deploy uncomment this:
-#after "deploy:restart", "deploy:cleanup"
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+# set :format, :pretty
+# set :log_level, :debug
+# set :pty, true
 
-# If you are using Passenger mod_rails uncomment this:
+# set :linked_files, %w{config/database.yml}
+# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
 namespace :deploy do
- 
-  task :start do ; end
-  task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
-     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      execute :mkdir, '-p', release_path.join('tmp') # <= ‚±‚ê‚ð’Ç‰Á‚·‚é
+      execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
   end
 
   desc "Symlink shared configs and folders on each release."
   task :symlink_shared do
     run "ln -nfs #{shared_path}/shared_config/ #{release_path}/shared"
   end
+
+  after :finishing, 'deploy:cleanup'
+
 end

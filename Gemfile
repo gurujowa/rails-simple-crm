@@ -35,8 +35,10 @@ group :development do
   gem 'binding_of_caller'
 
   #capistano
-  gem 'capistrano'
-  gem 'capistrano_colors'
+  gem 'capistrano', '~>3.0.0'
+  gem 'capistrano-rails', :require => true
+  #gem 'capistrano-rbenv', github: "capistrano/rbenv"
+  gem 'capistrano-bundler', :require => true
 end
 
 
@@ -54,7 +56,6 @@ gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-editable-rails'
-
 
 #Format Convert Library
 gem 'pdfkit'
