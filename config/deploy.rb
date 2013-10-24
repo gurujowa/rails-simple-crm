@@ -25,6 +25,11 @@ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public
 # set :log_level, :debug
 # set :pty, true
 
+task :whenever do
+  on roles(:all) do |h|
+    execute "cd " + release_path.to_s + " &&  whenever | crontab"
+  end
+end
 
 namespace :deploy do
 
@@ -47,5 +52,6 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
+  after :published, 'whenever'
 
 end

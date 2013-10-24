@@ -11,7 +11,7 @@ end
 every 1.day, :at => '6:00 am' do
   rake "calendar:google"
   rake "mail:course_end"
-  command "backup perform --trigger crm_backup --config_file config/backup.rb --data-path db --log-path log --tmp-path tmp"
+  command %Q{cd #{Dir.pwd} && backup perform --trigger crm_backup --config_file #{Dir.pwd}/config/backup.rb}
 end
 
 # Example:
