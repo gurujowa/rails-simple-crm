@@ -18,8 +18,10 @@ class Company < ActiveRecord::Base
   validates :fax, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}
   validates :mail,  :email_format => {:message => ' メールアドレスの形式が不適切です', :allow_blank=>true} 
   validates :client_name, presence: true, length: {maximum: 50}
+  validates :zipcode, presence: true, length: {maximum: 8, :message => '郵便番号は７文字以内です'}, format: {with: /\d{3}\-\d{4}/, message: "半角数字とハイフンのみで入力してください。（ハイフンが必要です）", allow_blank: true }
   validates :prefecture, presence: true, length: {maximum: 4, :message => '都道府県は４文字以内で入力してください'}
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
+  validates :address, presence:true
   validates :bill,  :numericality => true, :allow_nil => true
 
   def getAddress
@@ -36,6 +38,13 @@ class Company < ActiveRecord::Base
     return address
   end
 
+  def sales_name
+    if self.sales_person.present?
+      User.find(self.sales_person).name
+    else
+      return ""
+    end
+  end
 
   def full_address
     address = ""
@@ -115,10 +124,10 @@ class Company < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate do |csv|
-      csv << self.column_names.concat(["ランク"])
+      csv << self.column_names.concat(["ランク","ステータス名","営業マン"])
       key = 1
       all.each do |row|
-        csv << row.attributes.map{|a| a[1]}.concat([row.status.rank])
+        csv << row.attributes.map{|a| a[1]}.concat([row.status.rank, row.status.name, row.sales_name])
         key += 1
       end
     end
