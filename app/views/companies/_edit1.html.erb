@@ -1,4 +1,4 @@
-<% @company.task.each do |t|%>
+<% @company.tasks.each do |t|%>
 <%=javascript_tag "$(function() { $('#balloon_" + t.id.to_s + "').balloon({position: 'right', contents: $('#balloon_popup_" + t.id.to_s + "').clone().show()}); });" %>
 <div id="balloon_popup_<%= t.id.to_s %>" style="display:none;">
 	<%= select :task_status,:name,options_for_select(@task.getProgressList, t.progress_id),{},
@@ -22,7 +22,7 @@
           </tr>
         </thead>
         <tbody>
-        	<% @company.task.each do |t|%>
+        	<% @company.tasks.each do |t|%>
           <tr id="task_tr_<%= t.id.to_s %>" class="<%= t.getBootstrapColor %>">
             <td><%= t.duedate.strftime("%m/%d") %></td>
             <td id="task_progress_<%= t.id.to_s %>"><%= t.getProgress()%></td>
