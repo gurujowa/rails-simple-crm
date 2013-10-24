@@ -69,9 +69,7 @@ gem 'will_paginate'
 gem 'business_time'
 gem "google_calendar"
 
-#gem "google-api-client"
 gem 'whenever'
-gem 'backup'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
