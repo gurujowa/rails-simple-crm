@@ -17,7 +17,11 @@ comp = @datatables.getCompanies.map do |company|
         company.tel,
         company.fax,
         contactAsHtml(company),
-        '<input type="checkbox" name="check' + company.id.to_s + '" value="' + company.id.to_s + '">'
+        '<input type="checkbox" name="check' + company.id.to_s + '" value="' + company.id.to_s + '">',
+        company.prefecture,
+        company.city,
+        company.address,
+        company.building
 ]
 end
 
