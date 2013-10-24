@@ -1,5 +1,5 @@
 未確認のタスクがあるコースがあります。
 
-<% @alert.each do |c|%>
-  <%= c %>
+<% @alerts.all.each do |c|%>
+  <%= c.mail_message %>
 <% end %>

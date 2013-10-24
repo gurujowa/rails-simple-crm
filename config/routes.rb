@@ -32,6 +32,7 @@ Mycrm::Application.routes.draw do
       put 'update/:id' => 'courses#up_name'  
       get 'update/:id/:type' => 'courses#up_bool'
       get 'google'
+      get 'alert'
     end
   end
 

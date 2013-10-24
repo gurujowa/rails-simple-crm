@@ -11,18 +11,6 @@ namespace :mail do
       end
   end
 
-  task :course_alert_test => :environment do |task,args|
-      puts "コースアラートの取得開始"
-      courses = Course.all
-      alert = CourseAlert.new
-      courses.each do |c|
-        alert.check c
-      end
-
-      alert.errors.each do |e|
-        puts e
-      end
-  end
 
   task :course_end => :environment do |task, args|
       puts "コース終了時のメール開始"
@@ -40,17 +28,13 @@ namespace :mail do
       end
   end
 
-  task :course_alert => :environment do |task, args|
-      puts "コースアラートのメール開始"
+  task :alert => :environment do |task, args|
+      puts "アラートのメール開始"
 
-      courses = Course.all
-      alert = CourseAlert.new
-      courses.each do |c|
-        alert.check c
-      end
+      alerts = Alert.check
 
-      if alert.errors.length != 0
-        AlertMailer.course(alert).deliver
+      if alerts.length != 0
+        AlertMailer.course(alerts).deliver
       end
   end
 end

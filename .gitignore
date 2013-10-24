@@ -20,3 +20,4 @@ pickle-email-*.html
 config/database.yml
 config/shared/*
 public/assets/*
+Backup/*.yml

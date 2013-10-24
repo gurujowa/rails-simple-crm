@@ -41,8 +41,6 @@ class CompaniesController < ApplicationController
       GROUP BY companies.client_name, companies.updated_at
       order by up_at DESC;
       ')
-
-        @course_alert = CourseAlert.check_all
   end
 
   def client_sheet

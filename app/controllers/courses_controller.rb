@@ -8,6 +8,10 @@ class CoursesController < ApplicationController
   def edit
     @course = Course.find(params[:id])
   end
+
+  def alert
+    @alerts = Alert.check
+  end
   
   def calendar
     @courses = Course.all
