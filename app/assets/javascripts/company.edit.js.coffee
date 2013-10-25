@@ -1,5 +1,6 @@
 $.fn.editable.defaults.mode = "inline"
 
+
 jQuery ->
   $('.balloon').balloon({contents: $('#balloon_popup').clone().show(), position: "right"})
   $(".edit_in_place").editable({
@@ -12,6 +13,14 @@ jQuery ->
   lastTab = localStorage.getItem("lastEditTab")
   $("#" + lastTab).tab "show"  if lastTab
 
+  #郵便番号検索
+  $("#jump_zip").on "click", ->
+    url = "http://www.google.co.jp/search?q=" + $("#company_prefecture").val() + $("#company_city").val() + $("#company_address").val() + " 郵便番号"
+    window.open(url,"_blank")
+  #GoogleMap検索
+  $("#jump_map").on "click", ->
+    url = "http://maps.google.co.jp/maps?q=" + $("#company_prefecture").val() + $("#company_city").val() + $("#company_address").val()
+    window.open(url,"_blank")
 
   $('form#new_task_form').submit ->
     $('#new_task_detail').show()

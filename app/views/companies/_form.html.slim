@@ -1,0 +1,103 @@
+.well
+  - @company.errors.full_messages.each do |msg|
+    li= msg
+  .control-group
+    label.control-label 会社名
+    .controls
+      = form.text_field :client_name
+  .control-group
+    label.control-label 業種
+    .controls
+      = form.collection_select(:industry_id, @industries, :id, :name, {:include_blank => true })
+      | (#{link_to "業種の追加", {controller: "industries"}})
+  .control-group
+    label.control-label 営業マン
+    .controls= form.select :sales_person , options_from_users(@company.sales_person), :include_blank => true
+  .control-group
+    label.control-label 見込み度
+    .controls= form.select :chance , options_chance(@company.chance), :include_blank => true
+  .control-group
+    label.control-label 新規獲得元
+    .controls
+      = form.collection_select :campaign_id , Campaign.all, :id, :name, :include_blank => true
+      = link_to "(新規追加)", campaigns_path
+  .control-group
+    label.control-label ステータス
+    .controls
+      = form.select :status_id, options_from_statuses(@company.status_id), :include_blank => true
+  .control-group
+    label.control-label 住所
+    .controls
+      table.table.table-condensed
+        tr
+          td 郵便番号
+          td 都道府県
+          td 市町村
+        tr
+          td= form.text_field :zipcode
+          td= form.text_field :prefecture
+          td= form.text_field :city
+        tr
+          td 番地
+          td 建物名
+        tr
+          td= form.text_field :address
+          td= form.text_field :building
+      a.btn#jump_zip 郵便番号
+      a.btn#jump_map GoogleMap検索
+  .control-group
+    label.control-label 予定日
+    .controls
+      table.table
+        tr
+          td 初回アポ
+          td
+            = form.text_field :appoint_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
+        tr
+          td 提案見積日
+          td
+            = form.text_field :proposed_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
+        tr
+          td 契約日
+          td
+            = form.text_field :contract_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
+        tr
+          td 入金日
+          td
+            = form.text_field :payment_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
+.well
+  ul.nav.nav-pills
+    li.active
+      a 代表者
+    li
+      a 連絡先2
+  .control-group
+    label.control-label 担当者名
+    .controls 性#{form.text_field :client_person} 名#{form.text_field :client_person}
+  .control-group
+    label.control-label 連絡先
+    .controls
+      | TEL#{form.text_field :tel} FAX#{form.text_field :fax} Mail#{form.text_field :mail}
+.well
+  .control-group
+    label.control-label コンタクト
+    .controls
+      - contact_index = 1
+      table.table
+        = form.fields_for :contacts do |c|
+          tr
+            td= contact_index
+            td style="width:100px;"
+              - ContactType.all.each do |t|
+                = c.radio_button :con_type, t.id , :class =>"icheck"
+                = c.label "con_type_"+ t.id.to_s, t.name
+                br
+            td
+              = c.text_area :memo, :rows => "8" , :style =>"width:100%"
+              br
+                | \&nbsp;&nbsp;&nbsp;担当者：#{c.object.getCreatedBy()}, 作成日: #{simple_date(c.object.created_at)}
+                br
+                  = c.hidden_field :created_by
+                  - contact_index += 1
+.form-actions
+  = submit_tag "編集する", :class=>"btn btn-primary"
