@@ -27,6 +27,7 @@ gem 'passenger', '4.0.20'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+gem 'erb2haml'
 
 group :development do
   # エラー画面をわかりやすく整形してくれる

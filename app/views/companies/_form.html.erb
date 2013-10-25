@@ -1,4 +1,4 @@
-
+<div class="well">
 <% @company.errors.full_messages.each do |msg|%>
 <li><%=msg%></li>
 <%end%>
@@ -9,13 +9,13 @@
 <label class="control-label">業種</label> <div class="controls"><%= form.collection_select(:industry_id, @industries, :id, :name, {:include_blank => true }) %>(<%= link_to "業種の追加", {controller: "industries"}%>)</div>
 </div>
 <div class="control-group">
-<label class="control-label">担当者名</label> <div class="controls"><%= form.text_field :client_person %></div>
-</div>
-<div class="control-group">
 <label class="control-label">営業マン</label> <div class="controls"><%= form.select :sales_person , options_from_users(@company.sales_person), :include_blank => true %></div>
 </div>
 <div class="control-group">
 <label class="control-label">見込み度</label> <div class="controls"><%= form.select :chance , options_chance(@company.chance), :include_blank => true  %></div>
+</div>
+<div class="control-group">
+<label class="control-label">担当者名</label> <div class="controls"><%= form.text_field :client_person %></div>
 </div>
 <div class="control-group">
 <label class="control-label">連絡先</label><div class="controls"> TEL<%= form.text_field :tel %> FAX<%= form.text_field :fax %> Mail<%= form.text_field :mail %></div>
@@ -72,6 +72,9 @@
 	</table>
 	</div>
 </div>
+
+</div>
+<div class="well">
 <div class="control-group">
 <label class="control-label">コンタクト </label>
 <div class="controls">
@@ -93,6 +96,7 @@
 	<% end %>
 </table>
 </div></div>
+</div>
 
 
 

@@ -124,10 +124,11 @@ class Company < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate do |csv|
-      csv << self.column_names.concat(["ランク","ステータス名","営業マン"])
+      csv << self.column_names.concat(["ランク","ステータス名","営業マン", "コンタクト"])
       key = 1
       all.each do |row|
-        csv << row.attributes.map{|a| a[1]}.concat([row.status.rank, row.status.name, row.sales_name])
+        memos = row.contacts.map{|c| c.memo}
+        csv << row.attributes.map{|a| a[1]}.concat([row.status.rank, row.status.name, row.sales_name, memos.join("\n・")])
         key += 1
       end
     end

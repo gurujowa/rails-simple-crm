@@ -38,7 +38,7 @@
 
   </div>
   <div class="span9">
-  	<%= form_for(@company, :html => {:class => 'form-horizontal well'}) do |form|%>
+  	<%= form_for(@company, :html => {:class => 'form-horizontal'}) do |form|%>
   	<%= render :partial => 'form', :locals => {:form => form} %>
     <% end %>
     <%= link_to '削除する', @company, method: :delete, data: { confirm: '本当に削除しますか' } ,  :class=>"btn"%>
