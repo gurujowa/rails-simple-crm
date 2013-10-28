@@ -1,0 +1,39 @@
+p#notice = notice
+
+p
+  strong Last name:
+  = @client.last_name
+p
+  strong First name:
+  = @client.first_name
+p
+  strong Last kana:
+  = @client.last_kana
+p
+  strong First kana:
+  = @client.first_kana
+p
+  strong Tel:
+  = @client.tel
+p
+  strong Fax:
+  = @client.fax
+p
+  strong Email:
+  = @client.email
+p
+  strong Gender:
+  = @client.gender
+p
+  strong Official position:
+  = @client.official_position
+p
+  strong Company:
+  = @client.company_id
+p
+  strong Memo:
+  = @client.memo
+
+= link_to 'Edit', edit_client_path(@client)
+'|
+= link_to 'Back', clients_path

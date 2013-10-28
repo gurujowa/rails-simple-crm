@@ -1,0 +1,17 @@
+h1 <%= plural_table_name %> 一覧
+
+= link_to '新規追加', new_<%= singular_table_name %>_path, :class => 'btn'
+table.default_datatables
+  thead
+    tr
+      <% attributes.reject(&:password_digest?).each do |attribute| -%>
+      th <%= attribute.human_name %><% end -%>
+      th CH
+  tbody
+    - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+      tr
+        <% attributes.reject(&:password_digest?).each do |attribute| -%>
+        td = <%= singular_table_name %>.<%= attribute.name %> <% end %>
+        td 
+          = link_to '編集', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), :class => "btn"
+          = link_to '削除', <%= singular_table_name %>, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"

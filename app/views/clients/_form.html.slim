@@ -1,0 +1,18 @@
+=simple_form_for(@client) do |f|
+  =f.error_notification
+
+  .form-inputs
+  
+    = f.input :last_name 
+    = f.input :first_name 
+    = f.input :last_kana 
+    = f.input :first_kana 
+    = f.input :tel 
+    = f.input :fax 
+    = f.input :email 
+    = f.input :gender 
+    = f.input :official_position 
+    = f.input :company_id 
+    = f.input :memo 
+  .form-actions
+    = f.button :submit
