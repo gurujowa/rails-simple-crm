@@ -1,7 +1,8 @@
 module CrmApi
   class Config
       def self.load path
-        yml = YAML::load(File.open(path))
+        loaded = YAML::load(File.open(path))
+        yml = loaded[Rails.env]
         setting = {username: yml["username"], calendar: yml["calendar"], password: yml["password"], app_name: yml["app_name"]}
         @cal = Google::Calendar.new(setting)
       end

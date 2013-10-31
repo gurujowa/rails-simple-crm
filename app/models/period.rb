@@ -40,6 +40,8 @@ class Period < ActiveRecord::Base
          e.start_time = start_time
          e.end_time = end_time
       end
+      logger.debug "-----------------------Google Calendar exported--------------------"
+      logger.debug "event_id = " + event.id
       self.google_id = event.id
       super
   end
