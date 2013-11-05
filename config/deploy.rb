@@ -1,11 +1,13 @@
 
+#settings = YAML::load_file(File.expand_path("../shared/deploy.yml",__FILE__))
+
 set :application, "rails-simple-crm"
 set :repo_url,  "https://github.com/gurujowa/rails-simple-crm.git"
 set :scm, :git
 set :branch, 'master'
 set :deploy_to, '/var/www/html/rails-crm'
-set :git_https_username, "gurujowa"
-set :git_https_password, "ma3gbuib"
+#set :git_https_username, settings[:git_https_username]
+#set :git_https_password, settings[:git_https_password]
 set :keep_releases, 10
 set :linked_files, %w{config/database.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system config/shared}

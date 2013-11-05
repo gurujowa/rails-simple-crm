@@ -5,7 +5,7 @@
 
 every 1.day, :at => '6:00 pm' do
   rake "mail:contact"
-  rake "mail:course_alert"
+  rake "mail:alert"
 end
 
 every 1.day, :at => '6:00 am' do
