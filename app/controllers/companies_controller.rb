@@ -56,6 +56,12 @@ class CompaniesController < ApplicationController
 
   end
 
+  def failure
+    @companies = Company.joins(:status)
+    .where("companies.updated_at BETWEEN ? AND ?" , 3.day.ago, DateTime.now.end_of_day)
+    .where(:statuses => {rank:  ["X","Z"]})
+  end
+
   def name
     @companies = Company.joins(:status).where("client_name like :search", search: "%#{params[:q]}%").where(:statuses => {rank:  ["A".."K"]}).
        order("statuses.rank asc")

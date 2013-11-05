@@ -1,0 +1,22 @@
+h1 失注案件
+table.table.table-bordered
+  thead
+    tr
+      th ID
+      th 会社名
+      th ステータス
+      th 営業マン
+      th 更新日
+      th コンタクト
+  tbody
+    - @companies.each_with_index do |c,i| 
+      tr
+        td = i+1
+        td = link_to c.client_name , {action: "edit", id: c.id}
+        td = c.status.name
+        td = get_user_name c.sales_person
+        td = c.updated_at.strftime("%Y-%m-%d %H時")
+        td 
+          - c.contacts.each do |o|
+            = "・"+o.memo
+            br
