@@ -10,7 +10,7 @@ class Alert
   end
 
   def all
-    return @companies.concat(@courses)
+    return @companies.concat(@courses).concat(@periods)
   end
 
   def length
