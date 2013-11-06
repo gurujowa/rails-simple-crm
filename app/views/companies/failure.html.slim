@@ -16,7 +16,7 @@ table.table.table-bordered
         td = c.status.name
         td = get_user_name c.sales_person
         td = c.updated_at.strftime("%Y-%m-%d %H時")
-        td 
+        td style="width:60%;"
           - c.contacts.each do |o|
             = "・"+o.memo.to_s
             br
