@@ -18,5 +18,5 @@ table.table.table-bordered
         td = c.updated_at.strftime("%Y-%m-%d %H時")
         td 
           - c.contacts.each do |o|
-            = "・"+o.memo
+            = "・"+o.memo.to_s
             br
