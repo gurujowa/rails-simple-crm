@@ -18,9 +18,9 @@ class CreateClients < ActiveRecord::Migration
 
     companies = Company.all
     companies.each do |c|
-      if c.client_person.present?
+      if c.read_attribute(:client_person).present?
         mailaddress = c.mail
-        clie = Client.create!(:last_name => c.client_person, :tel => c.tel, :fax => c.fax, :mail => mailaddress, :gender => 3, :company_id => c.id)
+        clie = Client.create!(:last_name => c.read_attribute(:client_person), :tel => c.tel, :fax => c.fax, :mail => mailaddress, :gender => 3, :company_id => c.id)
       end
     end
   end
