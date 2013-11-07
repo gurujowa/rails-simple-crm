@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20131025112541) do
     t.string   "first_kana"
     t.string   "tel"
     t.string   "fax"
-    t.string   "email"
+    t.string   "mail"
     t.integer  "gender",            null: false
     t.string   "official_position"
     t.integer  "company_id",        null: false

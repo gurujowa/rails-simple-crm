@@ -17,6 +17,10 @@
     label.control-label 見込み度
     .controls= form.select :chance , options_chance(@company.chance), :include_blank => true
   .control-group
+    label.control-label 代表電話
+    .controls
+      | TEL#{form.text_field :tel} FAX#{form.text_field :fax}
+  .control-group
     label.control-label 新規獲得元
     .controls
       = form.collection_select :campaign_id , Campaign.all, :id, :name, :include_blank => true
@@ -66,16 +70,18 @@
           td
             = form.text_field :payment_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
 .well
-  ul.nav.nav-pills
-    li.active
-      a 代表者
-  .control-group
-    label.control-label 担当者名
-    .controls #{form.text_field :client_person}
-  .control-group
-    label.control-label 連絡先
-    .controls
-      | TEL#{form.text_field :tel} FAX#{form.text_field :fax} Mail#{form.text_field :mail}
+  ul.nav.nav-pills#company_edit_clients_tab
+    li.clients_tab_add_field
+      = link_to_add_fields "＋", form, :clients
+
+    - @company.clients.each_with_index do |c,i|
+      li class=("active" if i==0)
+        a href="#company_edit_client_#{i}" data-toggle="tab" #{c.name}
+
+  .tab-content.add_fields#company_edit_clients_tab_content
+    = form.fields_for :clients do |i|
+      = render :partial => "client_fields", :locals => { :f => i}
+
 .well
   .control-group
     label.control-label コンタクト

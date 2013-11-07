@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
       FROM companies 
       LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE statuses.rank IN ("B","C","D","E") AND tasks.id Is Null
+      WHERE statuses.rank NOT IN ("A","X","Z","ZZ","P")  AND tasks.id Is Null
       GROUP BY companies.client_name, companies.updated_at
       order by up_at ASC;
       ')
@@ -23,7 +23,7 @@ class CompaniesController < ApplicationController
       FROM companies 
       LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE statuses.rank IN ("B","C","D","E")
+      WHERE statuses.rank NOT IN ("A","X","Z","ZZ","P") 
       AND (tasks.id) Is Null 
       AND companies.sales_person = ' + session[:current_user].id.to_s + '
       GROUP BY companies.client_name, companies.updated_at
@@ -220,7 +220,7 @@ class CompaniesController < ApplicationController
   end
   
   private
-  def set_default_form()
+  def set_default_form
     @task = Task.new
     @task_types = TaskType.order("tag").all
     @industries = Industry.all
@@ -244,7 +244,9 @@ class CompaniesController < ApplicationController
   def company_params
       params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
       :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
-      :bill, :campaign_id, :appoint_plan, :proposed_plan, :contract_plan, :payment_plan, contacts_attributes: [:id, :memo, :created_by, :con_type])
+      :bill, :campaign_id, :appoint_plan, :proposed_plan, :contract_plan, :payment_plan,
+      contacts_attributes: [:id, :memo, :created_by, :con_type],
+      clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position, :mail, :tel, :fax, :memo])
   end
   
   private

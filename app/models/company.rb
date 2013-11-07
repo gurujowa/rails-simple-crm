@@ -1,5 +1,6 @@
 class Company < ActiveRecord::Base
   has_many :contacts, :dependent => :destroy
+  has_many :clients, :dependent => :destroy
   has_many :tasks, :dependent => :destroy  
   has_many :courses, :dependent => :destroy
   has_many :estimate
@@ -8,6 +9,7 @@ class Company < ActiveRecord::Base
   belongs_to :campaign
   belongs_to :industry
   accepts_nested_attributes_for :contacts,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
+  accepts_nested_attributes_for :clients,  :allow_destroy => true , reject_if: :all_blank
 
   validates :status_id, presence: true  
   validates :campaign_id, presence: true  
@@ -16,8 +18,6 @@ class Company < ActiveRecord::Base
   validates :sales_person, presence: true
   validates :tel, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}
   validates :fax, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}
-  validates :mail,  :email_format => {:message => ' メールアドレスの形式が不適切です', :allow_blank=>true} 
-  validates :client_name, presence: true, length: {maximum: 50}
   validates :zipcode, presence: true, length: {maximum: 8, :message => '郵便番号は７文字以内です'}, format: {with: /\d{3}\-\d{4}/, message: "半角数字とハイフンのみで入力してください。（ハイフンが必要です）", allow_blank: true }
   validates :prefecture, presence: true, length: {maximum: 4, :message => '都道府県は４文字以内で入力してください'}
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
@@ -36,6 +36,16 @@ class Company < ActiveRecord::Base
       address.concat(self.address)
     end
     return address
+  end
+
+  def client_person
+    if self.clients.present?
+      return self.clients.first.name
+    end
+  end
+
+  def name
+      return client_name
   end
 
   def sales_name
