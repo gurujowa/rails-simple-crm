@@ -76,7 +76,8 @@
 
     - @company.clients.each_with_index do |c,i|
       li class=("active" if i==0)
-        a href="#company_edit_client_#{i}" data-toggle="tab" #{c.name}
+        a id="company_edit_client_tab_#{i}" href="#company_edit_client_#{i}" data-toggle="tab"
+          = c.name.present? ? c.name : "新しい連絡先"
 
   .tab-content.add_fields#company_edit_clients_tab_content
     = form.fields_for :clients do |i|

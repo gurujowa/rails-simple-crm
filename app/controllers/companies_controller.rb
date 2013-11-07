@@ -155,6 +155,7 @@ class CompaniesController < ApplicationController
   def new
     @company = Company.new
     @company.contacts.build(:created_by => session[:current_user].id)
+    @company.clients.build
     set_default_form
   end
 
@@ -186,6 +187,9 @@ class CompaniesController < ApplicationController
   def edit
     @company = Company.find(params[:id])
     @company.contacts.build(:created_by => session[:current_user].id)
+    unless @company.clients.present?
+      @company.clients.build
+    end
     @course = Course.where(company_id: params[:id])
     set_default_form
   end
