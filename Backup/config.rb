@@ -16,13 +16,6 @@ Backup::Model.new(:crm_backup, 'CRM SQLite File') do
     archive.add backup_config[RAILS_ENV][:backup]
   end
 
-  ##
-  # Local (Copy) [Storage]
-  #
-  store_with Local do |local|
-    local.path       = "/tmp/backups/"
-    local.keep       = 5
-  end
 
   store_with SCP do |server|
     server.username = backup_config[:username]
@@ -31,6 +24,14 @@ Backup::Model.new(:crm_backup, 'CRM SQLite File') do
     server.port     = 22
     server.path     = "~/backups/"
     server.keep     = 20
+  end
+
+  ##
+  # Local (Copy) [Storage]
+  #
+  store_with Local do |local|
+    local.path       = "/tmp/backups/"
+    local.keep       = 5
   end
 
 

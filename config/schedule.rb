@@ -9,7 +9,6 @@ every 1.day, :at => '6:00 pm' do
 end
 
 every 1.day, :at => '6:00 am' do
-  rake "calendar:google"
   rake "mail:course_end"
   command %Q{backup perform --trigger crm_backup}
 end
