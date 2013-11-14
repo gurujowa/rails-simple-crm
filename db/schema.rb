@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131025112541) do
+ActiveRecord::Schema.define(version: 20131114002413) do
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -89,6 +89,39 @@ ActiveRecord::Schema.define(version: 20131025112541) do
   add_index "companies", ["prefecture"], name: "index_companies_on_prefecture"
   add_index "companies", ["updated_at"], name: "index_companies_on_updated_at"
   add_index "companies", ["updated_by"], name: "index_companies_on_updated_by"
+
+  create_table "company_contract_plans", force: true do |t|
+    t.date     "duedate",    null: false
+    t.text     "reason"
+    t.text     "memo"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "company_contract_plans", ["company_id"], name: "index_company_contract_plans_on_company_id"
+
+  create_table "company_payment_plans", force: true do |t|
+    t.date     "duedate",    null: false
+    t.text     "reason"
+    t.text     "memo"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "company_payment_plans", ["company_id"], name: "index_company_payment_plans_on_company_id"
+
+  create_table "company_proposed_plans", force: true do |t|
+    t.date     "duedate",    null: false
+    t.text     "reason"
+    t.text     "memo"
+    t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "company_proposed_plans", ["company_id"], name: "index_company_proposed_plans_on_company_id"
 
   create_table "contacts", force: true do |t|
     t.integer  "company_id"

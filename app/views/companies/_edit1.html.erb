@@ -51,7 +51,7 @@
   </tr>
   <tr>
     <td>作成者</td>
-    <td><%= @company.getCreatedBy()%></td>
+    <td><%= get_user_name(@company.created_by) %></td>
   </tr>
   <tr>
     <td>作成日</td>
@@ -59,7 +59,7 @@
   </tr>
   <tr>
     <td>更新者</td>
-    <td><%= @company.getUpdatedBy()%></td>
+    <td><%= get_user_name(@company.updated_by) %></td>
   </tr>
   <tr>
     <td>更新日</td>

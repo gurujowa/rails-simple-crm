@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  duedate: 2013-11-12
+  reason: MyText
+  memo: MyText
+  company_id: 
+
+two:
+  duedate: 2013-11-12
+  reason: MyText
+  memo: MyText
+  company_id: 

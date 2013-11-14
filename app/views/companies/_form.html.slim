@@ -60,15 +60,15 @@
         tr
           td 提案見積日
           td
-            = form.text_field :proposed_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
+            = render :partial => 'sales_plan', :locals => {name: "proposed",:plans => @company.company_proposed_plans}
         tr
           td 契約日
           td
-            = form.text_field :contract_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
+            = render :partial => 'sales_plan', :locals => {name: "contract",:plans => @company.company_contract_plans}
         tr
           td 入金日
           td
-            = form.text_field :payment_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
+            = render :partial => 'sales_plan', :locals => {name: "payment",:plans => @company.company_payment_plans}
 .well
   ul.nav.nav-pills#company_edit_clients_tab
     li.clients_tab_add_field

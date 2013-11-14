@@ -1,0 +1,21 @@
+- if plans.empty?
+  = text_field :plan, name,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
+- else
+  span 提案日：#{plans.last.duedate} - 
+  span 延期回数：#{plans.length - 1}回
+  a.btn id="#{name}_postpone_button" href="#" 延期
+  div class="#{name}_none_text"
+    |日付：#{text_field :plan, name,'data-format' => 'yyyy-MM-dd', class: "datepicker"}
+    |延期理由：#{text_field :plan, name+"_reason"}
+    table
+      thead
+        tr
+          td 修正前期日
+          td 延期理由
+          td 修正日
+      tbody
+        - plans.each_with_index do |c, i|
+          tr
+            td = c.duedate
+            td = i == 0 ? "初期設定期日" : c.reason
+            td = c.created_at.strftime "%Y-%m-%d"

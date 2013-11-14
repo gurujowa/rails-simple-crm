@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
       FROM companies 
       LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE statuses.rank NOT IN ("A","X","Z","ZZ","P")  AND tasks.id Is Null
+      WHERE statuses.rank NOT IN ("A","Y","X","Z","ZZ","P")  AND tasks.id Is Null
       GROUP BY companies.client_name, companies.updated_at
       order by up_at ASC;
       ')
@@ -23,7 +23,7 @@ class CompaniesController < ApplicationController
       FROM companies 
       LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE statuses.rank NOT IN ("A","X","Z","ZZ","P") 
+      WHERE statuses.rank NOT IN ("A","Y","X","Z","ZZ","P") 
       AND (tasks.id) Is Null 
       AND companies.sales_person = ' + session[:current_user].id.to_s + '
       GROUP BY companies.client_name, companies.updated_at
@@ -36,7 +36,7 @@ class CompaniesController < ApplicationController
       strftime("%Y-%m-%d",companies.updated_at) as up_at
       FROM companies 
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE statuses.rank NOT IN ("A","X","Z","ZZ","P") 
+      WHERE statuses.rank NOT IN ("A","Y","X","Z","ZZ","P") 
       AND NOT EXISTS(select id from tasks where tasks.company_id = comp_id and tasks.progress_id in (1,2,3))
       GROUP BY companies.client_name, companies.updated_at
       order by up_at DESC;
@@ -53,7 +53,6 @@ class CompaniesController < ApplicationController
     report.cell "E6",@company.tel
 
     send_file report.write  , :type=>"application/ms-excel", :filename => "client_sheet.xls"
-
   end
 
   def failure
@@ -163,6 +162,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     @company.created_by = session[:current_user].id
+    assign_plan
     set_default_form
 
       if @company.save
@@ -200,6 +200,7 @@ class CompaniesController < ApplicationController
     @company.assign_attributes(company_params)
     @company.updated_by = session[:current_user].id
     @course = Course.where(company_id: params[:id])
+    assign_plan
     set_default_form
 
     
@@ -211,6 +212,21 @@ class CompaniesController < ApplicationController
     else
       @company.contacts.build(:created_by => session[:current_user].id)
       render "edit"
+    end
+  end
+
+  def assign_plan
+    plan = CompanyProposedPlan.build_for_params(plan_params,params[:id])
+    if (plan.duedate.present? && plan.duedate != @company.proposed_plan) 
+      @company.company_proposed_plans << plan
+    end
+    plan = CompanyContractPlan.build_for_params(plan_params,params[:id])
+    if (plan.duedate.present? && plan.duedate != @company.contract_plan) 
+      @company.company_contract_plans << plan
+    end
+    plan = CompanyPaymentPlan.build_for_params(plan_params,params[:id])
+    if (plan.duedate.present? && plan.duedate != @company.payment_plan) 
+      @company.company_payment_plans << plan
     end
   end
   
@@ -228,10 +244,9 @@ class CompaniesController < ApplicationController
     @task = Task.new
     @task_types = TaskType.order("tag").all
     @industries = Industry.all
-
   end
+
   
-  private
   def checkbox_append(params)
     ids = []
     params.each do |p|
@@ -242,15 +257,17 @@ class CompaniesController < ApplicationController
     return ids
   end
   
-
-  
   # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
-      params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
+    params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
       :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
-      :bill, :campaign_id, :appoint_plan, :proposed_plan, :contract_plan, :payment_plan,
+      :bill, :campaign_id, :proposed_plan, :appoint_plan, :contract_plan, :payment_plan,
       contacts_attributes: [:id, :memo, :created_by, :con_type],
       clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position, :mail, :tel, :fax, :memo])
+  end
+
+  def plan_params
+    params.require(:plan).permit(:proposed, :proposed_reason, :contract, :contract_reason, :payment, :payment_reason)
   end
   
   private

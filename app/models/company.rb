@@ -5,6 +5,10 @@ class Company < ActiveRecord::Base
   has_many :courses, :dependent => :destroy
   has_many :estimate
 
+  has_many :company_proposed_plans, :dependent => :destroy
+  has_many :company_contract_plans, :dependent => :destroy
+  has_many :company_payment_plans, :dependent => :destroy  
+
   belongs_to :status
   belongs_to :campaign
   belongs_to :industry
@@ -73,23 +77,25 @@ class Company < ActiveRecord::Base
     return address
 
   end
-  
-  def getCreatedBy()
-    if self.created_by.present?
-      User.find(self.created_by).name
-    else
-      return ""
+
+  def proposed_plan
+    if self.company_proposed_plans.present?
+      self.company_proposed_plans.last.duedate
     end
   end
-  
-   def getUpdatedBy()
-    if self.updated_by.present?
-      User.find(self.updated_by).name
-    else
-      return ""
+
+  def contract_plan
+    if self.company_contract_plans.present?
+      self.company_contract_plans.last.duedate
     end
   end
-  
+
+  def payment_plan
+    if self.company_payment_plans.present?
+      self.company_payment_plans.last.duedate
+    end
+  end
+
   def getContactMemo
     array = []
     self.contacts.each do |c|
