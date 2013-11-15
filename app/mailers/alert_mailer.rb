@@ -23,7 +23,7 @@ class AlertMailer < ActionMailer::Base
       return false
     end
 
-    if @period.course.company.clients.empty?
+    if @period.course.company.clients.empty? or !@period.course.company.clients.first.mail.present?
       error("会社の連絡先が存在しません。会社名＝" + @period.course.company.name)
       return false
     else
