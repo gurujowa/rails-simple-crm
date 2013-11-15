@@ -19,11 +19,11 @@ class CreateCompanyPlans < ActiveRecord::Migration
     companies.each do |c|
       if c.read_attribute(:contract_plan).present?
         p c.read_attribute(:contract_plan)
-        CompanyContractPlan.create!(duedate: c.read_attribute(:contract_plan), company_id: c.id)
+        CompanyContractPlan.create!(duedate: c.read_attribute(:contract_plan), company_id: c.id, reason:"initial")
       end
       if c.read_attribute(:payment_plan).present?
         p c.read_attribute(:payment_plan)
-        CompanyPaymentPlan.create!(duedate: c.read_attribute(:payment_plan), company_id: c.id)
+        CompanyPaymentPlan.create!(duedate: c.read_attribute(:payment_plan), company_id: c.id, reason:"initial")
       end
     end
   end

@@ -13,7 +13,7 @@ class CreateCompanyProposedPlans < ActiveRecord::Migration
     companies.each do |c|
       if c.read_attribute(:proposed_plan).present?
         p c.read_attribute(:proposed_plan)
-        CompanyProposedPlan.create!(duedate: c.read_attribute(:proposed_plan), company_id: c.id)
+        CompanyProposedPlan.create!(duedate: c.read_attribute(:proposed_plan),reason:"initial", company_id: c.id)
       end
     end
   end
