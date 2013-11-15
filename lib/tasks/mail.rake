@@ -1,18 +1,29 @@
 namespace :mail do
-  desc "メール送信"
-  task :contact  => :environment do |task, args|
+  desc "本日のコンタクト内容のメール送信"
+  task :contact  => :environment do
       puts "contact send start"
       beginning =  DateTime.now.beginning_of_day.utc.to_s(:db)
-      contacts = Contact.where("STRFTIME('%Y-%m-%d %H:%M:%S', created_at) > ?", beginning).all
+      contacts = Contact.joins(:company).where("STRFTIME('%Y-%m-%d %H:%M:%S', contacts.created_at) > ?", beginning).order("companies.sales_person").all
       
-      puts beginning
       if (contacts.present?)         
         ContactMailer.today(contacts).deliver
       end
   end
 
+  desc "コースのリマインダーメール"
+  task "course:reminder" => :environment do
+      beginning =  DateTime.tomorrow.beginning_of_day.utc.to_s(:db)
+      ending =  DateTime.tomorrow.end_of_day.utc.to_s(:db)
+      periods = Period.where("STRFTIME('%Y-%m-%d %H:%M:%S', day) > ?", beginning).where("STRFTIME('%Y-%m-%d %H:%M:%S', day) <= ?",ending).all
 
-  task :course_end => :environment do |task, args|
+      periods.each do |p|
+        AlertMailer.reminder(p).deliver
+      end
+  end
+
+
+  desc "コース終了時に送られるメール"
+  task "course:end" => :environment do
       puts "コース終了時のメール開始"
 
       courses = Course.all
@@ -28,9 +39,9 @@ namespace :mail do
       end
   end
 
-  task :alert => :environment do |task, args|
+  desc "コースアラートのメール"
+  task :alert => :environment do
       puts "アラートのメール開始"
-
       alerts = Alert.check
 
       if alerts.length != 0
