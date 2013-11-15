@@ -156,13 +156,13 @@ class CompaniesController < ApplicationController
     @company.contacts.build(:created_by => session[:current_user].id)
     @company.clients.build
     set_default_form
+    build_plans
   end
 
 
   def create
     @company = Company.new(company_params)
     @company.created_by = session[:current_user].id
-    assign_plan
     set_default_form
 
       if @company.save
@@ -187,6 +187,8 @@ class CompaniesController < ApplicationController
   def edit
     @company = Company.find(params[:id])
     @company.contacts.build(:created_by => session[:current_user].id)
+    build_plans
+
     unless @company.clients.present?
       @company.clients.build
     end
@@ -200,10 +202,8 @@ class CompaniesController < ApplicationController
     @company.assign_attributes(company_params)
     @company.updated_by = session[:current_user].id
     @course = Course.where(company_id: params[:id])
-    assign_plan
     set_default_form
 
-    
     if @company.save
       @log = Log.new(:company_id => @company.id, :status_id => @company.status_id,  :created_by => session[:current_user].name)
       @log.save!
@@ -215,21 +215,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  def assign_plan
-    plan = CompanyProposedPlan.build_for_params(plan_params,params[:id])
-    if (plan.duedate.present? && plan.duedate != @company.proposed_plan) 
-      @company.company_proposed_plans << plan
-    end
-    plan = CompanyContractPlan.build_for_params(plan_params,params[:id])
-    if (plan.duedate.present? && plan.duedate != @company.contract_plan) 
-      @company.company_contract_plans << plan
-    end
-    plan = CompanyPaymentPlan.build_for_params(plan_params,params[:id])
-    if (plan.duedate.present? && plan.duedate != @company.payment_plan) 
-      @company.company_payment_plans << plan
-    end
-  end
-  
   # DELETE /statuses/1
   # DELETE /statuses/1.json
   def destroy
@@ -244,6 +229,15 @@ class CompaniesController < ApplicationController
     @task = Task.new
     @task_types = TaskType.order("tag").all
     @industries = Industry.all
+  end
+
+  def build_plans
+    @company.company_proposed_plans.build
+    @company.company_proposed_plans.first.reason = "初期設定" if @company.company_proposed_plans.first.new_record?
+    @company.company_contract_plans.build
+    @company.company_contract_plans.first.reason = "初期設定" if @company.company_contract_plans.first.new_record?
+    @company.company_payment_plans.build
+    @company.company_payment_plans.first.reason = "初期設定" if @company.company_payment_plans.first.new_record?
   end
 
   
@@ -263,14 +257,13 @@ class CompaniesController < ApplicationController
       :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
       :bill, :campaign_id, :proposed_plan, :appoint_plan, :contract_plan, :payment_plan,
       contacts_attributes: [:id, :memo, :created_by, :con_type],
-      clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position, :mail, :tel, :fax, :memo])
+      clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position, :mail, :tel, :fax, :memo],
+      company_proposed_plans_attributes:[:id,:duedate, :reason],
+      company_contract_plans_attributes:[:id,:duedate, :reason],
+      company_payment_plans_attributes:[:id,:duedate, :reason],
+                                   )
   end
 
-  def plan_params
-    params.require(:plan).permit(:proposed, :proposed_reason, :contract, :contract_reason, :payment, :payment_reason)
-  end
-  
-  private
   def new_task_params
       params.require(:new_task).permit(:name, :duedate, :assignee, :progress_id, :type_id , :note)
   end

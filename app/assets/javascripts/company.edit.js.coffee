@@ -13,16 +13,6 @@ jQuery ->
   lastTab = localStorage.getItem("lastEditTab")
   $("#" + lastTab).tab "show"  if lastTab
 
-  #予定日の延期ボタン
-  $("#proposed_postpone_button").on "click",->
-    $(".proposed_none_text").show()
-    return false
-  $("#payment_postpone_button").on "click",->
-    $(".payment_none_text").show()
-    return false
-  $("#contract_postpone_button").on "click",->
-    $(".contract_none_text").show()
-    return false
 
   #郵便番号検索
   $("#jump_zip").on "click", ->

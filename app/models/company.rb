@@ -8,6 +8,9 @@ class Company < ActiveRecord::Base
   has_many :company_proposed_plans, :dependent => :destroy
   has_many :company_contract_plans, :dependent => :destroy
   has_many :company_payment_plans, :dependent => :destroy  
+  accepts_nested_attributes_for :company_proposed_plans , reject_if: proc { |a| a['duedate'].blank? }
+  accepts_nested_attributes_for :company_contract_plans , reject_if: proc { |a| a['duedate'].blank? }
+  accepts_nested_attributes_for :company_payment_plans , reject_if: proc { |a| a['duedate'].blank? }
 
   belongs_to :status
   belongs_to :campaign

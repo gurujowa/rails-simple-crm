@@ -59,16 +59,13 @@
             = form.text_field :appoint_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
         tr
           td 提案見積日
-          td
-            = render :partial => 'sales_plan', :locals => {name: "proposed",:plans => @company.company_proposed_plans}
+          td = render :partial => 'sales_plan', :locals => {:form => form, :plan_name => "company_proposed_plans", :plan_length => @company.company_proposed_plans.length}
         tr
           td 契約日
-          td
-            = render :partial => 'sales_plan', :locals => {name: "contract",:plans => @company.company_contract_plans}
+          td = render :partial => 'sales_plan', :locals => {:form => form, :plan_name => "company_contract_plans", :plan_length => @company.company_contract_plans.length}
         tr
           td 入金日
-          td
-            = render :partial => 'sales_plan', :locals => {name: "payment",:plans => @company.company_payment_plans}
+          td = render :partial => 'sales_plan', :locals => {:form => form, :plan_name => "company_payment_plans", :plan_length => @company.company_payment_plans.length}
 .well
   ul.nav.nav-pills#company_edit_clients_tab
     li.clients_tab_add_field
