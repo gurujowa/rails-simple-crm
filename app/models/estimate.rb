@@ -1,4 +1,6 @@
 class Estimate < ActiveRecord::Base
+
+  has_paper_trail 
   belongs_to :company
   has_many :estimate_lines, :dependent => :destroy
   accepts_nested_attributes_for :estimate_lines, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }

@@ -1,4 +1,6 @@
 class BillingPlanLine < ActiveRecord::Base
+
+  has_paper_trail 
   belongs_to :billing_plan
 
   validates :due_date, presence: true  

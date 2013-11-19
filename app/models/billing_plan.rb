@@ -1,5 +1,7 @@
 class BillingPlan < ActiveRecord::Base
   extend Enumerize
+
+  has_paper_trail 
   belongs_to :company
   has_many :billing_plan_lines, :dependent => :destroy  
   accepts_nested_attributes_for :billing_plan_lines, reject_if: :all_blank

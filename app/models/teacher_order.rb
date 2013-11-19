@@ -1,4 +1,6 @@
 class TeacherOrder < ActiveRecord::Base
+
+  has_paper_trail 
   has_many :teacher_order_courses
   has_many :courses, through: :teacher_order_courses
   belongs_to :teacher

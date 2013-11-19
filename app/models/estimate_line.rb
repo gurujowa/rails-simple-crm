@@ -1,4 +1,6 @@
 class EstimateLine < ActiveRecord::Base
+
+  has_paper_trail 
   belongs_to :estimate
 
   validates :unit_price, presence: true
