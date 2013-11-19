@@ -61,12 +61,20 @@ class TeacherOrder < ActiveRecord::Base
 
   def start_date
      periods = course_where
-     return periods.first.day
+     if periods.present? 
+       return periods.first.day
+     else
+       return nil
+     end
   end
 
   def end_date
      periods = course_where
-     return periods.first.day
+     if periods.present? 
+       return periods.first.day
+     else
+       return nil
+     end
   end
 
   def company_name

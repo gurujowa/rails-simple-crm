@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @billing_plan.name
+p
+  strong Company:
+  = @billing_plan.company
+p
+  strong Tax rate:
+  = @billing_plan.tax_rate
+p
+  strong Status:
+  = @billing_plan.status
+
+= link_to 'Edit', edit_billing_plan_path(@billing_plan)
+'|
+= link_to 'Back', billing_plans_path

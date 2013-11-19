@@ -30,6 +30,7 @@
 //= require select2_locale_ja
 //= require jquery.icheck
 //= require_tree .
+//= require jquery_nested_form
 
 function icheck(){
   if($(".icheck").length > 0){

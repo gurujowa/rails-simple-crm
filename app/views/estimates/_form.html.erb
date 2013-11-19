@@ -1,6 +1,6 @@
 <%= simple_form_for(@estimate, :html => {:class => "form-horizontal"}) do |f| %>
   <%= f.error_notification %>
-    <%= f.input :company_id , input_html: { class: 'input-xxlarge' } %>
+    <%= f.input :company_id , input_html: { class: 'input-xxlarge search_company' } %>
     <%= f.input :expired, as: :date_picker %>
     <%= f.input :tax_rate, as: :radio_buttons, collection: [["税抜",5], ["税込",0]] %>
     <%= f.input :memo %>

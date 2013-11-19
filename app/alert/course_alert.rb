@@ -11,6 +11,7 @@ class CourseAlert
     book_flg_check course
     report_flg_check course
     end_form_flg_check course
+    diploma_flg_check course
   end
 
   def self.check_all
@@ -25,16 +26,19 @@ class CourseAlert
 
   private
   def order_flg_check(c)
-    course_flg_check c, 14.days.since, c.order_flg, "発注書フラグがオフになっています。"
+    course_start_check c, 14.days.since, c.order_flg, "発注書フラグがオフになっています。"
   end
   def book_flg_check(c)
-    course_flg_check c, 14.days.since, c.book_flg, "書籍送付フラグがオフになっています。"
+    course_start_check c, 14.days.since, c.book_flg, "書籍送付フラグがオフになっています。"
   end
   def report_flg_check(c)
-    course_flg_check c, 7.days.since, c.report_flg, "３点セットフラグがオフになっています。"
+    course_start_check c, 7.days.since, c.report_flg, "３点セットフラグがオフになっています。"
   end
   def end_form_flg_check(c)
     course_end_check c, 30.days.ago, c.end_form_flg, "支給申請が完了していません。"
+  end
+  def diploma_flg_check(c)
+    course_end_check c, 7.days.since, c.diploma_flg, "表彰状の準備ができていません"
   end
 
 
@@ -48,7 +52,7 @@ class CourseAlert
     end
   end
 
-  def course_flg_check(c, compare, flg, message)
+  def course_start_check(c, compare, flg, message)
     if c.start_date >= compare
       return false
     end

@@ -1,0 +1,25 @@
+h1 請求予定表 一覧
+
+= link_to '新規追加', new_billing_plan_path, :class => 'btn'
+table.default_datatables
+  thead
+    tr
+      
+      th 件名
+      th 会社名
+      th 税率
+      th 金額
+      th ステータス
+      th CH
+  tbody
+    - @billing_plans.each do |billing_plan|
+      tr
+        
+        td = billing_plan.name 
+        td = billing_plan.company.name
+        td = billing_plan.tax_rate 
+        td = billing_plan.total_price 
+        td = billing_plan.status.text
+        td 
+          = link_to '編集', edit_billing_plan_path(billing_plan), :class => "btn"
+          = link_to '削除', billing_plan, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"

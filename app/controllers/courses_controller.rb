@@ -47,7 +47,6 @@ class CoursesController < ApplicationController
 
   def up_name
     @course = Course.find(params[:id])
-    
     if @course.update_attributes(course_params)
        head :no_content
     else
@@ -58,34 +57,12 @@ class CoursesController < ApplicationController
   def up_bool
     @course = Course.find(params[:id])
     @type = params[:type]
-    
-    case @type
-    when "order_flg"
-      @course.order_flg = reverse_bool(@course.order_flg)
-      @bool = @course.order_flg
-    when "book_flg"
-      @course.book_flg = reverse_bool(@course.book_flg)
-      @bool = @course.book_flg
-    when "end_report_flg"
-      @course.end_report_flg = reverse_bool(@course.end_report_flg)
-      @bool = @course.end_report_flg
-    when "resume_flg"
-      @course.resume_flg = reverse_bool(@course.resume_flg)
-      @bool = @course.resume_flg
-    when "report_flg"
-      @course.report_flg = reverse_bool(@course.report_flg)
-      @bool = @course.report_flg
-    when "end_form_flg"
-      @course.end_form_flg = reverse_bool(@course.end_form_flg)
-      @bool = @course.end_form_flg
-    else
-      raise "どのフラグを立てていいかがわかりません"
-    end
-    
-    if @course.save
+    @bool = reverse_bool(@course.read_attribute(@type))
+    if @course.update_attributes({@type => @bool})
     else
        render json: @course.errors, status: :unprocessable_entity
     end    
+    
   end
 
   # DELETE /statuses/1
@@ -101,7 +78,7 @@ class CoursesController < ApplicationController
   private
   def course_params
     params.require(:course).permit(:name, :company_id, :order_flg, :book_flg, :report_flg, 
-    :end_report_flg, periods_attributes: [:id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id,
+    :end_report_flg, :diploma_flg, periods_attributes: [:id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id,
        :memo, :_destroy, :resume_flg, :equipment_flg, :attend_flg, :report_flg])
   end
 

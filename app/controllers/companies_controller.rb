@@ -163,12 +163,10 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     @company.created_by = session[:current_user].id
+    @company.updated_by = session[:current_user].id
     set_default_form
 
       if @company.save
-        @log = Log.new(:company_id => @company.id, :status_id => @company.status_id, :created_by => session[:current_user].name)
-        @log.save!
-
         if(params[:new_task][:name]).present?
           @new_task = Task.new(new_task_params)
           @new_task.created_by = session[:current_user].id
@@ -205,8 +203,6 @@ class CompaniesController < ApplicationController
     set_default_form
 
     if @company.save
-      @log = Log.new(:company_id => @company.id, :status_id => @company.status_id,  :created_by => session[:current_user].name)
-      @log.save!
       flash[:notice] = '会社情報が変更されました。'
       redirect_to :action=> 'search', :company => session[:last_search_url], :last_rank => session[:last_search_rank]
     else

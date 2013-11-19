@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131114002413) do
+ActiveRecord::Schema.define(version: 20131118132102) do
+
+  create_table "billing_plan_lines", force: true do |t|
+    t.date     "due_date",        null: false
+    t.date     "bill_date",       null: false
+    t.date     "accural_date",    null: false
+    t.integer  "unit_price",      null: false
+    t.integer  "quantity",        null: false
+    t.text     "memo"
+    t.integer  "billing_plan_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "billing_plan_lines", ["billing_plan_id"], name: "index_billing_plan_lines_on_billing_plan_id"
+
+  create_table "billing_plans", force: true do |t|
+    t.string   "name",                         null: false
+    t.integer  "company_id",                   null: false
+    t.integer  "tax_rate",   default: 0,       null: false
+    t.string   "status",     default: "draft", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "billing_plans", ["company_id"], name: "index_billing_plans_on_company_id"
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -59,7 +84,7 @@ ActiveRecord::Schema.define(version: 20131114002413) do
     t.string   "tel"
     t.string   "fax"
     t.string   "mail"
-    t.integer  "status_id",                 null: false
+    t.integer  "status_id",                             null: false
     t.string   "client_person"
     t.string   "zipcode"
     t.string   "prefecture"
@@ -67,28 +92,26 @@ ActiveRecord::Schema.define(version: 20131114002413) do
     t.string   "address"
     t.string   "building"
     t.string   "lead"
-    t.string   "created_by"
-    t.string   "updated_by"
+    t.integer  "created_by",    limit: 255
+    t.integer  "updated_by",    limit: 255
     t.string   "sales_person"
     t.date     "approach_day"
     t.integer  "bill"
     t.integer  "chance"
-    t.integer  "industry_id",   default: 1, null: false
+    t.integer  "industry_id",               default: 1, null: false
     t.date     "payment_plan"
     t.date     "appoint_plan"
     t.date     "contract_plan"
     t.date     "proposed_plan"
-    t.integer  "campaign_id",               null: false
+    t.integer  "campaign_id",                           null: false
   end
 
   add_index "companies", ["campaign_id"], name: "index_companies_on_campaign_id"
   add_index "companies", ["city"], name: "index_companies_on_city"
   add_index "companies", ["client_name"], name: "index_companies_on_client_name"
   add_index "companies", ["created_at"], name: "index_companies_on_created_at"
-  add_index "companies", ["created_by"], name: "index_companies_on_created_by"
   add_index "companies", ["prefecture"], name: "index_companies_on_prefecture"
   add_index "companies", ["updated_at"], name: "index_companies_on_updated_at"
-  add_index "companies", ["updated_by"], name: "index_companies_on_updated_by"
 
   create_table "company_contract_plans", force: true do |t|
     t.date     "duedate",    null: false
@@ -143,6 +166,7 @@ ActiveRecord::Schema.define(version: 20131114002413) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "end_form_flg",   default: false, null: false
+    t.boolean  "diploma_flg",    default: false, null: false
   end
 
   create_table "estimate_lines", force: true do |t|
@@ -272,5 +296,16 @@ ActiveRecord::Schema.define(version: 20131114002413) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "versions", force: true do |t|
+    t.string   "item_type",  null: false
+    t.integer  "item_id",    null: false
+    t.string   "event",      null: false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
 
 end

@@ -35,8 +35,14 @@
                <li><%= link_to "新規追加" , {controller: "companies", action: "new"}%></li>
                <li><%= link_to "見込み度高い案件", {controller: "companies", action: "usershow"}%></li>
                <li><%= link_to "新規獲得元", controller: "campaigns" %></li>
-               <li><%= link_to "見積り" , {controller: "estimates", action: "index"}%></li>
                <li><%= link_to "連絡先" , {controller: "clients", action: "index"}%></li>
+             </ul>
+            </li>
+            <li class="dropdown"><%= link_to "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>
+            	見積り<b class='caret'></b><% end %>
+             <ul class="dropdown-menu">
+               <li><%= link_to "見積り" , {controller: "estimates", action: "index"}%></li>
+               <li><%= link_to "請求予定表" , {controller: "billing_plans", action: "index"}%></li>
              </ul>
             </li>
             <li class="dropdown"><%= link_to "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>

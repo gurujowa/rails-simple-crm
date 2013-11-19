@@ -1,22 +1,27 @@
 class Company < ActiveRecord::Base
+
+  has_paper_trail 
   has_many :contacts, :dependent => :destroy
   has_many :clients, :dependent => :destroy
   has_many :tasks, :dependent => :destroy  
   has_many :courses, :dependent => :destroy
   has_many :estimate
-
   has_many :company_proposed_plans, :dependent => :destroy
   has_many :company_contract_plans, :dependent => :destroy
   has_many :company_payment_plans, :dependent => :destroy  
+
   accepts_nested_attributes_for :company_proposed_plans , reject_if: proc { |a| a['duedate'].blank? }
   accepts_nested_attributes_for :company_contract_plans , reject_if: proc { |a| a['duedate'].blank? }
   accepts_nested_attributes_for :company_payment_plans , reject_if: proc { |a| a['duedate'].blank? }
+  accepts_nested_attributes_for :contacts,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
+  accepts_nested_attributes_for :clients,  :allow_destroy => true , reject_if: :all_blank
 
   belongs_to :status
   belongs_to :campaign
   belongs_to :industry
-  accepts_nested_attributes_for :contacts,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
-  accepts_nested_attributes_for :clients,  :allow_destroy => true , reject_if: :all_blank
+  belongs_to :created_user , class_name: "User", foreign_key: "created_by"
+  belongs_to :sales_user , class_name: "User", foreign_key: "sales_person"
+  belongs_to :updated_user , class_name: "User", foreign_key: "updated_by"
 
   validates :status_id, presence: true  
   validates :campaign_id, presence: true  
@@ -153,6 +158,17 @@ class Company < ActiveRecord::Base
     end
   end
 
+  def updated_name
+    if self.updated_user.present?
+      return self.updated_user.name
+    else
+      return "未設定"
+    end
+  end
+
   
+  after_save do
+    Log.create!(:company_id => self.id, :status_id => self.status_id, :created_by => self.updated_name)
+  end
 
 end

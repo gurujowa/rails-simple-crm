@@ -1,5 +1,7 @@
 Mycrm::Application.routes.draw do
 
+  resources :billing_plans
+
   resources :clients
 
   resources :estimates

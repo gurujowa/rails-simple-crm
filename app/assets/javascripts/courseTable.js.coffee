@@ -19,6 +19,8 @@ class CourseTable
        value: "３点セット"
      end_form_flg:
        value: "支給申請"
+     diploma_flg:
+       value: "修了書"
      total_time:
        value: "コース時間"
      start_date:
