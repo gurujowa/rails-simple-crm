@@ -247,7 +247,6 @@ class CompaniesController < ApplicationController
     return ids
   end
   
-  # Never trust parameters from the scary internet, only allow the white list through.
   def company_params
     params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
       :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,

@@ -8,6 +8,8 @@ class BillingPlansController < ApplicationController
 
   # GET /billing_plans/1
   def show
+    @until = 10 - @billing_plan.billing_plan_lines.length
+    render :layout => "pdf.html"
   end
 
   # GET /billing_plans/new

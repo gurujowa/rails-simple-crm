@@ -4,22 +4,25 @@ h1 請求予定表 一覧
 table.default_datatables
   thead
     tr
-      
       th 件名
       th 会社名
       th 税率
       th 金額
+      th 請求開始
+      th 請求終了
       th ステータス
-      th CH
+      th 削除
   tbody
     - @billing_plans.each do |billing_plan|
       tr
         
-        td = billing_plan.name 
+        td = link_to billing_plan.name,  edit_billing_plan_path(billing_plan)
         td = billing_plan.company.name
         td = billing_plan.tax_rate 
-        td = billing_plan.total_price 
+        td = number_to_currency billing_plan.tax_include_price 
+        td = billing_plan.bill_start
+        td = billing_plan.bill_end
         td = billing_plan.status.text
         td 
-          = link_to '編集', edit_billing_plan_path(billing_plan), :class => "btn"
+          = link_to '表示', billing_plan , :class => "btn"
           = link_to '削除', billing_plan, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"
