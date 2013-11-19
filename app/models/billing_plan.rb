@@ -27,7 +27,7 @@ class BillingPlan < ActiveRecord::Base
   def total_price
      price = 0
      self.billing_plan_lines.each do |c|
-       price += c.total_price
+       price += c.price
      end
      return price
   end

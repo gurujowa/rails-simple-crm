@@ -18,23 +18,24 @@
     tr
       th ステータス
       td = f.select :status , BillingPlan.status.options
+    tr
+      th 発行日
+      td = f.text_field :publish_date, class: "datepicker"
   table.table.table-borderd.table-striped.billing_plan_lines#tasks
     thead
       tr
-        th 発生日
         th 請求日
         th 支払期限
-        th 単価
-        th 数量
-        th メモ
+        th 価格
+        th 適用
+        th 削除
     tbody
       = f.fields_for :billing_plan_lines, :wrapper => false do  |l|
         tr.fields
-          td = l.text_field :due_date, class: "datepicker input-small", required: true
           td = l.text_field :bill_date, class: "datepicker input-small", required: true
           td = l.text_field :accural_date, class: "datepicker input-small", required: true
-          td = l.text_field :unit_price
-          td = l.text_field :quantity
+          td = l.text_field :price
+          td = l.text_field :memo, class:"input-xlarge"
           td = l.link_to_remove "削除", class: "btn"
   .form-actions
     = f.button :submit, class: "btn btn-primary"

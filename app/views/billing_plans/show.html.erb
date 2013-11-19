@@ -7,6 +7,7 @@
         padding:0;
         font-size:13px;
         background-color:#fff;
+        -webkit-print-color-adjust: exact;
         color:#000; }
 
       .wrapper{margin:0 auto; width:730px;}
@@ -47,7 +48,7 @@
       .beta {
         float:right;
         text-align:left;
-        font-size: 12px;
+        font-size: 14px;
         margin-right: 5px;
         width: 240px;
       }
@@ -95,10 +96,11 @@
       td { padding: 12px; text-align:left; }
 
       .gray td {background-color:#f7f7f7;}
+      td.gray {background-color:gray;}
 
       .table_main {  border-collapse: collapse}
 
-      .table_main th {border: 1px solid #000;background-color:#d9d8d8; text-align: center;font-size:14px;padding: 10px;}
+      .table_main th {border: 1px solid #000; text-align: center;font-size:14px;padding: 10px;}
       .table_main tr {height: 40px;}
       .table_main td {border: 1px solid #000;padding:0 10px}
       .table_main td.blank {border:none;}
@@ -163,7 +165,7 @@
 
 <div class="alnright">
   <p>
-  <%= Date.today.strftime "%Y年%m月%d月" %>
+  <%= @billing_plan.publish_date.strftime "%Y年%m月%d月" %>
   </p>
 
   <p>
@@ -208,21 +210,17 @@
 
 <table width="100%" class="table_main">
   <tr>
-    <th>年月</th>
-    <th>ご請求日</th>
+    <th>請求年月日</th>
     <th>支払期限</th>
-    <th width="10%">数量</th>
-    <th width="15%">単価</th>
-    <th width="15%">金額</th>
+    <th width="20%" style="font-size:15px;">ご請求金額</th>
+    <th width="40%" style="font-size:15px;">摘要</th>
   </tr>
     <% @billing_plan.billing_plan_lines.each do |e| %>
     <tr>
-      <td> <%= e.due_date.strftime("%Y年%m月") %> </td>
-      <td> <%= e.bill_date.to_s(:db) %> </td>
-      <td> <%= e.accural_date.to_s(:db) %> </td>
-      <td class="alnright"> <%= e.quantity %> </td>
-      <td class="alnright"> <%= number_to_currency e.unit_price %> </td>
-      <td class="alnright"> <%= number_to_currency e.total_price %> </td>
+      <td style="font-size:15px;"> <%= e.bill_date.strftime("%Y年%m月%d日") %> </td>
+      <td style="font-size:15px;"> <%= e.accural_date.strftime("%Y年%m月%d日") %> </td>
+      <td class="alnright" style="font-size:15px;"> <%= number_to_currency e.price %> </td>
+      <td><%= e.memo %></td>
     </tr>
   <% end %>
   <% @until.times do %>
@@ -231,30 +229,12 @@
       <td class="alnright"> </td>
       <td class="alnright"> </td>
       <td class="alnright"> </td>
-      <td class="alnright"> </td>
-      <td class="alnright"> </td>
     </tr>
   <% end %>
-    <tr>
-      <td class="blank"></td>
-      <td class="blank"></td>
-      <td class="blank"></td>
-      <td colspan="2">小計</td>
-      <td class="alnright"><%= number_to_currency @billing_plan.total_price %></td>
-    </tr>
-      <tr>
-        <td class="blank"></td>
-      <td class="blank"></td>
-      <td class="blank"></td>
-        <td colspan="2">消費税(<%= @billing_plan.tax_rate %> %)</td>
-        <td class="alnright"><%= number_to_currency @billing_plan.tax_price %></td>
-      </tr>
   <tr>
-    <td class="blank"></td>
-      <td class="blank"></td>
-      <td class="blank"></td>
     <td colspan="2">合計金額</td>
     <td class="alnright"><%= number_to_currency @billing_plan.tax_include_price %></td>
+    <td class="gray"></td>
   </tr>
 </table>
 

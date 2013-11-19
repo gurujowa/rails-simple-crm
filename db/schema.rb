@@ -11,29 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118132102) do
+ActiveRecord::Schema.define(version: 20131119091150) do
 
   create_table "billing_plan_lines", force: true do |t|
-    t.date     "due_date",        null: false
     t.date     "bill_date",       null: false
     t.date     "accural_date",    null: false
-    t.integer  "unit_price",      null: false
-    t.integer  "quantity",        null: false
     t.text     "memo"
     t.integer  "billing_plan_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "price"
   end
 
   add_index "billing_plan_lines", ["billing_plan_id"], name: "index_billing_plan_lines_on_billing_plan_id"
 
   create_table "billing_plans", force: true do |t|
-    t.string   "name",                         null: false
-    t.integer  "company_id",                   null: false
-    t.integer  "tax_rate",   default: 0,       null: false
-    t.string   "status",     default: "draft", null: false
+    t.string   "name",                           null: false
+    t.integer  "company_id",                     null: false
+    t.integer  "tax_rate",     default: 0,       null: false
+    t.string   "status",       default: "draft", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "publish_date"
   end
 
   add_index "billing_plans", ["company_id"], name: "index_billing_plans_on_company_id"
