@@ -1,6 +1,9 @@
 class Company < ActiveRecord::Base
 
   has_paper_trail 
+  geocoded_by :getAddress
+  after_validation :geocode
+
   has_many :contacts, :dependent => :destroy
   has_many :clients, :dependent => :destroy
   has_many :tasks, :dependent => :destroy  
