@@ -31,7 +31,9 @@
 //= require jquery.icheck
 //= require_tree .
 //= require jquery_nested_form
-
+//= require underscore
+//= require gmaps/google
+//
 function icheck(){
   if($(".icheck").length > 0){
     $(".icheck").each(function(){
@@ -124,4 +126,13 @@ function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g")
   $(".add_fields").append(content.replace(regexp, new_id));
+}
+
+function submit_format(form, format) {
+  $(form).submit(function(){
+  $('<input />').attr('type', 'hidden')
+   .attr('name', 'format')
+   .attr('value', format)
+   .appendTo(form);
+  });
 }

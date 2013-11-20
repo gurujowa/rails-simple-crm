@@ -13,7 +13,7 @@
 <%= form.collection_select(:industry_id,Industry.all, :id, :name, {:selected => "" , :prompt => "< 業種 >", :include_blank => true} , {:class => "input-medium"} ) %>
 <br>
 <%= submit_tag "検索する", :class=>"btn btn-primary" %>
-<%= submit_tag "CSV", {:class=>"btn"} %>
+<%= submit_tag "CSV", {:class=>"btn", :onclick => ("submit_format('#new_company','csv')")} %>
 <%= link_to "新規作成", {:action=> "new"} , {:class=>"btn"}%>
 
 </form>

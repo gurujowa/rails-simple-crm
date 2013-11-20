@@ -21,9 +21,6 @@ gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-gem "nested_form"
-gem 'enumerize'
-gem 'paper_trail', '>= 3.0.0.rc2'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
@@ -31,7 +28,6 @@ gem 'passenger', '4.0.20'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
-gem 'slim-rails'
 
 group :development do
   # エラー画面をわかりやすく整形してくれる
@@ -61,10 +57,13 @@ gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-editable-rails'
+gem 'gmaps4rails'
+gem 'underscore-rails'
 
 #Format Convert Library
 gem 'pdfkit'
 gem 'spreadsheet'
+gem 'slim-rails'
 
 #other library
 gem "simple_form", "~> 3.0.0.rc"
@@ -72,7 +71,10 @@ gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'will_paginate'
 gem 'business_time'
-gem "google_calendar"
+gem "nested_form"
+gem 'enumerize'
+gem 'paper_trail', '>= 3.0.0.rc2'
+gem "geocoder"
 
 gem 'whenever'
 

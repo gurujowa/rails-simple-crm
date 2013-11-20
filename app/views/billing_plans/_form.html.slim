@@ -9,13 +9,6 @@
       th 会社名
       td = f.text_field :company_id, class: "search_company"
     tr
-      th 税率
-      td 
-        label for="billing_plan_tax_rate_5" 税抜
-        = f.radio_button :tax_rate , 5
-        label for="billing_plan_tax_rate_0" 税込 
-        = f.radio_button :tax_rate ,0
-    tr
       th ステータス
       td = f.select :status , BillingPlan.status.options
     tr

@@ -5,6 +5,8 @@
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= yield :head %>
+  
 </head>
 <body>
   <% if flash[:notice].present? then%>
@@ -33,6 +35,7 @@
              <ul class="dropdown-menu">
                <li><%= link_to "会社検索" , {controller: "companies", action: "search"}%></li>
                <li><%= link_to "新規追加" , {controller: "companies", action: "new"}%></li>
+               <li><%= link_to "Google Map" , {controller: "companies", action: "map"}%></li>
                <li><%= link_to "見込み度高い案件", {controller: "companies", action: "usershow"}%></li>
                <li><%= link_to "新規獲得元", controller: "campaigns" %></li>
                <li><%= link_to "連絡先" , {controller: "clients", action: "index"}%></li>

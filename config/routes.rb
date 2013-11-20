@@ -44,6 +44,7 @@ Mycrm::Application.routes.draw do
   resources :companies, except: [:show] do
     collection do
       get "search"
+      get "map"
       get "invoice"
       get "label"
       get "usershow"

@@ -99,11 +99,27 @@ class CompaniesController < ApplicationController
       @company.assign_attributes(company_params)
     end
     @company_params =  @company.attributes.to_hash
-    if params["commit"] == "CSV"
-      send_data @datatables.all.to_csv.tosjis,
-             :type => 'text/csv; charset=shift_jis; header=present',
-              :disposition => "attachment; filename=companies_#{Time.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv"
-      return
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv  { 
+        send_data @datatables.all.to_csv.tosjis,
+               :type => 'text/csv; charset=shift_jis; header=present',
+                :disposition => "attachment; filename=companies_#{Time.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv"
+      }
+    end
+  end
+
+  def map
+    @users = User.all
+    @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+      marker.lat "1"
+      marker.lng "2"
+    end
+
+    @company = Company.new
+    if (params[:company].present?)
+      @company.assign_attributes(company_params)
     end
   end
   
