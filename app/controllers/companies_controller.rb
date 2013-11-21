@@ -62,8 +62,8 @@ class CompaniesController < ApplicationController
   end
 
   def name
-    @companies = Company.joins(:status).where("client_name like :search", search: "%#{params[:q]}%").where(:statuses => {rank:  ["A".."K"]}).
-       order("statuses.rank asc")
+    @companies = Company.joins(:status).where("client_name like :search", search: "%#{params[:q]}%").
+      where(:statuses => {rank:  ["A".."K"]}).order("statuses.rank asc")
   end
 
   def find
@@ -96,7 +96,7 @@ class CompaniesController < ApplicationController
     @company = Company.new
     @statuses = Status.order(:rank).find_all_by_active(true)
     if (params[:company].present?)
-      @company.assign_attributes(company_params)
+      @company.assign_attributes(search_params)
     end
     @company_params =  @company.attributes.to_hash
     respond_to do |format|
@@ -219,6 +219,9 @@ class CompaniesController < ApplicationController
     set_default_form
 
     if @company.save
+#      ad = @company.zipcode + " " + @company.getAddress
+#      results = Geocoder.search()
+#      raise results.inspect
       flash[:notice] = '会社情報が変更されました。'
       redirect_to :action=> 'search', :company => session[:last_search_url], :last_rank => session[:last_search_rank]
     else
@@ -262,11 +265,14 @@ class CompaniesController < ApplicationController
     end
     return ids
   end
+
+  def search_params
+    params.require(:company).permit!
+  end
   
   def company_params
-    params.require(:company).permit(:id, :client_name, :client_person, :category, :tel, :fax, :mail, :status_id,  :zipcode, :prefecture,
-      :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead,  :created_at, :created_by, :updated_at, :updated_by,
-      :bill, :campaign_id, :proposed_plan, :appoint_plan, :contract_plan, :payment_plan,
+    params.require(:company).permit(:id, :client_name,  :category, :tel, :fax, :status_id,  :zipcode, :prefecture, :appoint_plan,
+      :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead, :created_by,  :updated_by, :campaign_id,  
       contacts_attributes: [:id, :memo, :created_by, :con_type],
       clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position, :mail, :tel, :fax, :memo],
       company_proposed_plans_attributes:[:id,:duedate, :reason],

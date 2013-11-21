@@ -2,7 +2,7 @@
 Geocoder.configure(
 
   # geocoding service (see below for supported options):
-#  :lookup => :bing,
+  :lookup => :google,
 
   # to use an API key:
 #  :api_key => "As06qmlmH97BW18YhnVpamsHlQ-TNH4AEYgFK9r2yD4oQWidqCgJAMVxT7mTJBBf",
@@ -13,4 +13,5 @@ Geocoder.configure(
   # set default units to kilometers:
   :units => :km,
 
+  :always_raise => :all,
 )

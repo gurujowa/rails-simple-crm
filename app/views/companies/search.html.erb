@@ -1,15 +1,15 @@
-    <h4>検索結果</h4>
-    <div class="btn-group dropup" style="float:right">
-      <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-        チェックしたものを <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        <li>
-          <a href="#" id="label" data-source="<%= url_for(:action => 'pdf') %>">ラベル印刷</a>
-          <a href="#" id="up_postsend" data-source="<%= url_for(:action => 'up_postsend') %>">郵送済みへステータス変更</a>
-        </li>
-      </ul>
-    </div>
+<h4>検索結果</h4>
+<div class="btn-group dropup" style="float:right">
+  <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+    チェックしたものを <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li>
+      <a href="#" id="label" data-source="<%= url_for(:action => 'pdf') %>">ラベル印刷</a>
+      <a href="#" id="up_postsend" data-source="<%= url_for(:action => 'up_postsend') %>">郵送済みへステータス変更</a>
+    </li>
+  </ul>
+</div>
 <div class="row-fluid">
 <div class="span2">
 <%= render(:partial => "search_form") %>

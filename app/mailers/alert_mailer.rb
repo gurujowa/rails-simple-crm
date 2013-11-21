@@ -8,9 +8,10 @@ class AlertMailer < ActionMailer::Base
   end
 
   def error(message)
-    mail(:to => mail_to, :subject => message) do |format|
+    m = mail(:to => mail_to, :subject => message) do |format|
       format.text { render text: message}
     end
+    m.deliver
   end
 
   def reminder(period)
