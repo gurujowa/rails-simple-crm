@@ -219,9 +219,6 @@ class CompaniesController < ApplicationController
     set_default_form
 
     if @company.save
-#      ad = @company.zipcode + " " + @company.getAddress
-#      results = Geocoder.search()
-#      raise results.inspect
       flash[:notice] = '会社情報が変更されました。'
       redirect_to :action=> 'search', :company => session[:last_search_url], :last_rank => session[:last_search_rank]
     else

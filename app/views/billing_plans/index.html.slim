@@ -1,6 +1,7 @@
 h1 請求予定表 一覧
 
 = link_to '新規追加', new_billing_plan_path, :class => 'btn'
+= link_to 'CSV出力', {action: "index", format: "csv"}, :class => 'btn'
 table.default_datatables
   thead
     tr

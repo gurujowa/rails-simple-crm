@@ -4,6 +4,11 @@ class BillingPlansController < ApplicationController
   # GET /billing_plans
   def index
     @billing_plans = BillingPlan.all
+
+    respond_to do |format|
+      format.html
+      format.csv { render text: @billing_plans.to_csv.tosjis }
+    end
   end
 
   # GET /billing_plans/1

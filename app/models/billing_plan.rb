@@ -40,5 +40,15 @@ class BillingPlan < ActiveRecord::Base
      return total_price + tax_price
   end
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << BillingPlanLine.column_names
+      all.each do |row|
+        row.billing_plan_lines.each do |l|
+          csv << l.attributes.map{|a| a[1]}.concat([l.billing_plan.company.name])
+        end
+      end
+    end
+  end
 
 end
