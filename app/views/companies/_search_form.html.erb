@@ -1,4 +1,4 @@
-<%= form_for(@company, :url => { :action => 'search'}, :html => {:method => 'GET', :class=>"search_form"}) do |form|%><br>
+<%= form_for(@company, options) do |form|%><br>
 <%= form.text_field :client_name, {:class => "input-medium", :placeholder => "会社名"} %><br>
 <%= form.select :status_id , options_from_statuses(@company.status_id),{:prompt => "< ステータス >", :include_blank => true}, {:class => "input-medium"} %><br>
 <%= text_field_tag :rank,params["rank"], {:class => "input-medium", :placeholder => "ランク"} %><br>

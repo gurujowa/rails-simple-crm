@@ -31,8 +31,6 @@
 //= require jquery.icheck
 //= require_tree .
 //= require jquery_nested_form
-//= require underscore
-//= require gmaps/google
 //
 function icheck(){
   if($(".icheck").length > 0){

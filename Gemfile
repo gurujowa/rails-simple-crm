@@ -57,7 +57,6 @@ gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-editable-rails'
-gem 'gmaps4rails'
 gem 'underscore-rails'
 
 #Format Convert Library

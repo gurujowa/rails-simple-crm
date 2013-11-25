@@ -111,17 +111,20 @@ class CompaniesController < ApplicationController
   end
 
   def map
-    @users = User.all
-    @hash = Gmaps4rails.build_markers(@users) do |user, marker|
-      marker.lat "1"
-      marker.lng "2"
-    end
-
     @company = Company.new
     if (params[:company].present?)
-      @company.assign_attributes(company_params)
+      @company.assign_attributes(search_params)
+    end
+
+    respond_to do |format|
+      format.html
+      format.json {
+        table = CompaniesDatatable.new(view_context)
+        @companies = table.all.where("latitude is not null")
+      }
     end
   end
+
   
  def pdf
     @companies = Company.find(checkbox_append(params))

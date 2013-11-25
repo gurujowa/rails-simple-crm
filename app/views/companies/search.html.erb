@@ -12,7 +12,7 @@
 </div>
 <div class="row-fluid">
 <div class="span2">
-<%= render(:partial => "search_form") %>
+  <%= render(:partial => "search_form",locals:{options:   {url: {action: "search"},html: {:method => 'GET', :class=>"search_form"}}    }) %>
 <table id="companies_toggle_table" class="table table-bordered">
 </table>
 </div>
