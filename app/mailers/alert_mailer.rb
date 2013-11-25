@@ -23,10 +23,11 @@ class AlertMailer < ActionMailer::Base
       error("講師のメールアドレスが存在しません。講師名＝" + @period.teacher.name)
     end
 
-    if @period.course.company.clients.empty? or !@period.course.company.clients.first.mail.present?
+    if @period.course.company.clients.empty? or @period.course.company.clients.first.mail.blank?
       error("会社の連絡先が存在しません。会社名＝" + @period.course.company.name)
     else
-      address << @period.course.company.clients.first.mail
+      mailad = @period.course.company.clients.first.mail
+      address << mailad
     end
     address << "kenshu_g@yourbright.co.jp"
 
