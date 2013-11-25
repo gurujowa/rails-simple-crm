@@ -33,11 +33,4 @@ class Period < ActiveRecord::Base
     return Time.local day.year, day.month, day.day, read_attribute(:end_time).hour ,read_attribute(:end_time).min
   end
 
-  def destroy
-      cal = CrmApi::Calendar.instance
-      event = cal.find_or_create_event_by_id google_id
-      event.delete
-      super
-  end
-
 end
