@@ -7,29 +7,31 @@ class AlertMailer < ActionMailer::Base
          :subject => "[アラート]期限が迫っているコースがあります。")
   end
 
+  def send_error(message)
+    AlertMailer.error(message).deliver
+  end
+
   def error(message)
-    m = mail(:to => mail_to, :subject => message) do |format|
-      format.text { render text: message}
-    end
-    m.deliver
+    @message = message
+    mail(:to => mail_to, :subject => message)
   end
 
   def reminder(period)
     @period = period
+    address = ["kenshu_g@yourbright.co.jp"]
 
     if @period.teacher.email.present?
-      address = [@period.teacher.email]
+      address << [@period.teacher.email]
     else
-      error("講師のメールアドレスが存在しません。講師名＝" + @period.teacher.name)
+      send_error("講師のメールアドレスが存在しません。講師名＝" + @period.teacher.name)
     end
 
     if @period.course.company.clients.empty? or @period.course.company.clients.first.mail.blank?
-      error("会社の連絡先が存在しません。会社名＝" + @period.course.company.name)
+      send_error("会社の連絡先が存在しません。会社名＝" + @period.course.company.name)
     else
       mailad = @period.course.company.clients.first.mail
       address << mailad
     end
-    address << "kenshu_g@yourbright.co.jp"
 
     p address.inspect
 
