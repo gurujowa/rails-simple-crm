@@ -38,7 +38,6 @@ class Company < ActiveRecord::Base
   validates :prefecture, presence: true, length: {maximum: 4, :message => '都道府県は４文字以内で入力してください'}
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
   validates :address, presence:true
-  validates :bill,  :numericality => true, :allow_nil => true
 
   def getAddress
     address = ""
