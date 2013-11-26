@@ -5,6 +5,7 @@ class Company < ActiveRecord::Base
   after_validation :geocode
 
   has_many :contacts, :dependent => :destroy
+  has_many :logs, :dependent => :destroy
   has_many :clients, :dependent => :destroy
   has_many :tasks, :dependent => :destroy  
   has_many :courses, :dependent => :destroy
@@ -63,12 +64,36 @@ class Company < ActiveRecord::Base
       return client_name
   end
 
+  def got_appoint
+    if self.contacts.blank?
+      return nil
+    end
+
+    count = 0
+    self.contacts.each do |c|
+      if c.con_type == ContactType.id(:appoint)
+        count += 1
+      end
+    end
+    count
+  end
+
   def sales_name
     if self.sales_person.present?
       User.find(self.sales_person).name
     else
       return ""
     end
+  end
+
+  def max_rank
+    array = []
+    self.logs.each do |c|
+      if c.status.present?
+        array.push(c.status.rank)
+      end
+    end
+    return array.sort!.first
   end
 
   def full_address
@@ -151,11 +176,11 @@ class Company < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate do |csv|
-      csv << self.column_names.concat(["ランク","ステータス名","営業マン", "コンタクト","キャンペーン"])
+      csv << self.column_names.concat(["ランク","ステータス名","営業マン", "コンタクト","キャンペーン","最終到達ランク","アポイント数"])
       key = 1
       all.each do |row|
         memos = row.contacts.map{|c| c.memo}
-        csv << row.attributes.map{|a| a[1]}.concat([row.status.rank, row.status.name, row.sales_name, memos.join("\n・"), row.campaign.name])
+        csv << row.attributes.map{|a| a[1]}.concat([row.status.rank, row.status.name, row.sales_name, memos.join("\n・"), row.campaign.name, row.max_rank, row.got_appoint])
         key += 1
       end
     end

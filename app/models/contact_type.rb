@@ -20,6 +20,16 @@ class ContactType
     found
   end
 
+  def symbol
+    found = nil
+    self.all.each do |c|
+      if c.id == id
+        found = c
+      end
+    end
+    found
+  end
+
   def self.id symbol
     type = @@list[symbol]
     return type[0]

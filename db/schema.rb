@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120014806) do
+ActiveRecord::Schema.define(version: 20131126045229) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -90,18 +90,13 @@ ActiveRecord::Schema.define(version: 20131120014806) do
     t.string   "city"
     t.string   "address"
     t.string   "building"
-    t.string   "lead"
-    t.integer  "created_by",    limit: 255
-    t.integer  "updated_by",    limit: 255
-    t.string   "sales_person"
+    t.string   "created_by"
+    t.string   "updated_by"
+    t.integer  "sales_person",  limit: 255,             null: false
     t.date     "approach_day"
-    t.integer  "bill"
     t.integer  "chance"
     t.integer  "industry_id",               default: 1, null: false
-    t.date     "payment_plan"
     t.date     "appoint_plan"
-    t.date     "contract_plan"
-    t.date     "proposed_plan"
     t.integer  "campaign_id",                           null: false
     t.float    "latitude"
     t.float    "longitude"
@@ -111,8 +106,10 @@ ActiveRecord::Schema.define(version: 20131120014806) do
   add_index "companies", ["city"], name: "index_companies_on_city"
   add_index "companies", ["client_name"], name: "index_companies_on_client_name"
   add_index "companies", ["created_at"], name: "index_companies_on_created_at"
+  add_index "companies", ["created_by"], name: "index_companies_on_created_by"
   add_index "companies", ["prefecture"], name: "index_companies_on_prefecture"
   add_index "companies", ["updated_at"], name: "index_companies_on_updated_at"
+  add_index "companies", ["updated_by"], name: "index_companies_on_updated_by"
 
   create_table "company_contract_plans", force: true do |t|
     t.date     "duedate",    null: false

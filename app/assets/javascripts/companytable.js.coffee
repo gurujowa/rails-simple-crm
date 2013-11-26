@@ -18,8 +18,6 @@ class CompanyTable
       value: "営業マン"
     industry_id:
       value: "業種"
-    bill:
-      value: "売上見込"
     chance:
       value: "見込み度"
     campaign_id:
@@ -32,20 +30,22 @@ class CompanyTable
       value: "電話番号"
     fax:
       value: "FAX"
-    contact:
-      value: "コンタクト"
-      define: {sWidth: "40%", bSortable: false ,aTargets:["contact"]}
-    check: 
-      value: "CH"
-      define: {sWidth: "20px", bSortable: false, aTargets:["check"]}
     prefecture:
       value: "都道府県"
     city:
       value: "市町村区"
     address:
       value: "住所"
+      define: { bSortable: false}
     building:
       value: "ビル名"
+      define: { bSortable: false}
+    contact:
+      value: "コンタクト"
+      define: {sWidth: "40%", bSortable: false ,aTargets:["contact"]}
+    check: 
+      value: "CH"
+      define: {sWidth: "20px", bSortable: false, aTargets:["check"]}
 
   constructor: ->
     table = new DataTable(this.property, this.column)
