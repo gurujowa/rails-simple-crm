@@ -96,6 +96,7 @@ class CompaniesController < ApplicationController
     @statuses = Status.order(:rank).find_all_by_active(true)
     if (params[:company].present?)
       @company.assign_attributes(search_params)
+      @active_st = params[:active_st]
     end
     @company_params =  @company.attributes.to_hash
     respond_to do |format|

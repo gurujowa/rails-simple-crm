@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20131128070907) do
     t.string   "active_st",                 default: "notstart", null: false
   end
 
+  add_index "companies", ["active_st"], name: "index_companies_on_active_st"
   add_index "companies", ["campaign_id"], name: "index_companies_on_campaign_id"
   add_index "companies", ["city"], name: "index_companies_on_city"
   add_index "companies", ["client_name"], name: "index_companies_on_client_name"
