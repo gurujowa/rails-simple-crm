@@ -1,6 +1,7 @@
 class AddDoubleStatusToCompanies < ActiveRecord::Migration
   def up
     add_column :companies, :active_st, :string, :null => false, :default => "notstart"
+    add_index :companies, :active_st
     companies = Company.all
     companies.each do |c|
       if ["X","Y"].include?(c.status.rank)
