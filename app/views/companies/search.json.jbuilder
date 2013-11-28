@@ -5,6 +5,7 @@ comp = @datatables.getCompanies.map do |company|
 [
         "<a href='"+ url_for(:action=>"edit", :id => company.id) + "'>"+ company.client_name.slice(0,25) + "</a>",
         get_status_name(company.status_id),
+        company.active_st_text,
         company.client_person,
         company.updated_at.strftime('%Y/%m/%d'),
         get_user_name(company.sales_person),

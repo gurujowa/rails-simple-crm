@@ -25,6 +25,12 @@ ja:
       status:
         draft: 下書き
         completed: 発送済み
+    company:
+      active_st:
+        notstart: 接触前
+        active: アクティブ
+        pending: そのうち客
+        impossible: 接触禁止
   activerecord:
     models:
       teacher: 講師

@@ -1,4 +1,6 @@
 class Company < ActiveRecord::Base
+extend Enumerize
+
 
   has_paper_trail 
   geocoded_by :getAddress
@@ -28,6 +30,7 @@ class Company < ActiveRecord::Base
   belongs_to :updated_user , class_name: "User", foreign_key: "updated_by"
 
   validates :status_id, presence: true  
+  validates :active_st, inclusion:{ in: ["active","impossible","pending"],  message: "接触前はランクPのみ有効です"} , :unless => Proc.new{|company| "P" == company.status.rank } 
   validates :campaign_id, presence: true  
   validates :chance, presence: true  
   validates :industry_id, presence: true
@@ -38,6 +41,10 @@ class Company < ActiveRecord::Base
   validates :prefecture, presence: true, length: {maximum: 4, :message => '都道府県は４文字以内で入力してください'}
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
   validates :address, presence:true
+
+  enumerize :active_st, in: [:notstart, :active, :pending, :impossible], :default => :notstart
+
+  scope :is_active, lambda {|c| where("active_st = ?" , "active")}
 
   def getAddress
     address = ""

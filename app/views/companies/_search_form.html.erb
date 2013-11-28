@@ -2,6 +2,7 @@
 <%= form.text_field :client_name, {:class => "input-medium", :placeholder => "会社名"} %><br>
 <%= form.select :status_id , options_from_statuses(@company.status_id),{:prompt => "< ステータス >", :include_blank => true}, {:class => "input-medium"} %><br>
 <%= text_field_tag :rank,params["rank"], {:class => "input-medium", :placeholder => "ランク"} %><br>
+<%= form.select :active_st , Company.active_st.options,{:prompt => "< 状態ステータス >" , :selected => params[:company][:active_st], :include_blank => true}, {:class => "input-medium"} %><br>
 <%= form.text_field :prefecture, {:class => "input-medium", :placeholder => "都道府県"} %><br>
 <%= form.text_field :city, {:class => "input-medium", :placeholder => "市町村"} %><br>
 <%= form.select :sales_person , options_from_users(@company.sales_person),{:prompt => "< 営業マン >", :include_blank => true}, {:class => "input-medium"} %><br>

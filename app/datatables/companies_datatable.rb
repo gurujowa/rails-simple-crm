@@ -58,6 +58,10 @@ class CompaniesDatatable
       companies = companies.where(:status_id => status_array)
     end
 
+    if p_comp['active_st'].present?
+      companies = companies.where(:active_st => p_comp['active_st'])
+    end
+
     if p_comp['campaign_id'].present?
       companies = companies.where(:campaign_id => p_comp['campaign_id'])
     end
@@ -87,7 +91,7 @@ class CompaniesDatatable
   end
 
   def sort_column
-    sort_hash = ["client_name" , "status_id", "client_person", "updated_at", 
+    sort_hash = ["client_name" , "status_id","active_st", "client_person", "updated_at", 
       "sales_person","industry_id", "chance","lead","created_by", "updated_by", "tel", "fax", "prefecture","city"]
     if params[:iSortCol_0].present?
       sort_column = sort_hash.fetch(params[:iSortCol_0].to_i)

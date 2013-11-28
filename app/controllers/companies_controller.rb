@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
   before_action :check_user
 
   def index
-      @not_complite = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
+      @not_complite = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).where("duedate <= ?", Date.today).
       order("duedate asc").all
       
       @not_task = Company.connection.select_all('
@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
       FROM companies 
       LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE statuses.rank NOT IN ("A","Y","X","Z","ZZ","P")  AND tasks.id Is Null
+      WHERE companies.active_st = \'active\' AND tasks.id Is Null AND statuses.rank != "A"
       GROUP BY companies.client_name, companies.updated_at
       order by up_at ASC;
       ')
@@ -23,8 +23,7 @@ class CompaniesController < ApplicationController
       FROM companies 
       LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE statuses.rank NOT IN ("A","Y","X","Z","ZZ","P") 
-      AND (tasks.id) Is Null 
+      WHERE companies.active_st = \'active\' AND tasks.id Is Null AND statuses.rank != "A"
       AND companies.sales_person = ' + session[:current_user].id.to_s + '
       GROUP BY companies.client_name, companies.updated_at
       order by up_at Asc;
@@ -36,7 +35,7 @@ class CompaniesController < ApplicationController
       strftime("%Y-%m-%d",companies.updated_at) as up_at
       FROM companies 
       INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE statuses.rank NOT IN ("A","Y","X","Z","ZZ","P") 
+      WHERE companies.active_st = \'active\' AND statuses.rank != "A"
       AND NOT EXISTS(select id from tasks where tasks.company_id = comp_id and tasks.progress_id in (1,2,3))
       GROUP BY companies.client_name, companies.updated_at
       order by up_at DESC;
@@ -271,7 +270,7 @@ class CompaniesController < ApplicationController
   end
   
   def company_params
-    params.require(:company).permit(:id, :client_name,  :category, :tel, :fax, :status_id,  :zipcode, :prefecture, :appoint_plan,
+    params.require(:company).permit(:id, :client_name,  :category, :tel, :fax, :status_id, :active_st,  :zipcode, :prefecture, :appoint_plan,
       :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead, :created_by,  :updated_by, :campaign_id,  
       contacts_attributes: [:id, :memo, :created_by, :con_type],
       clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position, :mail, :tel, :fax, :memo],

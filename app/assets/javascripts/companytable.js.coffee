@@ -8,8 +8,10 @@ class CompanyTable
       value: "会社名"
       define: {sWidth: "200px", aTargets:["client_name"]},
     status:
-      value: "ステータス"
+      value: "進捗ステータス"
       define: {sWidth: "70px", aTargets:["status"]},
+    active_st:
+      value: "状態ステータス"
     client_person:
       value: "担当者"
     updated_at:
