@@ -33,7 +33,14 @@ module ApplicationHelper
       return "/img/cross.png"
     end
   end
-  
+
+  def link_to_switch_flg model,attr
+    bool = model.read_attribute(attr)
+    model_name =  model.class.model_name.human.pluralize.downcase
+    img_tag =  %Q{<img src='#{check_img_src(bool)}' /><span style="display:none;">#{bool}</span>}
+
+    return link_to img_tag.html_safe , {:controller => model_name, :action => "flag", :id => model.id, :type => attr}, :remote => true,  id: %Q{#{model_name}_#{attr}_#{model.id}}
+  end
   
   def check_m_img(bool)
     if bool === true

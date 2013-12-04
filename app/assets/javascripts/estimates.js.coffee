@@ -2,16 +2,17 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  $("input[name='estimate[tax_rate]']").on 'change', ->
-    $('#estimate_tax_rate').text($(this).val())
-    calcTotalPrice()
-
   $(document).on 'change', '.estimate_lines_trigger', ->
     unit_price = $(this).parent().parent().find('.estimate_line_unit_price').val()
     quantity = $(this).parent().parent().find('.estimate_line_quantity').val()
-    $(this).parent().parent().find('.estimate_line_total_price').html( "<span class='estimate_line_calc'>" + (unit_price * quantity) + "</span>円")
-    calcTotalPrice()
+    tax_rate = $(this).parent().parent().find('.estimate_line_tax_rate').val()
+    total_price = unit_price * quantity
+    tax_price = total_price * tax_rate / 100
+    tax_include_price = total_price + tax_price
 
+    $(this).parent().parent().find('.estimate_line_tax_price').html(tax_price + "円")
+    $(this).parent().parent().find('.estimate_line_total_price').html( "<span class='estimate_line_calc'>" + tax_include_price + "</span>円")
+    calcTotalPrice()
 
 
 calcTotalPrice = ->

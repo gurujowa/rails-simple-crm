@@ -47,6 +47,11 @@ class CompaniesDatatable
     if p_comp['city'].present?
       companies = companies.where("city like ?","%" + p_comp['city'] + "%")
     end
+
+    if p_comp['tel'].present?
+      companies = companies.where("tel like ?","%" + p_comp['tel'] + "%")
+    end
+
     if p_comp['sales_person'].present?
       companies = companies.where(:sales_person => p_comp['sales_person'])
     end

@@ -185,7 +185,7 @@
     </p>
     <dl class="totalAmountPrice clearfix">
       <dt>お見積金額</dt>
-      <dd><%= number_to_currency @estimate.tax_include_price %> </dd>
+      <dd><%= number_to_currency @estimate.total_price %> </dd>
     </dl>
   </div>
 
@@ -205,15 +205,19 @@
 <table width="100%" class="table_main">
   <tr>
     <th>品番・品名</th>
-    <th width="10%">数量</th>
-    <th width="15%">単価</th>
-    <th width="15%">金額</th>
+    <th width="8%">数量</th>
+    <th width="14%">単価</th>
+    <th width="8%">税率</th>
+    <th width="12%">税額</th>
+    <th width="15%">合計金額</th>
   </tr>
     <% @estimate.estimate_lines.each do |e| %>
     <tr>
       <td> <%= e.name %> </td>
       <td class="alnright"> <%= e.quantity %> </td>
       <td class="alnright"> <%= number_to_currency e.unit_price %> </td>
+      <td class="alnright"> <%= e.tax_rate %>% </td>
+      <td class="alnright"> <%= number_to_currency e.tax_price %> </td>
       <td class="alnright"> <%= number_to_currency e.total_price %> </td>
     </tr>
   <% end %>
@@ -223,22 +227,16 @@
       <td class="alnright"> </td>
       <td class="alnright"> </td>
       <td class="alnright"> </td>
+      <td class="alnright"> </td>
+      <td class="alnright"> </td>
     </tr>
   <% end %>
-    <tr>
-      <td class="blank"></td>
-      <td colspan="2">小計</td>
-      <td class="alnright"><%= number_to_currency @estimate.total_price %></td>
-    </tr>
-      <tr>
-        <td class="blank"></td>
-        <td colspan="2">消費税(<%= @estimate.tax_rate %> %)</td>
-        <td class="alnright"><%= number_to_currency @estimate.tax_price %></td>
-      </tr>
   <tr>
     <td class="blank"></td>
+    <td class="blank"></td>
+    <td class="blank"></td>
     <td colspan="2">合計金額</td>
-    <td class="alnright"><%= number_to_currency @estimate.tax_include_price %></td>
+    <td class="alnright"><%= number_to_currency @estimate.total_price %></td>
   </tr>
 </table>
 

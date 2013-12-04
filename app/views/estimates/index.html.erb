@@ -1,14 +1,13 @@
-<h1>estimates 一覧</h1>
+<h1>見積り一覧</h1>
 
 <table id="estimates_datatable" class="default_datatables">
   <thead>
     <tr>
+      <th>発行済</th>
       <th>会社名</th>
       <th>期日</th>
       <th>合計金額</th>
-      <th>発行済フラグ</th>
       <th>作成日</th>
-      <th>更新日</th>
       <th>Memo</th>
       <th>CH</th>
     </tr>
@@ -17,22 +16,15 @@
   <tbody>
     <% @estimates.each do |estimate| %>
       <tr>
-        <td><%= estimate.company.client_name %></td>
+        <td><%= link_to_switch_flg estimate, :send_flg %></td>
+        <td><%= link_to estimate.company.client_name, edit_company_path(estimate.company) %></td>
         <td><%= estimate.expired %></td>
-        <td><%= estimate.total_price %></td>
-        <td><%= check_m_img estimate.send_flg %></td>
-        <td><%= estimate.created_at %></td>
-        <td><%= estimate.updated_at %></td>
+        <td><%= number_to_currency estimate.total_price %></td>
+        <td><%= estimate.created_at.strftime("%Y年%m月%d日") %></td>
         <td><%= estimate.memo %></td>
-        <td>
-<div class="btn-group">
-  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"> Action <span class="caret"></span> </a>
-  <ul class="dropdown-menu">
-    <li><%= link_to '見積書の発行をする', estimate %></li>
-    <li><%= link_to '編集する', edit_estimate_path(estimate) %></li>
-    <li><%= link_to '削除する', estimate, method: :delete, data: { confirm: '本当に削除しますか' } %></li>
-  </ul>
-</div>
+        <td><%= link_to '表示', estimate , class: "btn"%>
+          <%= link_to '編集', edit_estimate_path(estimate) , class: "btn"%>
+          <%= link_to '削除', estimate, method: :delete, data: { confirm: '本当に削除しますか' } , class: "btn"%>
       </td>
       </tr>
     <% end %>

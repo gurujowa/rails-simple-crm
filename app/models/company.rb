@@ -67,7 +67,7 @@ extend Enumerize
   end
 
   def name
-      return client_name
+      return client_person
   end
 
   def got_appoint
@@ -182,11 +182,11 @@ extend Enumerize
 
   def self.to_csv
     CSV.generate do |csv|
-      csv << self.column_names.concat(["ランク","ステータス名","営業マン", "コンタクト","キャンペーン","最終到達ランク","アポイント数"])
+      csv << self.column_names.concat(["担当者名","ランク","ステータス名","営業マン", "コンタクト","キャンペーン","最終到達ランク","アポイント数"])
       key = 1
       all.each do |row|
         memos = row.contacts.map{|c| c.memo}
-        csv << row.attributes.map{|a| a[1]}.concat([row.status.rank, row.status.name, row.sales_name, memos.join("\n・"), row.campaign.name, row.max_rank, row.got_appoint])
+        csv << row.attributes.map{|a| a[1]}.concat([row.name, row.status.rank, row.status.name, row.sales_name, memos.join("\n・"), row.campaign.name, row.max_rank, row.got_appoint])
         key += 1
       end
     end

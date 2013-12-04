@@ -48,6 +48,25 @@ class EstimatesController < ApplicationController
     redirect_to estimates_url, notice: 'Estimate was successfully destroyed.'
   end
 
+  def flag
+    @to = Estimate.find(params[:id])
+    bool = !@to.read_attribute(params[:type])
+
+    if bool == true
+      html =  "/img/check.png"
+    elsif bool == false
+      html =  "/img/cross.png"
+    else
+      raise "型があっていません"
+    end
+
+    if (@to.update_attributes({params[:type] => bool}))
+      render_noty :success, "フラグの変更が完了しました。", %Q{$('#estimates_#{params[:type]}_#{params[:id]}').html("<img src='#{html}' />")}
+    else
+      render_noty :error, @to.errors.full_messages
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_estimate
@@ -56,6 +75,6 @@ class EstimatesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def estimate_params
-      params.require(:estimate).permit(:title, :company_id, :expired, :tax_rate, :send_flg, :memo, estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy])
+      params.require(:estimate).permit(:title, :company_id, :expired,  :send_flg, :memo, estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy, :tax_rate])
     end
 end

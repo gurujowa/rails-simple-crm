@@ -3,11 +3,26 @@ class EstimateLine < ActiveRecord::Base
   has_paper_trail 
   belongs_to :estimate
 
-  validates :unit_price, presence: true
+  validates :unit_price, presence:true, numericality: {only_integer: true}
   validates :name, presence: true
-  validates :quantity, presence:true
+  validates :quantity, presence:true, numericality: {only_integer: true}
+  validates :tax_rate, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than: 10}
+  
 
-  def total_price
+  def tax_exclude_price
     unit_price.to_i * quantity.to_i
   end
+
+  def tax_price
+    tax_exclude_price * tax_rate / 100
+  end
+
+  def tax_include_price
+    tax_exclude_price + tax_price
+  end
+
+  def total_price
+    tax_include_price
+  end
+
 end

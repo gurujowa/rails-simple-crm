@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128070907) do
+ActiveRecord::Schema.define(version: 20131204073903) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -170,18 +170,18 @@ ActiveRecord::Schema.define(version: 20131128070907) do
   end
 
   create_table "estimate_lines", force: true do |t|
-    t.string   "name",        null: false
-    t.integer  "unit_price",  null: false
-    t.integer  "quantity",    null: false
-    t.integer  "estimate_id", null: false
+    t.string   "name",                    null: false
+    t.integer  "unit_price",              null: false
+    t.integer  "quantity",                null: false
+    t.integer  "estimate_id",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tax_rate",    default: 0, null: false
   end
 
   create_table "estimates", force: true do |t|
     t.integer  "company_id",                 null: false
     t.date     "expired"
-    t.integer  "tax_rate",   default: 0,     null: false
     t.boolean  "send_flg",   default: false, null: false
     t.text     "memo"
     t.datetime "created_at"

@@ -6,7 +6,6 @@ class Estimate < ActiveRecord::Base
   accepts_nested_attributes_for :estimate_lines, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }
 
   validates :company_id, presence: true
-  validates :tax_rate, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 0, less_than: 10}
 
   def total_price
      price = 0
@@ -14,13 +13,5 @@ class Estimate < ActiveRecord::Base
        price += c.total_price
      end
      return price
-  end
-
-  def tax_price
-     return total_price * (tax_rate.to_f * 0.01)
-  end
-
-  def tax_include_price
-     return total_price + tax_price
   end
 end

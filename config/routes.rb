@@ -4,7 +4,11 @@ Mycrm::Application.routes.draw do
 
   resources :clients
 
-  resources :estimates
+  resources :estimates do 
+    member do
+      get 'flag/:type' , :action => "flag"
+    end
+  end
 
   resources :campaigns
   resources :invoices
