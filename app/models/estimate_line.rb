@@ -14,7 +14,11 @@ class EstimateLine < ActiveRecord::Base
   end
 
   def tax_price
-    tax_exclude_price * tax_rate / 100
+    if tax_rate.present? and tax_exclude_price.present?
+      return tax_exclude_price * tax_rate / 100
+    else
+      return 0
+    end
   end
 
   def tax_include_price
