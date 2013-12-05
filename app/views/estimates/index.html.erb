@@ -17,13 +17,12 @@
     <% @estimates.each do |estimate| %>
       <tr>
         <td><%= link_to_switch_flg estimate, :send_flg %></td>
-        <td><%= link_to estimate.company.client_name, edit_company_path(estimate.company) %></td>
+        <td><%= link_to estimate.company.client_name, edit_estimate_path(estimate) %></td>
         <td><%= estimate.expired %></td>
         <td><%= number_to_currency estimate.total_price %></td>
         <td><%= estimate.created_at.strftime("%Y年%m月%d日") %></td>
         <td><%= estimate.memo %></td>
         <td><%= link_to '表示', estimate , class: "btn"%>
-          <%= link_to '編集', edit_estimate_path(estimate) , class: "btn"%>
           <%= link_to '削除', estimate, method: :delete, data: { confirm: '本当に削除しますか' } , class: "btn"%>
       </td>
       </tr>
