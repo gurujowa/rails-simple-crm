@@ -32,6 +32,7 @@ class ContactType
 
   def self.id symbol
     type = @@list[symbol]
+    return nil if type.blank?
     return type[0]
   end
 

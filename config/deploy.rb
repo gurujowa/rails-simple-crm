@@ -15,6 +15,7 @@ set :rbenv_path, "/home/#{fetch(:username)}/.rbenv"
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 
+set :ssh_options, :port => "10234"
 
 #bunlde ‚ÌÝ’è
 set :bundle_gemfile, -> { release_path.join('Gemfile') }
@@ -39,7 +40,7 @@ set :bundle_bins, %w(gem rake rails)
 
 task :whenever do
   on roles(:all) do |h|
-    execute "cd " + release_path.to_s + " &&  whenever | crontab"
+    execute "cd " + release_path.to_s + " &&  bundle exec whenever | crontab"
   end
 end
 
