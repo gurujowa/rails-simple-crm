@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204073903) do
+ActiveRecord::Schema.define(version: 20131206105737) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20131204073903) do
   add_index "companies", ["created_at"], name: "index_companies_on_created_at"
   add_index "companies", ["created_by"], name: "index_companies_on_created_by"
   add_index "companies", ["prefecture"], name: "index_companies_on_prefecture"
+  add_index "companies", ["tel"], name: "index_companies_on_tel", unique: true
   add_index "companies", ["updated_at"], name: "index_companies_on_updated_at"
   add_index "companies", ["updated_by"], name: "index_companies_on_updated_by"
 

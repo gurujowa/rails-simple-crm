@@ -14,6 +14,15 @@ class Task < ActiveRecord::Base
     progress = TaskProgress.new
     name = progress.getNameById(self.progress_id)
   end
+
+  def company_name
+    c = self.company
+    if c.present?
+      return c.client_name
+    else
+      return "エラー：会社がありません"
+    end
+  end
   
   def getProgressList
     progress = TaskProgress.new

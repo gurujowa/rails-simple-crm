@@ -22,7 +22,7 @@
         <td><%= task.task_type.name %></td>
         <td><%= task.duedate %></td>
         <td><%= get_user_name(task.assignee) %></td>
-        <td><%= task.company.client_name %></td>
+        <td><%= task.company_name %></td>
         <td><%= get_user_name(task.created_by) %></td>
         <td><%= task.getProgress() %> </td>
         <td><%= task.note %></td>

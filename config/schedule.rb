@@ -12,6 +12,7 @@ every 1.day, :at => '6:00 am' do
   rake "mail:course:end"
   rake "mail:course:reminder"
   command %Q{backup perform --trigger crm_backup}
+  command %Q{backup perform --trigger crm_dropbox}
 end
 
 # Example:
