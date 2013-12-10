@@ -27,7 +27,7 @@ class AlertMailer < ActionMailer::Base
     end
 
     if @period.course.company.clients.empty? or @period.course.company.clients.first.mail.blank?
-      send_error("会社の連絡先が存在しません。会社名＝" + @period.course.company.name)
+      send_error("会社の連絡先が存在しません。会社名＝" + @period.course.company.client_name)
     else
       mailad = @period.course.company.clients.first.mail
       address << mailad
