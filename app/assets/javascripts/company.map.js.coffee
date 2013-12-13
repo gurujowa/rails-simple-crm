@@ -10,8 +10,15 @@ jQuery ->
             position: myLatlng,
             map: map_canvas,
             title: c.name
+
+        attachMessage marker, c.contents
         window.markersArray.push marker
+        marker = null
     return false
+
+attachMessage = (marker, msg) ->
+  google.maps.event.addListener marker, "click", (event) ->
+    new google.maps.InfoWindow(content: msg).open marker.getMap(), marker
 
 clearOverlays = ->
   if window.markersArray
