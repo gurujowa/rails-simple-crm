@@ -5,7 +5,7 @@ class BillingPlan < ActiveRecord::Base
   belongs_to :company
   has_many :billing_plan_lines, :dependent => :destroy , :order => "bill_date ASC"
   accepts_nested_attributes_for :billing_plan_lines, reject_if: :all_blank
-  enumerize :status, in: [:draft, :completed], default: :draft
+  enumerize :status, in: [:draft, :completed, :canceled], default: :draft
   
   validates :name, presence: true  
   validates :company_id, presence: true, numericality: true

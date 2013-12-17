@@ -11,6 +11,7 @@ extend Enumerize
   has_many :clients, :dependent => :destroy
   has_many :tasks, :dependent => :destroy  
   has_many :courses, :dependent => :destroy
+  has_many :billing_plans
   has_many :estimate
   has_many :company_proposed_plans, :dependent => :destroy
   has_many :company_contract_plans, :dependent => :destroy

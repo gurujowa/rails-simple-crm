@@ -8,6 +8,7 @@ class CompanyAlert
 
   def check(company)
     course_null_check company
+    billing_plan_null_check company
 
   end
 
@@ -25,6 +26,12 @@ class CompanyAlert
   def course_null_check(c)
     if c.courses.length == 0
       push_error c, "契約済みなのにコースがありません"
+    end
+  end
+
+  def billing_plan_null_check(c)
+    if c.billing_plans.length == 0
+      push_error c, "契約済みなのに請求予定表がありません"
     end
   end
 
