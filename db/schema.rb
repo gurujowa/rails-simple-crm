@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206105737) do
+ActiveRecord::Schema.define(version: 20131218004904) do
+
+  create_table "bill_lines", force: true do |t|
+    t.string   "name",                   null: false
+    t.integer  "tax_rate",               null: false
+    t.integer  "unit_price",             null: false
+    t.integer  "bill_id",                null: false
+    t.integer  "quantity",   default: 1, null: false
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -36,6 +47,19 @@ ActiveRecord::Schema.define(version: 20131206105737) do
   end
 
   add_index "billing_plans", ["company_id"], name: "index_billing_plans_on_company_id"
+
+  create_table "bills", force: true do |t|
+    t.string   "name",                                 null: false
+    t.date     "duedate",                              null: false
+    t.integer  "billing_plan_line_id",                 null: false
+    t.boolean  "bill_flg",             default: false, null: false
+    t.boolean  "payment_flg",          default: false, null: false
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bills", ["billing_plan_line_id"], name: "index_bills_on_billing_plan_line_id"
 
   create_table "campaigns", force: true do |t|
     t.string   "name"

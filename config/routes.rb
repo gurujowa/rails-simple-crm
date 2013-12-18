@@ -1,5 +1,14 @@
 Mycrm::Application.routes.draw do
 
+  resources :bills do
+    collection do
+      get "search"
+    end
+    member do
+      get "find"
+    end
+  end
+
   resources :billing_plans
 
   resources :clients

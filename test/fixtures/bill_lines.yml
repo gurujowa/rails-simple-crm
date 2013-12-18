@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  memo: MyText
+  tax_rate: 1
+  unit_price: 1
+  quantity: 1
+  name: MyString
+
+two:
+  memo: MyText
+  tax_rate: 1
+  unit_price: 1
+  quantity: 1
+  name: MyString

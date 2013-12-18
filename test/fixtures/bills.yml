@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  duedate: 2013-12-17
+  billing_plan_line_id: 
+  bill_flg: false
+  payment_flg: false
+  memo: MyText
+
+two:
+  name: MyString
+  duedate: 2013-12-17
+  billing_plan_line_id: 
+  bill_flg: false
+  payment_flg: false
+  memo: MyText

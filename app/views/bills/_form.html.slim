@@ -1,0 +1,38 @@
+= nested_form_for (@bill) do |f|
+  - @bill.errors.full_messages.each do |msg|
+    li = msg
+  table.table.table-borderd
+    tr
+      th 件名
+      td = f.text_field :name 
+    tr
+      th 請求予定表の請求箇所
+      td = f.text_field :billing_plan_line_id, class: "search_billing_plan_line"
+    tr
+      th 期日
+      td = f.text_field :duedate, class: "datepicker"
+    tr
+      th メモ
+      td = f.text_area :memo, :size => "100x5", class: "input-xlarge"
+  table.table.table-borderd.table-striped.bill_lines#tasks
+    thead
+      tr
+        th 品目
+        th 単価
+        th 数量
+        th 税率
+        th 適用
+        th 削除
+    tbody
+      = f.fields_for :bill_lines, :wrapper => false do  |l|
+        tr.fields
+          td = l.text_field :name
+          td = l.text_field :unit_price
+          td = l.text_field :quantity
+          td = l.text_field :tax_rate
+          td = l.text_field :memo, class:"input-xlarge"
+          td = l.link_to_remove "削除", class: "btn"
+  .form-actions
+    = f.button :submit, class: "btn btn-primary"
+    = f.link_to_add "行の追加", :bill_lines, :data => { :target => "#tasks" }, class: "btn"
+
