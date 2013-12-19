@@ -49,22 +49,7 @@ class EstimatesController < ApplicationController
   end
 
   def flag
-    @to = Estimate.find(params[:id])
-    bool = !@to.read_attribute(params[:type])
-
-    if bool == true
-      html =  "/img/check.png"
-    elsif bool == false
-      html =  "/img/cross.png"
-    else
-      raise "型があっていません"
-    end
-
-    if (@to.update_attributes({params[:type] => bool}))
-      render_noty :success, "フラグの変更が完了しました。", %Q{$('#estimates_#{params[:type]}_#{params[:id]}').html("<img src='#{html}' />")}
-    else
-      render_noty :error, @to.errors.full_messages
-    end
+    remote_flag Estimate
   end
 
   private

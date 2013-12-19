@@ -1,0 +1,3 @@
+var n = noty({text: 'ステータスの更新が完了しました', type: 'success', timeout: 1000});
+$("a#<%= @id %>")
+.html('<span class="flag_<%= @to.read_attribute(@attr) %>"><%= t(@locale) %></span>');

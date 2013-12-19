@@ -34,13 +34,19 @@ module ApplicationHelper
     end
   end
 
-  def link_to_switch_flg model,attr
+  def link_to_switch_flg model , attr
     bool = model.read_attribute(attr)
-    model_name =  model.class.model_name.human.pluralize.downcase
-    img_tag =  %Q{<img src='#{check_img_src(bool)}' /><span style="display:none;">#{bool}</span>}
+    model_name =  model.class.model_name.human.downcase
 
-    return link_to img_tag.html_safe , {:controller => model_name, :action => "flag", :id => model.id, :type => attr}, :remote => true,  id: %Q{#{model_name}_#{attr}_#{model.id}}
+    bool_locale = bool == true ? ".flag_on" : ".flag_off"
+    locale = "activerecord.flags." + model_name + "." + attr.to_s + bool_locale
+
+    text = I18n.t locale
+    span_tag =  %Q{<span class="flag_#{bool}">#{text}</span>}
+
+    return link_to span_tag.html_safe , {:controller => model_name.pluralize, :action => "flag",  :id => model.id, :type => attr, :format => "js"}, :remote => true,  id: %Q{#{model_name}_#{attr}_#{model.id}}
   end
+
   
   def check_m_img(bool)
     if bool === true

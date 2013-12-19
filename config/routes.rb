@@ -6,6 +6,7 @@ Mycrm::Application.routes.draw do
     end
     member do
       get "find"
+      get 'flag/:type' , :action => "flag"
     end
   end
 
@@ -80,6 +81,7 @@ Mycrm::Application.routes.draw do
   get 'usertasks' => 'tasks#usershow'
   post 'create_task' => 'tasks#ajax_create'
   get 'task_status_change' => 'tasks#status_change'
+
    
   
   get 'current' => 'users#current'

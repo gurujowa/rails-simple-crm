@@ -8,6 +8,7 @@ table.default_datatables
       th 概要
       th 期日
       th 会社名
+      th 金額
       th 請求済
       th 入金済
       th CH
@@ -18,8 +19,10 @@ table.default_datatables
         td = link_to bill.name , edit_bill_path(bill)
         td = bill.duedate 
         td = bill.company_name
-        td = bill.bill_flg 
-        td = bill.payment_flg 
+        td = number_to_currency bill.total_price
+        td = link_to_switch_flg bill, :bill_flg
+        td = link_to_switch_flg bill, :payment_flg 
         td 
-          = link_to '編集', edit_bill_path(bill), :class => "btn"
+          = link_to 'PDF', bill_path(bill, format: "pdf"), :class => "btn"
+          = link_to '表示', bill_path(bill), :class => "btn"
           = link_to '削除', bill, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"

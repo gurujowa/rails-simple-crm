@@ -12,4 +12,14 @@ class Bill < ActiveRecord::Base
   def company_name
     self.billing_plan_line.billing_plan.company.client_name
   end
+
+
+  def total_price
+     price = 0
+     self.bill_lines.each do |c|
+       price += c.total_price
+     end
+     return price
+  end
+
 end

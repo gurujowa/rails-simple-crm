@@ -6,8 +6,24 @@ class BillsController < ApplicationController
     @bills = Bill.all
   end
 
+  def flag
+    remote_flag Bill
+  end
+
   # GET /bills/1
   def show
+    @until = 10 - @bill.bill_lines.length
+    respond_to do |format|
+      format.html { 
+        render :layout => "pdf.html"
+      }
+      format.pdf {
+        html = render_to_string(:layout => "pdf.html", :formats => [:html])
+        kit = PDFKit.new(html)
+        send_data(kit.to_pdf, :filename => "bill.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+      }
+    end
   end
 
   # GET /bills/new

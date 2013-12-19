@@ -14,7 +14,16 @@ class BillingPlansController < ApplicationController
   # GET /billing_plans/1
   def show
     @until = 10 - @billing_plan.billing_plan_lines.length
-    render :layout => "pdf.html"
+      format.html { 
+        render :layout => "pdf.html"
+      }
+      format.pdf {
+        html = render_to_string(:layout => "pdf.html", :formats => [:html])
+        kit = PDFKit.new(html)
+        send_data(kit.to_pdf, :filename => "billing_plan.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+      }
+    end
   end
 
   # GET /billing_plans/new

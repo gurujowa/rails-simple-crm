@@ -36,6 +36,18 @@ ja:
     models:
       teacher: 講師
       teacher_order: 講師発注
+    flags:
+      estimate:
+        send_flg:
+          flag_on: 発行済
+          flag_off: 未発行
+      bill:
+        bill_flg:
+          flag_on:  請求済
+          flag_off: 未請求
+        payment_flg:
+          flag_on:  入金済
+          flag_off: 未入金
     attributes: #一覧画面で必要
       teacher:  #モデル毎に階層化しておく。
         first_kanji: 名（漢字）

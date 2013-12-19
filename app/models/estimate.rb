@@ -14,4 +14,5 @@ class Estimate < ActiveRecord::Base
      end
      return price
   end
+
 end
