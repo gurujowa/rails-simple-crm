@@ -22,5 +22,6 @@ table.default_datatables
         td = billing_plan.bill_end
         td = billing_plan.status.text
         td 
+          = link_to 'PDF', billing_plan_path(billing_plan, format: "pdf"), :class => "btn"
           = link_to '表示', billing_plan , :class => "btn"
           = link_to '削除', billing_plan, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"
