@@ -8,7 +8,7 @@ class CompanyAlert
 
   def check(company)
     course_null_check company
-    billing_plan_null_check company
+#    billing_plan_null_check company
 
   end
 
