@@ -5,6 +5,10 @@ module ApplicationHelper
       return time.strftime("%Y年%m月%d日 %H時%M分%S秒")
     end
   end
+
+  def hbr(str)
+    h(str).gsub(/(\r\n?)|(\n)/, "<br />").html_safe
+  end
   
   def convert_min(minute)
     if(minute.present?)

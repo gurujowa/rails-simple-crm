@@ -60,6 +60,7 @@ class EstimatesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def estimate_params
-      params.require(:estimate).permit(:title, :company_id, :expired,  :send_flg, :memo, estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy, :tax_rate])
+      params.require(:estimate).permit(:title, :company_id, :expired,  :send_flg, :memo,
+           estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy, :tax_rate, :detail])
     end
 end

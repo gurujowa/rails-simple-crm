@@ -1,5 +1,5 @@
 class AddDetailFromEstimates < ActiveRecord::Migration
   def change
-    add_column :estimates, :detail, :text
+    add_column :estimate_lines, :detail, :text
   end
 end

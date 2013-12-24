@@ -213,7 +213,9 @@
   </tr>
     <% @estimate.estimate_lines.each do |e| %>
     <tr>
-      <td> <%= e.name %> </td>
+      <td> <div style="font-size:110%; margin-top:4px;"><%= e.name %></div>
+        <div style="font-size:90%;color: #444;margin-bottom:4px;"><%= hbr(e.detail) %></div>
+      </td>
       <td class="alnright"> <%= e.quantity %> </td>
       <td class="alnright"> <%= number_to_currency e.unit_price %> </td>
       <td class="alnright"> <%= e.tax_rate %>% </td>

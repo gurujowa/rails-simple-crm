@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218004904) do
+ActiveRecord::Schema.define(version: 20131224032155) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(version: 20131218004904) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tax_rate",    default: 0, null: false
+    t.text     "detail"
   end
 
   create_table "estimates", force: true do |t|
