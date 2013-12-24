@@ -11,6 +11,7 @@
     <thead>
        <tr>
           <th>品名</th>
+          <th>詳細</th>
           <th>単価</th>
           <th>数量</th>
           <th>税率</th>
@@ -25,7 +26,7 @@
      <% end %>
   </tbody>
      <tr>
-        <td colspan="3">&nbsp;</td>
+        <td colspan="4">&nbsp;</td>
         <td><b>合計</b></td>
         <td id="td_estimate_total_price"><%= number_to_currency @estimate.total_price %></td>
       </tr>
