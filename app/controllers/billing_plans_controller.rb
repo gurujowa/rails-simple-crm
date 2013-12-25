@@ -33,6 +33,10 @@ class BillingPlansController < ApplicationController
     @billing_plan.billing_plan_lines.new
   end
 
+  def sales
+    @lines = BillingPlanLine.sales
+  end
+
   # GET /billing_plans/1/edit
   def edit
   end

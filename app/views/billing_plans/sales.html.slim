@@ -1,0 +1,20 @@
+h1 売上計上表
+
+table style="border-collapse:collapse;" class="table table-bordered"
+  thead
+    tr
+      th 請求名
+      th メモ
+      th 会社名
+      th 請求期限
+      th 入金期限
+      th 金額
+  tbody
+    - @lines.each do |c|
+      tr
+        td = c.billing_plan.name
+        td = c.memo
+        td = c.company_name
+        td = c.bill_date
+        td = c.accural_date
+        td = number_to_currency c.price

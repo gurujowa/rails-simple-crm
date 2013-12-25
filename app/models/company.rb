@@ -31,7 +31,7 @@ extend Enumerize
   belongs_to :updated_user , class_name: "User", foreign_key: "updated_by"
 
   validates :status_id, presence: true  
-  validates :active_st, inclusion:{ in: ["active","impossible","pending"],  message: "接触前はランクPのみ有効です"} , :unless => Proc.new{|company| "P" == company.status.rank } 
+  validates :active_st, inclusion:{ in: ["active","impossible","pending"],  message: "接触前はランクPのみ有効です"} , :unless => Proc.new{|company| "P" == company.status.present? && company.status.rank } 
   validates :campaign_id, presence: true  
   validates :chance, presence: true  
   validates :industry_id, presence: true

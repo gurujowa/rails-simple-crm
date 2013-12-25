@@ -10,7 +10,11 @@ Mycrm::Application.routes.draw do
     end
   end
 
-  resources :billing_plans
+  resources :billing_plans do 
+    collection do
+      get "sales"
+    end
+  end
 
   resources :clients
 

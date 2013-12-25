@@ -21,6 +21,11 @@ namespace :mail do
       end
   end
 
+  desc "売上表の送付"
+  task "bill" => :environment do
+    BillMailer.sales.deliver
+  end
+
 
   desc "コース終了時に送られるメール"
   task "course:end" => :environment do
