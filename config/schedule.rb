@@ -16,3 +16,6 @@ every 1.day, :at => '6:00 am' do
   rake "mail:course:reminder"
 end
 
+every :month do
+  rake "mail:bill"
+end

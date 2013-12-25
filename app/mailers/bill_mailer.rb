@@ -2,7 +2,7 @@ class BillMailer < ActionMailer::Base
   default from: "antenna@yourbright.co.jp"
 
   def sales()
-    @line = BillingPlanLine.sales
+    @line = BillingPlanLine.sales(Date.today.prev_month)
 
     if Rails.env == 'production'
       to = ["yamashita.hayato@yourbright.co.jp","miwa@yourbright.co.jp"]

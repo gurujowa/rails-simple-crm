@@ -34,7 +34,7 @@ class BillingPlansController < ApplicationController
   end
 
   def sales
-    @lines = BillingPlanLine.sales
+    @lines = BillingPlanLine.sales(Date.today)
   end
 
   # GET /billing_plans/1/edit
