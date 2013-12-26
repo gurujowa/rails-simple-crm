@@ -10,5 +10,6 @@ PDFKit.configure do |config|
 
    }
   # config.root_url = "http://localhost" # Use only if your external hostname is unavailable on the server.
+  config.middleware.use "PDFKit::Middleware", :print_media_type => true
 end
 
