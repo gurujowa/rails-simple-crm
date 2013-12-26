@@ -11,3 +11,11 @@ PDFKit.configure do |config|
    }
   # config.root_url = "http://localhost" # Use only if your external hostname is unavailable on the server.
 end
+
+ActionController::Base.asset_host = Proc.new { |source, request|
+  if request.format.pdf?
+    "#{request.protocol}#{request.host_with_port}"
+  else
+    nil
+  end
+}

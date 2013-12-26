@@ -11,9 +11,11 @@ class EstimatesController < ApplicationController
     @until = 10 - @estimate.estimate_lines.length
     respond_to do |format|
       format.html { 
+        @logo = true
         render :layout => "pdf.html"
       }
       format.pdf {
+        @logo = false
         html = render_to_string(:layout => "pdf.html", :formats => [:html])
         kit = PDFKit.new(html)
         send_data(kit.to_pdf, :filename => "見積書.pdf", :type => 'application/pdf')
