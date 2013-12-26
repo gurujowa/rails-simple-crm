@@ -9,8 +9,17 @@ class EstimatesController < ApplicationController
   # GET /estimates/1
   def show
     @until = 10 - @estimate.estimate_lines.length
-    @estimate.update_attributes({:send_flg => true})
-    render :layout => "pdf.html"
+    respond_to do |format|
+      format.html { 
+        render :layout => "pdf.html"
+      }
+      format.pdf {
+        html = render_to_string(:layout => "pdf.html", :formats => [:html])
+        kit = PDFKit.new(html)
+        send_data(kit.to_pdf, :filename => "見積書.pdf", :type => 'application/pdf')
+        return # to avoid double render call
+      }
+    end
   end
 
   # GET /estimates/new

@@ -1,7 +1,7 @@
 env :PATH, "/var/www/rails-crm/current/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 set :output, "/home/yamashita/whenever.log"
 
-every 1.day, :at => '6:00 pm' do
+every 1.day, :at => '7:30 pm' do
   rake "mail:contact"
   rake "mail:alert"
 end
