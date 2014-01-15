@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131224032155) do
+ActiveRecord::Schema.define(version: 20140114103726) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -181,17 +181,18 @@ ActiveRecord::Schema.define(version: 20131224032155) do
   end
 
   create_table "courses", force: true do |t|
-    t.string   "name",                           null: false
-    t.integer  "company_id",                     null: false
-    t.boolean  "order_flg",      default: false, null: false
-    t.boolean  "book_flg",       default: false, null: false
-    t.boolean  "resume_flg",     default: false, null: false
-    t.boolean  "report_flg",     default: false, null: false
-    t.boolean  "end_report_flg", default: false, null: false
+    t.string   "name",                               null: false
+    t.integer  "company_id",                         null: false
+    t.boolean  "order_flg",          default: false, null: false
+    t.boolean  "book_flg",           default: false, null: false
+    t.boolean  "resume_flg",         default: false, null: false
+    t.boolean  "end_report_flg",     default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "end_form_flg",   default: false, null: false
-    t.boolean  "diploma_flg",    default: false, null: false
+    t.boolean  "end_form_flg",       default: false, null: false
+    t.boolean  "diploma_flg",        default: false, null: false
+    t.boolean  "reception_seal_flg", default: false, null: false
+    t.boolean  "cert_seal_flg",      default: false, null: false
   end
 
   create_table "estimate_lines", force: true do |t|

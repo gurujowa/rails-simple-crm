@@ -15,8 +15,10 @@ class CourseTable
        value: "発注書"
      book_flg:
        value: "書籍送付"
-     report_flg:
-       value: "３点セット"
+     reception_seal_flg:
+       value: "窓口受領印"
+     cert_seal_flg:
+       value: "労働局受領印"
      end_form_flg:
        value: "支給申請"
      diploma_flg:

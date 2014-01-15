@@ -4,8 +4,15 @@ class Alert
   def self.check
     alerts = self.new
     alerts.companies = CompanyAlert.check_all.errors
-    alerts.courses = CourseAlert.check_all.errors
-    alerts.periods = PeriodAlert.check_all.errors
+    alerts.courses = CourseAlert.check_all(:alert).errors
+    alerts.periods = PeriodAlert.check_all(:alert).errors
+    alerts
+  end
+
+  def self.task
+    alerts = self.new
+    alerts.courses = CourseAlert.check_all(:task).errors
+    alerts.periods = PeriodAlert.check_all(:task).errors
     alerts
   end
 

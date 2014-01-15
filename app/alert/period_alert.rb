@@ -4,22 +4,31 @@ class PeriodAlert
     @errors = []
   end
 
-  def check(course)
+  def check(course, type)
     unless period_null course
       return false
     end
 
-    period_resume_flg_check course
-    period_equipment_flg_check course
-    period_attend_flg_check course
-    period_report_flg_check course
+    if type == :alert
+      period_resume_flg_check course,7.days.since
+      period_equipment_flg_check course, 7.days.since
+      period_attend_flg_check course, 4.days.ago
+      period_report_flg_check course, 4.days.ago
+    elsif type == :task
+      period_resume_flg_check course, 14.days.since
+      period_equipment_flg_check course, 14.days.since
+      period_attend_flg_check course, 0.days.ago
+      period_report_flg_check course, 0.days.ago
+    else
+      raise "Alert type is only 'alert' and 'task'"
+    end
   end
 
-  def self.check_all
+  def self.check_all(type)
       courses = Course.all
       alert = self.new
       courses.each do |c|
-        alert.check c
+        alert.check c, type
       end
       alert
   end
@@ -29,23 +38,23 @@ class PeriodAlert
   end
 
   private
-  def period_resume_flg_check c
-    period_flg_check c, 7.days.since, :resume_flg, "レジュメが届いていないコマがあります。"
+  def period_resume_flg_check c, day
+    period_flg_check c, day, :resume_flg, "レジュメが届いていないコマがあります。"
   end
-  def period_equipment_flg_check c
-    period_flg_check c, 7.days.since, :equipment_flg, "備品が揃っていないコマがあります。"
+  def period_equipment_flg_check c, day
+    period_flg_check c, day, :equipment_flg, "備品が揃っていないコマがあります。"
   end
-  def period_report_flg_check c
-    period_flg_check c, 2.days.ago, :report_flg, "実施報告書が届いていないコマがあります。"
+  def period_report_flg_check c, day
+    period_flg_check c, day, :report_flg, "実施報告書が届いていないコマがあります。"
   end
-  def period_attend_flg_check c
-    period_flg_check c, 2.days.ago, :attend_flg, "出欠表が届いていないコマがあります。"
+  def period_attend_flg_check c, day
+    period_flg_check c, day, :attend_flg, "出欠表が届いていないコマがあります。"
   end
 
   def period_flg_check(c, compare, flg, message)
     c.periods.each do |p|
       if p.day <= compare and p.read_attribute(flg) == false
-        push_error c, message, p.day
+        push_error c, message, p
       end
     end
   end
@@ -60,8 +69,8 @@ class PeriodAlert
   end
 
 
-  def push_error c, message, day = nil
-    message = PeriodAlertMessage.new c, message, day
+  def push_error c, message, p
+    message = PeriodAlertMessage.new c, message, p
     @errors.push message
   end
 
@@ -69,14 +78,17 @@ class PeriodAlert
 end
 
 class PeriodAlertMessage
-  attr_reader :course, :day, :message
+  attr_reader :course, :period, :message
 
-  def initialize course, message, day
+  def initialize course, message, period
     @course = course
     @message = message
-    @day = day
+    @period = period
   end
 
+  def day
+    period.day
+  end
 
   def client_name
     @course.company.client_name

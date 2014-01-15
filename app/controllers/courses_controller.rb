@@ -12,6 +12,10 @@ class CoursesController < ApplicationController
   def alert
     @alerts = Alert.check
   end
+
+  def task
+    @alerts = Alert.task
+  end
   
   def calendar
     @courses = Course.all

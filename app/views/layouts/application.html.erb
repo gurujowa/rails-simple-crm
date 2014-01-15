@@ -25,6 +25,7 @@
             	コクピット<b class='caret'></b><% end %>
              <ul class="dropdown-menu">
                <li><a href="/">未完了タスク</a></li>
+               <li><%= link_to "コースタスク" , {controller: "courses", action: "task"}%></li>
                <li><%= link_to "コースアラート" , {controller: "courses", action: "alert"}%></li>
                <li><%= link_to "失注案件" , {controller: "companies", action: "failure"}%></li>
              </ul>

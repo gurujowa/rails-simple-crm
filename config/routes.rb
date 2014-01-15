@@ -55,6 +55,7 @@ Mycrm::Application.routes.draw do
       get 'update/:id/:type' => 'courses#up_bool'
       get 'google'
       get 'alert'
+      get 'task'
     end
   end
 

@@ -6,39 +6,54 @@ class CourseAlert
     @errors = []
   end
 
-  def check(course)
-    order_flg_check course
-    book_flg_check course
-    report_flg_check course
-    end_form_flg_check course
-    diploma_flg_check course
+  def check(course, type)
+    if type == :alert
+      order_flg_check course,14.days.since
+      book_flg_check course, 14.days.since
+      reception_seal_flg_check course,30.days.since
+      cert_seal_flg_check course, 3.days.since
+      end_form_flg_check course, 30.days.ago
+      diploma_flg_check course, 7.days.since
+    elsif type == :task
+      order_flg_check course,21.days.since
+      book_flg_check course, 21.days.since
+      reception_seal_flg_check course,40.days.since
+      cert_seal_flg_check course, 7.days.since
+      end_form_flg_check course, 0.days.ago
+      diploma_flg_check course, 14.days.since
+    else
+      raise "Alert type is only 'alert' and 'task'"
+    end
   end
 
-  def self.check_all
+  def self.check_all type
       courses = Course.all
       alert = self.new
       courses.each do |c|
-        alert.check c
+        alert.check c,type
       end
       alert
   end
 
 
   private
-  def order_flg_check(c)
-    course_start_check c, 14.days.since, c.order_flg, "発注書フラグがオフになっています。"
+  def order_flg_check(c, day)
+    course_start_check c, day, c.order_flg, "発注書フラグがオフになっています。"
   end
-  def book_flg_check(c)
-    course_start_check c, 14.days.since, c.book_flg, "書籍送付フラグがオフになっています。"
+  def book_flg_check(c, day)
+    course_start_check c, day, c.book_flg, "書籍送付フラグがオフになっています。"
   end
-  def report_flg_check(c)
-    course_start_check c, 7.days.since, c.report_flg, "３点セットフラグがオフになっています。"
+  def reception_seal_flg_check(c, day)
+    course_start_check c, day, c.reception_seal_flg, "窓口受領印が届いていません"
   end
-  def end_form_flg_check(c)
-    course_end_check c, 30.days.ago, c.end_form_flg, "支給申請が完了していません。"
+  def cert_seal_flg_check(c, day)
+    course_start_check c, day, c.cert_seal_flg, "労働局受領印が届いていません"
   end
-  def diploma_flg_check(c)
-    course_end_check c, 7.days.since, c.diploma_flg, "表彰状の準備ができていません"
+  def end_form_flg_check(c, day)
+    course_end_check c, day, c.end_form_flg, "支給申請が完了していません。"
+  end
+  def diploma_flg_check(c, day)
+    course_end_check c, day, c.diploma_flg, "表彰状の準備ができていません"
   end
 
 
@@ -96,7 +111,6 @@ class CourseAlertMessage
 
   def mail_message
     message = %Q{#{@message} 会社名：#{@course.company.client_name}, コース名：#{@course.name}, ID: #{@course.id}}
-
     message
   end
 
