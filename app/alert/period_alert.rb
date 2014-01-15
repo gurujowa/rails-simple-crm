@@ -10,12 +10,12 @@ class PeriodAlert
     end
 
     if type == :alert
-      period_resume_flg_check course,7.days.since
+      period_resume_flg_check course, 4.days.since
       period_equipment_flg_check course, 7.days.since
       period_attend_flg_check course, 4.days.ago
       period_report_flg_check course, 4.days.ago
     elsif type == :task
-      period_resume_flg_check course, 14.days.since
+      period_resume_flg_check course, 7.days.since
       period_equipment_flg_check course, 14.days.since
       period_attend_flg_check course, 0.days.ago
       period_report_flg_check course, 0.days.ago
