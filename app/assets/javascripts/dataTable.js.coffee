@@ -15,14 +15,16 @@ class DataTable
          .append($("<td></td>").text(val.value))
          .append($('<td></td>').html('<input id="' + switch_id + '" type="checkbox" checked>'))
        )
-       $("#" + switch_id).wrap('<div id="' + toggle_id + '" class="' + this.property.table_id  +  '-toggle-switch make-switch switch-small" />').parent().bootstrapSwitch()
+       $("#" + switch_id)
+         .wrap('<div id="' + toggle_id + '" class="' + this.property.table_id  +  '-toggle-switch make-switch switch-small" />')
+         .parent().bootstrapSwitch()
    switchState: ->
      for key, val of this.column 
        toggle_id = "#toggle-" + this.property.table_id + '-' + key
-       if(this.getCookieId(key) == "false")
-         $(toggle_id).bootstrapSwitch('setState', false)       
-       else
+       if(this.getCookieId(key) == "true" or val.defaultState == true)
          $(toggle_id).bootstrapSwitch('setState', true)
+       else
+         $(toggle_id).bootstrapSwitch('setState', false)
 
    init: ->
      this.appendToggle()
@@ -37,10 +39,10 @@ class DataTable
      for key, val of this.column
        if val.define == undefined
          val.define = {}
-       if (this.getCookieId(key) == "false")
-         val.define.bVisible = false
-       else
+       if (this.getCookieId(key) == "true" or val.defaultState == true)
          val.define.bVisible = true
+       else
+         val.define.bVisible = false
        array.push(val.define)
      return array
    getColumnIndex: (switch_column)->

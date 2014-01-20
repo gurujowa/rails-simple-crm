@@ -272,12 +272,9 @@ class CompaniesController < ApplicationController
   
   def company_params
     params.require(:company).permit(:id, :client_name,  :category, :tel, :fax, :status_id, :active_st,  :zipcode, :prefecture, :appoint_plan,
-      :city, :address, :building,:industry_id, :sales_person,:approach_day, :chance,  :lead, :created_by,  :updated_by, :campaign_id,  
+      :city, :address, :building, :mail, :industry_id, :regular_staff, :nonregular_staff, :memo, :sales_person,:approach_day,  :lead, :created_by,  :updated_by, :campaign_id,  
       contacts_attributes: [:id, :memo, :created_by, :con_type],
-      clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position, :mail, :tel, :fax, :memo],
-      company_proposed_plans_attributes:[:id,:duedate, :reason],
-      company_contract_plans_attributes:[:id,:duedate, :reason],
-      company_payment_plans_attributes:[:id,:duedate, :reason],
+      clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position,  :memo],
                                    )
   end
 

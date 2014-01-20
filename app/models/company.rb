@@ -30,12 +30,12 @@ extend Enumerize
   belongs_to :sales_user , class_name: "User", foreign_key: "sales_person"
   belongs_to :updated_user , class_name: "User", foreign_key: "updated_by"
 
+  validates :mail, :email_format => {:message => ' メールアドレスの形式が不適切です'}
   validates :status_id, presence: true  
-  validates :active_st, inclusion:{ in: ["active","impossible","pending"],  message: "接触前はランクPのみ有効です"} , :unless => Proc.new{|company| "P" == company.status.present? && company.status.rank } 
   validates :campaign_id, presence: true  
-  validates :chance, presence: true  
   validates :industry_id, presence: true
   validates :sales_person, presence: true
+  validates :active_st, presence: true  
   validates :tel, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true},  :uniqueness => true, :presence => true
   validates :fax, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}
   validates :zipcode, presence: true, length: {maximum: 8, :message => '郵便番号は７文字以内です'}, format: {with: /\d{3}\-\d{4}/, message: "半角数字とハイフンのみで入力してください。（ハイフンが必要です）", allow_blank: true }
@@ -43,9 +43,10 @@ extend Enumerize
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
   validates :address, presence:true
 
-  enumerize :active_st, in: [:notstart, :active, :pending, :impossible], :default => :notstart
+  enumerize :active_st, in: [:active, :pending, :impossible]
 
   scope :is_active, lambda {|c| where("active_st = ?" , "active")}
+  scope :is_contract,lambda {where(status_id: 19)} 
 
   def getAddress
     address = ""

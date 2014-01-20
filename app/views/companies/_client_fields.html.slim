@@ -13,12 +13,5 @@
     .controls  
       #{f.label :gender, "男性", :value => 1}#{f.radio_button :gender , 1}  #{f.label :gender, "女性", :value => 2}#{f.radio_button :gender , 2} #{f.label :gender, "不明", :value => 3}#{f.radio_button :gender , 3}
   .control-group
-    label.control-label 電話番号
-    .controls
-      | TEL#{f.text_field :tel} FAX#{f.text_field :fax}
-  .control-group
-    label.control-label メールアドレス
-    .controls = f.text_field :mail
-  .control-group
     label.control-label メモ
     .controls = f.text_area :memo, :class => "span12", :rows => "5"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140114103726) do
+ActiveRecord::Schema.define(version: 20140117012917) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 20140114103726) do
     t.string   "tel"
     t.string   "fax"
     t.string   "mail"
-    t.integer  "status_id",                                      null: false
+    t.integer  "status_id",                                         null: false
     t.string   "client_person"
     t.string   "zipcode"
     t.string   "prefecture"
@@ -116,15 +116,18 @@ ActiveRecord::Schema.define(version: 20140114103726) do
     t.string   "building"
     t.string   "created_by"
     t.string   "updated_by"
-    t.integer  "sales_person",  limit: 255,                      null: false
+    t.integer  "sales_person",     limit: 255,                      null: false
     t.date     "approach_day"
     t.integer  "chance"
-    t.integer  "industry_id",               default: 1,          null: false
+    t.integer  "industry_id",                  default: 1,          null: false
     t.date     "appoint_plan"
-    t.integer  "campaign_id",                                    null: false
+    t.integer  "campaign_id",                                       null: false
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "active_st",                 default: "notstart", null: false
+    t.string   "active_st",                    default: "notstart", null: false
+    t.integer  "regular_staff"
+    t.integer  "nonregular_staff"
+    t.text     "memo"
   end
 
   add_index "companies", ["active_st"], name: "index_companies_on_active_st"

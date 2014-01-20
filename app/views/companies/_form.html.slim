@@ -11,15 +11,12 @@
       = form.collection_select(:industry_id, @industries, :id, :name, {:include_blank => true })
       | (#{link_to "業種の追加", {controller: "industries"}})
   .control-group
-    label.control-label 営業マン
+    label.control-label 担当営業
     .controls= form.select :sales_person , options_from_users(@company.sales_person), :include_blank => true
-  .control-group
-    label.control-label 見込み度
-    .controls= form.select :chance , options_chance(@company.chance), :include_blank => true
   .control-group
     label.control-label 代表電話
     .controls
-      | TEL#{form.text_field :tel} FAX#{form.text_field :fax}
+      | TEL#{form.text_field :tel} FAX#{form.text_field :fax} MAIL#{form.text_field :mail}
   .control-group
     label.control-label 新規獲得元
     .controls
@@ -28,11 +25,21 @@
   .control-group
     label.control-label 状態ステータス
     .controls
-      = form.select :active_st, Company.active_st.options
+      = form.select :active_st, Company.active_st.options, :include_blank => true
   .control-group
     label.control-label 案件進行ステータス
     .controls
       = form.select :status_id, options_from_statuses(@company.status_id), :include_blank => true
+  .control-group
+    label.control-label 人数
+    .controls
+      table.table.table-condensed
+        tr
+          td 正規職員
+          td 非正規職員
+        tr
+          td= form.text_field :regular_staff
+          td= form.text_field :nonregular_staff
   .control-group
     label.control-label 住所
     .controls
@@ -54,32 +61,17 @@
       a.btn#jump_zip 郵便番号
       a.btn#jump_map GoogleMap検索
   .control-group
-    label.control-label 予定日
+    label.control-label メモ
     .controls
-      table.table
-        tr
-          td 初回アポ
-          td
-            = form.text_field :appoint_plan,'data-format' => 'yyyy-MM-dd', :class=>"datepicker"
-        tr
-          td 提案見積日
-          td = render :partial => 'sales_plan', :locals => {:form => form, :plan_name => "company_proposed_plans", :plan_length => @company.company_proposed_plans.length}
-        tr
-          td 契約日
-          td = render :partial => 'sales_plan', :locals => {:form => form, :plan_name => "company_contract_plans", :plan_length => @company.company_contract_plans.length}
-        tr
-          td 入金日
-          td = render :partial => 'sales_plan', :locals => {:form => form, :plan_name => "company_payment_plans", :plan_length => @company.company_payment_plans.length}
+      = form.text_area :memo, :rows => "8" , :style =>"width:100%"
 .well
   ul.nav.nav-pills#company_edit_clients_tab
     li.clients_tab_add_field
       = link_to_add_fields "＋", form, :clients
-
     - @company.clients.each_with_index do |c,i|
       li class=("active" if i==0)
         a id="company_edit_client_tab_#{i}" href="#company_edit_client_#{i}" data-toggle="tab"
           = c.name.present? ? c.name : "新しい連絡先"
-
   .tab-content.add_fields#company_edit_clients_tab_content
     = form.fields_for :clients do |i|
       = render :partial => "client_fields", :locals => { :f => i}
