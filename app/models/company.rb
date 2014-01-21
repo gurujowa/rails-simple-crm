@@ -43,9 +43,9 @@ extend Enumerize
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
   validates :address, presence:true
 
-  enumerize :active_st, in: [:active_a, :active_b, :active, :pending, :notfull,  :impossible]
+  enumerize :active_st, in: [:active_a, :active_b, :active_c, :pending, :notfull,  :impossible]
 
-  scope :is_active, lambda {where(:companies => {active_st: [:active_a,:active_b, :active]}).where.not("statuses.rank = ?","A")}
+  scope :is_active, lambda {where(active_st: [:active_a,:active_b, :active_c]).where.not("statuses.rank = ?","A")}
   scope :is_contract,lambda {where(status_id: 19)} 
 
   def getAddress
