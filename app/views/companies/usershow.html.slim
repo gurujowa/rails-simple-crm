@@ -9,38 +9,16 @@ table style="border-collapse:collapse;" class="table table-bordered" id="usersho
   thead
     tr
       th>ID
-      th 見込み度
       th 会社名
-      th 初回アポ日
-      th 提案見積日
-      th 契約日
-      th 入金日
-      th ステータス
+      th 状態ステータス
+      th 進行ステータス
   tbody
     - @companies.each_with_index do |c,i| 
       tr class="#{cycle('even','odd')} #{ i == 4 ? 'big_border' : nil }"
         td class="level1" data-pk="#{c.id}"
           = i+1
-        td = c.chance
         td = link_to c.client_name , {action: "edit", id: c.id}
-        td = c.appoint_plan
-          - if c.appoint_contact.present?
-            br
-            | 実績: #{c.appoint_contact.created_at.strftime("%Y/%m/%d") }
-        td 
-          = c.proposed_plan
-          - if c.company_proposed_plans.length > 1
-            br （延期:#{c.company_proposed_plans.length - 1}回）
-          - if c.proposed_contact.present?
-            br | 実績:#{c.proposed_contact.created_at.strftime("%Y/%m/%d")}
-        td 
-          = c.contract_plan
-          - if c.company_contract_plans.length > 1
-            br （延期:#{c.company_contract_plans.length - 1}回）
-        td 
-          = c.payment_plan
-          - if c.company_payment_plans.length > 1
-            br （延期:#{c.company_payment_plans.length - 1}回）
+        td = c.active_st_text
         td = c.status.name
       - c.contacts.each do |o|
         tr class="tr-contact-#{c.id} level2" style="display:none"

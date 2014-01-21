@@ -29,8 +29,11 @@ ja:
     company:
       active_st:
         notstart: 接触前
-        active: アクティブ
+        active_a: "A - 今月～来月"
+        active_b: "B - 半年以内"
+        active: "C - 1年以内"
         pending: そのうち客
+        notfull: 要件が合わない
         impossible: 接触禁止
   activerecord:
     models:

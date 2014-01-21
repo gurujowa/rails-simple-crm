@@ -73,8 +73,8 @@ class CompaniesController < ApplicationController
     if (!params[:id].present?)
       params[:id] = session[:current_user].id
     end
-    @companies = Company.joins(:status).where(sales_person: params[:id] ).where(:statuses => {rank: "B".."H"}).
-    order("companies.chance desc, companies.status_id asc, companies.id asc").limit(20)
+    @companies = Company.joins(:status).where(sales_person: params[:id] ).is_active.
+    order("companies.active_st asc, statuses.rank asc, companies.id asc").limit(20)
 
     respond_to do |format|
       format.html
