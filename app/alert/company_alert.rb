@@ -10,7 +10,7 @@ class CompanyAlert
     course_null_check company
     fax_null_check company
     mail_null_check company
-    billing_plan_null_check company
+#    billing_plan_null_check company
   end
 
   def self.check_all

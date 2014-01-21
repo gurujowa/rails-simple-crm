@@ -30,7 +30,7 @@ extend Enumerize
   belongs_to :sales_user , class_name: "User", foreign_key: "sales_person"
   belongs_to :updated_user , class_name: "User", foreign_key: "updated_by"
 
-  validates :mail, :email_format => {:message => ' メールアドレスの形式が不適切です'}
+  validates :mail, :email_format => {:message => ' メールアドレスの形式が不適切です'}, :allow_blank => true
   validates :status_id, presence: true  
   validates :campaign_id, presence: true  
   validates :industry_id, presence: true
