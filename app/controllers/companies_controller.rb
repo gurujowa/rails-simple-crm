@@ -74,7 +74,7 @@ class CompaniesController < ApplicationController
       params[:id] = session[:current_user].id
     end
     @companies = Company.joins(:status).where(sales_person: params[:id] ).is_active.
-    order("companies.active_st asc, statuses.rank asc, companies.id asc").limit(20)
+    order("companies.active_st asc, statuses.rank asc, companies.id asc").limit(40)
 
     respond_to do |format|
       format.html

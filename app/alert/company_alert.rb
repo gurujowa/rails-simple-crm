@@ -9,8 +9,8 @@ class CompanyAlert
   def check(company)
     course_null_check company
     fax_null_check company
-    mail_null_check company
-#    billing_plan_null_check company
+#    mail_null_check company
+    billing_plan_null_check company
   end
 
   def self.check_all
@@ -43,7 +43,7 @@ class CompanyAlert
   end
 
   def billing_plan_null_check c
-    if c.billing_plans.length == 0
+    if c.billing_plans.length == 0 && c.created_at >= Date.new(2013,10,1)
       push_error c, "契約済みなのに請求予定表がありません"
     end
   end
