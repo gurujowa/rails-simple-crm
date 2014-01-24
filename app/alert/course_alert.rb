@@ -18,7 +18,7 @@ class CourseAlert
       order_flg_check course,21.days.since
       book_flg_check course, 21.days.since
       reception_seal_flg_check course,40.days.since
-      cert_seal_flg_check course, 7.days.since
+      cert_seal_flg_check course, 14.days.since
       end_form_flg_check course, 0.days.ago
       diploma_flg_check course, 14.days.since
     else
@@ -47,7 +47,7 @@ class CourseAlert
     course_start_check c, day, c.reception_seal_flg, "窓口受領印が届いていません"
   end
   def cert_seal_flg_check(c, day)
-    course_start_check c, day, c.cert_seal_flg, "労働局受領印が届いていません"
+    course_end_check c, day, c.cert_seal_flg, "労働局受領印が届いていません"
   end
   def end_form_flg_check(c, day)
     course_end_check c, day, c.end_form_flg, "支給申請が完了していません。"
