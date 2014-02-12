@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id          :integer          not null, primary key
+#  type_id     :integer
+#  duedate     :date
+#  name        :string(255)
+#  assignee    :integer
+#  created_by  :integer
+#  note        :string(255)
+#  progress_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  company_id  :integer
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

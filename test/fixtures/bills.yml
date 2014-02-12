@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: bills
+#
+#  id                   :integer          not null, primary key
+#  name                 :string(255)      not null
+#  duedate              :date             not null
+#  billing_plan_line_id :integer          not null
+#  bill_flg             :boolean          default(FALSE), not null
+#  payment_flg          :boolean          default(FALSE), not null
+#  memo                 :text
+#  created_at           :datetime
+#  updated_at           :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

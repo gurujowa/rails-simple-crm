@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: courses
+#
+#  id                 :integer          not null, primary key
+#  name               :string(255)      not null
+#  company_id         :integer          not null
+#  order_flg          :boolean          default(FALSE), not null
+#  book_flg           :boolean          default(FALSE), not null
+#  resume_flg         :boolean          default(FALSE), not null
+#  end_report_flg     :boolean          default(FALSE), not null
+#  created_at         :datetime
+#  updated_at         :datetime
+#  end_form_flg       :boolean          default(FALSE), not null
+#  diploma_flg        :boolean          default(FALSE), not null
+#  reception_seal_flg :boolean          default(FALSE), not null
+#  cert_seal_flg      :boolean          default(FALSE), not null
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

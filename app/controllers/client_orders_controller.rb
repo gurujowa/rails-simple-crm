@@ -1,5 +1,6 @@
 class ClientOrdersController < ApplicationController
   before_action :set_client_order, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /client_orders
   def index

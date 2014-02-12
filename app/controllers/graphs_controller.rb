@@ -1,5 +1,5 @@
 class GraphsController < ApplicationController
-  before_action :check_user
+  before_action :authenticate_user!
 
   def index
     @day_created = make_day_created

@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :check_user
+  before_action :authenticate_user!
 
   def index
       @not_complite = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).where("duedate <= ?", Date.today).
@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
       ')
 
       @not_complite_current = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
-      where(assignee: session[:current_user].id).order("duedate asc").all
+      where(assignee: current_user.id).order("duedate asc").all
       
       @not_task_current = Company.connection.select_all('
       SELECT companies.id,companies.client_name,statuses.name as status, strftime("%Y-%m-%d",companies.updated_at) as up_at
@@ -24,7 +24,7 @@ class CompaniesController < ApplicationController
       LEFT JOIN tasks ON tasks.company_id = companies.id
       INNER JOIN statuses ON statuses.id = companies.status_id
       WHERE companies.active_st = \'active\' AND tasks.id Is Null AND statuses.rank != "A"
-      AND companies.sales_person = ' + session[:current_user].id.to_s + '
+      AND companies.sales_person = ' + current_user.id.to_s + '
       GROUP BY companies.client_name, companies.updated_at
       order by up_at Asc;
       ')
@@ -46,7 +46,7 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     report = Report.new "client_sheet.xls"
     report.cell "A1",@company.client_name + "様"
-    report.cell "F3",%Q{担当：#{session[:current_user].name}}
+    report.cell "F3",%Q{担当：#{current_user.name}}
     report.cell "B4",%Q{担当：#{@company.client_person}様}
     report.cell "B5",@company.full_address
     report.cell "E6",@company.tel
@@ -71,7 +71,7 @@ class CompaniesController < ApplicationController
   
   def usershow
     if (!params[:id].present?)
-      params[:id] = session[:current_user].id
+      params[:id] = current_user.id
     end
     @companies = Company.joins(:status).where(sales_person: params[:id] ).is_active.
     order("companies.active_st asc, statuses.rank asc, companies.id asc").limit(40)
@@ -172,7 +172,7 @@ class CompaniesController < ApplicationController
 
   def new
     @company = Company.new
-    @company.contacts.build(:created_by => session[:current_user].id)
+    @company.contacts.build(:created_by => current_user.id)
     @company.clients.build
     set_default_form
     build_plans
@@ -181,21 +181,21 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    @company.created_by = session[:current_user].id
-    @company.updated_by = session[:current_user].id
+    @company.created_by = current_user.id
+    @company.updated_by = current_user.id
     set_default_form
 
       if @company.save
         if(params[:new_task][:name]).present?
           @new_task = Task.new(new_task_params)
-          @new_task.created_by = session[:current_user].id
+          @new_task.created_by = current_user.id
           @new_task.company_id = @company.id
           @new_task.save!
         end
         flash[:notice] = @company.client_name + 'を追加しました。'
         redirect_to :action => "new" 
       else
-        @company.contacts.build(:created_by => session[:current_user].id)
+        @company.contacts.build(:created_by => current_user.id)
         render action: 'new'
       end
   end
@@ -203,7 +203,7 @@ class CompaniesController < ApplicationController
   
   def edit
     @company = Company.find(params[:id])
-    @company.contacts.build(:created_by => session[:current_user].id)
+    @company.contacts.build(:created_by => current_user.id)
     build_plans
 
     unless @company.clients.present?
@@ -217,7 +217,7 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:id])
     @company.assign_attributes(company_params)
-    @company.updated_by = session[:current_user].id
+    @company.updated_by = current_user.id
     @course = Course.where(company_id: params[:id])
     set_default_form
 
@@ -225,7 +225,7 @@ class CompaniesController < ApplicationController
       flash[:notice] = '会社情報が変更されました。'
       redirect_to :action=> 'search', :company => session[:last_search_url], :last_rank => session[:last_search_rank]
     else
-      @company.contacts.build(:created_by => session[:current_user].id)
+      @company.contacts.build(:created_by => current_user.id)
       render "edit"
     end
   end

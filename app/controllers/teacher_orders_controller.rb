@@ -1,6 +1,7 @@
 class TeacherOrdersController < ApplicationController
   before_action :set_teacher_order, only: [:show, :edit, :update, :destroy]
   before_action :set_default_form, only: [:edit, :update, :new, :create]
+  before_action :authenticate_user!
 
   # GET /teacher_orders
   def index

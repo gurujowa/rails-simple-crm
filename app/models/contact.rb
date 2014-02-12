@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: contacts
+#
+#  id         :integer          not null, primary key
+#  company_id :integer
+#  memo       :text
+#  created_by :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  con_type   :integer
+#
+
 class Contact < ActiveRecord::Base
 
   validates :memo, presence: true

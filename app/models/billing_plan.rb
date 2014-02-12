@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: billing_plans
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)      not null
+#  company_id   :integer          not null
+#  tax_rate     :integer          default(0), not null
+#  status       :string(255)      default("draft"), not null
+#  created_at   :datetime
+#  updated_at   :datetime
+#  publish_date :date
+#
+
 class BillingPlan < ActiveRecord::Base
   extend Enumerize
 

@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: campaigns
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  bill       :integer          not null
+#  sent       :integer          not null
+#  start_date :date
+#  memo       :text
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Campaign < ActiveRecord::Base
   validates :bill, presence: true  
   validates :sent, presence: true  

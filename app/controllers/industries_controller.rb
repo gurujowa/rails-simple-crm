@@ -1,5 +1,6 @@
 class IndustriesController < ApplicationController
   before_action :set_industry, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /industries
   # GET /industries.json

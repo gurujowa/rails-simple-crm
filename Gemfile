@@ -21,6 +21,7 @@ gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+gem 'devise'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
@@ -47,7 +48,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+#------------------------------
 #JavaScript
+#------------------------------
 gem "select2-rails"
 gem 'icheck-rails'
 gem 'fullcalendar-rails'
@@ -58,20 +61,29 @@ gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'bootstrap-editable-rails'
 gem 'underscore-rails'
 
+#------------------------------
 #Format Convert Library
+#------------------------------
 gem 'pdfkit'
 gem 'spreadsheet'
 gem 'slim-rails'
 
+#------------------------------
+#activerecord and model
+#------------------------------
+gem 'enumerize'
+gem 'paper_trail', '>= 3.0.0.rc2'
+
+
+#------------------------------
 #other library
+#------------------------------
 gem "simple_form", "~> 3.0.0.rc"
 gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'will_paginate'
 gem 'business_time'
 gem "nested_form"
-gem 'enumerize'
-gem 'paper_trail', '>= 3.0.0.rc2'
 gem "geocoder"
 
 gem 'whenever'

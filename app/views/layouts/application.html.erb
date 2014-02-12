@@ -83,7 +83,12 @@
             <li><%= link_to "グラフ", controller: "graphs", action: "action" %></li>
           </ul>
           <ul class="nav pull-right">
-                      <li><a href="/current">ユーザー名：<%= session[:current_layout_user] %></a></li>
+          <% if user_signed_in? %>
+            <li><%= link_to 'ユーザー名：' + current_user.name, edit_user_registration_path, :class => 'navbar-link' %></li>
+            <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
+          <% else %>
+            <li><%= link_to 'ユーザーなし', new_user_session_path, :class => 'navbar-link' %></li>
+          <% end %>
           </ul>
           <!-- /.nav-collapse -->
       </div>

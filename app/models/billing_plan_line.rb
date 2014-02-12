@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: billing_plan_lines
+#
+#  id              :integer          not null, primary key
+#  bill_date       :date             not null
+#  accural_date    :date             not null
+#  memo            :text
+#  billing_plan_id :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  price           :integer
+#
+
 class BillingPlanLine < ActiveRecord::Base
 
   has_paper_trail 

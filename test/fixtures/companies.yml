@@ -1,3 +1,38 @@
+# == Schema Information
+#
+# Table name: companies
+#
+#  id               :integer          not null, primary key
+#  created_at       :datetime
+#  updated_at       :datetime
+#  category         :string(255)
+#  client_name      :string(255)
+#  tel              :string(255)
+#  fax              :string(255)
+#  mail             :string(255)
+#  status_id        :integer          not null
+#  client_person    :string(255)
+#  zipcode          :string(255)
+#  prefecture       :string(255)
+#  city             :string(255)
+#  address          :string(255)
+#  building         :string(255)
+#  created_by       :string(255)
+#  updated_by       :string(255)
+#  sales_person     :integer          not null
+#  approach_day     :date
+#  chance           :integer
+#  industry_id      :integer          default(1), not null
+#  appoint_plan     :date
+#  campaign_id      :integer          not null
+#  latitude         :float
+#  longitude        :float
+#  active_st        :string(255)      default("notstart"), not null
+#  regular_staff    :integer
+#  nonregular_staff :integer
+#  memo             :text
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 # This model initially had no columns defined.  If you add columns to the

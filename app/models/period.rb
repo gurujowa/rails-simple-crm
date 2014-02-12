@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: periods
+#
+#  id            :integer          not null, primary key
+#  day           :date             not null
+#  start_time    :time             not null
+#  end_time      :time             not null
+#  break_start   :time
+#  break_end     :time
+#  teacher_id    :integer
+#  course_id     :integer
+#  memo          :text
+#  created_at    :datetime
+#  updated_at    :datetime
+#  resume_flg    :boolean          default(FALSE), not null
+#  report_flg    :boolean          default(FALSE), not null
+#  google_id     :string(255)
+#  equipment_flg :boolean          default(FALSE), not null
+#  attend_flg    :boolean          default(FALSE), not null
+#
+
 class Period < ActiveRecord::Base
   has_paper_trail 
   validates :day, presence: true  

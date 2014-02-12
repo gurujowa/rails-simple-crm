@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: estimate_lines
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)      not null
+#  unit_price  :integer          not null
+#  quantity    :integer          not null
+#  estimate_id :integer          not null
+#  created_at  :datetime
+#  updated_at  :datetime
+#  tax_rate    :integer          default(0), not null
+#  detail      :text
+#
+
 class EstimateLine < ActiveRecord::Base
 
   has_paper_trail 

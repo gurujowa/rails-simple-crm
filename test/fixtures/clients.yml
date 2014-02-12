@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: clients
+#
+#  id                :integer          not null, primary key
+#  last_name         :string(255)      not null
+#  first_name        :string(255)
+#  last_kana         :string(255)
+#  first_kana        :string(255)
+#  tel               :string(255)
+#  fax               :string(255)
+#  mail              :string(255)
+#  gender            :integer          not null
+#  official_position :string(255)
+#  company_id        :integer          not null
+#  memo              :text
+#  created_at        :datetime
+#  updated_at        :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

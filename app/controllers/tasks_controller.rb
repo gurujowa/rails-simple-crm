@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, :only => [:show, :edit, :update, :destroy]
-  before_action :check_user
+  before_action :authenticate_user!
 
   # GET /tasks
   # GET /tasks.json
@@ -9,7 +9,7 @@ class TasksController < ApplicationController
   end
 
   def usershow
-    @tasks = Task.joins(:company).where(assignee: session[:current_user].id ).
+    @tasks = Task.joins(:company).where(assignee: current_user.id ).
     where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
     order("companies.status_id asc, companies.client_name asc, tasks.duedate asc")
 
@@ -50,7 +50,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-    @task.created_by = session[:current_user].id
+    @task.created_by = current_user.id
 
     respond_to do |format|
       if @task.save
@@ -65,7 +65,7 @@ class TasksController < ApplicationController
   
   def ajax_create
     @task = Task.new(task_params)
-    @task.created_by = session[:current_user].id
+    @task.created_by = current_user.id
     if @task.save
     else
       logger.fatal(@task.errors.full_messages.to_sentence)

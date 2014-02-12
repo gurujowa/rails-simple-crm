@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: company_payment_plans
+#
+#  id         :integer          not null, primary key
+#  duedate    :date             not null
+#  reason     :text
+#  memo       :text
+#  company_id :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class CompanyPaymentPlan < ActiveRecord::Base
   belongs_to :company
 

@@ -1,5 +1,6 @@
 class BillingPlansController < ApplicationController
   before_action :set_billing_plan, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /billing_plans
   def index

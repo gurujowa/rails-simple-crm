@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: teachers
+#
+#  id              :integer          not null, primary key
+#  first_kanji     :string(255)      not null
+#  last_kanji      :string(255)      not null
+#  first_kana      :string(255)      not null
+#  last_kana       :string(255)      not null
+#  work_possible   :integer          default(0), not null
+#  genre           :string(255)
+#  memo            :text
+#  created_at      :datetime
+#  updated_at      :datetime
+#  orientation_flg :boolean
+#  profile_flg     :boolean
+#  photo_flg       :boolean
+#  regist_flg      :boolean
+#  contract_flg    :boolean
+#  bill            :integer
+#  tel             :string(255)
+#  email           :string(255)
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

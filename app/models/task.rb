@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id          :integer          not null, primary key
+#  type_id     :integer
+#  duedate     :date
+#  name        :string(255)
+#  assignee    :integer
+#  created_by  :integer
+#  note        :string(255)
+#  progress_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  company_id  :integer
+#
+
 class Task < ActiveRecord::Base
   belongs_to :company
   belongs_to(:task_type, :foreign_key => "type_id", :class_name =>"TaskType")

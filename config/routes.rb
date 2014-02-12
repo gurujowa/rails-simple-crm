@@ -1,5 +1,6 @@
 Mycrm::Application.routes.draw do
 
+  devise_for :users
   resources :bills do
     collection do
       get "search"
@@ -39,7 +40,7 @@ Mycrm::Application.routes.draw do
   get 'teachers_flag' => 'teachers#flag'
 
 
-  resources :industries, :task_types, :statuses, :users
+  resources :industries, :task_types, :statuses
   resources :contacts, :only => [:destroy]    
 
   get "graphs/index"
@@ -89,8 +90,8 @@ Mycrm::Application.routes.draw do
 
    
   
-  get 'current' => 'users#current'
-  get 'login' => 'users#login'
+#  get 'current' => 'users#current'
+#  get 'login' => 'users#login'
 
   root :to => 'companies#index'
   # The priority is based upon order of creation: first created -> highest priority.

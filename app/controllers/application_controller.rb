@@ -41,13 +41,4 @@ class ApplicationController < ActionController::Base
   end
 
   
-    # Use callbacks to share common setup or constraints between actions.
-    def check_user
-      if session[:current_user] == nil
-        redirect_to :controller => "users", :action=>"current"
-      else
-        @current_user = session[:current_user]
-      end
-    end
-
 end

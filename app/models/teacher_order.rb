@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: teacher_orders
+#
+#  id               :integer          not null, primary key
+#  teacher_id       :integer
+#  unit_price       :integer
+#  memo             :text
+#  order_date       :date
+#  payment_date     :date
+#  created_at       :datetime
+#  updated_at       :datetime
+#  additional_price :integer          default(0), not null
+#  students         :integer
+#  description      :string(255)
+#  invoice_date     :date
+#
+
 class TeacherOrder < ActiveRecord::Base
 
   has_paper_trail 

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: estimates
+#
+#  id         :integer          not null, primary key
+#  company_id :integer          not null
+#  expired    :date
+#  send_flg   :boolean          default(FALSE), not null
+#  memo       :text
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

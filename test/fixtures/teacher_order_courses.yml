@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: teacher_order_courses
+#
+#  id               :integer          not null, primary key
+#  teacher_order_id :integer
+#  course_id        :integer
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 # This model initially had no columns defined.  If you add columns to the
