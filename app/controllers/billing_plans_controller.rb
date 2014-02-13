@@ -42,6 +42,10 @@ class BillingPlansController < ApplicationController
   def edit
   end
 
+  def flag
+    remote_flag BillingPlan
+  end
+
   # POST /billing_plans
   def create
     @billing_plan = BillingPlan.new(billing_plan_params)

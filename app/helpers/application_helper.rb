@@ -40,7 +40,7 @@ module ApplicationHelper
 
   def link_to_switch_flg model , attr
     bool = model.read_attribute(attr)
-    model_name =  model.class.model_name.human.downcase
+    model_name =  model.class.name.underscore
 
     bool_locale = bool == true ? ".flag_on" : ".flag_off"
     locale = "activerecord.flags." + model_name + "." + attr.to_s + bool_locale
@@ -48,7 +48,7 @@ module ApplicationHelper
     text = I18n.t locale
     span_tag =  %Q{<span class="flag_#{bool}">#{text}</span>}
 
-    return link_to span_tag.html_safe , {:controller => model_name.pluralize, :action => "flag",  :id => model.id, :type => attr, :format => "js"}, :remote => true,  id: %Q{#{model_name}_#{attr}_#{model.id}}
+    return link_to span_tag.html_safe , {:controller => model_name.pluralize.gsub(" ","_"), :action => "flag",  :id => model.id, :type => attr, :format => "js"}, :remote => true,  id: %Q{#{model_name}_#{attr}_#{model.id}}
   end
 
   

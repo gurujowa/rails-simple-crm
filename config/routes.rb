@@ -15,6 +15,9 @@ Mycrm::Application.routes.draw do
     collection do
       get "sales"
     end
+    member do
+      get 'flag/:type' , :action => "flag"
+    end
   end
 
   resources :clients

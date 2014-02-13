@@ -9,13 +9,17 @@ class ApplicationController < ActionController::Base
     raise  "notyのタイプに" + type.to_s + "は含まれていません" unless noty_type.include? type
 
     str = %Q{var n = noty({text: '#{text}', type: '#{type.to_s}', timeout: 1000});}
-    render :text =>  str + add_javascript
+    if add_javascript.blank?
+      render :text =>  str
+    else
+      render :text =>  str + add_javascript
+    end
   end
   
   def remote_flag model
     @to = model.find(params[:id])
     @attr = params[:type]
-    model_name = @to.class.model_name.human.downcase
+    model_name = @to.class.name.underscore
     bool = !@to.read_attribute(@attr)
     @id = %Q{#{model_name}_#{@attr}_#{@to.id}}
 
@@ -25,7 +29,7 @@ class ApplicationController < ActionController::Base
     if (@to.update_attributes({@attr => bool}))
       render :template => "js/flag"
     else
-      render_noty :error, @to.errors.full_messages
+      render_noty :error, @to.errors.full_messages.to_s + "model_name = " + model_name
     end
   end
   

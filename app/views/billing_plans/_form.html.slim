@@ -9,8 +9,8 @@
       th 会社名
       td = f.text_field :company_id, class: "search_company"
     tr
-      th ステータス
-      td = f.select :status , BillingPlan.status.options
+      th 送信済み
+      td = f.check_box :send_flg
     tr
       th 発行日
       td = f.text_field :publish_date, class: "datepicker"

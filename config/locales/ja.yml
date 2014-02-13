@@ -41,6 +41,10 @@ ja:
       teacher: 講師
       teacher_order: 講師発注
     flags:
+      billing_plan:
+        send_flg:
+          flag_on: 発送済
+          flag_off: 未発送
       estimate:
         send_flg:
           flag_on: 発行済

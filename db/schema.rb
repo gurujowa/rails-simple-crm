@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131063925) do
+ActiveRecord::Schema.define(version: 20140213013838) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(version: 20140131063925) do
   add_index "billing_plan_lines", ["billing_plan_id"], name: "index_billing_plan_lines_on_billing_plan_id"
 
   create_table "billing_plans", force: true do |t|
-    t.string   "name",                           null: false
-    t.integer  "company_id",                     null: false
-    t.integer  "tax_rate",     default: 0,       null: false
-    t.string   "status",       default: "draft", null: false
+    t.string   "name",                         null: false
+    t.integer  "company_id",                   null: false
+    t.integer  "tax_rate",     default: 0,     null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "publish_date"
+    t.boolean  "send_flg",     default: false, null: false
   end
 
   add_index "billing_plans", ["company_id"], name: "index_billing_plans_on_company_id"

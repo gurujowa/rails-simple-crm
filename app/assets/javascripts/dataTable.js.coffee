@@ -21,7 +21,11 @@ class DataTable
    switchState: ->
      for key, val of this.column 
        toggle_id = "#toggle-" + this.property.table_id + '-' + key
-       if(this.getCookieId(key) == "true" or val.defaultState == true)
+       if(this.getCookieId(key) == "true")
+         $(toggle_id).bootstrapSwitch('setState', true)
+       else if(this.getCookieId(key) == "false")
+         $(toggle_id).bootstrapSwitch('setState', false)
+       else if(val.defaultState == true)
          $(toggle_id).bootstrapSwitch('setState', true)
        else
          $(toggle_id).bootstrapSwitch('setState', false)
@@ -39,7 +43,11 @@ class DataTable
      for key, val of this.column
        if val.define == undefined
          val.define = {}
-       if (this.getCookieId(key) == "true" or val.defaultState == true)
+       if (this.getCookieId(key) == "true")
+         val.define.bVisible = true
+       else if(this.getCookieId(key) == "false")
+         val.define.bVisible = false
+       else if(val.defaultState == true)
          val.define.bVisible = true
        else
          val.define.bVisible = false
