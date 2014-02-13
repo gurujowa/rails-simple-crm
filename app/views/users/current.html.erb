@@ -1,9 +1,0 @@
-<p id="notice"><%= notice %></p>
-
-<%= form_tag({:action => "login"}, {:method=>"get"}) do |f| %>
-現在のユーザー
-  <%= select_tag(:user_id,options_from_users)%>
-  <%= submit_tag "ログインする", :class=>"btn btn-primary" %>
-<% end %>
-
-<%= link_to "ユーザー管理",{ :action=>"index"} , {:class=>"btn" }%>
