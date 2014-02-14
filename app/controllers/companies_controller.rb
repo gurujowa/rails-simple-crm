@@ -175,7 +175,6 @@ class CompaniesController < ApplicationController
     @company.contacts.build(:created_by => current_user.id)
     @company.clients.build
     set_default_form
-    build_plans
   end
 
 
@@ -204,7 +203,6 @@ class CompaniesController < ApplicationController
   def edit
     @company = Company.find(params[:id])
     @company.contacts.build(:created_by => current_user.id)
-    build_plans
 
     unless @company.clients.present?
       @company.clients.build
@@ -246,16 +244,6 @@ class CompaniesController < ApplicationController
     @industries = Industry.all
   end
 
-  def build_plans
-    @company.company_proposed_plans.build
-    @company.company_proposed_plans.first.reason = "初期設定" if @company.company_proposed_plans.first.new_record?
-    @company.company_contract_plans.build
-    @company.company_contract_plans.first.reason = "初期設定" if @company.company_contract_plans.first.new_record?
-    @company.company_payment_plans.build
-    @company.company_payment_plans.first.reason = "初期設定" if @company.company_payment_plans.first.new_record?
-  end
-
-  
   def checkbox_append(params)
     ids = []
     params.each do |p|

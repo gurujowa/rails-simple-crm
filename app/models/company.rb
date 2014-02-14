@@ -44,17 +44,12 @@ extend Enumerize
   has_many :contacts, :dependent => :destroy
   has_many :logs, :dependent => :destroy
   has_many :clients, :dependent => :destroy
+  has_many :negos, :dependent => :destroy
   has_many :tasks, :dependent => :destroy  
   has_many :courses, :dependent => :destroy
   has_many :billing_plans
   has_many :estimate
-  has_many :company_proposed_plans, :dependent => :destroy
-  has_many :company_contract_plans, :dependent => :destroy
-  has_many :company_payment_plans, :dependent => :destroy  
 
-  accepts_nested_attributes_for :company_proposed_plans , reject_if: proc { |a| a['duedate'].blank? }
-  accepts_nested_attributes_for :company_contract_plans , reject_if: proc { |a| a['duedate'].blank? }
-  accepts_nested_attributes_for :company_payment_plans , reject_if: proc { |a| a['duedate'].blank? }
   accepts_nested_attributes_for :contacts,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
   accepts_nested_attributes_for :clients,  :allow_destroy => true , reject_if: :all_blank
 
@@ -155,24 +150,6 @@ extend Enumerize
     end
     return address
 
-  end
-
-  def proposed_plan
-    if self.company_proposed_plans.present?
-      self.company_proposed_plans.last.duedate
-    end
-  end
-
-  def contract_plan
-    if self.company_contract_plans.present?
-      self.company_contract_plans.last.duedate
-    end
-  end
-
-  def payment_plan
-    if self.company_payment_plans.present?
-      self.company_payment_plans.last.duedate
-    end
   end
 
   def getContactMemo

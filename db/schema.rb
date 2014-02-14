@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140213013838) do
+ActiveRecord::Schema.define(version: 20140214053234) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -230,6 +230,16 @@ ActiveRecord::Schema.define(version: 20140213013838) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "created_by"
+  end
+
+  create_table "negos", force: true do |t|
+    t.string   "name"
+    t.integer  "company_id", null: false
+    t.integer  "user_id",    null: false
+    t.string   "stage",      null: false
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "periods", force: true do |t|
