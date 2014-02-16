@@ -84,7 +84,7 @@
           </ul>
           <ul class="nav pull-right">
           <% if user_signed_in? %>
-            <li><%= link_to 'ユーザー名：' + current_user.name, edit_user_registration_path, :class => 'navbar-link' %></li>
+            <li><a class="navbar-link">ユーザー名： <%= current_user.name %></a></li>
             <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
           <% else %>
             <li><%= link_to 'ユーザーなし', new_user_session_path, :class => 'navbar-link' %></li>
