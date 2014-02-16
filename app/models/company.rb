@@ -52,19 +52,17 @@ extend Enumerize
 
   accepts_nested_attributes_for :contacts,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
   accepts_nested_attributes_for :clients,  :allow_destroy => true , reject_if: :all_blank
+  accepts_nested_attributes_for :negos,  :allow_destroy => true , 
+    reject_if: proc{|a| a['name'].blank?}
 
-  belongs_to :status
   belongs_to :campaign
   belongs_to :industry
   belongs_to :created_user , class_name: "User", foreign_key: "created_by"
-  belongs_to :sales_user , class_name: "User", foreign_key: "sales_person"
   belongs_to :updated_user , class_name: "User", foreign_key: "updated_by"
 
   validates :mail, :email_format => {:message => ' メールアドレスの形式が不適切です'}, :allow_blank => true
-  validates :status_id, presence: true  
   validates :campaign_id, presence: true  
   validates :industry_id, presence: true
-  validates :sales_person, presence: true
   validates :active_st, presence: true  
   validates :tel, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true},  :uniqueness => true, :presence => true
   validates :fax, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}
@@ -77,6 +75,16 @@ extend Enumerize
 
   scope :is_active, lambda {where(active_st: [:active_a,:active_b, :active_c]).where.not("statuses.rank = ?","A")}
   scope :is_contract,lambda {where(status_id: 19)} 
+  scope :sales_where, lambda {|a| joins(:negos).where("negos.user_id = ?", a)}
+
+  def salesman
+    if self.negos.length >= 2
+      user_names = self.negos.map {|x| x.user.name}
+      return user_names.uniq.join("：")
+    else
+      self.negos.first.user.name
+    end
+  end
 
   def getAddress
     address = ""
@@ -116,13 +124,6 @@ extend Enumerize
     count
   end
 
-  def sales_name
-    if self.sales_person.present?
-      User.find(self.sales_person).name
-    else
-      return ""
-    end
-  end
 
   def max_rank
     array = []
@@ -200,7 +201,7 @@ extend Enumerize
       key = 1
       all.each do |row|
         memos = row.contacts.map{|c| c.memo}
-        csv << row.attributes.map{|a| a[1]}.concat([row.client_person, row.status.rank, row.status.name, row.sales_name, memos.join("\n・"), row.campaign.name, row.max_rank, row.got_appoint])
+        csv << row.attributes.map{|a| a[1]}.concat([row.client_person, row.status.rank, row.status.name,  memos.join("\n・"), row.campaign.name, row.max_rank, row.got_appoint])
         key += 1
       end
     end

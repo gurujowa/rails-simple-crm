@@ -1,7 +1,10 @@
 module UsersHelper
       
-      def options_from_users(selected_id = nil)
+      def options_from_users(selected_id = nil, current_user = false)
         users = User.all()
+        if selected_id.blank? and current_user == true
+          selected_id = current_user.id
+        end
         options = options_from_collection_for_select(users, :id, :name, :selected=>selected_id)
         return options
       end

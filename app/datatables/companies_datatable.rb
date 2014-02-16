@@ -53,7 +53,7 @@ class CompaniesDatatable
     end
 
     if p_comp['sales_person'].present?
-      companies = companies.where(:sales_person => p_comp['sales_person'])
+      companies = companies.sales_where(p_comp['sales_person'])
     end
 
     if p_comp['status_id'].present?
@@ -82,7 +82,6 @@ class CompaniesDatatable
     if p_comp['updated_at'].present?
       companies = companies.where(:updated_at => Date.parse(p_comp['updated_at']).beginning_of_day..Date.parse(p_comp['updated_at']).end_of_day)
     end
-    
     
     return companies
   end

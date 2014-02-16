@@ -1,3 +1,5 @@
+
+.company_edit_header_1 会社情報
 .well
   - @company.errors.full_messages.each do |msg|
     li= msg
@@ -23,13 +25,13 @@
       = form.collection_select :campaign_id , Campaign.all, :id, :name, :include_blank => true
       = link_to "(新規追加)", campaigns_path
   .control-group
-    label.control-label 状態ステータス
-    .controls
-      = form.select :active_st, Company.active_st.options, :include_blank => true
-  .control-group
     label.control-label 案件進行ステータス
     .controls
       = form.select :status_id, options_from_statuses(@company.status_id), :include_blank => true
+  .control-group
+    label.control-label 状態ステータス
+    .controls
+      = form.select :active_st, Company.active_st.options, :include_blank => true
   .control-group
     label.control-label 人数
     .controls
@@ -64,6 +66,19 @@
     label.control-label メモ
     .controls
       = form.text_area :memo, :rows => "8" , :style =>"width:100%"
+
+.company_edit_header_1 商談
+.well
+  ul.nav.nav-pills#company_edit_negos_tab
+    - @company.negos.each_with_index do |c,i|
+      li class=("active" if i==0)
+        a id="company_edit_nego_tab_#{i}" href="#company_edit_nego_#{i}" data-toggle="tab"
+          = c.name.present? ? c.name : "新しい商談"
+  .tab-content.add_fields#company_edit_negos_tab_content
+    = form.fields_for :negos do |i|
+      = render :partial => "nego_fields", :locals => { :f => i}
+
+.company_edit_header_1 連絡先
 .well
   ul.nav.nav-pills#company_edit_clients_tab
     li.clients_tab_add_field
@@ -76,27 +91,24 @@
     = form.fields_for :clients do |i|
       = render :partial => "client_fields", :locals => { :f => i}
 
-コンタクト
+.company_edit_header_1 コンタクト
 .well
-  .control-group
-    label.control-label コンタクト
-    .controls
-      - contact_index = 1
-      table.table
-        = form.fields_for :contacts do |c|
-          tr
-            td= contact_index
-            td style="width:100px;"
-              - ContactType.all.each do |t|
-                = c.radio_button :con_type, t.id , :class =>"icheck"
-                = c.label "con_type_"+ t.id.to_s, t.name
-                br
-            td
-              = c.text_area :memo, :rows => "8" , :style =>"width:100%"
-              br
-                | \&nbsp;&nbsp;&nbsp;担当者：#{c.object.getCreatedBy()}, 作成日: #{simple_date(c.object.created_at)}
-                br
-                  = c.hidden_field :created_by
-                  - contact_index += 1
+  - contact_index = 1
+  table.table
+    = form.fields_for :contacts do |c|
+      tr
+        td= contact_index
+        td style="width:100px;"
+          - ContactType.all.each do |t|
+            = c.radio_button :con_type, t.id , :class =>"icheck"
+            = c.label "con_type_"+ t.id.to_s, t.name
+            br
+        td
+          = c.text_area :memo, :rows => "6" , :style =>"width:100%"
+          br
+            | \&nbsp;&nbsp;&nbsp;担当者：#{c.object.getCreatedBy()}, 作成日: #{simple_date(c.object.created_at)}
+            br
+              = c.hidden_field :created_by
+              - contact_index += 1
 .form-actions
   = submit_tag "編集する", :class=>"btn btn-primary"

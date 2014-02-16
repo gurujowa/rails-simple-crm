@@ -14,7 +14,7 @@ table.table.table-bordered
         td = i+1
         td = link_to c.client_name , {action: "edit", id: c.id}
         td = c.status.name
-        td = get_user_name c.sales_person
+        td = c.salesman
         td = c.updated_at.strftime("%Y-%m-%d %H時")
         td style="width:60%;"
           - c.contacts.each do |o|

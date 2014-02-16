@@ -1,0 +1,13 @@
+.tab-pane id="company_edit_nego_#{f.index}" class=("active" if f.index == 0) data-pk="#{f.index}"
+  .control-group
+    label.control-label 商談名
+    .controls = f.text_field :name
+  .control-group
+    label.control-label 商談ステージ
+    .controls = f.text_field :stage
+  .control-group
+    label.control-label メモ
+    .controls = f.text_area :memo, :class => "span12", :rows => "4"
+  .control-group
+    label.control-label 担当営業
+    .controls= f.select :user_id , options_from_users(f.object.user_id, true)

@@ -9,8 +9,8 @@ class GraphsController < ApplicationController
   end
 
   def action
-    @contacts = Contact.joins(:company).select("contacts.created_at, companies.sales_person, contacts.con_type,  count(*) as count").where("contacts.con_type is not null")
-    .group("date(contacts.created_at), companies.sales_person, contacts.con_type").having('date(contacts.created_at) >= ?', '2013-09-01')
+    @contacts = Contact.joins(:company).select("contacts.created_at,  contacts.con_type,  count(*) as count").where("contacts.con_type is not null")
+    .group("date(contacts.created_at),  contacts.con_type").having('date(contacts.created_at) >= ?', '2013-09-01')
   end
   
   private

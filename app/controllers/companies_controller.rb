@@ -207,6 +207,8 @@ class CompaniesController < ApplicationController
     unless @company.clients.present?
       @company.clients.build
     end
+    @company.negos.build
+
     @course = Course.where(company_id: params[:id])
     set_default_form
   end
@@ -260,9 +262,10 @@ class CompaniesController < ApplicationController
   
   def company_params
     params.require(:company).permit(:id, :client_name,  :category, :tel, :fax, :status_id, :active_st,  :zipcode, :prefecture, :appoint_plan,
-      :city, :address, :building, :mail, :industry_id, :regular_staff, :nonregular_staff, :memo, :sales_person,:approach_day,  :lead, :created_by,  :updated_by, :campaign_id,  
+      :city, :address, :building, :mail, :industry_id, :regular_staff, :nonregular_staff, :memo, :approach_day,  :lead, :created_by,  :updated_by, :campaign_id,  
       contacts_attributes: [:id, :memo, :created_by, :con_type],
       clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position,  :memo],
+      negos_attributes: [:id, :name, :stage, :user_id,  :memo],
                                    )
   end
 
