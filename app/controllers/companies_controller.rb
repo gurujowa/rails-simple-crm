@@ -5,41 +5,10 @@ class CompaniesController < ApplicationController
       @not_complite = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).where("duedate <= ?", Date.today).
       order("duedate asc").all
       
-      @not_task = Company.connection.select_all('
-      SELECT companies.id,companies.client_name,statuses.name as status, companies.sales_person as sales_person, strftime("%Y-%m-%d",companies.updated_at) as up_at
-      FROM companies 
-      LEFT JOIN tasks ON tasks.company_id = companies.id
-      INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE companies.active_st = \'active\' AND tasks.id Is Null AND statuses.rank != "A"
-      GROUP BY companies.client_name, companies.updated_at
-      order by up_at ASC;
-      ')
 
       @not_complite_current = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
       where(assignee: current_user.id).order("duedate asc").all
       
-      @not_task_current = Company.connection.select_all('
-      SELECT companies.id,companies.client_name,statuses.name as status, strftime("%Y-%m-%d",companies.updated_at) as up_at
-      FROM companies 
-      LEFT JOIN tasks ON tasks.company_id = companies.id
-      INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE companies.active_st = \'active\' AND tasks.id Is Null AND statuses.rank != "A"
-      AND companies.sales_person = ' + current_user.id.to_s + '
-      GROUP BY companies.client_name, companies.updated_at
-      order by up_at Asc;
-      ')
-      
-      @uncomplite = Company.connection.select_all('
-      SELECT companies.id as comp_id,companies.client_name,statuses.name as status, 
-      companies.sales_person as sales_person, 
-      strftime("%Y-%m-%d",companies.updated_at) as up_at
-      FROM companies 
-      INNER JOIN statuses ON statuses.id = companies.status_id
-      WHERE companies.active_st = \'active\' AND statuses.rank != "A"
-      AND NOT EXISTS(select id from tasks where tasks.company_id = comp_id and tasks.progress_id in (1,2,3))
-      GROUP BY companies.client_name, companies.updated_at
-      order by up_at DESC;
-      ')
   end
 
   def client_sheet
