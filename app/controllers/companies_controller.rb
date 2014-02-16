@@ -174,6 +174,7 @@ class CompaniesController < ApplicationController
     @company = Company.new
     @company.contacts.build(:created_by => current_user.id)
     @company.clients.build
+    @company.negos.build
     set_default_form
   end
 
