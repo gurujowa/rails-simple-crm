@@ -39,6 +39,7 @@ extend Enumerize
 
   has_paper_trail 
   geocoded_by :getAddress
+  attr_accessor :sales_person
   after_validation :geocode
 
   has_many :contacts, :dependent => :destroy

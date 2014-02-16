@@ -13,9 +13,6 @@
       = form.collection_select(:industry_id, @industries, :id, :name, {:include_blank => true })
       | (#{link_to "業種の追加", {controller: "industries"}})
   .control-group
-    label.control-label 担当営業
-    .controls= form.select :sales_person , options_from_users(@company.sales_person), :include_blank => true
-  .control-group
     label.control-label 代表電話
     .controls
       | TEL#{form.text_field :tel} FAX#{form.text_field :fax} MAIL#{form.text_field :mail}

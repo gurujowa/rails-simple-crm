@@ -22,6 +22,7 @@ class CompanyTable
     sales_person:
       value: "営業マン"
       defaultState: true
+      define: { bSortable: false}
     industry_id:
       value: "業種"
     chance:

@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 20140214084335) do
     t.string   "tel"
     t.string   "fax"
     t.string   "mail"
-    t.integer  "status_id",                                         null: false
+    t.integer  "status_id",                             null: false
     t.string   "client_person"
     t.string   "zipcode"
     t.string   "prefecture"
@@ -116,15 +116,14 @@ ActiveRecord::Schema.define(version: 20140214084335) do
     t.string   "building"
     t.string   "created_by"
     t.string   "updated_by"
-    t.integer  "sales_person",     limit: 255,                      null: false
     t.date     "approach_day"
     t.integer  "chance"
-    t.integer  "industry_id",                  default: 1,          null: false
+    t.integer  "industry_id",      default: 1,          null: false
     t.date     "appoint_plan"
-    t.integer  "campaign_id",                                       null: false
+    t.integer  "campaign_id",                           null: false
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "active_st",                    default: "notstart", null: false
+    t.string   "active_st",        default: "notstart", null: false
     t.integer  "regular_staff"
     t.integer  "nonregular_staff"
     t.text     "memo"

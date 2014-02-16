@@ -99,6 +99,11 @@ class CompaniesController < ApplicationController
       @active_st = params[:active_st]
     end
     @company_params =  @company.attributes.to_hash
+
+    if params[:company].present?
+      @company_params.store(:sales_person,params[:company][:sales_person])
+    end
+
     respond_to do |format|
       format.html
       format.json
