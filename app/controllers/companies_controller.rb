@@ -42,7 +42,7 @@ class CompaniesController < ApplicationController
     if (!params[:id].present?)
       params[:id] = current_user.id
     end
-    @companies = Company.joins(:status).where(sales_person: params[:id] ).is_active.
+    @negos = Nego.joins(:status,:company).where(user_id: params[:id] ).is_active.
     order("companies.active_st asc, statuses.rank asc, companies.id asc").limit(40)
 
     respond_to do |format|
@@ -240,7 +240,7 @@ class CompaniesController < ApplicationController
       :city, :address, :building, :mail, :industry_id, :regular_staff, :nonregular_staff, :memo, :approach_day,  :lead, :created_by,  :updated_by, :campaign_id,  
       contacts_attributes: [:id, :memo, :created_by, :con_type],
       clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position,  :memo],
-      negos_attributes: [:id, :name, :stage, :user_id,  :memo],
+      negos_attributes: [:id, :name, :status_id, :user_id,  :memo],
                                    )
   end
 

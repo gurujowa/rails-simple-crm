@@ -4,7 +4,7 @@
     .controls = f.text_field :name
   .control-group
     label.control-label 商談ステージ
-    .controls = f.select :stage, options_from_statuses(f.object.stage), :include_blank => true
+    .controls = f.select :status_id, options_from_statuses(f.object.status_id), :include_blank => true
   .control-group
     label.control-label メモ
     .controls = f.text_area :memo, :class => "span12", :rows => "4"

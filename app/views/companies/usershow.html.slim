@@ -13,15 +13,15 @@ table style="border-collapse:collapse;" class="table table-bordered" id="usersho
       th 状態ステータス
       th 進行ステータス
   tbody
-    - @companies.each_with_index do |c,i| 
+    - @negos.each_with_index do |n,i| 
       tr class="#{cycle('even','odd')} #{ i == 4 ? 'big_border' : nil }"
-        td class="level1" data-pk="#{c.id}"
+        td class="level1" data-pk="#{n.id}"
           = i+1
-        td = link_to c.client_name , {action: "edit", id: c.id}
-        td = c.active_st_text
-        td = c.status.name
-      - c.contacts.each do |o|
-        tr class="tr-contact-#{c.id} level2" style="display:none"
+        td = link_to n.company.client_name , {action: "edit", id: n.company.id}
+        td = n.company.active_st_text
+        td = n.status.name
+      - n.company.contacts.each do |o|
+        tr class="tr-contact-#{n.id} level2" style="display:none"
           td &nbsp;
           td style="width:100px;" = o.type
           td = o.created_at.strftime("%Y-%m-%d")

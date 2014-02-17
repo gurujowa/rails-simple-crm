@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140214084335) do
+ActiveRecord::Schema.define(version: 20140217004537) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 20140214084335) do
     t.string   "name"
     t.integer  "company_id", null: false
     t.integer  "user_id",    null: false
-    t.string   "stage",      null: false
+    t.string   "status_id",  null: false
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
