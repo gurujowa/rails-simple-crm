@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140217004537) do
+ActiveRecord::Schema.define(version: 20140218082315) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 20140217004537) do
     t.string   "tel"
     t.string   "fax"
     t.string   "mail"
-    t.integer  "status_id",                             null: false
     t.string   "client_person"
     t.string   "zipcode"
     t.string   "prefecture"

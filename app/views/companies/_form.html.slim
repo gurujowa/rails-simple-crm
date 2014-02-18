@@ -22,10 +22,6 @@
       = form.collection_select :campaign_id , Campaign.all, :id, :name, :include_blank => true
       = link_to "(新規追加)", campaigns_path
   .control-group
-    label.control-label 案件進行ステータス
-    .controls
-      = form.select :status_id, options_from_statuses(@company.status_id), :include_blank => true
-  .control-group
     label.control-label 状態ステータス
     .controls
       = form.select :active_st, Company.active_st.options, :include_blank => true

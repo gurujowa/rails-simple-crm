@@ -6,7 +6,6 @@
   <ul class="dropdown-menu">
     <li>
       <a href="#" id="label" data-source="<%= url_for(:action => 'pdf') %>">ラベル印刷</a>
-      <a href="#" id="up_postsend" data-source="<%= url_for(:action => 'up_postsend') %>">郵送済みへステータス変更</a>
     </li>
   </ul>
 </div>
@@ -17,7 +16,7 @@
 </table>
 </div>
 <div class="span10">
-<table id="companies_datatable" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>@company_params, :rank => params[:rank] %>">
+  <table id="companies_datatable" class="display" data-source="<%= url_for :controller => 'companies', :action => 'search', :format =>"json", :company =>@company_params, :rank => params[:rank] , :stage => params[:stage], :saler => params[:saler]%>">
 <thead>
   <tr>
   </tr>

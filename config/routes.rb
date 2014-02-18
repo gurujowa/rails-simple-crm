@@ -72,9 +72,7 @@ Mycrm::Application.routes.draw do
       get "label"
       get "usershow"
       get "pdf"
-      get "failure"
       get "name"
-      get "up_postsend"
     end
     
     member do

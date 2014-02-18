@@ -39,7 +39,7 @@ extend Enumerize
 
   has_paper_trail 
   geocoded_by :getAddress
-  attr_accessor :sales_person
+
   after_validation :geocode
 
   has_many :contacts, :dependent => :destroy
@@ -74,8 +74,6 @@ extend Enumerize
 
   enumerize :active_st, in: [:contract , :active_a, :active_b, :active_c, :pending, :notfull,  :impossible]
 
-  scope :is_active, lambda {where(active_st: [:active_a,:active_b, :active_c]).where.not("statuses.rank = ?","A")}
-  scope :is_contract,lambda {where(status_id: 19)} 
   scope :sales_where, lambda {|a| joins(:negos).where("negos.user_id = ?", a)}
 
   def salesman
@@ -126,15 +124,6 @@ extend Enumerize
   end
 
 
-  def max_rank
-    array = []
-    self.logs.each do |c|
-      if c.status.present?
-        array.push(c.status.rank)
-      end
-    end
-    return array.sort!.first
-  end
 
   def full_address
     address = ""
@@ -196,13 +185,25 @@ extend Enumerize
     found
   end
 
+  def status_name
+    if self.negos.length >= 2
+      status_names = self.negos.map {|x| x.status.name}
+      return status_names.uniq.join("：")
+    else
+      status =  self.negos.first.status
+      if status.present?
+        status.name
+      end
+    end
+  end
+
   def self.to_csv
     CSV.generate do |csv|
-      csv << self.column_names.concat(["担当者名","ランク","ステータス名","営業マン", "コンタクト","キャンペーン","最終到達ランク","アポイント数"])
+      csv << self.column_names.concat(["担当者名","営業マン", "コンタクト","キャンペーン","アポイント数"])
       key = 1
       all.each do |row|
         memos = row.contacts.map{|c| c.memo}
-        csv << row.attributes.map{|a| a[1]}.concat([row.client_person, row.status.rank, row.status.name,  memos.join("\n・"), row.campaign.name, row.max_rank, row.got_appoint])
+        csv << row.attributes.map{|a| a[1]}.concat([row.client_person,  memos.join("\n・"), row.campaign.name, row.got_appoint])
         key += 1
       end
     end
@@ -214,11 +215,6 @@ extend Enumerize
     else
       return "未設定"
     end
-  end
-
-  
-  after_save do
-    Log.create!(:company_id => self.id, :status_id => self.status_id, :created_by => self.updated_name)
   end
 
 end

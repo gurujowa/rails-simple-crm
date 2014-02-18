@@ -8,7 +8,6 @@ class CompaniesController < ApplicationController
 
       @not_complite_current = Task.where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
       where(assignee: current_user.id).order("duedate asc").all
-      
   end
 
   def client_sheet
@@ -23,14 +22,8 @@ class CompaniesController < ApplicationController
     send_file report.write  , :type=>"application/ms-excel", :filename => "client_sheet.xls"
   end
 
-  def failure
-    @companies = Company.joins(:status)
-    .where("companies.updated_at BETWEEN ? AND ?" , 3.day.ago, DateTime.now.end_of_day)
-    .where(:statuses => {rank:  ["X","Z"]})
-  end
-
   def name
-    @companies = Company.joins(:status).where("client_name like :search", search: "%#{params[:q]}%").
+    @companies = Nego.joins(:company, :status).where("company.client_name like :search", search: "%#{params[:q]}%").
       where(:statuses => {rank:  ["A".."K"]}).order("statuses.rank asc")
   end
 
@@ -68,10 +61,6 @@ class CompaniesController < ApplicationController
       @active_st = params[:active_st]
     end
     @company_params =  @company.attributes.to_hash
-
-    if params[:company].present?
-      @company_params.store(:sales_person,params[:company][:sales_person])
-    end
 
     respond_to do |format|
       format.html
@@ -126,24 +115,6 @@ class CompaniesController < ApplicationController
     end
   end
   
-  def up_postsend
-    @companies = Company.find(checkbox_append(params))
-    
-    begin
-      @companies.each do |c|
-        c.status_id = 14
-        c.save!
-      end
-    rescue => e
-      logger.fatal "up_postsend error  ||" + e.message
-      render :json => {'text' => e.message, 'type' => 'error'}
-      return
-    end
-
-    render :json => {'text' => 'ステータスの変更が完了しました', 'type' => 'alert'}
-    return
-  end
-
   def new
     @company = Company.new
     @company.contacts.build(:created_by => current_user.id)
@@ -205,8 +176,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-  # DELETE /statuses/1
-  # DELETE /statuses/1.json
   def destroy
     @company = Company.find(params[:id])
     @company.destroy
@@ -236,7 +205,7 @@ class CompaniesController < ApplicationController
   end
   
   def company_params
-    params.require(:company).permit(:id, :client_name,  :category, :tel, :fax, :status_id, :active_st,  :zipcode, :prefecture, :appoint_plan,
+    params.require(:company).permit(:id, :client_name,  :category, :tel, :fax,  :active_st,  :zipcode, :prefecture, :appoint_plan,
       :city, :address, :building, :mail, :industry_id, :regular_staff, :nonregular_staff, :memo, :approach_day,  :lead, :created_by,  :updated_by, :campaign_id,  
       contacts_attributes: [:id, :memo, :created_by, :con_type],
       clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position,  :memo],

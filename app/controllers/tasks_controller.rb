@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   def usershow
     @tasks = Task.joins(:company).where(assignee: current_user.id ).
     where.not(progress_id: [TaskProgress.getId(:finish),TaskProgress.getId(:canceled)]).
-    order("companies.status_id asc, companies.client_name asc, tasks.duedate asc")
+    order("companies.active_st asc, companies.client_name asc, tasks.duedate asc")
 
     respond_to do |format|
       format.html

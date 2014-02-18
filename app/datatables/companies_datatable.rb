@@ -28,7 +28,7 @@ class CompaniesDatatable
   end
 
   def fetch_companies
-    companies = Company.order("#{sort_column} #{sort_direction}")
+    companies = Company.joins(:negos).order("#{sort_column} #{sort_direction}")
     companies = companies.page(page).per_page(per_page)
     if params[:sSearch].present?
       companies = companies.where("client_name like :search", search: "%#{params[:sSearch]}%")
@@ -52,15 +52,15 @@ class CompaniesDatatable
       companies = companies.where("tel like ?","%" + p_comp['tel'] + "%")
     end
 
-    if p_comp['sales_person'].present?
-      companies = companies.sales_where(p_comp['sales_person'])
+    if params['saler'].present?
+      companies = companies.sales_where(params['saler'])
     end
 
-    if p_comp['status_id'].present?
-      companies = companies.where(:status_id => p_comp['status_id'])
+    if params['stage'].present?
+      companies = companies.where("negos.status_id = ?",  params['stage'])
     elsif params[:rank].present?
       status_array = Status.find_all_by_rank(params['rank'])
-      companies = companies.where(:status_id => status_array)
+      companies = companies.where(negos: {status_id: status_array})
     end
 
     if p_comp['active_st'].present?
