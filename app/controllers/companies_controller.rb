@@ -119,7 +119,7 @@ class CompaniesController < ApplicationController
     @company = Company.new
     @company.contacts.build(:created_by => current_user.id)
     @company.clients.build
-    @company.negos.build
+    @company.negos.build(name: "新規商談")
     set_default_form
   end
 
