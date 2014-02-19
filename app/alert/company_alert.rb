@@ -14,12 +14,12 @@ class CompanyAlert
   end
 
   def self.check_all
-      companies = Company.is_contract()
-      alert = self.new
-      companies.each do |c|
-        alert.check c
-      end
-      alert
+#      companies = Company.is_contract()
+#      alert = self.new
+#      companies.each do |c|
+#        alert.check c
+#      end
+#      alert
   end
 
 
