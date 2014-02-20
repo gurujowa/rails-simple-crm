@@ -76,6 +76,7 @@ extend Enumerize
 
   scope :sales_where, lambda {|a| joins(:negos).where("negos.user_id = ?", a)}
   scope :has_contract, lambda{ where("active_st = ?", :contract)}
+  scope :is_active, lambda { where(:active_st => [:active_a, :active_b, :active_c, :contract] ) }
 
   def salesman
     if self.negos.length >= 2

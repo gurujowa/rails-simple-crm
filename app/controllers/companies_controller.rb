@@ -23,8 +23,7 @@ class CompaniesController < ApplicationController
   end
 
   def name
-    @companies = Nego.joins(:company, :status).where("company.client_name like :search", search: "%#{params[:q]}%").
-      where(:statuses => {rank:  ["A".."K"]}).order("statuses.rank asc")
+    @companies = Company.where("companies.client_name like :search", search: "%#{params[:q]}%").is_active
   end
 
   def find
