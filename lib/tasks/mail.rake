@@ -12,7 +12,7 @@ namespace :mail do
 
   desc "コースのリマインダーメール"
   task "course:reminder" => :environment do
-      beginning =  DateTime.tomorrow.beginning_of_day.utc.to_s(:db)
+      beginning =  DateTime.now.beginning_of_day.utc.to_s(:db)
       ending =  DateTime.tomorrow.end_of_day.utc.to_s(:db)
       periods = Period.where("STRFTIME('%Y-%m-%d %H:%M:%S', day) > ?", beginning).where("STRFTIME('%Y-%m-%d %H:%M:%S', day) <= ?",ending).all
 

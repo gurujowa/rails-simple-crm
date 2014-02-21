@@ -21,16 +21,26 @@ class AlertMailer < ActionMailer::Base
     address = ["kenshu_g@yourbright.co.jp"]
 
     if @period.teacher.email.present?
-      address << [@period.teacher.email]
+      address = address + [@period.teacher.email]
     else
       send_error("講師のメールアドレスが存在しません。講師名＝" + @period.teacher.name)
     end
+
+    negos = @period.course.company.negos
+    sales_mail = negos.map {|x| x.user.email}
+
+    if sales_mail.blank?
+      send_error("営業マンが存在しません。会社名＝" + @period.course.company.client_name)
+    else
+      address = address + sales_mail
+    end
+
 
     if @period.course.company.blank? or @period.course.company.mail.blank?
       send_error("会社の連絡先が存在しません。会社名＝" + @period.course.company.client_name)
     else
       mailad = @period.course.company.mail
-      address << mailad
+      address = address + [mailad]
     end
 
     p address.inspect
