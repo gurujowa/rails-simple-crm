@@ -27,6 +27,9 @@ class EstimatesController < ApplicationController
   # GET /estimates/new
   def new
     @estimate = Estimate.new
+    if params[:company_id].present?
+      @estimate.company_id = params[:company_id]
+    end
   end
 
   # GET /estimates/1/edit

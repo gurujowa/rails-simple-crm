@@ -32,6 +32,9 @@ class BillingPlansController < ApplicationController
   def new
     @billing_plan = BillingPlan.new
     @billing_plan.billing_plan_lines.new
+    if params[:company_id].present?
+      @billing_plan.company_id = params[:company_id]
+    end
   end
 
   def sales
