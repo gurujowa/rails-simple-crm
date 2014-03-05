@@ -148,10 +148,7 @@ class CompaniesController < ApplicationController
   def edit
     @company = Company.find(params[:id])
     @company.contacts.build(:created_by => current_user.id)
-
-    unless @company.clients.present?
-      @company.clients.build
-    end
+    @company.clients.build
     @company.negos.build
 
     @course = Course.where(company_id: params[:id])

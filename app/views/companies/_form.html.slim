@@ -74,8 +74,6 @@
 .company_edit_header_1 連絡先
 .well
   ul.nav.nav-pills#company_edit_clients_tab
-    li.clients_tab_add_field
-      = link_to_add_fields "＋", form, :clients
     - @company.clients.each_with_index do |c,i|
       li class=("active" if i==0)
         a id="company_edit_client_tab_#{i}" href="#company_edit_client_#{i}" data-toggle="tab"
