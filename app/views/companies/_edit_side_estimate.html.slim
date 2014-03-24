@@ -10,3 +10,14 @@
         tr
           td  = link_to e.estimate_lines.first.name,edit_estimate_path(e)
           td  = number_to_currency e.total_price
+  h4 請求予定表一覧
+  table.table.table-bordered
+    thead
+      tr
+        th 件名
+        th 価格
+    tbody
+      - @company.billing_plans.each do |e|
+        tr
+          td  = link_to e.name , edit_billing_plan_path(e)
+          td  = number_to_currency e.total_price
