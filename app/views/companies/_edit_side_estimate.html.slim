@@ -8,5 +8,5 @@
     tbody
       - @company.estimates.each do |e|
         tr
-          td  = link_to e.estimate_lines.first.name,edit_company_path(@company)
+          td  = link_to e.estimate_lines.first.name,edit_estimate_path(e)
           td  = number_to_currency e.total_price
