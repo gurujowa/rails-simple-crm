@@ -49,7 +49,7 @@ extend Enumerize
   has_many :tasks, :dependent => :destroy  
   has_many :courses, :dependent => :destroy
   has_many :billing_plans
-  has_many :estimate
+  has_many :estimates
 
   accepts_nested_attributes_for :contacts,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
   accepts_nested_attributes_for :clients,  :allow_destroy => true , reject_if: :all_blank

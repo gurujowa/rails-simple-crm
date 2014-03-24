@@ -1,0 +1,12 @@
+.well
+  h4 見積り一覧
+  table.table.table-bordered
+    thead
+      tr
+        th コース名(最初の1つ)
+        th 価格
+    tbody
+      - @company.estimates.each do |e|
+        tr
+          td  = link_to e.estimate_lines.first.name,edit_company_path(@company)
+          td  = number_to_currency e.total_price
