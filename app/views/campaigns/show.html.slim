@@ -1,0 +1,19 @@
+h1 新規獲得一覧
+
+table.default_datatables
+  thead
+    tr
+      th 会社名
+      th ステータス
+      th 状態ステータス
+      th 営業マン
+      th style="width:50%" コンタクト
+  tbody
+    - @companies.each do |c|
+      tr
+        td = c.client_name
+        td = c.active_st_text
+        td = c.status_name
+        td = c.salesman
+        td = contactAsHtml(c)
+
