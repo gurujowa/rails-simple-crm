@@ -27,6 +27,10 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :periods, :allow_destroy => true
 
   validates :name, presence: true
+  validates :address, presence: true
+  validates :station, presence: true
+  validates :responsible, presence: true
+  validates :tel, presence: true
   validates :company_id, presence: true
 
   @@color = ["MidnightBlue", "DarkViolet", "Crimson", "Navy", "Black", "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta"]

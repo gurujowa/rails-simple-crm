@@ -18,6 +18,7 @@ namespace :mail do
 
       periods.each do |p|
         AlertMailer.reminder(p).deliver
+        AlertMailer.company_reminder(p).deliver
       end
   end
 

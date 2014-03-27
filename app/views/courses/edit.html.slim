@@ -1,0 +1,59 @@
+ul.breadcrumb
+  li
+    a href="/" Home 
+    span class="divider" ＞
+    = link_to @course.company.client_name, edit_company_path(@course.company) 
+    span class="divider" ＞
+    li.active = @course.name
+
+
+= form_for @course , html: {class: "form-horizontal"}do |f|
+  ul
+    - @course.errors.full_messages.each do |msg|
+      li = msg
+  
+  .control-group
+    label.control-label コース名
+    .controls = f.text_field :name, class: "input-xxlarge"
+  .control-group
+    label.control-label 会場住所
+    .controls = f.text_field :address, class: "input-xxlarge"
+  .control-group
+    label.control-label 最寄り駅と駅からの距離
+    .controls = f.text_field :station
+  .control-group
+    label.control-label 先方研修担当者名
+    .controls = f.text_field :responsible
+  .control-group
+    label.control-label 先方緊急連絡先
+    .controls = f.text_field :tel
+
+  table.table.table-bordered.table-striped#periods_table
+    thead
+      tr
+        th 日付
+        th 開始時刻
+        th 終了時刻
+        th 休憩開始
+        th 休憩終了
+        th 講師
+        th 合計時間
+        th レジュメ
+        th 備品確認
+        th 出欠表
+        th 実施報告書
+        th メモ
+    tbody.add_fields
+      = f.fields_for :periods do |c|
+        = render :partial => "period_fields", :locals => { :f => c, :delete_flg => true}
+  p
+    = link_to_add_fields "追加", f, :periods
+    button.btn.btn-info#calc_button value="再計算" 再計算
+    = f.submit "保存する", :class => "btn btn-primary"
+  .row-fluid
+    .span6
+      .well
+        コース合計時間
+        span#total_course_time ERROR
+    .span6
+      #period_calendar

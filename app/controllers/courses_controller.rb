@@ -7,6 +7,9 @@ class CoursesController < ApplicationController
   
   def edit
     @course = Course.find(params[:id])
+    @course.address = @course.company.getAddress if @course.address.blank?
+    @course.tel = @course.company.tel if @course.tel.blank?
+    @course.responsible = @course.company.clients.first.name if @course.responsible.blank?
   end
 
   def alert
@@ -81,7 +84,7 @@ class CoursesController < ApplicationController
 
   private
   def course_params
-    params.require(:course).permit(:name, :company_id, :order_flg, :book_flg, :report_flg, 
+    params.require(:course).permit(:name, :address, :tel, :station, :responsible, :company_id, :order_flg, :book_flg, :report_flg, 
     :end_report_flg, :diploma_flg, periods_attributes: [:id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id,
        :memo, :_destroy, :resume_flg, :equipment_flg, :attend_flg, :report_flg])
   end
