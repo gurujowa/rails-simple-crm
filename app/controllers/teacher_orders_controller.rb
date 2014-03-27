@@ -32,12 +32,16 @@ class TeacherOrdersController < ApplicationController
     report.cell("D26",price_string)
     report.cell("D31",@teacher_order.students.to_s + "名")
     report.cell("D32",@teacher_order.description)
+    report.cell("D35",@teacher_order.course_address)
+    report.cell("D36",@teacher_order.course_station)
+    report.cell("D37",@teacher_order.course_responsible)
+    report.cell("D38",@teacher_order.course_tel)
     ind = 1
     @teacher_order.course_where.each do |c|
         index_string =  "[ " + (ind).to_s + " ]"
         value_string =  c.day.strftime("%Y年%m月%d日") + " " + c.start_time.strftime("%R") + "～" + c.end_time.strftime("%R")
-        report.cell("C"+(34+ind).to_s, index_string)
-        report.cell("D"+(34+ind).to_s, value_string)
+        report.cell("C"+(38+ind).to_s, index_string)
+        report.cell("D"+(38+ind).to_s, value_string)
         ind += 1
       end
 

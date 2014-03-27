@@ -97,6 +97,22 @@ class TeacherOrder < ActiveRecord::Base
      end
   end
 
+  def course_address
+    self.courses.uniq {|c| c.address}.map{|c| c.address}.join(",")
+  end
+
+  def course_station
+    self.courses.uniq {|c| c.station}.map{|c| c.station}.join(",")
+  end
+
+  def course_responsible
+    self.courses.uniq {|c| c.responsible}.map{|c| c.responsible}.join(",")
+  end
+
+  def course_tel
+    self.courses.uniq {|c| c.tel}.map{|c| c.tel}.join(",")
+  end
+
   def company_name
     self.courses.first.company.client_name
   end
