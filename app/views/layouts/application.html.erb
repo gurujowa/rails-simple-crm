@@ -84,6 +84,7 @@
           <ul class="nav pull-right">
           <% if user_signed_in? %>
             <li><a class="navbar-link">ユーザー名： <%= current_user.name %></a></li>
+            <% if current_user.admin? %><li><%= link_to "管理者メニュー" , "/admin/users" %><li><% end %>
             <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
           <% else %>
             <li><%= link_to 'ユーザーなし', new_user_session_path, :class => 'navbar-link' %></li>

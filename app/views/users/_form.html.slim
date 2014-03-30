@@ -1,0 +1,9 @@
+=simple_form_for(@user) do |f|
+  =f.error_notification
+  .form-inputs
+    = f.input :name, :required => true
+    = f.input :email, :required => true
+    = f.input :password, :label => "New password", :required => true, :autofocus => true
+    = f.input :password_confirmation, :label => "Confirm your new password", :required => true
+  .form-actions
+    = f.button :submit

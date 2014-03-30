@@ -1,0 +1,23 @@
+h1 ユーザー 一覧
+
+= link_to '新規追加', new_user_path, :class => 'btn'
+table.default_datatables
+  thead
+    tr
+      
+      th 名前
+      th メール
+      th 作成日
+      th 更新日
+      th CH
+  tbody
+    - @users.each do |user|
+      tr
+        
+        td = user.name 
+        td = user.email 
+        td = user.created_at 
+        td = user.updated_at 
+        td 
+          = link_to '編集', edit_user_path(user), :class => "btn"
+          = link_to '削除', user, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"

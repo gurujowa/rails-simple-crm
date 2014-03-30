@@ -1,6 +1,13 @@
 Mycrm::Application.routes.draw do
 
   devise_for :users
+  scope "/admin" do
+    resources :users do
+      collection do
+        get "non_auth"
+      end
+    end
+  end
   resources :bills do
     collection do
       get "search"

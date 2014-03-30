@@ -9,7 +9,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @course.address = @course.company.getAddress if @course.address.blank?
     @course.tel = @course.company.tel if @course.tel.blank?
-    @course.responsible = @course.company.clients.first.name if @course.responsible.blank?
+    @course.responsible = @course.company.clients.first.name if @course.responsible.blank? and @course.company.clients.present?
   end
 
   def alert
