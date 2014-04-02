@@ -82,8 +82,8 @@ ja:
         report_flg: ３点セット
       teacher_order:  #モデル毎に階層化しておく。
         teacher_id: 講師
-        unit_price: 単価（時間あたり)
-        additional_price: 追加費用
+        price: 価格
+        price_detail: 価格に関する説明
         memo: メモ
         invoice_flg: 請求書受領
         payment_flg: 支払い完了

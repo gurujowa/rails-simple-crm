@@ -22,7 +22,7 @@ class TeacherOrder < ActiveRecord::Base
   has_many :teacher_order_courses
   has_many :courses, through: :teacher_order_courses
   belongs_to :teacher
-  validates :unit_price, presence: true, numericality: {only_integer: true, greater_than: 1000}
+  validates :price, presence: true, numericality: {only_integer: true, greater_than: 1000}
   validates :teacher_id, presence: true
   validates :description, presence: true
   validates :courses, presence: true
@@ -74,9 +74,7 @@ class TeacherOrder < ActiveRecord::Base
   end
 
   def total_price
-    total_hour = self.total_time / 60
-    price = total_hour * unit_price
-    return (price + self.additional_price).to_i
+    return price
   end
 
   def start_date

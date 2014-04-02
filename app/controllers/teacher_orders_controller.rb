@@ -13,9 +13,9 @@ class TeacherOrdersController < ApplicationController
     report = Report.new "gyoumu.xls"
 
     company = @teacher_order.courses.first.company
-    price_string = "金" + @teacher_order.unit_price.to_s + "/1h  X  " + (@teacher_order.total_time / 60).to_s + "h"
-    if @teacher_order.additional_price.present?
-      price_string << " + " + @teacher_order.additional_price.to_s + "円"
+    price_string = ActionController::Base.helpers.number_to_currency(@teacher_order.price) 
+    if @teacher_order.price_detail.present?
+      price_string << "(" + @teacher_order.price_detail.to_s + ")"
     end
 
     report.cell("F5",Date.today.strftime('%Y年%m月%d日'))
@@ -112,7 +112,7 @@ class TeacherOrdersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
   def teacher_order_params
     params.require(:teacher_order).permit(
-    :teacher_id,:additional_price, :unit_price, :memo, :invoice_flg,:students, :description,
+    :teacher_id,:price, :price_detail, :memo, :invoice_flg,:students, :description,
     :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
   end
 

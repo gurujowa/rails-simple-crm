@@ -8,7 +8,6 @@
       <th>講師</th>
       <th>開始日</th>
       <th>終了日</th>
-      <th>単価</th>
       <th>合計時間</th>
       <th>合計金額</th>
       <th>メモ</th>
@@ -26,9 +25,8 @@
         <td><%= teacher_order.teacher.name %></td>
         <td><%= teacher_order.start_date %></td>
         <td><%= teacher_order.end_date %></td>
-        <td><%= number_to_currency(teacher_order.unit_price) %></td>
         <td><%= convert_min(teacher_order.total_time) %></td>
-        <td><%= number_to_currency(teacher_order.total_price) %></td>
+        <td><%= number_to_currency(teacher_order.price) %></td>
         <td><%= teacher_order.memo %></td>
         <td><%= to_order_date teacher_order ,:order_date %></td>
         <td id="td_teacher_order_invoice_date_<%= teacher_order.id%>"><%= link_to_teacher_order_flg teacher_order, :invoice_date %></td>

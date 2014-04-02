@@ -1,13 +1,13 @@
 <%= simple_form_for @teacher_order, :html => {:class => 'form-horizontal'} do |f| %>
     <%= f.input :teacher_id, collection: @teachers %>
-    <%= f.input :unit_price %>
-    <%= f.input :additional_price  %>
+    <%= f.input :price, :required => true %>
+    <%= f.input :price_detail %>
     <%= f.association :courses,
       selected: @teacher_order.courses.map{|i| i.id},
       label_method: :to_select_label,
       input_html: { class: 'with-select2' } 
     %>
-    <%= f.input :students %>
+    <%= f.input :students, :required => true %>
     <%= f.input :description, input_html: {class: "input-xxlarge"} %>
     <%= f.input :memo %>
     <%= f.button :submit %>
