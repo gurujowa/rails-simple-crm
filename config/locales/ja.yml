@@ -77,6 +77,10 @@ ja:
       course:
         company_id: 会社名
         name: コース名
+        station: 最寄り駅および距離
+        address: 住所
+        responsible: 先方担当者
+        tel: 電話番号
         order_flg: 発注フラグ
         book_flg: 書籍送付
         report_flg: ３点セット
