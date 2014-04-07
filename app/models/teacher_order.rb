@@ -89,7 +89,7 @@ class TeacherOrder < ActiveRecord::Base
   def end_date
      periods = course_where
      if periods.present? 
-       return periods.first.day
+       return periods.last.day
      else
        return nil
      end

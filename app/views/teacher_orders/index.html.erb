@@ -8,6 +8,7 @@
       <th>講師</th>
       <th>開始日</th>
       <th>終了日</th>
+      <th>作成日</th>
       <th>合計時間</th>
       <th>合計金額</th>
       <th>メモ</th>
@@ -25,6 +26,7 @@
         <td><%= teacher_order.teacher.name %></td>
         <td><%= teacher_order.start_date %></td>
         <td><%= teacher_order.end_date %></td>
+        <td><%= teacher_order.created_at %></td>
         <td><%= convert_min(teacher_order.total_time) %></td>
         <td><%= number_to_currency(teacher_order.price) %></td>
         <td><%= teacher_order.memo %></td>
