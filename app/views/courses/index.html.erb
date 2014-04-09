@@ -16,7 +16,7 @@
       <tr>
         <td><%= b.id %></td>
         <td><%= link_to b.company.client_name, {controller: "companies", action: "edit", id: b.company_id} %></td>
-        <td><%= b.name %></td>
+        <td><%= link_to b.name,{action: "show", id: b.id} %></td>
         <td><%= check_course_img(b, "order_flg") %></td>
         <td><%= check_course_img(b, "book_flg") %></td>
         <td><%= check_course_img(b, "reception_seal_flg") %></td>
@@ -27,7 +27,7 @@
         <td><%= b.getStartDate %></td>
         <td><%= b.getEndDate %></td>
         <td><%= link_to '編集', edit_course_path(b), :class => "btn" %>
-        	<%= link_to '削除', b, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn" %></td>
+        	</td>
       </tr>
     <% end %>
   </tbody>

@@ -48,12 +48,5 @@ ul.breadcrumb
         = render :partial => "period_fields", :locals => { :f => c, :delete_flg => true}
   p
     = link_to_add_fields "追加", f, :periods
-    button.btn.btn-info#calc_button value="再計算" 再計算
     = f.submit "保存する", :class => "btn btn-primary"
-  .row-fluid
-    .span6
-      .well
-        コース合計時間
-        span#total_course_time ERROR
-    .span6
-      #period_calendar
+    = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"

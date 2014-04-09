@@ -59,7 +59,7 @@ Mycrm::Application.routes.draw do
 
 
   #コース
-  resources :courses, :except => [:show] do
+  resources :courses  do
     collection do
       get 'calendar'
       put 'update/:id' => 'courses#up_name'  

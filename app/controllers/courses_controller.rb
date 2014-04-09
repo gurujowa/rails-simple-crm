@@ -4,12 +4,13 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all    
   end
+
+  def show
+    @course = Course.find(params[:id])
+  end
   
   def edit
     @course = Course.find(params[:id])
-#    @course.address = @course.company.getAddress if @course.address.blank?
-#    @course.tel = @course.company.tel if @course.tel.blank?
-#    @course.responsible = @course.company.clients.first.name if @course.responsible.blank? and @course.company.clients.present?
   end
 
   def alert
@@ -50,6 +51,9 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
+    @course.address = @course.company.getAddress if @course.address.blank?
+    @course.tel = @course.company.tel if @course.tel.blank?
+    @course.responsible = @course.company.clients.first.name if @course.responsible.blank? and @course.company.clients.present?
   end
 
   def up_name

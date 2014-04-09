@@ -1,0 +1,66 @@
+ul.breadcrumb
+  li
+    a href="/" Home 
+    span class="divider" ＞
+    = link_to @course.company.client_name, edit_company_path(@course.company) 
+    span class="divider" ＞
+    li.active = @course.name
+
+h1 コース詳細画面
+
+h2 コース情報
+table.table.table-striped
+  tr
+    th コース名
+    td = @course.name
+  tr
+    th 会場住所
+    td = @course.address
+  tr
+    th 最寄り駅と駅からの時間
+    td = @course.station
+  tr
+    th 先方研修担当者
+    td = @course.responsible
+  tr
+    th 先方緊急連絡先
+    td = @course.tel
+  tr
+    th 合計時間
+    td = @course.total_time
+
+h2 コマ情報
+table.table.table-bordered.table-striped
+  thead
+    tr
+      th 日付
+      th 開始時刻
+      th 終了時刻
+      th 休憩開始
+      th 休憩終了
+      th 講師
+      th 合計時間
+      th メモ
+  tbody
+    - @course.periods.each do |p|
+      tr
+        td = p.day.to_s(:jp)
+        td = p.start_time.to_s(:time)
+        td = p.end_time.to_s(:time)
+        td = p.break_start
+        td = p.break_end
+        td = p.teacher.name
+        td = convert_min p.total_time
+        td style="width:40%" = p.memo
+
+= link_to '編集', edit_course_path, :class => "btn"
+= link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"
+.row-fluid
+  .span6
+    h3 メール用　テキスト（コピペ用)
+    .well
+      - @course.periods.each do |p|
+        = p.day.to_s(:jp) + " " + p.start_time.to_s(:time) + "～" + p.end_time.to_s(:time)
+        br
+  .span6
+    #period_calendar
