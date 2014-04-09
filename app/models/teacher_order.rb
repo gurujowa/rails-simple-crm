@@ -112,7 +112,12 @@ class TeacherOrder < ActiveRecord::Base
   end
 
   def company_name
-    self.courses.first.company.client_name
+    c = self.courses.first
+    if c.present?
+      return c.company.client_name
+    else
+      return ""
+    end
   end
 
   def course_where

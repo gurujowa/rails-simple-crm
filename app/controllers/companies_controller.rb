@@ -15,7 +15,7 @@ class CompaniesController < ApplicationController
     report = Report.new "client_sheet.xls"
     report.cell "A1",@company.client_name + "様"
     report.cell "F3",%Q{担当：#{current_user.name}}
-    report.cell "B4",%Q{担当：#{@company.client_person}様}
+    report.cell "B4",%Q{#{@company.client_person} 様}
     report.cell "B5",@company.full_address
     report.cell "E6",@company.tel
 

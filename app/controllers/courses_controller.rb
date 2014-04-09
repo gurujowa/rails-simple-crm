@@ -32,7 +32,7 @@ class CoursesController < ApplicationController
 
     if @course.save
       flash[:notice] = 'コース情報を変更しました'
-      redirect_to :action=> 'edit', :id => params[:id]
+      redirect_to :action=> 'show', :id => params[:id]
     else
       flash[:alert] = '入力内容にエラーがあります'
       render "edit"
@@ -46,14 +46,11 @@ class CoursesController < ApplicationController
      else
        flash[:alert] = @course.errors.full_messages.join(',')
      end
-     redirect_to :controller => "companies", :action => "edit", :id => @course.company_id
+     redirect_to :controller => "companies", :action => "show", :id => @course.company_id
   end
 
   def new
     @course = Course.new
-    @course.address = @course.company.getAddress if @course.address.blank?
-    @course.tel = @course.company.tel if @course.tel.blank?
-    @course.responsible = @course.company.clients.first.name if @course.responsible.blank? and @course.company.clients.present?
   end
 
   def up_name
