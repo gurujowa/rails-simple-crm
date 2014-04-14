@@ -24,6 +24,8 @@
 
 class Teacher < ActiveRecord::Base
 
+  has_many :periods, order: "day"
+
   has_paper_trail 
   validates :email, :format=>{:with=>/[a-z0-9_.-]+@([a-z0-9-]+\.)+[a-z]{2,4}/i, :message=>":メールアドレスの形式がおかしいです", :allow_blank=>true}
   validates :tel, :format=>{:with=>/[0-9-]/, :message=>"：電話番号は半角数値と「-」だけ", :allow_blank=>true}
@@ -35,5 +37,13 @@ class Teacher < ActiveRecord::Base
   
   def name
     return last_kanji + " " + first_kanji
+  end
+
+  def kanji
+    return name
+  end
+
+  def kana
+    return last_kana + " " + first_kana
   end
 end

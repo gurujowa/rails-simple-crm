@@ -13,6 +13,8 @@ class TeachersController < ApplicationController
 
   # GET /teachers/1
   def show
+    @periods = @teacher.periods
+    @future_periods = @periods.delete_if {|p| p.day <Time.now}
   end
 
   # GET /teachers/new
