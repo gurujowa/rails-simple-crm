@@ -46,7 +46,7 @@ class CoursesController < ApplicationController
      else
        flash[:alert] = @course.errors.full_messages.join(',')
      end
-     redirect_to :controller => "companies", :action => "show", :id => @course.company_id
+     redirect_to :controller => "courses", :action => "show", :id => @course.id
   end
 
   def new
