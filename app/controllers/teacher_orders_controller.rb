@@ -19,7 +19,7 @@ class TeacherOrdersController < ApplicationController
     end
 
     report.cell("F5",Date.today.strftime('%Y年%m月%d日'))
-    report.cell("B7",@teacher_order.teacher.name + "様")
+    report.cell("B7",@teacher_order.teacher.director_name + "様")
     report.cell("D15",@teacher_order.id)
     report.cell("D17",company.full_address)
     report.cell("D18",company.client_name)
@@ -32,7 +32,7 @@ class TeacherOrdersController < ApplicationController
     report.cell("F24","全" + @teacher_order.total_period.to_s + "回")
     report.cell("D26",price_string)
     report.cell("D31",@teacher_order.students.to_s + "名")
-    report.cell("D32",@teacher_order.description)
+    report.cell("D32",@teacher_order.teacher.short_name)
     report.cell("D35",@teacher_order.course_responsible)
     report.cell("D36",@teacher_order.course_tel)
     ind = 1
