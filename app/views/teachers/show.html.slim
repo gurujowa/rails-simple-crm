@@ -4,13 +4,16 @@ h3 講師情報
 table.table.table-bordered
   tr
     th 名前
-    td  =@teacher.kanji
+    td  =@teacher.short_name
   tr
     th かな
     td  =@teacher.kana
   tr
     th 仕事可能か
     td  = get_work_possible @teacher.work_possible
+  tr
+    th ディレクター
+    td  = @teacher.director_name
   tr
     th ジャンル
     td  =@teacher.genre

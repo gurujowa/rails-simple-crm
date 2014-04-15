@@ -25,6 +25,7 @@
 class Teacher < ActiveRecord::Base
 
   has_many :periods, order: "day"
+  belongs_to :director, :class_name => "Teacher", :foreign_key => "director_id"
 
   has_paper_trail 
   validates :email, :format=>{:with=>/[a-z0-9_.-]+@([a-z0-9-]+\.)+[a-z]{2,4}/i, :message=>":メールアドレスの形式がおかしいです", :allow_blank=>true}
@@ -34,14 +35,25 @@ class Teacher < ActiveRecord::Base
     {:possible => 0, :subtle => 1, :impossible => 2}
   end
 
-  
-  def name
-    return last_kanji + " " + first_kanji
+  def director_name
+    if self.director.present?
+      return self.director.name
+    end
   end
 
-  def kanji
-    return name
+  def short_name
+    kanji_name = last_kanji + " " + first_kanji
   end
+  
+  def name
+    kanji_name = last_kanji + " " + first_kanji
+    if self.director.present?
+      return kanji_name + "(" + self.director.last_kanji + "D)"
+    else
+      kanji_name
+    end
+  end
+
 
   def kana
     return last_kana + " " + first_kana

@@ -41,6 +41,13 @@
   </div>
 
   <div class="control-group">
+    <%= f.label :director_id , :class => "control-label" %>
+    <div class="controls">
+      <%= f.select :director_id , options_teachers(@teacher.director_id),{:include_blank => true}, :class => "select_teacher_id input-medium" %>
+  </div>
+  </div>
+
+  <div class="control-group">
     <%= f.label :memo , :class => "control-label" %>
     <div class="controls"><%= f.text_area :memo %></div>
   </div>

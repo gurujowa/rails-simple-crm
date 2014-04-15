@@ -8,7 +8,7 @@
       <th>名前（かな）</th>
       <th>仕事可能</th>
       <th>ジャンル</th>
-      <th>単価</th>
+      <th>ディレクター</th>
       <th>電話</th>
       <th>メール</th>
       <th>メモ</th>
@@ -19,11 +19,11 @@
   <tbody>
     <% @teachers.each do |teacher| %>
       <tr>
-        <td><%= link_to teacher.kanji, teacher_path(teacher) %></td>
+        <td><%= link_to teacher.short_name, teacher_path(teacher) %></td>
         <td><%= teacher.kana %></td>
         <td><%= get_work_possible(teacher.work_possible) %></td>
         <td><%= teacher.genre %></td>
-        <td><%= teacher.bill %></td>
+        <td><%= teacher.director_name %></td>
         <td><%= teacher.tel %></td>
         <td><%= teacher.email %></td>
         <td><%= teacher.memo %></td>
