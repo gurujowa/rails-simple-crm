@@ -51,7 +51,7 @@ class TeacherOrdersController < ApplicationController
     filename = "【" + @teacher_order.teacher.name + "】講師依頼書_" + Date.today.strftime('%Y%m%d') + "_" + company.client_name + ".xls"
 
     @teacher_order.update_attributes!({:order_date => Date.today})
-    send_file report.write  , :type=>"application/ms-excel", :filename => filename
+    send_file report.write  , :type=>"application/ms-excel", :filename => ERB::Util.url_encode(filename)
   end
 
 
