@@ -19,7 +19,11 @@ class TeacherOrdersController < ApplicationController
     end
 
     report.cell("F5",Date.today.strftime('%Y年%m月%d日'))
-    report.cell("B7",@teacher_order.teacher.director_name + "様")
+    if @teacher_order.teacher.director_name
+      report.cell("B7",@teacher_order.teacher.director_name + "様")
+    else
+      report.cell("B7",@teacher_order.teacher.short_name + "様")
+    end
     report.cell("D15",@teacher_order.id)
     report.cell("D17",company.full_address)
     report.cell("D18",company.client_name)
