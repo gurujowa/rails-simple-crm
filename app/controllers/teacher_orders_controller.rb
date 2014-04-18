@@ -31,6 +31,7 @@ class TeacherOrdersController < ApplicationController
     report.cell("D20",company.client_person)
     report.cell("D21",@teacher_order.course_address)
     report.cell("D22",@teacher_order.course_station)
+    report.cell("D23",@teacher_order.description)
     report.cell("D24",@teacher_order.start_date.strftime("%Y年%m月%d日") + "から")
     report.cell("D25",@teacher_order.end_date.strftime("%Y年%m月%d日") + "まで")
     report.cell("F24","全" + @teacher_order.total_period.to_s + "回")
