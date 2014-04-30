@@ -10,16 +10,16 @@ class CourseAlert
     if type == :alert
       order_flg_check course,14.days.since
       book_flg_check course, 14.days.since
-      reception_seal_flg_check course,30.days.since
-      cert_seal_flg_check course, 3.days.since
-      end_form_flg_check course, 30.days.ago
+#      reception_seal_flg_check course,30.days.since
+#      cert_seal_flg_check course, 3.days.since
+#      end_form_flg_check course, 30.days.ago
       diploma_flg_check course, 7.days.since
     elsif type == :task
       order_flg_check course,21.days.since
       book_flg_check course, 21.days.since
-      reception_seal_flg_check course,40.days.since
-      cert_seal_flg_check course, 14.days.since
-      end_form_flg_check course, 0.days.ago
+#      reception_seal_flg_check course,40.days.since
+#      cert_seal_flg_check course, 14.days.since
+#      end_form_flg_check course, 0.days.ago
       diploma_flg_check course, 14.days.since
     else
       raise "Alert type is only 'alert' and 'task'"
