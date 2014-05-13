@@ -32,6 +32,7 @@ class Period < ActiveRecord::Base
   validates :report_flg,  :inclusion => {:in => [true, false]}
   belongs_to :teacher
   belongs_to :course
+  belongs_to :user
 
   def getTotal
     b_time = 0
@@ -53,6 +54,32 @@ class Period < ActiveRecord::Base
 
   def end_time
     return Time.local day.year, day.month, day.day, read_attribute(:end_time).hour ,read_attribute(:end_time).min
+  end
+
+  def break_start(format=nil)
+    if read_attribute(:break_start).present?
+      time = Time.local day.year, day.month, day.day, read_attribute(:break_start).hour ,read_attribute(:break_start).min
+      if format.present?
+        time = time.to_s(format)
+      end
+      return time
+    end
+  end
+
+  def user_name
+    if self.user.present?
+      return self.user.name
+    end
+  end
+
+  def break_end(format=nil)
+    if read_attribute(:break_end).present?
+      time = Time.local day.year, day.month, day.day, read_attribute(:break_end).hour ,read_attribute(:break_end).min
+      if format.present?
+        time = time.to_s(format)
+      end
+      return time
+    end
   end
 
 end

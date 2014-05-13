@@ -26,6 +26,9 @@ table.table.table-striped
     th 先方緊急連絡先
     td = @course.tel
   tr
+    th 立会
+    td = @course.observe_text
+  tr
     th 合計時間
     td = convert_min @course.total_time
 
@@ -39,6 +42,7 @@ table.table.table-bordered.table-striped
       th 休憩開始
       th 休憩終了
       th 講師
+      th 立会人
       th 合計時間
       th メモ
   tbody
@@ -47,9 +51,10 @@ table.table.table-bordered.table-striped
         td = p.day.to_s(:jp)
         td = p.start_time.to_s(:time)
         td = p.end_time.to_s(:time)
-        td = p.break_start
-        td = p.break_end
+        td = p.break_start(:time)
+        td = p.break_end(:time)
         td = p.teacher.name
+        td = p.user_name
         td = convert_min p.total_time
         td style="width:40%" = p.memo
 

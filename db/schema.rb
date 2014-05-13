@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140415094814) do
+ActiveRecord::Schema.define(version: 20140513111233) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(version: 20140415094814) do
     t.string   "station"
     t.string   "responsible"
     t.string   "tel"
+    t.boolean  "observe_flg",        default: false, null: false
   end
 
   create_table "estimate_lines", force: true do |t|
@@ -260,7 +261,10 @@ ActiveRecord::Schema.define(version: 20140415094814) do
     t.string   "google_id"
     t.boolean  "equipment_flg", default: false, null: false
     t.boolean  "attend_flg",    default: false, null: false
+    t.integer  "user_id"
   end
+
+  add_index "periods", ["user_id"], name: "index_periods_on_user_id"
 
   create_table "statuses", force: true do |t|
     t.string   "name"

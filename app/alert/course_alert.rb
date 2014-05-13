@@ -13,6 +13,7 @@ class CourseAlert
 #      reception_seal_flg_check course,30.days.since
 #      cert_seal_flg_check course, 3.days.since
 #      end_form_flg_check course, 30.days.ago
+      observe_check course
       diploma_flg_check course, 7.days.since
     elsif type == :task
       order_flg_check course,21.days.since
@@ -20,6 +21,7 @@ class CourseAlert
 #      reception_seal_flg_check course,40.days.since
 #      cert_seal_flg_check course, 14.days.since
 #      end_form_flg_check course, 0.days.ago
+      observe_check course
       diploma_flg_check course, 14.days.since
     else
       raise "Alert type is only 'alert' and 'task'"
@@ -54,6 +56,24 @@ class CourseAlert
   end
   def diploma_flg_check(c, day)
     course_end_check c, day, c.diploma_flg, "表彰状の準備ができていません"
+  end
+
+  def observe_check(c)
+    if c.observe_flg == false
+      return false
+    end
+    periods = c.periods
+    observe_flg = false
+
+    periods.each do |p|
+      if p.user_id.present?
+        observe_flg = true
+      end
+    end
+
+    if observe_flg.blank?
+      push_error  c, "立会人が一人も入力されていません"
+    end
   end
 
 

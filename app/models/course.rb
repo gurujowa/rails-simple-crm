@@ -67,6 +67,15 @@ class Course < ActiveRecord::Base
     getEndDate
   end
 
+  def observe_text
+    if self.observe_flg == true
+      return "必要"
+    else
+      return "不必要"
+    end
+  end
+
+
   def getStartDate
     periods = self.periods
     array = []
