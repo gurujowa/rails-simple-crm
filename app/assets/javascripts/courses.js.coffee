@@ -73,6 +73,10 @@ courseCalendarRender = (method) ->
     calendar_settings.eventSources = json.eventSources
     $('#course_calendar').fullCalendar(calendar_settings)
 
+  $.getJSON "/courses/observe.json", (json)->
+    calendar_settings.eventSources = json.eventSources
+    $('#observe_calendar').fullCalendar(calendar_settings)
+
 
 calcTime = ->
   total_time = 0

@@ -34,6 +34,17 @@ class Period < ActiveRecord::Base
   belongs_to :course
   belongs_to :user
 
+  @@color = ["MidnightBlue", "DarkViolet", "DarkSlateBlue", "Navy",  "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta","LightPink"]
+
+  def observe_color
+    if self.user.present?
+      key = self.user.id % 10
+      return @@color[key]
+    else
+      return "Black"
+    end
+  end
+
   def getTotal
     b_time = 0
     c_time = end_time - start_time 

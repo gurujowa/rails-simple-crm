@@ -25,6 +25,10 @@ class CoursesController < ApplicationController
     @courses = Course.all
     @periods = Period.all
   end
+
+  def observe
+    @courses = Course.all
+  end
   
   def update
     @course = Course.find(params[:id])
