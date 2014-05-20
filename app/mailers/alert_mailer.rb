@@ -31,7 +31,7 @@ class AlertMailer < ActionMailer::Base
 
   def reminder(period)
     @period = period
-    address = ["kenshu_g@yourbright.co.jp"]
+    address = ["kenshu@yourbright.co.jp"]
 
     if @period.teacher.email.present?
       address = address + [@period.teacher.email]
@@ -70,7 +70,7 @@ class AlertMailer < ActionMailer::Base
 
   def mail_to
     if Rails.env == 'production'
-      to = "kenshu_g@yourbright.co.jp"
+      to = "kenshu@yourbright.co.jp"
     else
       to = "yamashita.hayato@yourbright.co.jp"
     end
