@@ -65,6 +65,7 @@ gem 'underscore-rails'
 #Format Convert Library
 #------------------------------
 gem 'pdfkit'
+gem 'icalendar'
 gem 'spreadsheet'
 gem 'slim-rails'
 

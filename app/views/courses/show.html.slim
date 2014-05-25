@@ -8,6 +8,18 @@ ul.breadcrumb
 
 h1 コース詳細画面
 
+h2 会社情報
+table.table.table-striped
+  tr
+    th 会社名
+    td = @course.company.name
+  tr
+    th 郵便番号
+    td = @course.company.zipcode
+  tr
+    th 住所
+    td = @course.company.full_address
+
 h2 コース情報
 table.table.table-striped
   tr

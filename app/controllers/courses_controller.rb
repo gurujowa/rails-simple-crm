@@ -24,6 +24,22 @@ class CoursesController < ApplicationController
   def calendar
     @courses = Course.all
     @periods = Period.all
+
+    respond_to do |format|
+      format.ics {
+        @cal = Icalendar::Calendar.new
+        @courses.each do |c|
+          c.periods.each do |p|
+            @cal.event do |e|
+              e.dtstart     = Icalendar::Values::DateTime.new(p.start_time)
+              e.dtend       = Icalendar::Values::DateTime.new(p.end_time)
+              e.summary     = c.company.client_name + "(" + p.teacher.name + ")"
+              e.description = %Q{会社名:#{c.company.client_name}\n講師名:#{p.teacher.name}}
+            end
+          end
+        end
+      }
+    end
   end
 
   def observe
