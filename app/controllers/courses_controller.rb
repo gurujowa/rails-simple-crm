@@ -26,6 +26,10 @@ class CoursesController < ApplicationController
     @periods = Period.all
 
     respond_to do |format|
+      format.html {
+      }
+      format.json{
+      }
       format.ics {
         @cal = Icalendar::Calendar.new
         @courses.each do |c|
