@@ -41,6 +41,9 @@ table.table.table-striped
     th 立会
     td = @course.observe_text
   tr
+    th 受講者数
+    td = @course.students
+  tr
     th 合計時間
     td = convert_min @course.total_time
 

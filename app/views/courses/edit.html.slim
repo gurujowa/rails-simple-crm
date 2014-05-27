@@ -29,7 +29,10 @@ ul.breadcrumb
     .controls = f.text_field :tel
   .control-group
     label.control-label 立会必要・不必要
-    .controls = f.check_box :observe_flg
+    .controls = f.check_box :observe_flg, default: true
+  .control-group
+    label.control-label 受講者数
+    .controls = f.text_field :students
 
   table.table.table-bordered.table-striped#periods_table
     thead
