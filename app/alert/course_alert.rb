@@ -10,6 +10,7 @@ class CourseAlert
     if type == :alert
       order_flg_check course,14.days.since
       book_flg_check course, 14.days.since
+      attendee_table_flg_check course, 3.days.since
 #      reception_seal_flg_check course,30.days.since
 #      cert_seal_flg_check course, 3.days.since
 #      end_form_flg_check course, 30.days.ago
@@ -21,6 +22,7 @@ class CourseAlert
 #      reception_seal_flg_check course,40.days.since
 #      cert_seal_flg_check course, 14.days.since
 #      end_form_flg_check course, 0.days.ago
+      attendee_table_flg_check course, 7.days.since
       observe_check course
       diploma_flg_check course, 14.days.since
     else
@@ -40,16 +42,19 @@ class CourseAlert
 
   private
   def order_flg_check(c, day)
-    course_start_check c, day, c.order_flg, "発注書フラグがオフになっています。"
+    course_start_check c, day, c.order_flg, "発注書の送付が完了していません。"
   end
   def book_flg_check(c, day)
-    course_start_check c, day, c.book_flg, "書籍送付フラグがオフになっています。"
+    course_start_check c, day, c.book_flg, "書籍の送付が完了していません。"
   end
   def reception_seal_flg_check(c, day)
     course_start_check c, day, c.reception_seal_flg, "窓口受領印が届いていません"
   end
   def cert_seal_flg_check(c, day)
     course_end_check c, day, c.cert_seal_flg, "労働局受領印が届いていません"
+  end
+  def attendee_table_flg_check(c, day)
+    course_start_check c, day, c.attendee_table_flg, "出欠表の作成が完了していません"
   end
   def end_form_flg_check(c, day)
     course_end_check c, day, c.end_form_flg, "支給申請が完了していません。"

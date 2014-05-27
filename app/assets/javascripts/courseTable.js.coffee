@@ -19,6 +19,9 @@ class CourseTable
      book_flg:
        value: "書籍送付"
        defaultState: true
+     attendee_table_flg:
+       value: "出席票作成"
+       defaultState: true
      reception_seal_flg:
        value: "窓口受領印"
        defaultState: true
