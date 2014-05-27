@@ -36,7 +36,7 @@ class TeacherOrdersController < ApplicationController
     report.cell("D25",@teacher_order.end_date.strftime("%Y年%m月%d日") + "まで")
     report.cell("F24","全" + @teacher_order.total_period.to_s + "回")
     report.cell("D26",price_string)
-    report.cell("D31",@teacher_order.students.to_s + "名")
+    report.cell("D31",@teacher_order.course_students.to_s + "名")
     report.cell("D32",@teacher_order.teacher.short_name)
     report.cell("D35",@teacher_order.course_responsible)
     report.cell("D36",@teacher_order.course_tel)

@@ -99,6 +99,10 @@ class TeacherOrder < ActiveRecord::Base
     self.courses.uniq {|c| c.address}.map{|c| c.address}.join(",")
   end
 
+  def course_students
+    self.courses.uniq {|c| c.students.to_s}.map{|c| c.students.to_s}.join(",")
+  end
+
   def course_station
     self.courses.uniq {|c| c.station}.map{|c| c.station}.join(",")
   end
