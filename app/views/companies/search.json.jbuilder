@@ -3,7 +3,7 @@ json.extract! @datatables.getIData, :sEcho, :iTotalRecords, :iTotalDisplayRecord
 comp = @datatables.getCompanies.map do |company|
 
 [
-        "<a href='"+ url_for(:action=>"edit", :id => company.id) + "'>"+ company.client_name.slice(0,25) + "</a>",
+        "<a target='_blank' href='"+ url_for(:action=>"edit", :id => company.id) + "'>"+ company.client_name.slice(0,25) + "</a>",
         company.status_name,
         company.active_st_text,
         company.client_person,
