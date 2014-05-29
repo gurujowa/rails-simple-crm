@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527073716) do
+ActiveRecord::Schema.define(version: 20140529094240) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(version: 20140527073716) do
     t.boolean  "observe_flg",        default: false, null: false
     t.integer  "students"
     t.boolean  "attendee_table_flg", default: false, null: false
+    t.text     "memo"
   end
 
   create_table "estimate_lines", force: true do |t|

@@ -33,6 +33,9 @@ ul.breadcrumb
   .control-group
     label.control-label 受講者数
     .controls = f.text_field :students
+  .control-group
+    label.control-label メモ
+    .controls = f.text_area :memo, class: "input-xxlarge", size: "10x5"
 
   table.table.table-bordered.table-striped#periods_table
     thead

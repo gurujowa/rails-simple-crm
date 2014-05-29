@@ -46,6 +46,9 @@ table.table.table-striped
   tr
     th 合計時間
     td = convert_min @course.total_time
+  tr
+    th メモ
+    td = @course.memo
 
 h2 コマ情報
 table.table.table-bordered.table-striped
