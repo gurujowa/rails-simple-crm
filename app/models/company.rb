@@ -211,11 +211,11 @@ extend Enumerize
 
   def self.to_csv
     CSV.generate do |csv|
-      csv << self.column_names.concat(["担当者名","営業マン", "コンタクト","キャンペーン","アポイント数"])
+      csv << self.column_names.concat(["担当者名", "コンタクト","キャンペーン","アポイント数","営業マン"])
       key = 1
       all.each do |row|
         memos = row.contacts.map{|c| c.memo}
-        csv << row.attributes.map{|a| a[1]}.concat([row.client_person,  memos.join("\n・"), row.campaign.name, row.got_appoint])
+        csv << row.attributes.map{|a| a[1]}.concat([row.client_person,  memos.join("\n・"), row.campaign.name, row.got_appoint, row.salesman])
         key += 1
       end
     end
