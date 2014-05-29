@@ -104,7 +104,7 @@ lastPickerReady = ->
 startPickerInit = (e) ->
     $(e).timepicker
       minTime: "9:00",
-      maxTime: "20:00",
+      maxTime: "21:00",
       showDuration: false,
       timeFormat: "H:i"    
     setStartTimePicker(e)
