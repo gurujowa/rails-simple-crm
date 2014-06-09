@@ -35,8 +35,8 @@ class CoursesController < ApplicationController
         @courses.each do |c|
           c.periods.each do |p|
             @cal.event do |e|
-              e.dtstart     = Icalendar::Values::DateTime.new(p.start_time)
-              e.dtend       = Icalendar::Values::DateTime.new(p.end_time)
+              e.dtstart     = Icalendar::Values::DateTime.new(p.start_date)
+              e.dtend       = Icalendar::Values::DateTime.new(p.end_date)
               e.summary     = c.company.client_name + "(" + p.teacher.name + ")"
               e.description = %Q{会社名:#{c.company.client_name}\n講師名:#{p.teacher.name}}
             end

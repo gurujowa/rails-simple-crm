@@ -67,8 +67,8 @@ table.table.table-bordered.table-striped
     - @course.periods.each do |p|
       tr
         td = p.day.to_s(:jp)
-        td = p.start_time.to_s(:time)
-        td = p.end_time.to_s(:time)
+        td = p.start_date.to_s(:time)
+        td = p.end_date.to_s(:time)
         td = p.break_start(:time)
         td = p.break_end(:time)
         td = p.teacher.name
@@ -83,7 +83,7 @@ table.table.table-bordered.table-striped
     h3 メール用　テキスト（コピペ用)
     .well
       - @course.periods.each do |p|
-        = p.day.to_s(:jp) + " " + p.start_time.to_s(:time) + "～" + p.end_time.to_s(:time)
+        = p.day.to_s(:jp) + " " + p.start_date.to_s(:time) + "～" + p.end_date.to_s(:time)
         br
   .span6
     #period_calendar

@@ -47,7 +47,7 @@ class Period < ActiveRecord::Base
 
   def getTotal
     b_time = 0
-    c_time = end_time - start_time 
+    c_time = end_date - start_date 
     b_time = break_end - break_start if break_end.present? && break_start.present?
     
     time = c_time - b_time 
@@ -59,12 +59,12 @@ class Period < ActiveRecord::Base
      getTotal
   end
 
-  def start_time
-    return Time.local day.year, day.month, day.day, read_attribute(:start_time).hour ,read_attribute(:start_time).min
+  def start_date
+    return Time.local day.year, day.month, day.day, start_time.hour ,start_time.min
   end
 
-  def end_time
-    return Time.local day.year, day.month, day.day, read_attribute(:end_time).hour ,read_attribute(:end_time).min
+  def end_date
+    return Time.local day.year, day.month, day.day, end_time.hour ,end_time.min
   end
 
   def break_start(format=nil)
