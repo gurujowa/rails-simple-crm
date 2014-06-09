@@ -6,6 +6,7 @@
   <th>コース名</Th>
   <th>発注書</Th>
   <th>書籍送付</Th>
+  <th>出欠表作成</Th>
   <th>受付印</Th>
   <th>労働局受領印</Th>
   <th>支給申請</Th>
@@ -19,8 +20,8 @@
   <td><a class="edit_in_place" href="#" data-type="text"  data-resource="course" data-url="/courses/update/<%= c.id %>"><%= c.name %></a></td>
   <td><%= check_course_img(c, "order_flg") %></td>
   <td><%= check_course_img(c, "book_flg") %></td>
-  <td><%= check_course_img(c, "reception_seal_flg") %></td>
   <td><%= check_course_img(c, "attendee_table_flg") %></td>
+  <td><%= check_course_img(c, "reception_seal_flg") %></td>
   <td><%= check_course_img(c, "cert_seal_flg") %></td>
   <td><%= check_course_img(c, "end_form_flg") %></td>
   <td><%= check_course_img(c, "diploma_flg") %></td>
