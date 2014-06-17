@@ -1,86 +1,56 @@
+.panel.panel-info
+  .panel-heading 会社情報
+  .panel-body
+    = form.input :client_name
+    = form.input :industry_id,  collection: @industries, hint: link_to("(業種の追加)", {controller: "industries"})
+    = form.input :campaign_id , collection:  Campaign.all, hint: link_to("(新規追加)", campaigns_path)
+    = form.input :active_st
+    = form.input :memo, :rows => "10"
+.panel.panel-default
+  .panel-heading 連絡先
+  .panel-body
+    = form.input :tel 
+    = form.input :fax
+    = form.input :mail
+    = form.input :zipcode
+    = form.input :prefecture
+    = form.input :city
+    = form.input :address
+    = form.input :building
+  .panel-footer
+    a.btn.btn-default#jump_zip 郵便番号
+    a.btn.btn-default#jump_map GoogleMap検索
 
-.company_edit_header_1 会社情報
-.well
-  - @company.errors.full_messages.each do |msg|
-    li= msg
-  .control-group
-    label.control-label 会社名
-    .controls
-      = form.text_field :client_name
-  .control-group
-    label.control-label 業種
-    .controls
-      = form.collection_select(:industry_id, @industries, :id, :name, {:include_blank => true })
-      | (#{link_to "業種の追加", {controller: "industries"}})
-  .control-group
-    label.control-label 代表電話
-    .controls
-      | TEL#{form.text_field :tel} FAX#{form.text_field :fax} MAIL#{form.text_field :mail}
-  .control-group
-    label.control-label 新規獲得元
-    .controls
-      = form.collection_select :campaign_id , Campaign.all, :id, :name, :include_blank => true
-      = link_to "(新規追加)", campaigns_path
-  .control-group
-    label.control-label 状態ステータス
-    .controls
-      = form.select :active_st, Company.active_st.options, :include_blank => true
-  .control-group
-    label.control-label 人数
-    .controls
-      table.table.table-condensed
-        tr
-          td 正規職員
-          td 非正規職員
-        tr
-          td= form.text_field :regular_staff
-          td= form.text_field :nonregular_staff
-  .control-group
-    label.control-label 住所
-    .controls
-      table.table.table-condensed
-        tr
-          td 郵便番号
-          td 都道府県
-          td 市町村
-        tr
-          td= form.text_field :zipcode
-          td= form.text_field :prefecture
-          td= form.text_field :city
-        tr
-          td 番地
-          td 建物名
-        tr
-          td= form.text_field :address
-          td= form.text_field :building
-      a.btn#jump_zip 郵便番号
-      a.btn#jump_map GoogleMap検索
-  .control-group
-    label.control-label メモ
-    .controls
-      = form.text_area :memo, :rows => "8" , :style =>"width:100%"
+.panel.panel-default
+  .panel-heading 職員情報
+  .panel-body
+    = form.input :regular_staff
+    = form.input :nonregular_staff
 
-.company_edit_header_1 商談
-.well
-  ul.nav.nav-pills#company_edit_negos_tab
-    - @company.negos.each_with_index do |c,i|
-      li class=("active" if i==0)
-        a id="company_edit_nego_tab_#{i}" href="#company_edit_nego_#{i}" data-toggle="tab"
-          = c.name.present? ? c.name : "新しい商談"
-  .tab-content.add_fields#company_edit_negos_tab_content
-    = form.fields_for :negos do |i|
-      = render :partial => "nego_fields", :locals => { :f => i}
 
-.company_edit_header_1 連絡先
-.well
-  ul.nav.nav-pills#company_edit_clients_tab
-    - @company.clients.each_with_index do |c,i|
-      li class=("active" if i==0)
-        a id="company_edit_client_tab_#{i}" href="#company_edit_client_#{i}" data-toggle="tab"
-          = c.name.present? ? c.name : "新しい連絡先"
-  .tab-content.add_fields#company_edit_clients_tab_content
-    = form.fields_for :clients do |i|
-      = render :partial => "client_fields", :locals => { :f => i}
+.panel.panel-default
+  .panel-heading 商談
+  .panel-body
+    ul.nav.nav-pills#company_edit_negos_tab
+      - @company.negos.each_with_index do |c,i|
+        li class=("active" if i==0)
+          a id="company_edit_nego_tab_#{i}" href="#company_edit_nego_#{i}" data-toggle="tab"
+            = c.name.present? ? c.name : "新しい商談"
+    .tab-content.add_fields#company_edit_negos_tab_content
+      = form.simple_fields_for :negos do |i|
+        = render :partial => "nego_fields", :locals => { :f => i}
+
+.panel.panel-default
+  .panel-heading 商談
+  .panel-body
+    ul.nav.nav-pills#company_edit_clients_tab
+      - @company.clients.each_with_index do |c,i|
+        li class=("active" if i==0)
+          a id="company_edit_client_tab_#{i}" href="#company_edit_client_#{i}" data-toggle="tab"
+            = c.name.present? ? c.name : "新しい連絡先"
+    .tab-content.add_fields#company_edit_clients_tab_content
+      = form.simple_fields_for :clients do |i|
+        = render :partial => "client_fields", :locals => { :f => i}
 
 .company_edit_header_1 コンタクト
 .well

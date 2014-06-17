@@ -1,0 +1,45 @@
+h1 leads 一覧
+
+= link_to '新規追加', new_lead_path, :class => 'btn'
+table.default_datatables
+  thead
+    tr
+      
+      th Name
+      th Tel
+      th Fax
+      th Email
+      th Person name
+      th Person kana
+      th Person post
+      th Url
+      th Zip code
+      th Prefecture
+      th Street
+      th Building
+      th Memo
+      th User
+      th Star
+      th CH
+  tbody
+    - @leads.each do |lead|
+      tr
+        
+        td = lead.name 
+        td = lead.tel 
+        td = lead.fax 
+        td = lead.email 
+        td = lead.person_name 
+        td = lead.person_kana 
+        td = lead.person_post 
+        td = lead.url 
+        td = lead.zip_code 
+        td = lead.prefecture 
+        td = lead.street 
+        td = lead.building 
+        td = lead.memo 
+        td = lead.user 
+        td = lead.star 
+        td 
+          = link_to '編集', edit_lead_path(lead), :class => "btn"
+          = link_to '削除', lead, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"

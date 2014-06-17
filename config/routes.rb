@@ -1,5 +1,7 @@
 Mycrm::Application.routes.draw do
 
+  resources :leads
+
   devise_for :users
   scope "/admin" do
     resources :users do

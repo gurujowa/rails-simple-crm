@@ -13,12 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
+//= require jquery.ui.datepicker-ja
 //= require bootstrap-switch.min
+//= require bootstrap
 //= require jquery.cookie
 //= require noty/jquery.noty
 //= require noty/layouts/top
 //= require noty/themes/default
-//= require bootstrap
 //= require dataTables/jquery.dataTables
 //= require jquery.balloon.min
 //= require bootstrap-editable
@@ -28,22 +29,9 @@
 //= require moment.min
 //= require select2
 //= require select2_locale_ja
-//= require jquery.icheck
 //= require_tree .
 //= require jquery_nested_form
 //
-function icheck(){
-  if($(".icheck").length > 0){
-    $(".icheck").each(function(){
-      var $el = $(this);
-      var opt = {
-        checkboxClass: 'icheckbox_square-aero',
-        radioClass: 'iradio_square-aero',
-      }
-      $el.iCheck(opt);
-    });
-  }
-}
 
 // moment.js language configuration
 // language : japanese (ja)
@@ -99,19 +87,9 @@ function icheck(){
 }));
 moment.lang("ja");
 
-$.fn.datepicker.dates['ja'] = {
-		days: ["日曜", "月曜", "火曜", "水曜", "木曜", "金曜", "土曜", "日曜"],
-		daysShort: ["日", "月", "火", "水", "木", "金", "土", "日"],
-		daysMin: ["日", "月", "火", "水", "木", "金", "土", "日"],
-		months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
-		monthsShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
-		today: "今日",
-		format: "yyyy/mm/dd"
-	};
 $(function(){
   $( ".datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'});
   $('.dropdown-toggle').dropdown();
-  icheck();
 
 });
 

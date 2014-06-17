@@ -9,8 +9,8 @@
 <%= link_to 'Edit', edit_task_path(t) %> / <%= link_to '削除', t, :confirm => '本当に削除しますか', :class => "destroy", :method => :delete, :remote => true %>
 </div>
 <% end %>
-<div class="row-fluid">
-  <div class="span3">
+<div class="row">
+  <div class="col-sm-3">
     <div class="task">
       <h4>タスク一覧</h4>
       <table class="table table-bordered table-hover" id="task_list_table">
@@ -38,8 +38,8 @@
   <%= render :partial => 'edit_side_sheet_button', :locals => {:company => @company}%>
 
   </div>
-  <div class="span9">
-  	<%= form_for(@company, :html => {:class => 'form-horizontal'}) do |form|%>
+  <div class="col-sm-9">
+  	<%= simple_form_for(@company, :html => {:class => 'form-horizontal'}, wrapper: :horizontal_form ) do |form|%>
   	<%= render :partial => 'form', :locals => {:form => form} %>
     <% end %>
     <%= link_to '削除する', @company, method: :delete, data: { confirm: '本当に削除しますか' } ,  :class=>"btn"%>

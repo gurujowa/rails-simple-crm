@@ -9,6 +9,7 @@ gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -16,7 +17,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', :platform => :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -25,7 +26,8 @@ gem 'devise'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
-gem 'passenger', '4.0.20'
+#gem 'passenger', '4.0.20'
+gem 'unicorn'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -57,7 +59,7 @@ gem 'fullcalendar-rails'
 gem 'jquery-datatables-rails'
 gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
-gem 'bootstrap-sass', '~> 2.3.2.2'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'bootstrap-editable-rails'
 gem 'underscore-rails'
 
@@ -79,7 +81,7 @@ gem 'paper_trail', '>= 3.0.0.rc2'
 #------------------------------
 #other library
 #------------------------------
-gem "simple_form", "~> 3.0.0.rc"
+gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'will_paginate'

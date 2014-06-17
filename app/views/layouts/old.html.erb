@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>デップ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -15,7 +16,12 @@
   <% if flash[:alert].present? then%>
     <%= javascript_tag 'noty({text: "' + flash[:alert] + '" ,type: "error",timeout: 2000});' %>
   <% end %>
-<div class="container-fluid">
+<div class="container">
+<div class="btn-group">
+  <button type="button" class="btn btn-default">Left</button>
+  <button type="button" class="btn btn-default">Middle</button>
+  <button type="button" class="btn btn-default">Right</button>
+</div>
 <div class="navbar">
     <div class="navbar-inner">
         <a class="brand" href="#">デップ</a>
@@ -27,6 +33,12 @@
                <li><a href="/">未完了タスク</a></li>
                <li><%= link_to "コースタスク" , {controller: "courses", action: "task"}%></li>
                <li><%= link_to "コースアラート" , {controller: "courses", action: "alert"}%></li>
+             </ul>
+            </li>
+            <li class="dropdown"><%= link_to "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"} do %>
+            	見込み客候補<b class='caret'></b><% end %>
+             <ul class="dropdown-menu">
+               <li><%= link_to "見込み客候補" , {controller: "leads", action: "index"}%></li>
              </ul>
             </li>
 

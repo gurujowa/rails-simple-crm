@@ -1,17 +1,17 @@
 .tab-pane id="company_edit_client_#{f.index}" class=("active" if f.index == 0) data-pk="#{f.index}"
-  .control-group
-    label.control-label 担当者名(漢字)
-    .controls 姓#{f.text_field :last_name} 名#{f.text_field :first_name}
-  .control-group
-    label.control-label 担当者名（かな）
-    .controls 姓#{f.text_field :last_kana} 名#{f.text_field :first_kana}
-  .control-group
-    label.control-label 役職
-    .controls = f.text_field :official_position
-  .control-group
-    label.control-label 性別
-    .controls  
-      #{f.label :gender, "男性", :value => 1}#{f.radio_button :gender , 1}  #{f.label :gender, "女性", :value => 2}#{f.radio_button :gender , 2} #{f.label :gender, "不明", :value => 3}#{f.radio_button :gender , 3}
-  .control-group
-    label.control-label メモ
-    .controls = f.text_area :memo, :class => "span12", :rows => "5"
+  h4 担当者名（漢字)
+  .form-group 
+    span.col-sm-6
+      = f.input :last_name
+    span.col-sm-6
+      = f.input :first_name
+  h4 担当者名（かな)
+  .form-group 
+    span.col-sm-6
+      = f.input :last_kana
+    span.col-sm-6
+      = f.input :first_kana
+  = f.input :official_position
+  = f.input :gender, as: :radio_buttons,collection:  [[ "男性", 1],["女性", 2],["その他", 3]]
+  = f.input :memo,  :rows => "7"
+

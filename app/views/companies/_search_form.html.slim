@@ -1,0 +1,34 @@
+= form_for(@company, options) do |form|
+  fieldset
+    - active_st = params[:company][:active_st] if params[:company].present?  
+    .form-group
+      = form.text_field :client_name, { :placeholder => "会社名", :class => "form-control"}
+    .form-group
+      = select_tag :stage, options_from_statuses(params[:stage]),{:prompt => "< ステータス >", :include_blank => true, :class => "form-control"} 
+    .form-group
+      = text_field_tag :rank,params["rank"], {:class => "form-control", :placeholder => "ランク"} 
+    .form-group
+      = form.select :active_st , Company.active_st.options,{:prompt => "< 状態ステータス >" , :selected => active_st, :include_blank => true}, :class => "form-control"  
+    .form-group
+      = form.text_field :tel, {:class => "form-control", :placeholder => "電話番号"} 
+    .form-group
+      = form.text_field :prefecture, {:class => "form-control", :placeholder => "都道府県"} 
+    .form-group
+      = form.text_field :city, {:class => "form-control", :placeholder => "市町村"} 
+    .form-group
+      = select_tag :saler, options_from_users(params[:saler]),{:prompt => "< 営業マン >", :include_blank => true , :class => "form-control"} 
+    .form-group
+      = form.collection_select :campaign_id , Campaign.all, :id, :name, { :prompt => " < 新規獲得元 > " ,:include_blank => true}, :class => "form-control" 
+    .form-group
+      = form.select :created_by , options_from_users(@company.created_by),{:prompt => "< 作成者 >", :include_blank => true},{:class => "form-control"} 
+    .form-group
+      = form.text_field :created_at, {'data-format' => 'yyyy-MM-dd', :class=>"datepicker form-control", :placeholder => "作成日"} 
+    .form-group
+      = form.select :updated_by , options_from_users(@company.updated_by),{:prompt => "< 更新者 >", :include_blank => true}, {:class => "form-control"} 
+    .form-group
+      = form.text_field :updated_at, {'data-format' => 'yyyy-MM-dd', :placeholder => "更新日", :class=>"datepicker form-control"} 
+    .form-group
+      = form.collection_select(:industry_id,Industry.all, :id, :name, {:selected => "" , :prompt => "< 業種 >", :include_blank => true} , {:class => "form-control"} ) 
+    = submit_tag "検索する", :class=>"btn btn-primary"
+    = submit_tag "CSV", {:class=>"btn", :onclick => ("submit_format('#new_company','csv')")}
+    = link_to "新規作成", {:action=> "new"} , {:class=>"btn btn-default"}
