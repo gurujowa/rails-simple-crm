@@ -21,12 +21,12 @@ table.table.table-bordered
     th メモ
     td  =@teacher.memo
 
-= link_to '編集', edit_teacher_path(@teacher), :class => "btn"
-= link_to '削除', @teacher, method: :delete, :class => "btn"
+= link_to '編集', edit_teacher_path(@teacher), :class => "btn btn-info"
+= link_to '削除', @teacher, method: :delete, :class => "btn btn-default"
 
 h3 コマ情報(全部）
-.row-fluid
-  .span6
+.row
+  .col-sm-6
     table.table-bordered.table-striped
       tr
         th 日程
@@ -39,7 +39,7 @@ h3 コマ情報(全部）
           td = p.start_time.to_s(:time)
           td = p.end_time.to_s(:time)
           td = p.course.company.name
-  .span6
+  .col-sm-6
     h3 メール用　テキスト（未来のコマのみ)
     .well
       - @future_periods.each do |p|

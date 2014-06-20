@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140611032835) do
+ActiveRecord::Schema.define(version: 20140619121053) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -230,6 +230,18 @@ ActiveRecord::Schema.define(version: 20140611032835) do
     t.datetime "updated_at"
   end
 
+  create_table "lead_histories", force: true do |t|
+    t.date     "approach_day"
+    t.integer  "category"
+    t.date     "next_approach_day"
+    t.text     "memo"
+    t.integer  "lead_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lead_histories", ["lead_id"], name: "index_lead_histories_on_lead_id"
+
   create_table "leads", force: true do |t|
     t.string   "name",        null: false
     t.string   "tel",         null: false
@@ -248,6 +260,7 @@ ActiveRecord::Schema.define(version: 20140611032835) do
     t.integer  "star"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "city"
   end
 
   add_index "leads", ["user_id"], name: "index_leads_on_user_id"

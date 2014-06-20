@@ -1,18 +1,17 @@
 <h1>講師 一覧</h1>
 
-<%= link_to '新規追加', new_teacher_path, :class => 'btn' %>
+<%= link_to '新規追加', new_teacher_path, :class => 'btn btn-info' %>
 <table class="default_datatables">
   <thead>
     <tr>
-      <th>名前（漢字）</th>
-      <th>名前（かな）</th>
-      <th>仕事可能</th>
+      <th>名前</th>
+      <th>rank</th>
       <th>ジャンル</th>
       <th>ディレクター</th>
       <th>電話</th>
       <th>メール</th>
       <th>メモ</th>
-      <th>CH</th>
+      <th>編集</th>
     </tr>
   </thead>
 
@@ -20,15 +19,13 @@
     <% @teachers.each do |teacher| %>
       <tr>
         <td><%= link_to teacher.short_name, teacher_path(teacher) %></td>
-        <td><%= teacher.kana %></td>
         <td><%= get_work_possible(teacher.work_possible) %></td>
         <td><%= teacher.genre %></td>
         <td><%= teacher.director_name %></td>
         <td><%= teacher.tel %></td>
         <td><%= teacher.email %></td>
         <td><%= teacher.memo %></td>
-        <td><%= link_to '編集', edit_teacher_path(teacher), :class => "btn" %>
-        	<%= link_to '削除', teacher, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn" %></td>
+        <td><%= link_to '編集', edit_teacher_path(teacher), :class => "btn btn-info" %></td>
       </tr>
     <% end %>
   </tbody>

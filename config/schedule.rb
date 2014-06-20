@@ -11,7 +11,7 @@ every 1.day, :at => '5:00 pm' do
   command %Q{backup perform --trigger crm_dropbox}
 end
 
-every 1.day, :at => '6:00 am' do
+every 1.day, :at => '12:10 pm' do
   rake "mail:course:end"
   rake "mail:course:reminder"
 end

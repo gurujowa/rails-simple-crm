@@ -18,3 +18,26 @@ tr.odd {
   display:none;
   background-color:#e3e3e3;
 }
+
+#company_sidebar.affix {
+  position: static;
+}
+@media screen and (min-width: 992px) {
+  #company_sidebar.affix,
+  #company_sidebar.affix-bottom {
+    width: 213px;
+  }
+  #company_sidebar.affix {
+    position: fixed;
+    top: 60px;
+  }
+  #company_sidebar.affix-bottom {
+    position: absolute; 
+  }
+}
+@media screen and (min-width: 1200px) {
+  #company_sidebar.affix-bottom,
+  #company_sidebar.affix {
+    width: 263px;
+  }
+}

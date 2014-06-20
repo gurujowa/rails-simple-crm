@@ -1,77 +1,32 @@
-.row
-  = form_for(@company, :html => {:class => 'form-horizontal'}) do |form|
-    .span6
-      .company_edit_header_1 会社情報
-      .well
-        - @company.errors.full_messages.each do |msg|
-          li= msg
-        .control-group
-          label.control-label 会社名
-          .controls
-            = form.text_field :client_name
-        .control-group
-          label.control-label 代表電話
-          .controls
-            = form.text_field :tel
-          label.control-label FAX
-          .controls
-            = form.text_field :fax
-          label.control-label MAIL
-          .controls
-            = form.text_field :mail
-        .control-group
-          label.control-label 状態ステータス
-          .controls
-            = form.select :active_st, Company.active_st.options, :include_blank => true
-        hr
-        ul.nav.nav-pills#company_edit_negos_tab
-          - @company.negos.each_with_index do |c,i|
-            - if c.persisted?
-              li class=("active" if i==0)
-                a id="company_edit3_nego_tab_#{i}" href="#company_edit3_nego_#{i}" data-toggle="tab"
-                  = c.name.present? ? c.name : "新しい商談"
-        .tab-content.add_fields#company_edit3_negos_tab_content
-          = form.fields_for :negos do |k|
-            = k.hidden_field :name
-            .tab-pane id="company_edit3_nego_#{k.index}" class=("active" if k.index == 0) data-pk="#{k.index}"
-              .control-group
-                label.control-label 商談ステータス
-                .controls = k.select :status_id, options_from_statuses(k.object.status_id), :include_blank => true
-                label.control-label 担当営業
-                .controls= k.select :user_id , options_from_users(k.object.user_id, true)
-        hr
-        ul.nav.nav-pills#company_edit3_clients_tab
-          - @company.clients.each_with_index do |c,i|
-            li class=("active" if i==0)
-              a id="company_edit3_client_tab_#{i}" href="#company_edit3_client_#{i}" data-toggle="tab" = c.name
-        .tab-content.add_fields#company_edit3_clients_tab_content
-          = form.fields_for :clients do |f|
-            .tab-pane id="company_edit3_client_#{f.index}" class=("active" if f.index == 0) data-pk="#{f.index}"
-              .control-group
-                label.control-label 担当者名(漢字)
-                .controls 姓#{f.text_field :last_name} 名#{f.text_field :first_name}
-                label.control-label 担当者名(かな)
-                .controls 姓#{f.text_field :last_kana} 名#{f.text_field :first_kana}
-    .span5
-      .company_edit_header_1 コンタクト
-      .well
-        - contact_index = 1
-        table.table
-          = form.fields_for :contacts do |c|
-            tr
-              td= contact_index
-              td style="width:100px;"
-                - ContactType.all.each do |t|
-                  = c.radio_button :con_type, t.id
-                  = c.label "con_type_"+ t.id.to_s, t.name
-                  br
-              td
-                = c.text_area :memo, :rows => "6" , :style =>"width:100%"
-                br
-                  | \&nbsp;&nbsp;&nbsp;担当者：#{c.object.getCreatedBy()}, 作成日: #{simple_date(c.object.created_at)}
-                  br
-                    = c.hidden_field :created_by
-                    - contact_index += 1
-    .span12
-      .form-actions
-        = submit_tag "編集する", :class=>"btn btn-primary"
+h4 見積り一覧
+table.table.table-bordered
+  thead
+    tr
+      th コース名(最初の1つ)
+      th 価格
+  tbody
+    - @company.estimates.each do |e|
+      tr
+        td  
+          = link_to e.estimate_lines.first.name,estimate_path(e)
+          = link_to "(edit)" , edit_estimate_path(e)
+        td  = number_to_currency e.total_price
+h4 請求予定表一覧
+table.table.table-bordered
+  thead
+    tr
+      th 件名
+      th 価格
+  tbody
+    - @company.billing_plans.each do |e|
+      tr
+        td  
+          = link_to e.name , billing_plan_path(e)
+          = link_to "(edit)" , edit_billing_plan_path(e)
+        td  = number_to_currency e.total_price
+
+h4 帳票作成
+= link_to "クライアントシート" , {action: "client_sheet", id: @company.id}, :class => "btn btn-default"
+- if @company.is_active
+  = link_to "見積書" , {controller: :estimates ,action: :new, company_id: @company.id}, :class => "btn btn-default"
+  = link_to "請求予定表" , {controller: :billing_plans ,action: :new, company_id: @company.id}, :class => "btn btn-default"

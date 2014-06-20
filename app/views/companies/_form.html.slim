@@ -1,3 +1,4 @@
+a name="company"
 .panel.panel-info
   .panel-heading 会社情報
   .panel-body
@@ -5,7 +6,7 @@
     = form.input :industry_id,  collection: @industries, hint: link_to("(業種の追加)", {controller: "industries"})
     = form.input :campaign_id , collection:  Campaign.all, hint: link_to("(新規追加)", campaigns_path)
     = form.input :active_st
-    = form.input :memo, :rows => "10"
+a name="client"
 .panel.panel-default
   .panel-heading 連絡先
   .panel-body
@@ -21,13 +22,20 @@
     a.btn.btn-default#jump_zip 郵便番号
     a.btn.btn-default#jump_map GoogleMap検索
 
+a name="staff"
 .panel.panel-default
   .panel-heading 職員情報
   .panel-body
     = form.input :regular_staff
     = form.input :nonregular_staff
 
+a name="memo"
+.panel.panel-default
+  .panel-heading メモ
+  .panel-body
+    = form.input :memo, input_html: {:rows => "20"}
 
+a name="nego"
 .panel.panel-default
   .panel-heading 商談
   .panel-body
@@ -40,8 +48,9 @@
       = form.simple_fields_for :negos do |i|
         = render :partial => "nego_fields", :locals => { :f => i}
 
+a name="people"
 .panel.panel-default
-  .panel-heading 商談
+  .panel-heading 連絡先
   .panel-body
     ul.nav.nav-pills#company_edit_clients_tab
       - @company.clients.each_with_index do |c,i|
@@ -52,24 +61,10 @@
       = form.simple_fields_for :clients do |i|
         = render :partial => "client_fields", :locals => { :f => i}
 
-.company_edit_header_1 コンタクト
-.well
-  - contact_index = 1
-  table.table
-    = form.fields_for :contacts do |c|
-      tr
-        td= contact_index
-        td style="width:100px;"
-          - ContactType.all.each do |t|
-            = c.radio_button :con_type, t.id , :class =>"icheck"
-            = c.label "con_type_"+ t.id.to_s, t.name
-            br
-        td
-          = c.text_area :memo, :rows => "6" , :style =>"width:100%"
-          br
-            | \&nbsp;&nbsp;&nbsp;担当者：#{c.object.getCreatedBy()}, 作成日: #{simple_date(c.object.created_at)}
-            br
-              = c.hidden_field :created_by
-              - contact_index += 1
+a name="contact"
+.panel.panel-default
+  .panel-heading コンタクト
+  .panel-body
+    = render partial: "contact_fields", locals: {:form => form}
 .form-actions
   = submit_tag "編集する", :class=>"btn btn-primary"

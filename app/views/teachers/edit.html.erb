@@ -1,5 +1,5 @@
 <h1>講師情報編集</h1>
-
 <%= render 'form' %>
 
+<%= link_to '削除', @teacher, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-default" %>
 <%= link_to '戻る', teachers_path %>

@@ -1,7 +1,7 @@
 h1 請求予定表 一覧
 
-= link_to '新規追加', new_billing_plan_path, :class => 'btn'
-= link_to 'CSV出力', {action: "index", format: "csv"}, :class => 'btn'
+= link_to '新規追加', new_billing_plan_path, :class => 'btn btn-info'
+= link_to 'CSV出力', {action: "index", format: "csv"}, :class => 'btn btn-default'
 table.default_datatables
   thead
     tr
@@ -11,17 +11,14 @@ table.default_datatables
       th 金額
       th 請求開始
       th 請求終了
-      th 削除
+      th 出力
   tbody
     - @billing_plans.each do |billing_plan|
       tr
         td = link_to_switch_flg billing_plan, :send_flg
         td = link_to billing_plan.name,  edit_billing_plan_path(billing_plan)
-        td = billing_plan.company.name
+        td = link_to billing_plan.company.name, edit_company_path(billing_plan.company)
         td = number_to_currency billing_plan.tax_include_price 
         td = billing_plan.bill_start
         td = billing_plan.bill_end
-        td 
-          = link_to 'PDF', billing_plan_path(billing_plan, format: "pdf"), :class => "btn"
-          = link_to '表示', billing_plan , :class => "btn"
-          = link_to '削除', billing_plan, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"
+        td = link_to "出力", billing_plan, :class => "btn btn-info"

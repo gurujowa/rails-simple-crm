@@ -27,9 +27,6 @@ module TeachersHelper
        end
     end
     
-    def options_work_possible(default = nil)
-        options_for_select(work_possible_string)    
-    end
 
     def work_possible_string
       {"◯" => 0, "△" => 1, "✗" => 2}

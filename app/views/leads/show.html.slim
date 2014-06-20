@@ -1,51 +1,76 @@
 p#notice = notice
 
-p
-  strong Name:
-  = @lead.name
-p
-  strong Tel:
-  = @lead.tel
-p
-  strong Fax:
-  = @lead.fax
-p
-  strong Email:
-  = @lead.email
-p
-  strong Person name:
-  = @lead.person_name
-p
-  strong Person kana:
-  = @lead.person_kana
-p
-  strong Person post:
-  = @lead.person_post
-p
-  strong Url:
-  = @lead.url
-p
-  strong Zip code:
-  = @lead.zip_code
-p
-  strong Prefecture:
-  = @lead.prefecture
-p
-  strong Street:
-  = @lead.street
-p
-  strong Building:
-  = @lead.building
-p
-  strong Memo:
-  = @lead.memo
-p
-  strong User:
-  = @lead.user
-p
-  strong Star:
-  = @lead.star
+.row
+  .col-sm-6
+    .panel.panel-info
+      .panel-heading お客様詳細情報
+      .panel-body
+        table.table.table-bordered.table-striped.table-condensed
+          tr
+            th 会社名
+            td = @lead.name
+          tr
+            th 電話番号
+            td = @lead.tel
+          tr
+            th FAX
+            td = @lead.fax
+          tr
+            th Eメール
+            td = @lead.email
+          tr
+            th 担当者名
+            td = @lead.person_name
+          tr
+            th 担当者かな
+            td = @lead.person_kana
+          tr
+            th 役職
+            td = @lead.person_post
+          tr
+            th URL
+            td = @lead.url
+          tr
+            th 郵便番号
+            td = @lead.zip_code
+          tr
+            th 都道府県
+            td = @lead.prefecture
+          tr
+            th 市区町村
+            td = @lead.city
+          tr
+            th 住所
+            td = @lead.street
+          tr
+            th 建物名
+            td = @lead.building
+          tr
+            th 顧客番号
+            td = @lead.id
+          tr
+            th 登録日
+            td = @lead.created_at
+          tr
+            th 更新日
+            td = @lead.updated_at
+      .panel-footer
+        = link_to '編集', edit_lead_path(@lead), class: "btn btn-default"
+  .col-sm-6
+    .panel.panel-info
+      .panel-heading 対応履歴
+      .panel-body
+        table.table
+          thead
+            tr
+              th 
+                span.label.label-success 電話対応
+              th 熊木みのり
+              th 20130101
+          tbody
+            tr
+              td colspan="3"
+                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
 
-= link_to 'Edit', edit_lead_path(@lead)
-'|
-= link_to 'Back', leads_path

@@ -1,17 +1,14 @@
 .tab-pane id="company_edit_client_#{f.index}" class=("active" if f.index == 0) data-pk="#{f.index}"
-  h4 担当者名（漢字)
   .form-group 
     span.col-sm-6
       = f.input :last_name
     span.col-sm-6
       = f.input :first_name
-  h4 担当者名（かな)
   .form-group 
     span.col-sm-6
       = f.input :last_kana
     span.col-sm-6
       = f.input :first_kana
   = f.input :official_position
-  = f.input :gender, as: :radio_buttons,collection:  [[ "男性", 1],["女性", 2],["その他", 3]]
+  = f.input :gender, collection:  [[ "男性", 1],["女性", 2],["その他", 3]], wrapper: :inline_radio, as: :radio_buttons
   = f.input :memo,  :rows => "7"
-

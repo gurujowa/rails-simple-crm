@@ -18,7 +18,7 @@
   <tbody>
     <% @campaigns.each do |campaign| %>
       <tr>
-        <td><%= campaign.name %></td>
+        <td><%= link_to campaign.name, campaign, :class => "btn" %></td>
         <td><%= number_to_currency campaign.bill %></td>
         <td><%= campaign.sent %></td>
         <td><%= campaign.reaction %></td>
@@ -26,8 +26,8 @@
         <td><%= number_to_currency campaign.cpa %></td>
         <td><%= campaign.start_date %></td>
         <td><%= campaign.memo %></td>
-        <td><%= link_to '表示', campaign, :class => "btn" %><%= link_to '編集', edit_campaign_path(campaign), :class => "btn" %>
-        	<%= link_to '削除', campaign, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn" %></td>
+        <td><%=  %><%= link_to '編集', edit_campaign_path(campaign), :class => "btn btn-default" %>
+        	</td>
       </tr>
     <% end %>
   </tbody>

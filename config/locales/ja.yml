@@ -57,6 +57,19 @@ ja:
           flag_on:  入金済
           flag_off: 未入金
     attributes: #一覧画面で必要
+      company:
+        active_st: 見込み確度
+        memo: 詳細情報
+        industory: 業種
+        client_name: 会社名
+        tel: 電話番号
+        zipcode: 郵便番号
+        prefecture: 都道府県
+        city: 市区町村
+        address: 番地
+        building: 建物名
+        regular_staff: 正規職員人数
+        nonregular_staff: 非正規職員人数
       teacher:  #モデル毎に階層化しておく。
         first_kanji: 名（漢字）
         last_kanji: 姓（漢字）
@@ -96,6 +109,19 @@ ja:
         description: 研修内容概要
         payment_term: 特記事項
         order_date: 発注日
+      nego:
+        name: 商談名
+        status_id: ステージ
+        memo: メモ
+        user_id: 営業マン
+      client:
+        last_name: 姓(漢字)
+        first_name: 名(漢字)
+        last_kana: 姓(かな)
+        first_kana: 名(かな)
+        official_position: 役職
+        gender: 性別
+        memo: メモ
       client_order:  #モデル毎に階層化しておく。
         company_id: 会社
         price: 価格

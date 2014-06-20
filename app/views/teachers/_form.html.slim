@@ -1,0 +1,27 @@
+= simple_form_for(@teacher,:html => {:class => "form-horizontal"}, wrapper: :horizontal_form ) do |f|
+  - if @teacher.errors.any?
+    div id="error_explanation"
+      h2
+        = pluralize(@teacher.errors.count, "error") 
+      ul
+        - @teacher.errors.full_messages.each do |msg|
+          li = msg
+
+  .row
+    .col-sm-6
+      = f.input :last_kanji
+    .col-sm-6
+      = f.input :first_kanji
+  .row
+    .col-sm-6
+      = f.input :last_kana 
+    .col-sm-6
+      = f.input :first_kana
+  = f.input :work_possible, collection: work_possible_string
+  = f.input :genre
+  = f.input :tel
+  = f.input :email 
+  = f.input :director_id , collection: Teacher.all
+
+  = f.input :memo
+  = f.submit :class => "btn btn-primary", :value => "保存する"

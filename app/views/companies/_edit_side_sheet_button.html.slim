@@ -1,6 +1,0 @@
-.well
-  h4 帳票作成
-  = link_to "クライアントシート" , {action: "client_sheet", id: company.id}, :class => "btn"
-  - if company.is_active
-    = link_to "見積書" , {controller: :estimates ,action: :new, company_id: company.id}, :class => "btn"
-    = link_to "請求予定表" , {controller: :billing_plans ,action: :new, company_id: company.id}, :class => "btn"

@@ -1,0 +1,17 @@
+- contact_index = 1
+table.table
+  = form.simple_fields_for :contacts do |c|
+    tr
+      td= contact_index
+      td style="width:100px;"
+        - ContactType.all.each do |t|
+          = c.radio_button :con_type, t.id , :class =>"icheck"
+          = c.label "con_type_"+ t.id.to_s, t.name
+          br
+      td
+        = c.text_area :memo, :rows => "6" , :style =>"width:100%"
+        br
+          | \&nbsp;&nbsp;&nbsp;担当者：#{c.object.getCreatedBy()}, 作成日: #{simple_date(c.object.created_at)}
+          br
+            = c.hidden_field :created_by
+            - contact_index += 1
