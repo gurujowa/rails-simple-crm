@@ -3,7 +3,13 @@ class LeadsController < ApplicationController
 
   # GET /leads
   def index
-    @leads = Lead.all
+    @leads = Lead.order(:created_at)
+    if (params[:full].present?) 
+      @leads = @leads.paginate_search('03', page: 1,per_page: 100)
+    else
+      @leads = @leads.paginate(page: params[:page],per_page: 2)
+    end
+    
   end
 
   # GET /leads/1
@@ -11,6 +17,10 @@ class LeadsController < ApplicationController
     @new_lead_history = LeadHistory.new
     @new_lead_history.lead_id = @lead.id
     @new_lead_history.approach_day = DateTime.now()
+
+    @status_ing = LeadHistoryStatus.where(progress: "ing")
+    @status_done = LeadHistoryStatus.where(progress: "done")
+    @status_forbidden = LeadHistoryStatus.where(progress: "forbidden")
   end
 
   # GET /leads/new
@@ -56,6 +66,6 @@ class LeadsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lead_params
-      params.require(:lead).permit(:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zip_code, :prefecture, :street, :building, :memo, :user_id, :star)
+      params.require(:lead).permit(:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zip_code, :prefecture, :street, :building, :memo, :user_id, :star)
     end
 end

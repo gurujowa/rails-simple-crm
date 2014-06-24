@@ -1,5 +1,10 @@
 h1 見込み客一覧
 
+= form_tag({action: "index"}, {method: "get"}) do
+  .form-group
+    label.sr-only for="full" 検索
+    = text_field_tag  :full
+  button type="submit" class="btn btn-default" 検索
 = link_to '新規追加', new_lead_path, :class => 'btn btn-default'
 table.table.table-striped.table-bordered
   thead
@@ -11,8 +16,9 @@ table.table.table-striped.table-bordered
   tbody
     - @leads.each do |lead|
       tr
-        
+
         td = link_to lead.name , lead
-        td = lead.tel 
-        td = lead.star 
-        td = lead.updated_at 
+        td = lead.tel
+        td = lead.star
+        td = lead.updated_at
+= will_paginate @leads, renderer: BootstrapPagination::Rails

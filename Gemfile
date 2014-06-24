@@ -60,7 +60,6 @@ gem 'jquery-datatables-rails'
 gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
 gem 'bootstrap-sass', '~> 3.1.1'
-gem 'bootstrap-editable-rails'
 gem 'underscore-rails'
 
 #------------------------------
@@ -76,6 +75,9 @@ gem 'slim-rails'
 #------------------------------
 gem 'enumerize'
 gem 'paper_trail', '>= 3.0.0.rc2'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+gem 'acts_as_indexed'
 
 
 #------------------------------
@@ -84,7 +86,6 @@ gem 'paper_trail', '>= 3.0.0.rc2'
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
-gem 'will_paginate'
 gem 'business_time'
 gem "nested_form"
 gem "geocoder"

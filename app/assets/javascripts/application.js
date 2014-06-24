@@ -14,16 +14,14 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require jquery.ui.datepicker-ja
-//= require bootstrap-switch.min
 //= require bootstrap
+//= require bootstrap-switch.min
 //= require jquery.cookie
 //= require noty/jquery.noty
 //= require noty/layouts/top
 //= require noty/themes/default
 //= require dataTables/jquery.dataTables
 //= require jquery.balloon.min
-//= require bootstrap-editable
-//= require bootstrap-editable-rails
 //= require jquery.timepicker.min
 //= require fullcalendar
 //= require moment.min
@@ -90,7 +88,6 @@ moment.lang("ja");
 $(function(){
   $( ".datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'});
   $('.dropdown-toggle').dropdown();
-
 });
 
 function remove_fields(link) {

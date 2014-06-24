@@ -41,3 +41,24 @@ tr.odd {
     width: 263px;
   }
 }
+
+.table-lead-history-status th {
+  font-weight: normal;
+  white-space:nowrap;
+}
+
+.table-lead-history-status td {
+  font-weight: normal;
+}
+
+.color-box {
+  float: left;
+  width: 11px;
+  height: 11px;
+  margin-right: 3px;
+  border: 1px solid #ccc;
+  moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+}

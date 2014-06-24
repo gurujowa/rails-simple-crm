@@ -1,13 +1,6 @@
-$.fn.editable.defaults.mode = "inline"
-
 
 jQuery ->
   $('.balloon').balloon({contents: $('#balloon_popup').clone().show(), position: "right"})
-  $(".edit_in_place").editable({
-    inputclass: 'input-xlarge'
-    name: 'name'
-    })
-    
   $("#edit_tab a[data-toggle=\"tab\"]").on "shown", (e) -> 
     localStorage.setItem "lastEditTab", $(e.target).attr("id")
   lastTab = localStorage.getItem("lastEditTab")

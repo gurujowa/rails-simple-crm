@@ -16,7 +16,10 @@ p#notice = notice
       .panel-body
         table.table.table-bordered.table-striped.table-condensed
           tr
-            th 会社名
+            th 
+              span 会社名
+              a.btn.btn-default href="http://www.google.co.jp/search?q=#{@lead.name}" target="_blank"
+                span.glyphicon.glyphicon-search
             td = @lead.name
           tr
             th 電話番号
@@ -43,17 +46,11 @@ p#notice = notice
             th 郵便番号
             td = @lead.zip_code
           tr
-            th 都道府県
-            td = @lead.prefecture
-          tr
-            th 市区町村
-            td = @lead.city
-          tr
-            th 住所
-            td = @lead.street
-          tr
-            th 建物名
-            td = @lead.building
+            th
+              span 住所
+              a.btn.btn-default href="http://maps.google.co.jp/maps?q=#{@lead.full_address}" target="_blank"
+                span.glyphicon.glyphicon-map-marker
+            td = @lead.full_address
           tr
             th 顧客番号
             td = @lead.id
@@ -71,18 +68,50 @@ p#notice = notice
       .alert.alert-warning
         | 再アプローチ日：
         = @lead.next_approach_day
+    button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#btn-history" 対応履歴の追加
     =simple_form_for(@new_lead_history) do |f|
       =f.error_notification
-      .panel.panel-info
-        .panel-heading 対応履歴の追加
-        .panel-body
-          = f.input :approach_day, as: :datetime_picker
-          = f.input :status
-          = f.input :next_approach_day, as: :datetime_picker
-          = f.input :memo
-          = f.hidden_field :lead_id
-        .panel-footer
-          = f.button :submit
+      #btn-history.collapse
+        .panel.panel-info
+          .panel-heading 対応履歴の追加
+          .panel-body
+            = f.input :approach_day, as: :date_picker
+            table.table.table-bordered.table-lead-history-status
+              tr
+                th  継続
+                td 
+                  .row
+                    - @status_ing.each do |l|
+                      .col-sm-6
+                        = f.label :lead_history_status_id, value: l.id do
+                          .color-box style="background-color:##{l.color}"
+                          = l.name
+                        = f.radio_button :lead_history_status_id, l.id
+              tr
+                th  完了
+                td 
+                  .row
+                    - @status_done.each do |l|
+                      .col-sm-6
+                        = f.label :lead_history_status_id, value: l.id do
+                          .color-box style="background-color:##{l.color}"
+                          = l.name
+                        = f.radio_button :lead_history_status_id, l.id
+              tr
+                th  接触禁止
+                td 
+                  .row
+                    - @status_forbidden.each do |l|
+                      .col-sm-6
+                        = f.label :lead_history_status_id, value: l.id do
+                          .color-box style="background-color:##{l.color}"
+                          = l.name
+                        = f.radio_button :lead_history_status_id, l.id
+            = f.input :next_approach_day, as: :date_picker
+            = f.input :memo
+            = f.hidden_field :lead_id
+          .panel-footer
+            = f.button :submit
 
     .panel.panel-info
       .panel-heading 対応履歴
@@ -92,9 +121,10 @@ p#notice = notice
             thead
               tr
                 th 
-                  span.label.label-success 電話対応
+                  .color-box style="height:23px;background-color:##{h.lead_history_status.color}"
+                  span = h.lead_history_status.name
                 th = h.user.name
-                th = h.status.text
+                th = h.approach_day
             tbody
               tr
                 td colspan="3"

@@ -2,6 +2,9 @@ class Lead < ActiveRecord::Base
   belongs_to :user
   has_many :lead_histories
 
+  default_scope :order => 'created_at DESC'
+  acts_as_indexed :fields => [:full_address, :name, :tel, :fax, :email, :person_name, :person_kana, :zip_code]
+
   def next_approach_day
     if self.lead_histories.present?
       self.lead_histories.last.next_approach_day

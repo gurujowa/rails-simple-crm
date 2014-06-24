@@ -10,7 +10,13 @@ class LeadHistoriesController < ApplicationController
     if @lead_history.save
       redirect_to lead_show_url(@lead_history.lead_id), notice: '顧客対応履歴を作成しました'
     else
-      render controller: "leads", action: 'show', id: @lead_history.lead_id 
+      @lead = @lead_history.lead
+      @new_lead_history = @lead_history
+
+      @status_ing = LeadHistoryStatus.where(progress: "ing")
+      @status_done = LeadHistoryStatus.where(progress: "done")
+      @status_forbidden = LeadHistoryStatus.where(progress: "forbidden")
+      render template: "leads/show"
     end
   end
 
@@ -41,6 +47,6 @@ class LeadHistoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lead_history_params
-      params.require(:lead_history).permit(:approach_day, :next_approach_day, :status, :memo, :lead_id, :user_id)
+      params.require(:lead_history).permit(:approach_day, :next_approach_day, :lead_history_status_id, :memo, :lead_id, :user_id)
     end
 end
