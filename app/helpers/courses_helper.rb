@@ -19,7 +19,7 @@ module CoursesHelper
   def time_input(builder, name, required)
     value = builder.object.read_attribute(name)
     
-    hash = {:class=>name + "picker course_timepicker input-mini"}
+    hash = {:class=>name + "picker course_timepicker form-control input-sm"}
     hash.store(:required, true) if required == true
     hash.store(:value, value.strftime("%H:%M")) if value.present?
     

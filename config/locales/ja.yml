@@ -81,6 +81,9 @@ ja:
         order_flg: 発注フラグ
         book_flg: 書籍送付
         report_flg: ３点セット
+        students: 受講者数
+        memo: メモ
+        observe_flg: 立ち会い必要かどうか
       teacher_order:  #モデル毎に階層化しておく。
         teacher_id: 講師
         price: 価格

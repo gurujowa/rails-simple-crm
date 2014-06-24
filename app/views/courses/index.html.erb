@@ -1,11 +1,11 @@
 <h1>コース 一覧</h1>
-<%= link_to "新規追加" , {controller: "courses", action: "new"}, class: "btn"%>
-<div class="row-fluid">
-<div class="span2">
+<%= link_to "新規追加" , {controller: "courses", action: "new"}, class: "btn btn-default"%>
+<div class="row">
+<div class="col-sm-2">
 <table id="courses_toggle_table" class="table table-bordered">
 </table>
 </div>
-<div class="span10">
+<div class="col-sm-10">
 <table id="courses_datatable">
   <thead>
     <tr>
@@ -27,7 +27,7 @@
         <td><%= convert_min(b.getTotalTime) %></td>
         <td><%= b.getStartDate %></td>
         <td><%= b.getEndDate %></td>
-        <td><%= link_to '編集', edit_course_path(b), :class => "btn" %>
+        <td><%= link_to '編集', edit_course_path(b), :class => "btn btn-default" %>
         	</td>
       </tr>
     <% end %>

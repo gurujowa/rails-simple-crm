@@ -7,7 +7,7 @@ class LeadsController < ApplicationController
     if (params[:full].present?) 
       @leads = @leads.paginate_search('03', page: 1,per_page: 100)
     else
-      @leads = @leads.paginate(page: params[:page],per_page: 2)
+      @leads = @leads.paginate(page: params[:page],per_page: 100)
     end
     
   end
