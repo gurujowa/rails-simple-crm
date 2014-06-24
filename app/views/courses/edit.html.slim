@@ -42,4 +42,4 @@ ul.breadcrumb
   p
     = link_to_add_fields "追加", f, :periods
     = f.submit "保存する", :class => "btn btn-primary"
-    = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"
+    = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
