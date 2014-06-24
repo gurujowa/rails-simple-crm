@@ -1,5 +1,14 @@
 p#notice = notice
 
+.well
+  h3 = @lead.name
+  h4
+    span.glyphicon.glyphicon-earphone 
+    = @lead.tel
+  h4
+    span.glyphicon.glyphicon-home
+    = @lead.full_address
+
 .row
   .col-sm-6
     .panel.panel-info
@@ -56,21 +65,37 @@ p#notice = notice
             td = @lead.updated_at
       .panel-footer
         = link_to '編集', edit_lead_path(@lead), class: "btn btn-default"
+
   .col-sm-6
+    - if @lead.next_approach_day.present?
+      .alert.alert-warning
+        | 再アプローチ日：
+        = @lead.next_approach_day
+    =simple_form_for(@new_lead_history) do |f|
+      =f.error_notification
+      .panel.panel-info
+        .panel-heading 対応履歴の追加
+        .panel-body
+          = f.input :approach_day, as: :datetime_picker
+          = f.input :status
+          = f.input :next_approach_day, as: :datetime_picker
+          = f.input :memo
+          = f.hidden_field :lead_id
+        .panel-footer
+          = f.button :submit
+
     .panel.panel-info
       .panel-heading 対応履歴
       .panel-body
-        table.table
-          thead
-            tr
-              th 
-                span.label.label-success 電話対応
-              th 熊木みのり
-              th 20130101
-          tbody
-            tr
-              td colspan="3"
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-                wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-
+        - @lead.lead_histories.each do |h|
+          table.table
+            thead
+              tr
+                th 
+                  span.label.label-success 電話対応
+                th = h.user.name
+                th = h.status.text
+            tbody
+              tr
+                td colspan="3"
+                  = h.memo

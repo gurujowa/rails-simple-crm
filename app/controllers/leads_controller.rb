@@ -8,6 +8,9 @@ class LeadsController < ApplicationController
 
   # GET /leads/1
   def show
+    @new_lead_history = LeadHistory.new
+    @new_lead_history.lead_id = @lead.id
+    @new_lead_history.approach_day = DateTime.now()
   end
 
   # GET /leads/new

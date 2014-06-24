@@ -1,0 +1,54 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+ja:
+  enumerize:
+    billing_plan:
+      status:
+        draft: 下書き
+        completed: 発送済み
+        canceled: キャンセル
+    company:
+      active_st:
+        notstart: 接触前
+        active_a: "A - 今月～来月"
+        active_b: "B - 半年以内"
+        active_c: "C - 1年以内"
+        pending: そのうち客
+        contract: 契約済み
+        notfull: 要件が合わない
+        impossible: 接触禁止
+    lead_history:
+      status:
+        ing_tel: 電話対応
+        ing_mail: メール対応
+        ing_leave: 不在・離籍
+        ing_next: 時期改め
+        ing_re: 再アプローチ
+        ing_defer: 保留・検討
+        done_appoint: アポイント
+        done_send: 資料請求
+        done_ng_up: 担当NG
+        done_ng_down: 受付NG
+        done_block: ガチャ切り
+        done_claim: クレーム
+        forbidden_gone: 不通・移転
+        forbidden_ng: 荷電禁止

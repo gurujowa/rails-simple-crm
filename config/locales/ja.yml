@@ -20,22 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ja:
-  enumerize:
-    billing_plan:
-      status:
-        draft: 下書き
-        completed: 発送済み
-        canceled: キャンセル
-    company:
-      active_st:
-        notstart: 接触前
-        active_a: "A - 今月～来月"
-        active_b: "B - 半年以内"
-        active_c: "C - 1年以内"
-        pending: そのうち客
-        contract: 契約済み
-        notfull: 要件が合わない
-        impossible: 接触禁止
   activerecord:
     models:
       teacher: 講師
@@ -143,3 +127,8 @@ ja:
         name: 件名
         status: ステータス
         memo: メモ
+      lead_history:
+        approach_day: 対応日時
+        next_approach_day: 次回対応日時
+        memo: 対応メモ
+        category: 対応結果
