@@ -3,6 +3,8 @@ Mycrm::Application.routes.draw do
   resources :leads do
     collection do
       match 'search' => 'leads#search', via: [:get, :post], as: :search
+      get "mylist"
+      get "approach"
     end
     member do
       get "add_mylist"

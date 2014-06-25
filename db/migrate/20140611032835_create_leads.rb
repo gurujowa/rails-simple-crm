@@ -9,7 +9,7 @@ class CreateLeads < ActiveRecord::Migration
       t.string :person_kana
       t.string :person_post
       t.string :url
-      t.string :zipcode
+      t.string :zip_code
       t.string :prefecture
       t.string :street
       t.string :building

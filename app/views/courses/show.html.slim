@@ -1,10 +1,7 @@
 ul.breadcrumb
-  li
-    a href="/" Home 
-    span class="divider" ＞
-    = link_to @course.company.client_name, edit_company_path(@course.company) 
-    span class="divider" ＞
-    li.active = @course.name
+  li Home 
+  li = link_to @course.company.client_name, edit_company_path(@course.company) 
+  li.active = @course.name
 
 h1 コース詳細画面
 .row

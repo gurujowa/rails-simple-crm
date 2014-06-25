@@ -1,0 +1,24 @@
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th style="font-size:12px;width:30px" 本日
+      th 会社名
+      th 電話番号
+      = content_tag :th ,sort_link(@q, :max_approach_day,"前回対応日時")
+      th 対応内容
+  tbody
+    - @leads.each do |lead|
+      tr
+        td
+          - if lead.today?
+            span.glyphicon.glyphicon-check
+        td = link_to lead.name , lead
+        td = lead.tel
+        td = lead.last_approach_day
+        - if lead.last_approach_day.present?
+          td style="background-color:#{lead.last_approach.lead_history_status.color}"
+            a href="#{lead_path(lead)}" data-toggle="tooltip" title="#{lead.last_approach.memo}"
+              = lead.last_approach.lead_history_status.name
+              span style="color:white;background-color:black;" (#{lead.last_approach.user.name.chars.first})
+        - else
+          td 

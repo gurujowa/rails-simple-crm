@@ -3,9 +3,13 @@ class LeadsController < ApplicationController
 
   # GET /leads
   def index
-      @q = Lead.includes(:lead_histories).search(params[:q])
-      @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
-    
+      @q = Lead.group(:name).search(params[:q])
+      @leads = @q.result.includes(:lead_histories).attack_list.paginate(page: params[:page],per_page: 100)
+  end
+
+  def mylist
+      @q = Lead.group(:name).search(params[:q])
+      @leads =@q.result.includes(:lead_histories).where(user_id: current_user.id)
   end
 
   def add_mylist

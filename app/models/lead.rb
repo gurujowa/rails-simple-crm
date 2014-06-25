@@ -2,10 +2,22 @@ class Lead < ActiveRecord::Base
   belongs_to :user
   has_many :lead_histories
 
-  scope :lastest, -> { order("name asc") }
+  scope :attack_list, lambda {
+    where("user_id is null")
+  }
 
-  ransacker :full_text do |p|
-    Arel::Nodes::InfixOperation.new('||', p.table[:name] , p.table[:prefecture])
+  ransacker :max_approach_day do |parent|
+    ar = Arel.sql('max(lead_histories.approach_day)')
+  end
+
+  def today?
+    if self.last_approach_day.present?
+      if self.last_approach_day.to_date == Date.current
+        return true
+      end
+    end
+
+    return false
   end
 
   def next_approach_day
