@@ -2,8 +2,7 @@ class Lead < ActiveRecord::Base
   belongs_to :user
   has_many :lead_histories
 
-  default_scope :order => 'created_at DESC'
-
+  scope :lastest, -> { order("name asc") }
 
   ransacker :full_text do |p|
     Arel::Nodes::InfixOperation.new('||', p.table[:name] , p.table[:prefecture])
@@ -21,9 +20,9 @@ class Lead < ActiveRecord::Base
     end
   end
 
-  def last_approach_status
+  def last_approach
     if self.lead_histories.present?
-      self.lead_histories.last.lead_history_status
+      self.lead_histories.last
     end
   end
 

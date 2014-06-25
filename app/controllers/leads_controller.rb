@@ -3,7 +3,7 @@ class LeadsController < ApplicationController
 
   # GET /leads
   def index
-      @q = Lead.search(params[:q])
+      @q = Lead.includes(:lead_histories).search(params[:q])
       @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
     
   end
