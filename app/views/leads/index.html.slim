@@ -1,12 +1,23 @@
 h1 見込み客一覧
 
 .well
-  = form_tag({action: "index"}, {method: "get"}) do
-    .input-group
-      = text_field_tag  "full","", :class => "form-control"
-      span.input-group-btn
-        button type="button" class="btn btn-info" 検索
-  = link_to '新規追加', new_lead_path, :class => 'btn btn-default'
+  button type="button" class="btn btn-info" data-toggle="collapse" data-target="#btn-lead-search" 検索ボックス
+  #btn-lead-search.collapse
+    = search_form_for @q, :builder => SimpleForm::FormBuilder, wrapper: :horizontal_form,url: search_leads_path, html: {class: "form-horizontal",method: :get} do |f|
+      = f.input :name_cont
+      = f.input :tel_cont
+      = f.input :fax_cont
+      = f.input :email_cont
+      = f.input :person_name_cont
+      = f.input :person_kana_cont
+      = f.input :person_post_cont
+      = f.input :prefecture_cont
+      = f.input :city_cont
+      = f.input :street_cont
+      = f.input :building_cont
+      = f.input :lead_histories_memo_cont
+      = f.input :user_id_cont, collection: User.all
+      = f.submit "検索する", class: "btn btn-primary"
 table.table.table-striped.table-bordered
   thead
     tr
@@ -14,6 +25,7 @@ table.table.table-striped.table-bordered
       th 電話番号
       th 顧客評価
       th 前回対応日時
+      th 対応内容
   tbody
     - @leads.each do |lead|
       tr
@@ -21,5 +33,12 @@ table.table.table-striped.table-bordered
         td = link_to lead.name , lead
         td = lead.tel
         td = lead.star
-        td = lead.updated_at
+        td = lead.last_approach_day
+        - if lead.last_approach_day.present?
+          td style="background-color:#{lead.last_approach_status.color}"
+            a href="#{lead_path(lead)}" data-toggle="tooltip" title="#{lead.lead_histories.last.memo}"
+              = lead.last_approach_status.name
+        - else
+          td 
+
 = will_paginate @leads, renderer: BootstrapPagination::Rails

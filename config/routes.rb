@@ -1,6 +1,10 @@
 Mycrm::Application.routes.draw do
 
-  resources :leads
+  resources :leads do
+    collection do
+      match 'search' => 'leads#search', via: [:get, :post], as: :search
+    end
+  end
   resources :lead_histories
 
   devise_for :users

@@ -3,13 +3,14 @@ class LeadsController < ApplicationController
 
   # GET /leads
   def index
-    @leads = Lead.order(:created_at)
-    if (params[:full].present?) 
-      @leads = @leads.paginate_search('03', page: 1,per_page: 100)
-    else
-      @leads = @leads.paginate(page: params[:page],per_page: 100)
-    end
+      @q = Lead.search(params[:q])
+      @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
     
+  end
+
+  def search
+    index
+    render :index
   end
 
   # GET /leads/1
@@ -66,6 +67,6 @@ class LeadsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lead_params
-      params.require(:lead).permit(:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zip_code, :prefecture, :street, :building, :memo, :user_id, :star)
+      params.require(:lead).permit(:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star)
     end
 end

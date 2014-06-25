@@ -44,7 +44,7 @@ p#notice = notice
             td = @lead.url
           tr
             th 郵便番号
-            td = @lead.zip_code
+            td = @lead.zipcode
           tr
             th
               span 住所
@@ -61,7 +61,8 @@ p#notice = notice
             th 更新日
             td = @lead.updated_at
       .panel-footer
-        = link_to '編集', edit_lead_path(@lead), class: "btn btn-default"
+        = link_to '編集', edit_lead_path(@lead), class: "btn btn-info"
+        = link_to '削除', @lead, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
 
   .col-sm-6
     - if @lead.next_approach_day.present?

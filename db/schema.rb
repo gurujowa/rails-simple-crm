@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624015334) do
+ActiveRecord::Schema.define(version: 20140624103554) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -262,7 +262,7 @@ ActiveRecord::Schema.define(version: 20140624015334) do
     t.string   "person_kana"
     t.string   "person_post"
     t.string   "url"
-    t.string   "zip_code"
+    t.string   "zipcode"
     t.string   "prefecture"
     t.string   "street"
     t.string   "building"

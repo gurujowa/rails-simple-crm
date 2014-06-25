@@ -88,6 +88,7 @@ moment.lang("ja");
 $(function(){
   $( ".datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'});
   $('.dropdown-toggle').dropdown();
+  $("[data-toggle=tooltip]").tooltip()
 });
 
 function remove_fields(link) {

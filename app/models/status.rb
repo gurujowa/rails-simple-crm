@@ -12,4 +12,5 @@
 #
 
 class Status < ActiveRecord::Base
+  has_many :negos
 end

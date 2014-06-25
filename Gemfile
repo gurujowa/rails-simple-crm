@@ -77,7 +77,7 @@ gem 'enumerize'
 gem 'paper_trail', '>= 3.0.0.rc2'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
-gem 'acts_as_indexed'
+gem "ransack", github: "activerecord-hackery/ransack" 
 
 
 #------------------------------

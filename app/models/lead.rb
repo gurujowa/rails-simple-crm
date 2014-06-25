@@ -3,11 +3,27 @@ class Lead < ActiveRecord::Base
   has_many :lead_histories
 
   default_scope :order => 'created_at DESC'
-  acts_as_indexed :fields => [:full_address, :name, :tel, :fax, :email, :person_name, :person_kana, :zip_code]
+
+
+  ransacker :full_text do |p|
+    Arel::Nodes::InfixOperation.new('||', p.table[:name] , p.table[:prefecture])
+  end
 
   def next_approach_day
     if self.lead_histories.present?
       self.lead_histories.last.next_approach_day
+    end
+  end
+
+  def last_approach_day
+    if self.lead_histories.present?
+      self.lead_histories.last.approach_day
+    end
+  end
+
+  def last_approach_status
+    if self.lead_histories.present?
+      self.lead_histories.last.lead_history_status
     end
   end
 
