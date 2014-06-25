@@ -8,6 +8,16 @@ class LeadsController < ApplicationController
     
   end
 
+  def add_mylist
+    @lead = Lead.find(params[:id])
+
+    if @lead.update_attributes({user_id: current_user.id})
+      render_noty :success, "マイリストに追加しました", %Q{$('#btn-lead-add-mylist').addClass("active")} 
+    else
+      render_noty :error, @to.errors.full_messages
+    end    
+  end
+
   def search
     index
     render :index

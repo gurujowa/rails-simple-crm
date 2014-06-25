@@ -42,6 +42,7 @@ group :development do
   gem 'capistrano', '~>3.0.0'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
+  gem 'i18n_generators'
 end
 
 

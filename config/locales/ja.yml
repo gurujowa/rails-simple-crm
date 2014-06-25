@@ -20,6 +20,23 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ja:
+  simple_form:
+    labels:
+      q:
+        name_cont: 会社名
+        tel_cont: 電話
+        fax_cont: FAX
+        email_cont: メールアドレス
+        person_name_cont: 担当者
+        person_kana_cont: 担当者（かな）
+        person_post_cont: 役職
+        prefecture_cont: 都道府県
+        city_cont: 市区町村
+        street_cont: 番地
+        building_cont: 建物名
+        lead_histories_memo_cont: 対応メモ
+        user_id_cont: マイリスト
+
   activerecord:
     models:
       teacher: 講師

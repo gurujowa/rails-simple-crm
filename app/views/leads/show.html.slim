@@ -1,13 +1,20 @@
 p#notice = notice
 
 .well
-  h3 = @lead.name
-  h4
-    span.glyphicon.glyphicon-earphone 
-    = @lead.tel
-  h4
-    span.glyphicon.glyphicon-home
-    = @lead.full_address
+  .row
+    .col-sm-10
+      h3 = @lead.name
+      h4
+        span.glyphicon.glyphicon-earphone 
+        = @lead.tel
+      h4
+        span.glyphicon.glyphicon-home
+        = @lead.full_address
+    .col-sm-2
+      - if @lead.other_user?(current_user.id)
+        button type="button" class="btn btn-default" disabled=true #{@lead.user.name}が追加済み
+      - else
+        = link_to "マイリスト追加", {action: "add_mylist", id: @lead.id},remote: true, class: "btn btn-default btn-block #{if @lead.mylist?(current_user.id) then "active" end }",id: "btn-lead-add-mylist"
 
 .row
   .col-sm-6

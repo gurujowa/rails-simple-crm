@@ -20,6 +20,26 @@ class Lead < ActiveRecord::Base
     end
   end
 
+  def mylist? (current_user_id)
+    if self.user_id == current_user_id
+      return true
+    else
+      return false
+    end
+  end
+
+  def other_user? (current_user_id)
+    if self.user_id.blank?
+      return false
+    end
+
+    if self.user_id != current_user_id
+      return true
+    else
+      return false
+    end
+  end
+
   def last_approach
     if self.lead_histories.present?
       self.lead_histories.last
