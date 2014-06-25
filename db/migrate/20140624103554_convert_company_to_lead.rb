@@ -1,5 +1,6 @@
 class ConvertCompanyToLead < ActiveRecord::Migration
   def up
+    rename_column :leads, :zip_code, :zipcode
     statuses = Status.where(rank: "P")
     nego_list = []
     statuses.each do |s|
