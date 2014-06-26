@@ -1,6 +1,8 @@
 class AddNotStartRecordToLead < ActiveRecord::Migration
   def up
-    companies = Company.where(active_st: :notstart)
+    LeadHistory.delete_all
+    Lead.delete_all
+    companies = Company.where(active_st: [:notstart,:pending, :active_c, :active_b, :active_a])
     companies.each do |c|
       lead = Lead.new
       lead.name = c.name
@@ -50,9 +52,16 @@ class AddNotStartRecordToLead < ActiveRecord::Migration
       nego = c.negos.first
       if nego.present?
         if nego.status.present?
-          lead.memo = "旧ステータス;" +  nego.status.name
+          lead.memo = "旧ステータス;" +  nego.status.name + "\n"
         end
       end
+
+      if lead.memo.present?
+        lead.memo = lead.memo + "旧確度:" + c.active_st.text if c.active_st.present?
+      else
+        lead.memo = "旧確度:" + c.active_st.text if c.active_st.present?
+      end
+
 
       c.contacts.each do |con|
         his = LeadHistory.new
@@ -84,5 +93,9 @@ class AddNotStartRecordToLead < ActiveRecord::Migration
       end
   end
 
+  def down
+    LeadHistory.delete_all
+    Lead.delete_all
+  end
 
 end
