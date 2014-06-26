@@ -14,7 +14,7 @@ p#notice = notice
       - if @lead.other_user?(current_user.id)
         button type="button" class="btn btn-default" disabled=true #{@lead.user.name}が追加済み
       - else
-        = link_to "マイリスト追加", {action: "add_mylist", id: @lead.id},remote: true, class: "btn btn-default btn-block #{if @lead.mylist?(current_user.id) then "active" end }",id: "btn-lead-add-mylist"
+        = link_to "マイリスト追加", {controller: "leads",action: "add_mylist", id: @lead.id},remote: true, class: "btn btn-default btn-block #{if @lead.mylist?(current_user.id) then "active" end }",id: "btn-lead-add-mylist"
 
 .row
   .col-sm-6
@@ -59,6 +59,12 @@ p#notice = notice
                 span.glyphicon.glyphicon-map-marker
             td = @lead.full_address
           tr
+            th 獲得元
+            td = @lead.campaign
+          tr
+            th 獲得元詳細
+            td = @lead.campaign_detail
+          tr
             th 顧客番号
             td = @lead.id
           tr
@@ -70,6 +76,9 @@ p#notice = notice
       .panel-footer
         = link_to '編集', edit_lead_path(@lead), class: "btn btn-info"
         = link_to '削除', @lead, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
+    .panel.panel-info
+      .panel-heading お客様メモ
+      .panel-body = @lead.memo
 
   .col-sm-6
     - if @lead.next_approach_day.present?

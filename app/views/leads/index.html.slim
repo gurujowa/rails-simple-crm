@@ -15,6 +15,7 @@ h1 見込み客一覧
       = f.input :city_cont
       = f.input :street_cont
       = f.input :building_cont
+      = f.input :campaign_cont, collection: Lead.campaign.values
       = f.input :lead_histories_memo_cont
       = f.input :user_id_cont, collection: User.all
       = f.submit "検索する", class: "btn btn-primary"

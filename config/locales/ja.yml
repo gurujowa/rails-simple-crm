@@ -31,6 +31,7 @@ ja:
         person_kana_cont: 担当者（かな）
         person_post_cont: 役職
         prefecture_cont: 都道府県
+        campaign_cont: 獲得元
         city_cont: 市区町村
         street_cont: 番地
         building_cont: 建物名

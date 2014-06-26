@@ -12,6 +12,16 @@ class LeadsController < ApplicationController
       @leads =@q.result.includes(:lead_histories).where(user_id: current_user.id)
   end
 
+  def approach
+      @q = Lead.group(:name).search(params[:q])
+      inner = "(SELECT lead_id AS last_id, MAX(approach_day) AS approach_day FROM lead_histories GROUP BY lead_id) AS last_his"
+      result = LeadHistory.find_by_sql("SELECT his.id, last_his.approach_day, his.next_approach_day 
+                                       FROM lead_histories AS his INNER JOIN #{inner} ON his.lead_id = last_his.last_id WHERE his.next_approach_day is not null")
+      raise result.inspect
+
+      @leads =@q.result.includes(:lead_histories).having("max(lead_histories.created_at) is not null")
+  end
+
   def add_mylist
     @lead = Lead.find(params[:id])
 
@@ -81,6 +91,6 @@ class LeadsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lead_params
-      params.require(:lead).permit(:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star)
+      params.require(:lead).permit(:campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star)
     end
 end

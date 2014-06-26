@@ -1,6 +1,9 @@
 class Lead < ActiveRecord::Base
+  extend Enumerize
   belongs_to :user
   has_many :lead_histories
+
+  enumerize :campaign, in: [:fax,:homepage,:tel,:introduce,:other]
 
   validates :tel, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true},  :uniqueness => true, :presence => true
   validates :fax, :format=>{:with=>/\A[0-9-]*\z/, :message=>"：半角数値と「-」だけ有効です", :allow_blank=>true}
