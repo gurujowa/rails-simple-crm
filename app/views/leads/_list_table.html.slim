@@ -4,6 +4,7 @@ table.table.table-striped.table-bordered
       th style="font-size:12px;width:30px" 本日
       th 会社名
       th 電話番号
+      th.hidden-xs 住所
       = content_tag :th ,sort_link(@q, :max_approach_day,"前回対応日時")
       th 対応内容
   tbody
@@ -14,6 +15,7 @@ table.table.table-striped.table-bordered
             span.glyphicon.glyphicon-check
         td = link_to lead.name , lead
         td = lead.tel
+        td.hidden-xs = lead.full_address false
         td 
           = lead.last_approach_day
           - if lead.other_user?(current_user.id)
