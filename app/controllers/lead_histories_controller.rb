@@ -8,7 +8,7 @@ class LeadHistoriesController < ApplicationController
     @lead_history.user = current_user
 
     if @lead_history.save
-      redirect_to lead_show_url(@lead_history.lead_id), notice: '顧客対応履歴を作成しました'
+      redirect_to stored_path_for, notice: '顧客対応履歴を作成しました'
     else
       @lead = @lead_history.lead
       @new_lead_history = @lead_history
@@ -23,7 +23,7 @@ class LeadHistoriesController < ApplicationController
   # PATCH/PUT /leads/1
   def update
     if @lead.update(lead_params)
-      redirect_to leads_url, notice: 'Lead was successfully updated.'
+      redirect_to leads_url, notice: '見込み客の更新が完了しました'
     else
       render action: 'edit'
     end
@@ -37,6 +37,10 @@ class LeadHistoriesController < ApplicationController
   def destroy
     @lead_history.destroy
     redirect_to leads_url, notice: 'Lead was successfully destroyed.'
+  end
+
+  def stored_path_for
+    session["previous_url"] || leads_url
   end
 
   private

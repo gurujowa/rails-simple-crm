@@ -148,6 +148,25 @@ ja:
         name: 件名
         status: ステータス
         memo: メモ
+      lead:
+        name: 事業所名
+        corporation_name: 法人名
+        tel: 電話番号
+        fax: FAX
+        email: メールアドレス
+        person_name: 担当者名
+        person_kana: 担当者かな
+        person_post: 役職
+        url: URL
+        zipcode: 郵便番号
+        prefecture: 都道府県
+        city: 市区町村
+        street: 番地
+        building: 建物名
+        campaign: 獲得元
+        user: マイリスト
+        campaign_detail: 獲得元詳細
+        memo: 会社メモ
       lead_history:
         approach_day: 対応日時
         next_approach_day: 次回対応日時

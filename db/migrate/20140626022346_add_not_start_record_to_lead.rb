@@ -1,5 +1,6 @@
 class AddNotStartRecordToLead < ActiveRecord::Migration
   def up
+    add_column :leads, :corporation_name, :string
     LeadHistory.delete_all
     Lead.delete_all
     companies = Company.where(active_st: [:notstart,:pending, :active_c, :active_b, :active_a])
@@ -94,6 +95,7 @@ class AddNotStartRecordToLead < ActiveRecord::Migration
   end
 
   def down
+    remove_column :leads, :corporation_name
     LeadHistory.delete_all
     Lead.delete_all
   end

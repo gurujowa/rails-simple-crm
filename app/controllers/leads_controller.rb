@@ -1,5 +1,6 @@
 class LeadsController < ApplicationController
   before_action :set_lead, only: [:show, :edit, :update, :destroy]
+  after_action :store_location, only: [:index, :search, :mylist, :approach]
 
   # GET /leads
   def index
@@ -71,7 +72,7 @@ class LeadsController < ApplicationController
   # PATCH/PUT /leads/1
   def update
     if @lead.update(lead_params)
-      redirect_to leads_url, notice: 'Lead was successfully updated.'
+      redirect_to after_update_path_for, notice: 'Lead was successfully updated.'
     else
       render action: 'edit'
     end
@@ -83,6 +84,17 @@ class LeadsController < ApplicationController
     redirect_to leads_url, notice: 'Lead was successfully destroyed.'
   end
 
+  def after_update_path_for
+    session[:previous_url] || leads_url
+  end
+
+  def store_location
+    # store last url - this is needed for post-login redirect to whatever the user last visited.
+    return unless request.get? 
+    session[:previous_url] = request.fullpath 
+    session[:last_request_time] = Time.now.utc.to_i
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lead
@@ -91,6 +103,6 @@ class LeadsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lead_params
-      params.require(:lead).permit(:campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star)
+      params.require(:lead).permit(:corporation_name, :campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star)
     end
 end
