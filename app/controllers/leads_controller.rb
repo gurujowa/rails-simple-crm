@@ -5,7 +5,7 @@ class LeadsController < ApplicationController
   # GET /leads
   def index
       @q = Lead.group(:name).search(params[:q])
-      @leads = @q.result.includes(:lead_histories).attack_list.paginate(page: params[:page],per_page: 100)
+      @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
   end
 
   def mylist

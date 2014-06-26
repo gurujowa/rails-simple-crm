@@ -11,10 +11,6 @@ class Lead < ActiveRecord::Base
   validates :prefecture,  length: {maximum: 4, :message => '都道府県は４文字以内で入力してください'}
   validates :city,  length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
 
-  scope :attack_list, lambda {
-    where("leads.user_id is null")
-  }
-
   ransacker :max_approach_day do |parent|
     ar = Arel.sql('max(lead_histories.approach_day)')
   end

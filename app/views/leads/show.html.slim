@@ -68,6 +68,9 @@ p#notice = notice
             th 獲得元詳細
             td = @lead.campaign_detail
           tr
+            th マイリスト登録ユーザー
+            td = @lead.user.name if @lead.user.present?
+          tr
             th 顧客番号
             td = @lead.id
           tr
