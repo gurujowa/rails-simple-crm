@@ -19,5 +19,6 @@ h1 見込み客一覧
       = f.input :lead_histories_memo_cont
       = f.input :user_id_cont, collection: User.all
       = f.submit "検索する", class: "btn btn-primary"
+  #total_entries 件数：#{@leads.total_entries}件
 = render 'list_table', locals: {leads: @leads}
 = will_paginate @leads, renderer: BootstrapPagination::Rails

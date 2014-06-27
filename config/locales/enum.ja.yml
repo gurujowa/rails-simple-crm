@@ -37,6 +37,9 @@ ja:
         notfull: 要件が合わない
         impossible: 接触禁止
     lead:
+      sex:
+        male: 男性
+        female: 女性
       campaign:
         homepage: ホームページ
         tel: テレアポ

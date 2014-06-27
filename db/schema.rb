@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626022346) do
+ActiveRecord::Schema.define(version: 20140627010459) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(version: 20140626022346) do
     t.string   "campaign"
     t.string   "campaign_detail"
     t.string   "corporation_name"
+    t.string   "sex"
   end
 
   add_index "leads", ["tel"], name: "index_leads_on_tel", unique: true

@@ -157,6 +157,7 @@ ja:
         person_name: 担当者名
         person_kana: 担当者かな
         person_post: 役職
+        sex: 性別
         url: URL
         zipcode: 郵便番号
         prefecture: 都道府県
