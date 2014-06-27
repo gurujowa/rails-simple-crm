@@ -1,5 +1,7 @@
 Mycrm::Application.routes.draw do
 
+  resources :lead_history_statuses
+
   resources :leads do
     collection do
       match 'search' => 'leads#search', via: [:get, :post], as: :search

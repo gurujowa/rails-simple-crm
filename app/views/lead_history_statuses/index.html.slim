@@ -1,0 +1,21 @@
+h1 lead_history_statuses 一覧
+
+= link_to '新規追加', new_lead_history_status_path, :class => 'btn'
+table.default_datatables
+  thead
+    tr
+      
+      th Name
+      th Progress
+      th Color
+      th CH
+  tbody
+    - @lead_history_statuses.each do |lead_history_status|
+      tr
+        
+        td = lead_history_status.name 
+        td = lead_history_status.progress 
+        td = lead_history_status.color 
+        td 
+          = link_to '編集', edit_lead_history_status_path(lead_history_status), :class => "btn"
+          = link_to '削除', lead_history_status, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"

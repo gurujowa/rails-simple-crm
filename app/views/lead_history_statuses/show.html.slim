@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @lead_history_status.name
+p
+  strong Progress:
+  = @lead_history_status.progress
+p
+  strong Color:
+  = @lead_history_status.color
+
+= link_to 'Edit', edit_lead_history_status_path(@lead_history_status)
+'|
+= link_to 'Back', lead_history_statuses_path

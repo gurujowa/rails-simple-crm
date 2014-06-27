@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  type: 
+  progress: MyString
   color: MyString
 
 two:
   name: MyString
-  type: 
+  progress: MyString
   color: MyString
