@@ -20,10 +20,12 @@ class LeadHistoriesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /leads/1
+  def edit
+  end
+
   def update
-    if @lead.update(lead_params)
-      redirect_to leads_url, notice: '見込み客の更新が完了しました'
+    if @lead_history.update(lead_history_params)
+      redirect_to lead_url @lead_history.lead, notice: '見込み客の更新が完了しました'
     else
       render action: 'edit'
     end
@@ -35,8 +37,9 @@ class LeadHistoriesController < ApplicationController
 
   # DELETE /leads/1
   def destroy
+    lead = @lead_history.lead
     @lead_history.destroy
-    redirect_to leads_url, notice: 'Lead was successfully destroyed.'
+    redirect_to lead_url(lead), notice: 'Lead was successfully destroyed.'
   end
 
   def stored_path_for

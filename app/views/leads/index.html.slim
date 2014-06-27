@@ -5,6 +5,7 @@ h1 見込み客一覧
   #btn-lead-search.collapse
     = search_form_for @q, :builder => SimpleForm::FormBuilder, wrapper: :horizontal_form,url: search_leads_path, html: {class: "form-horizontal",method: :get} do |f|
       = f.input :name_cont
+      = f.input :corporation_name_cont
       = f.input :tel_cont
       = f.input :fax_cont
       = f.input :email_cont

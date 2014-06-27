@@ -23,7 +23,8 @@ ja:
   simple_form:
     labels:
       q:
-        name_cont: 会社名
+        name_cont: 事業所名
+        corporation_name_cont: 法人名
         tel_cont: 電話
         fax_cont: FAX
         email_cont: メールアドレス
