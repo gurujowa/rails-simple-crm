@@ -82,6 +82,6 @@ Mycrm::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 end
 
-PDFKit.configure do |config|
-   config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
-end
+#PDFKit.configure do |config|
+#   config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
+#end
