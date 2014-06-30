@@ -16,7 +16,7 @@ class EstimatesController < ApplicationController
         redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :estimates, action: :show
       }
       format.pdf {
-        render pdf: @estimate.company.name  + " - Œ©Ï‘",
+        render pdf: @estimate.company.name  + " - è¦‹ç©æ›¸",
                encoding: 'UTF-8',
                layout: 'pdf.html',
                show_as_html: params[:debug].present?
