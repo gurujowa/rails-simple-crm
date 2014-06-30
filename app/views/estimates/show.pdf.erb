@@ -190,7 +190,7 @@
   </div>
 
   <div class="gamma">
-    <%= image_tag "logo.gif" if params[:format] != "pdf" %>
+    <%=  params[:debug].present? ? image_tag('logo.gif') : wicked_pdf_image_tag('logo.gif') %>
 
   </div>
 

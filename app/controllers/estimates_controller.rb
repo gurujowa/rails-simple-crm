@@ -13,10 +13,10 @@ class EstimatesController < ApplicationController
     @until = 10 - @estimate.estimate_lines.length
     respond_to do |format|
       format.html { 
-        render :layout => "pdf.html"
+        redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :estimates, action: :show
       }
       format.pdf {
-        render pdf: 'show',
+        render pdf: @estimate.company.name,
                encoding: 'UTF-8',
                layout: 'pdf.html',
                show_as_html: params[:debug].present?

@@ -10,7 +10,6 @@
       <th>合計金額</th>
       <th>作成日</th>
       <th>Memo</th>
-      <th>表示</th>
       <th>PDF</th>
     </tr>
   </thead>
@@ -24,7 +23,6 @@
         <td><%= number_to_currency estimate.total_price %></td>
         <td><%= estimate.created_at.strftime("%Y年%m月%d日") %></td>
         <td><%= estimate.memo %></td>
-        <td><%= link_to '表示', estimate , class: "btn btn-default"%></td>
         <td><%= link_to 'PDF', estimate_path(estimate, format: :pdf) , class: "btn btn-default"%></td>
       </tr>
     <% end %>
