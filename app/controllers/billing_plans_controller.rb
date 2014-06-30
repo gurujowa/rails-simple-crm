@@ -15,17 +15,19 @@ class BillingPlansController < ApplicationController
   # GET /billing_plans/1
   def show
     @until = 10 - @billing_plan.billing_plan_lines.length
+
     respond_to do |format|
       format.html { 
-        render :layout => "pdf.html"
+        redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :billing_plans, action: :show
       }
       format.pdf {
-        html = render_to_string(:layout => "pdf.html", :formats => [:html])
-        kit = PDFKit.new(html)
-        send_data(kit.to_pdf, :filename => "billing_plan.pdf", :type => 'application/pdf')
-        return # to avoid double render call
+        render pdf: @billing_plan.company.name + " - 請求予定表",
+               encoding: 'UTF-8',
+               layout: 'pdf.html',
+               show_as_html: params[:debug].present?
       }
     end
+
   end
 
   # GET /billing_plans/new

@@ -11,7 +11,7 @@ table.default_datatables
       th 金額
       th 請求開始
       th 請求終了
-      th 出力
+      th PDF
   tbody
     - @billing_plans.each do |billing_plan|
       tr
@@ -21,4 +21,4 @@ table.default_datatables
         td = number_to_currency billing_plan.tax_include_price 
         td = billing_plan.bill_start
         td = billing_plan.bill_end
-        td = link_to "出力", billing_plan, :class => "btn btn-info"
+        td = link_to "PDF", billing_plan_path(billing_plan, format: :pdf), :class => "btn btn-default"

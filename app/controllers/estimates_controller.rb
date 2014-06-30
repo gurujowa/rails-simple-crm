@@ -16,17 +16,11 @@ class EstimatesController < ApplicationController
         redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :estimates, action: :show
       }
       format.pdf {
-        render pdf: @estimate.company.name,
+        render pdf: @estimate.company.name  + " - Œ©Ï‘",
                encoding: 'UTF-8',
                layout: 'pdf.html',
                show_as_html: params[:debug].present?
       }
-#      format.pdf {
-#        html = render_to_string(:layout => "pdf.html", :formats => [:html])
-#        kit = PDFKit.new(html)
-#        send_data(kit.to_pdf, :filename => "è¦‹ç©æ›¸.pdf", :type => 'application/pdf')
-#        return # to avoid double render call
-#      }
     end
   end
 
