@@ -16,11 +16,17 @@ class EstimatesController < ApplicationController
         render :layout => "pdf.html"
       }
       format.pdf {
-        html = render_to_string(:layout => "pdf.html", :formats => [:html])
-        kit = PDFKit.new(html)
-        send_data(kit.to_pdf, :filename => "見積書.pdf", :type => 'application/pdf')
-        return # to avoid double render call
+        render pdf: 'show',
+               encoding: 'UTF-8',
+               layout: 'pdf.html',
+               show_as_html: params[:debug].present?
       }
+#      format.pdf {
+#        html = render_to_string(:layout => "pdf.html", :formats => [:html])
+#        kit = PDFKit.new(html)
+#        send_data(kit.to_pdf, :filename => "見積書.pdf", :type => 'application/pdf')
+#        return # to avoid double render call
+#      }
     end
   end
 

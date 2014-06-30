@@ -37,6 +37,6 @@ config.action_mailer.default_url_options = { :host => "192.168.30.15", :port => 
 config.action_mailer.delivery_method = :smtp
 end
 
-PDFKit.configure do |config|
-   config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
-end
+#PDFKit.configure do |config|
+#   config.wkhtmltopdf = '/usr/local/bin/wkhtmltopdf'
+#end
