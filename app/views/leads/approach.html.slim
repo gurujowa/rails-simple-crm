@@ -1,4 +1,16 @@
 h1 再アプローチ一覧
 
-- if @leads.present?
-  = render 'list_table', locals: {leads: @leads}
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th 会社名
+      th 電話番号
+      th.hidden-xs 住所
+      th 再アプローチ日時
+  tbody
+    - @lead_histories.each do |his|
+      tr
+        td = link_to his.lead.name , his.lead
+        td = his.lead.tel
+        td.hidden-xs = his.lead.full_address false
+        td = his.next_approach_day

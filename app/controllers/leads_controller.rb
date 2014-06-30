@@ -15,22 +15,29 @@ class LeadsController < ApplicationController
 
   def approach
       @q = Lead.group(:name).search(params[:q])
-      inner = "(SELECT lead_id AS last_id, MAX(approach_day) AS approach_day FROM lead_histories GROUP BY lead_id) AS last_his"
-      result = LeadHistory.find_by_sql("SELECT his.id, last_his.approach_day, his.next_approach_day 
-                                       FROM lead_histories AS his INNER JOIN #{inner} ON his.lead_id = last_his.last_id WHERE his.next_approach_day is not null")
-      raise result.inspect
+      inner = "(SELECT id AS last_his_id , lead_id AS last_id, MAX(approach_day) AS max_approach_day FROM lead_histories  WHERE approach_day is not null GROUP BY lead_id) AS last_his"
+      result = LeadHistory.find_by_sql("SELECT his.id, last_his.max_approach_day, his.next_approach_day , his.lead_id
+                                       FROM lead_histories AS his INNER JOIN #{inner} ON his.id = last_his.last_his_id where next_approach_day is not null")
 
-      @leads =@q.result.includes(:lead_histories).having("max(lead_histories.created_at) is not null")
+      @lead_histories = result
   end
 
   def add_mylist
     @lead = Lead.find(params[:id])
 
-    if @lead.update_attributes({user_id: current_user.id})
-      render_noty :success, "マイリストに追加しました", %Q{$('#btn-lead-add-mylist').addClass("active")} 
+    if @lead.user_id.blank?
+      if @lead.update_attributes({user_id: current_user.id})
+        render_noty :success, "マイリストに追加しました", %Q{$('#btn-lead-add-mylist').addClass("active")} 
+      else
+        render_noty :error, @to.errors.full_messages
+      end    
     else
-      render_noty :error, @to.errors.full_messages
-    end    
+      if @lead.update_attributes({user_id: nil})
+        render_noty :success, "マイリストを解除しました", %Q{$('#btn-lead-add-mylist').removeClass("active")} 
+      else
+        render_noty :error, @to.errors.full_messages
+      end    
+    end
   end
 
   def search
