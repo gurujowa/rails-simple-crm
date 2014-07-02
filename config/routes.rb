@@ -16,8 +16,6 @@ Mycrm::Application.routes.draw do
   resources :lead_histories do 
     collection do
       get "total_all"
-    end
-    member do
       get "total"
     end
   end

@@ -1,53 +1,36 @@
 class PivotTable
 
   @data
+  @group2_list
+  @row_data
 
-  def sales_person_list
-    [13,2,1]
-  end
-
-  def select_list
-    User.where(id: sales_person_list)
-  end
-
-  def init_user_id_hash
-    users = select_list
-    user_id_hash = Hash[]
-    users.each do |u|
-      user_id_hash.store u.id, 0
+  def initialize(list, group_key)
+    hash = Hash[]
+    list.each do |u|
+      hash.store u.read_attribute(group_key), Hash[]
     end
-    user_id_hash
+    @group2_list = hash
   end
 
-  def user_header
-    users = select_list
-    user_list = []
-    users.each do |u|
-      user_list.push u.name
-    end
-    user_list
 
-  end
-
-  def store_user_list value,user_id, hash = nil
-    if hash.blank?
-      hash = init_user_id_hash
+  def day_header
+    day_list = []
+    @row_data.each do |c|
+      day = c[0][1]
+      day_list.push day
     end
-    hash[user_id] = value
-    hash
+    day_list.uniq
   end
 
   def set_rows calculation
-      table = Hash[]
-      users = init_user_id_hash
+    @row_data = calculation
+      table = @group2_list
       calculation.each do |c|
         day = c[0][1]
-        user_id = c[0][0]
+        group2 = c[0][0]
         value = c[1]
-        if table.has_key? day
-          table[day] = store_user_list(value,user_id, table[day])
-        else
-          table.store(day, store_user_list(value,user_id))
+        if table.has_key? group2
+          table[group2] = store_day(value,day, table[group2])
         end
       end
       @data = table.sort
@@ -62,4 +45,24 @@ class PivotTable
   def to_a
     @data
   end
+
+  private
+  def store_day value, day, hash
+    unless hash.has_key? day
+      hash = init_day_hash @row_data
+    end
+    hash.store(day, value)
+    hash
+  end
+
+
+  def init_day_hash calculation
+      day_hash = Hash[]
+      uniq_list = day_header
+      uniq_list.each do |l|
+        day_hash.store l, 0
+      end
+      day_hash
+  end
+
 end

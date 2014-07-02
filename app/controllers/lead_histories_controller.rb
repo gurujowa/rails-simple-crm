@@ -21,14 +21,28 @@ class LeadHistoriesController < ApplicationController
   end
 
   def total_all
-      table = PivotTable.new
-      calculation = LeadHistory.where(user_id: table.sales_person_list).calculate(:count,:all, group: [:user_id,:approach_day])
+      from = Date.today.beginning_of_month.prev_month
+      to = Date.today.end_of_month
+      table = PivotTable.new(User.where(id: [13,2,1]), :id)
+      calculation = LeadHistory.where(user_id: [13,2,1]).where(approach_day: from...to).calculate(:count,:all, group: [:user_id,:approach_day])
       table.set_rows calculation
       @table = table
   end
 
   def total
+    raise "user_idは必須です" if params[:user_id].blank?
+    if params[:date].present?
+      @date = Date.new(params[:date][:year].to_i,params[:date][:month].to_i, 1)
+    else
+      @date = Date.today
+    end
 
+    from = @date.beginning_of_month
+    to = @date.end_of_month
+    table = PivotTable.new(LeadHistoryStatus.all, :id)
+    calculation = LeadHistory.where(user_id: params[:user_id]).where(approach_day: from...to).calculate(:count,:all, group: [:lead_history_status_id,:approach_day])
+    table.set_rows calculation
+    @table = table
   end
 
 

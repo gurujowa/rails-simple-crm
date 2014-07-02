@@ -4,12 +4,12 @@ table.table.table-bordered
   thead
     tr
       th 日付
-      - @table.user_header.each do |u|
-        th = u
+      - @table.day_header.sort.each do |u|
+        th = u.to_s(:day)
   tbody
-    - @table.each do |day, row| 
+    - @table.each do |key, row| 
       tr
-        td = day.to_s
-        - row.each do |user_id, d|
+        td = User.find(key).name
+        - row.sort.each do |user_id, d|
           td = d
     
