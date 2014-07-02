@@ -1,0 +1,25 @@
+<div class="container" style="width: 1200px">
+	<% if @format_html_flg.present? %>
+   <%= form_tag({action: "pdf", format: "pdf"}, :method=>"get") do %>
+	    <% @checkbox_params.each do |c| %>
+	      <%= hidden_field_tag("check"+c.to_s, c) %>
+	    <% end %>
+	    空のラベルを追加する<%= select_tag('junban', options_for_select(0..20)) %>
+	    <%= submit_tag("PDF出力")%>
+	  <% end %>
+	<%end %>
+<div class="row">
+<% @companies.each do |c| %>
+<div style="margin:0; height: 242px;width:33%;float:left;">
+	<div style="margin-top:30px;margin-left:30px;">
+	<% if c.zipcode.present? %>〒<%end %><%= c.zipcode %><br>
+	<%= c.prefecture%><%= c.city%><%= c.address%><br><%= c.building%><br>
+		<div style="margin-top:30px;">
+		<%= c.client_name %><br>
+		<span style="font-size:x-large"><%= c.client_person %> <% if c.client_person.present? %>様<%end%></span>
+		</div>
+	</div>
+	</div>
+<% end %>
+</div>
+</div>
