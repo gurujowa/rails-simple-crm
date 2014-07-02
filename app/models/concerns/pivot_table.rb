@@ -2,8 +2,12 @@ class PivotTable
 
   @data
 
+  def sales_person_list
+    [13,2,1]
+  end
+
   def select_list
-    User.where(id: [13,2,1])
+    User.where(id: sales_person_list)
   end
 
   def init_user_id_hash
