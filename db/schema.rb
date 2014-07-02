@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701075648) do
+ActiveRecord::Schema.define(version: 20140702105730) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -230,8 +230,28 @@ ActiveRecord::Schema.define(version: 20140701075648) do
     t.datetime "updated_at"
   end
 
+  create_table "lead_estimate_lines", force: true do |t|
+    t.string   "name",                         null: false
+    t.integer  "unit_price",                   null: false
+    t.integer  "quantity",                     null: false
+    t.integer  "lead_estimate_id",             null: false
+    t.integer  "tax_rate",         default: 0, null: false
+    t.text     "detail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lead_estimates", force: true do |t|
+    t.integer  "lead_id",                    null: false
+    t.date     "expired"
+    t.boolean  "send_flg",   default: false, null: false
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "lead_histories", force: true do |t|
-    t.datetime "approach_day"
+    t.date     "approach_day"
     t.integer  "lead_history_status_id"
     t.integer  "user_id"
     t.date     "next_approach_day"
@@ -319,21 +339,6 @@ ActiveRecord::Schema.define(version: 20140701075648) do
   end
 
   add_index "periods", ["user_id"], name: "index_periods_on_user_id"
-
-  create_table "reportable_cache", force: true do |t|
-    t.string   "model_name",       limit: 100,               null: false
-    t.string   "report_name",      limit: 100,               null: false
-    t.string   "grouping",         limit: 10,                null: false
-    t.string   "aggregation",      limit: 10,                null: false
-    t.string   "conditions",       limit: 100,               null: false
-    t.float    "value",                        default: 0.0, null: false
-    t.datetime "reporting_period",                           null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "reportable_cache", ["model_name", "report_name", "grouping", "aggregation", "conditions", "reporting_period"], name: "name_model_grouping_aggregation_period", unique: true
-  add_index "reportable_cache", ["model_name", "report_name", "grouping", "aggregation", "conditions"], name: "name_model_grouping_agregation"
 
   create_table "statuses", force: true do |t|
     t.string   "name"

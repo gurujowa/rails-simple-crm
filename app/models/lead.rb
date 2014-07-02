@@ -1,5 +1,6 @@
 class Lead < ActiveRecord::Base
   extend Enumerize
+  has_paper_trail 
   belongs_to :user
   has_many :lead_histories
 

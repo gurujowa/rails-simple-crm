@@ -48,6 +48,10 @@ ja:
         send_flg:
           flag_on: 発送済
           flag_off: 未発送
+      lead_estimate:
+        send_flg:
+          flag_on: 発行済
+          flag_off: 未発行
       estimate:
         send_flg:
           flag_on: 発行済

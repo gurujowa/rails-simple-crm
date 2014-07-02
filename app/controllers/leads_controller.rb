@@ -22,6 +22,14 @@ class LeadsController < ApplicationController
       @lead_histories = result
   end
 
+  def name
+    @leads = Lead.where("name like :search", search: "%#{params[:q]}%")
+  end
+
+  def find
+    @leads = Lead.find(params[:id])
+  end
+
   def add_mylist
     @lead = Lead.find(params[:id])
 

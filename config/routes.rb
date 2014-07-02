@@ -7,9 +7,11 @@ Mycrm::Application.routes.draw do
       match 'search' => 'leads#search', via: [:get, :post], as: :search
       get "mylist"
       get "approach"
+      get "name"
     end
     member do
       get "add_mylist"
+      get "find"
     end
   end
 
@@ -50,6 +52,13 @@ Mycrm::Application.routes.draw do
   resources :clients
 
   resources :estimates do 
+    member do
+      get 'flag/:type' , :action => "flag"
+    end
+  end
+
+
+  resources :lead_estimates do 
     member do
       get 'flag/:type' , :action => "flag"
     end
