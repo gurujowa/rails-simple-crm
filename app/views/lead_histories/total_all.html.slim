@@ -1,15 +1,3 @@
-h1 集計
+h1 全体集計
 
-table.table.table-bordered
-  thead
-    tr
-      th 日付
-      - @table.day_header.sort.each do |u|
-        th = u.to_s(:day)
-  tbody
-    - @table.each do |key, row| 
-      tr
-        td = User.find(key).name
-        - row.sort.each do |user_id, d|
-          td = d
-    
+#lead_histories_total_all_pivot

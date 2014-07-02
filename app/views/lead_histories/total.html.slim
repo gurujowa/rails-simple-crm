@@ -1,4 +1,4 @@
-h1 ステータス別集計
+h1 個人集計
 
 .well
   - method =  {:method => "get"}
@@ -9,5 +9,3 @@ h1 ステータス別集計
     = select_month @date
     = submit_tag "変更する"
 #lead_histories_total_pivot data-user_id="#{params[:user_id]}" data-month="#{@date.month}" data-year="#{@date.year}"
-
-#lead_histories_total_aggregate data-user_id="#{params[:user_id]}" data-month="#{@date.month}" data-year="#{@date.year}"

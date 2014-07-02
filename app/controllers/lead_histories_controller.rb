@@ -21,12 +21,7 @@ class LeadHistoriesController < ApplicationController
   end
 
   def total_all
-      from = Date.today.beginning_of_month.prev_month
-      to = Date.today.end_of_month
-      table = PivotTable.new(User.where(id: [13,2,1]), :id)
-      calculation = LeadHistory.where(user_id: [13,2,1]).where(approach_day: from...to).calculate(:count,:all, group: [:user_id,:approach_day])
-      table.set_rows calculation
-      @table = table
+    @lead_histories = LeadHistory.all
   end
 
   def total
