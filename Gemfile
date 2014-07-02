@@ -43,6 +43,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'i18n_generators'
+  gem 'rb-readline'
 end
 
 

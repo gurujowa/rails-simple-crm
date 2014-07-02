@@ -39,10 +39,8 @@ class LeadHistoriesController < ApplicationController
 
     from = @date.beginning_of_month
     to = @date.end_of_month
-    table = PivotTable.new(LeadHistoryStatus.all, :id)
-    calculation = LeadHistory.where(user_id: params[:user_id]).where(approach_day: from...to).calculate(:count,:all, group: [:lead_history_status_id,:approach_day])
-    table.set_rows calculation
-    @table = table
+
+    @lead_histories = LeadHistory.where(user_id: params[:user_id]).where(approach_day: from...to)
   end
 
 

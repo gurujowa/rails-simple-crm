@@ -25,6 +25,7 @@
 //= require jquery.timepicker.min
 //= require fullcalendar
 //= require moment.min
+//= require pivot
 //= require select2
 //= require select2_locale_ja
 //= require_tree .
