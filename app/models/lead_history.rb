@@ -7,4 +7,6 @@ class LeadHistory < ActiveRecord::Base
   validates :user_id, presence: true  
   validates :lead_history_status_id, presence: true  
 
+  reportable :tel, :aggregation => :count, :date_column => :approach_day, :live_data => true
+  scope  :exclude_initial, lambda{ where('created_at > ?', DateTime.new(2014,06,27))}
 end

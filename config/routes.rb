@@ -12,7 +12,15 @@ Mycrm::Application.routes.draw do
       get "add_mylist"
     end
   end
-  resources :lead_histories
+
+  resources :lead_histories do 
+    collection do
+      get "total_all"
+    end
+    member do
+      get "total"
+    end
+  end
 
   devise_for :users
   scope "/admin" do

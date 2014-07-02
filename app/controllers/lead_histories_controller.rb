@@ -20,6 +20,37 @@ class LeadHistoriesController < ApplicationController
     end
   end
 
+  def analysis
+      id = params[:id]
+      id = current_user.id if id.blank?
+      his = LeadHistory.where("approach_day > ?", DateTime.new.beginning_of_month)
+
+#      h = LeadHistory.where(user_id: 8).tel_report.to_a.map{|l| l[0]}
+#      t = LeadHistory.where(user_id: 1).tel_report.to_a.map{|l| l[1].to_i}
+#      f = LeadHistory.where(user_id: 2).tel_report.to_a.map{|l| l[1].to_i}
+#      a = LeadHistory.where(user_id: 3).tel_report.to_a.map{|l| l[1].to_i}
+      calculation = LeadHistory.where(user_id: [13,2,1]).calculate(:count,:all, group: [:user_id,:approach_day])
+      table = PivotTable.new
+      table.set_rows calculation
+      @table = table
+
+
+#      l = LeadHistory.get_stat(:user_count,:user_id => 1) 
+#      table = LeadHistory.exclude_initial.report_table(:all, only: %w[id user_id approach_day], group: "user_id, approach_day")
+#      g= Grouping(table, by: "approach_day")
+
+#      rubygems_versions = Table(%w[user_id count])  
+
+#      g.each do |name,group|
+#        Grouping(group, :by => "rubygems_version").each do |vname,group|
+#          rubygems_versions << { "platform"         => name, 
+#                                 "rubygems_version" => vname,
+#                                 "count"            => group.length }
+#        end
+#      end
+  end
+
+
   def edit
   end
 

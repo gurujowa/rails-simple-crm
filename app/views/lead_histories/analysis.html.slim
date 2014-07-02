@@ -1,0 +1,18 @@
+h1見込み高い案件
+
+span 表示営業マン
+=select_tag "analysis_change" , options_from_users(params[:id]), :include_blank => true 
+
+table.table.table-bordered
+  thead
+    tr
+      th 日付
+      - @table.user_header.each do |u|
+        th = u
+  tbody
+    - @table.each do |day, row| 
+      tr
+        td = day.to_s
+        - row.each do |user_id, d|
+          td = d
+    

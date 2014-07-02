@@ -81,7 +81,9 @@ gem 'paper_trail', '>= 3.0.0.rc2'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem "ransack", github: "activerecord-hackery/ransack" 
-
+gem 'reportable', :require => 'saulabs/reportable'
+#gem 'acts_as_reportable'
+#gem 'statistics'
 
 #------------------------------
 #other library

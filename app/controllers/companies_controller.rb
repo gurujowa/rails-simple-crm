@@ -100,13 +100,12 @@ class CompaniesController < ApplicationController
     end
     respond_to do |format|
       format.html { 
-        @format_html_flg = true
         @checkbox_params = checkbox_append(params)
         render :layout => "pdf.html"
       }
       format.pdf {
-        @format_html_flg = false
         render pdf: "ラベル",
+               margin: {top: 0, bottom: 0 , left: 0, right: 0},
                encoding: 'UTF-8',
                layout: 'pdf.html',
                show_as_html: params[:debug].present?
