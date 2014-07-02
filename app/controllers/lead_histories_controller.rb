@@ -21,7 +21,7 @@ class LeadHistoriesController < ApplicationController
   end
 
   def total_all
-    @lead_histories = LeadHistory.all
+    @lead_histories = LeadHistory.where('approach_day > ?', Date.new(2013,8,1))
   end
 
   def total

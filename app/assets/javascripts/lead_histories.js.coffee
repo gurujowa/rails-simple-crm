@@ -6,11 +6,11 @@ jQuery ->
         rows: [
           "status"
         ]
-        cols: ["day"]
+        cols: ["week","day"]
 
   if document.getElementById("lead_histories_total_all_pivot") != null
     table = $("#lead_histories_total_all_pivot")
     $.getJSON "/lead_histories/total_all.json", (mps) ->
       table.pivotUI mps,
         rows: [ "user_name" ]
-        cols: ["year"]
+        cols: ["year","month"]
