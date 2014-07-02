@@ -106,10 +106,10 @@ class CompaniesController < ApplicationController
       }
       format.pdf {
         @format_html_flg = false
-        html = render_to_string(:layout => "pdf.html", :formats => [:html])
-        kit = PDFKit.new(html)
-        send_data(kit.to_pdf, :filename => "ラベル.pdf", :type => 'application/pdf')
-        return # to avoid double render call
+        render pdf: "ラベル",
+               encoding: 'UTF-8',
+               layout: 'pdf.html',
+               show_as_html: params[:debug].present?
       }
     end
   end
