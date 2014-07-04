@@ -93,7 +93,7 @@ p#notice = notice
         = link_to '削除', @lead, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
     .panel.panel-info
       .panel-heading お客様メモ
-      .panel-body = @lead.memo
+      .panel-body = simple_format @lead.memo
 
   .col-sm-6
     - if @lead.next_approach_day.present?
