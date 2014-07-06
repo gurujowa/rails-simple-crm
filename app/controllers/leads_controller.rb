@@ -1,6 +1,7 @@
 class LeadsController < ApplicationController
   before_action :set_lead, only: [:show, :edit, :update, :destroy]
   after_action :store_location, only: [:index, :search, :mylist, :approach]
+  before_action :authenticate_user!
 
   # GET /leads
   def index
