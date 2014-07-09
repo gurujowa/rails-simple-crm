@@ -23,4 +23,29 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
+
+
+  def color
+    num = self.id.modulo(9)
+    case num
+    when 1 then
+      "background-color:Beige;"
+    when 2 then
+      "background-color:LightCyan;"
+    when 3 then
+      "background-color:LightPink;"
+    when 4 then
+      "background-color:Wheat;"
+    when 5 then
+      "background-color:PeachPuff;"
+    when 7 then
+      "background-color:PaleTurquoise;"
+    when 8 then
+      "background-color:Goldenrod;"
+    when 9 then
+      "background-color:Azure;"
+    else
+      raise "id modulo error"
+    end
+  end
 end

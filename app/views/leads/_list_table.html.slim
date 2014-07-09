@@ -18,12 +18,13 @@ table.table.table-striped.table-bordered
         td.hidden-xs = lead.full_address false
         td 
           = lead.last_approach_day
+          - if lead.last_approach.present?
+            span style="#{lead.last_approach.user.color}" （#{lead.last_approach.user.name.chars.first}）
           - if lead.other_user?(current_user.id)
             span.glyphicon.glyphicon-user data-toggle="tooltip" title="#{lead.user.name}のマイリスト"
         - if lead.last_approach_day.present?
           td style="background-color:#{lead.last_approach.lead_history_status.color}"
             a href="#{lead_path(lead)}" data-toggle="tooltip" title="#{lead.last_approach.memo}"
               = lead.last_approach.lead_history_status.name
-              span style="color:white;background-color:black;" (#{lead.last_approach.user.name.chars.first})
         - else
-          td 
+          td
