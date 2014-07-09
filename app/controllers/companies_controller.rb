@@ -201,7 +201,7 @@ class CompaniesController < ApplicationController
   
   def company_params
     params.require(:company).permit(:id, :client_name,  :category, :tel, :fax,  :active_st,  :zipcode, :prefecture, :appoint_plan,
-      :city, :address, :building, :mail, :industry_id, :regular_staff, :nonregular_staff, :memo, :approach_day,  :lead, :created_by,  :updated_by, :campaign_id,  
+      :city, :address, :building, :tel2, :fax2, :prefecture2, :zipcode2, :city2, :address2, :building2, :mail, :industry_id, :regular_staff, :nonregular_staff, :memo, :approach_day,  :lead, :created_by,  :updated_by, :campaign_id,  
       contacts_attributes: [:id, :memo, :created_by, :con_type],
       clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position,  :memo],
       negos_attributes: [:id, :name, :status_id, :user_id,  :memo],

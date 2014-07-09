@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702105730) do
+ActiveRecord::Schema.define(version: 20140709011315) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -126,6 +126,13 @@ ActiveRecord::Schema.define(version: 20140702105730) do
     t.integer  "regular_staff"
     t.integer  "nonregular_staff"
     t.text     "memo"
+    t.string   "tel2"
+    t.string   "fax2"
+    t.string   "zipcode2"
+    t.string   "prefecture2"
+    t.string   "city2"
+    t.string   "address2"
+    t.string   "building2"
   end
 
   add_index "companies", ["active_st"], name: "index_companies_on_active_st"

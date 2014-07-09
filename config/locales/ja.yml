@@ -75,6 +75,11 @@ ja:
         city: 市区町村
         address: 番地
         building: 建物名
+        zipcode2: 郵便番号2
+        prefecture2: 都道府県2
+        city2: 市区町村2
+        address2: 番地2
+        building2: 建物名2
         regular_staff: 正規職員人数
         nonregular_staff: 非正規職員人数
       teacher:  #モデル毎に階層化しておく。

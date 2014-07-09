@@ -22,6 +22,20 @@ a name="client"
     a.btn.btn-default#jump_zip 郵便番号
     a.btn.btn-default#jump_map GoogleMap検索
 
+a name="client2"
+.panel.panel-default
+  .panel-heading 連絡先2
+  .panel-body
+    = form.input :tel2
+    = form.input :fax2
+    = form.input :zipcode2
+    = form.input :prefecture2
+    = form.input :city2
+    = form.input :address2
+    = form.input :building2
+  .panel-footer
+    a.btn.btn-default#jump_map2 GoogleMap検索
+
 a name="staff"
 .panel.panel-default
   .panel-heading 職員情報

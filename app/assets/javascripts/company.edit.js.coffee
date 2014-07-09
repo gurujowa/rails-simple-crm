@@ -16,6 +16,11 @@ jQuery ->
     url = "http://maps.google.co.jp/maps?q=" + $("#company_prefecture").val() + $("#company_city").val() + $("#company_address").val()
     window.open(url,"_blank")
 
+  #GoogleMap検索
+  $("#jump_map2").on "click", ->
+    url = "http://maps.google.co.jp/maps?q=" + $("#company_prefecture2").val() + $("#company_city2").val() + $("#company_address2").val()
+    window.open(url,"_blank")
+
   $('form#new_task_form').submit ->
     $('#new_task_detail').show()
     $('#new_task_modal').modal('hide')    
