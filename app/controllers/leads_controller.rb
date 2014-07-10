@@ -17,8 +17,8 @@ class LeadsController < ApplicationController
   def approach
       @q = Lead.group(:name).search(params[:q])
       inner = "(SELECT id AS last_his_id , lead_id AS last_id, MAX(approach_day) AS max_approach_day FROM lead_histories  WHERE approach_day is not null GROUP BY lead_id) AS last_his"
-      result = LeadHistory.find_by_sql("SELECT his.id, last_his.max_approach_day, his.next_approach_day , his.lead_id
-                                       FROM lead_histories AS his INNER JOIN #{inner} ON his.id = last_his.last_his_id where next_approach_day is not null")
+      result = LeadHistory.find_by_sql(["SELECT his.id, last_his.max_approach_day, his.next_approach_day , his.lead_id
+                                       FROM lead_histories AS his INNER JOIN #{inner} ON his.id = last_his.last_his_id where next_approach_day is not null AND his.user_id = :user_id",{ user_id: params[:id]}])
 
       @lead_histories = result
   end

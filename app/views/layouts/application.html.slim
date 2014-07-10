@@ -36,7 +36,7 @@ html
               ul.dropdown-menu
                 li = link_to "見込み客一覧" , leads_path
                 li = link_to "マイリスト一覧" , {controller: "leads", action: "mylist"}
-                li = link_to "再アプローチ一覧" , {controller: "leads", action: "approach"}
+                li = link_to "再アプローチ一覧" , {controller: "leads", action: "approach", id: current_user.id}
                 li = link_to "新規作成" , new_lead_path
                 li = link_to "全体集計" , {controller: "lead_histories", action: "total_all"}
                 li = link_to "個人集計" , {controller: "lead_histories", action: "total", user_id: current_user.id}
