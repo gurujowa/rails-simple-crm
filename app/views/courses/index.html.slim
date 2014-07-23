@@ -20,7 +20,9 @@ h1 コース 一覧
       - @courses.each do |b|
         tr
           td= link_to b.company.client_name, {controller: "companies", action: "edit", id: b.company_id}
-          td= link_to b.name,{action: "show", id: b.id}
+          td
+            = link_to b.name,{action: "show", id: b.id}
+            = link_to "(edit)", edit_course_path(b.id)
           td= check_course_img(b, "order_flg")
           td= check_course_img(b, "book_flg")
           td= check_course_img(b, "attendee_table_flg")
