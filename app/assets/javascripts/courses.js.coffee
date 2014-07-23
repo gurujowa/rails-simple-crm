@@ -13,7 +13,23 @@ jQuery ->
       results: (data, page) -> 
         results: data.companies
 
-  table = new CourseTable()
+  oTable = $('#courses_datatable').dataTable
+    sPaginationType: "full_numbers"
+    bJQueryUI: true
+    aaSorting: [[ 1, "asc" ]]
+    bProcessing: true
+    bStateSave:  false
+    iDisplayLength: 100
+    bSort: true
+    bDeferRender: true
+    bAutoWidth: false
+    oLanguage: 
+      sLengthMenu: "表示行数 _MENU_ 件"
+      oPaginate: 
+        "sNext": "次",
+        "sPrevious": "前"
+      sInfo: "TOTAL_TOTAL_ _START_/_END_"
+      sSearch: "検索："
 
   pickerReady()
   calcTime()

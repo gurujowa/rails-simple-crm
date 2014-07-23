@@ -1,0 +1,35 @@
+h1 コース 一覧
+= link_to "新規追加" , {controller: "courses", action: "new"}, class: "btn btn-default"
+.row
+  table id="courses_datatable"
+    thead
+      tr
+        th 会社名
+        th コース名
+        th 発注書
+        th 書籍送付
+        th 出席票作成
+        th 受理印
+        th 労働局印
+        th 支給申請
+        th 修了証
+        th 開始日
+        th 終了日
+        th メモ
+    tbody
+      - @courses.each do |b|
+        tr
+          td= link_to b.company.client_name, {controller: "companies", action: "edit", id: b.company_id}
+          td= link_to b.name,{action: "show", id: b.id}
+          td= check_course_img(b, "order_flg")
+          td= check_course_img(b, "book_flg")
+          td= check_course_img(b, "attendee_table_flg")
+          td= check_course_img(b, "reception_seal_flg")
+          td= check_course_img(b, "cert_seal_flg")
+          td= check_course_img(b, "end_form_flg")
+          td= check_course_img(b, "diploma_flg")
+          td= b.getStartDate
+          td= b.getEndDate
+          td
+            - if b.memo.present?
+              span.glyphicon.glyphicon-paperclip data-toggle="tooltip" title="#{b.memo}" 
