@@ -5,7 +5,7 @@ class PeriodAlert
   end
 
   def check(course, type)
-    unless period_null course
+    if course.periods.blank?
       return false
     end
 

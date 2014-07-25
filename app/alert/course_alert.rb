@@ -7,6 +7,9 @@ class CourseAlert
   end
 
   def check(course, type)
+    unless course_present_check course
+      return false
+    end
     if type == :alert
       order_flg_check course,14.days.since
       book_flg_check course, 14.days.since
@@ -41,6 +44,22 @@ class CourseAlert
 
 
   private
+
+  def course_present_check c
+    unless c.present?
+      push_error  c, "コース情報がありません"
+      return false
+    end
+
+    unless c.periods.present?
+      push_error  c, "コマ情報がありません"
+      return false
+    end
+
+    return true
+
+  end
+
   def order_flg_check(c, day)
     course_start_check c, day, c.order_flg, "発注書の送付が完了していません。"
   end
