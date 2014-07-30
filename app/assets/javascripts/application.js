@@ -97,6 +97,11 @@ function remove_fields(link) {
   $(link).closest("tr").hide();
 }
 
+function remove_periods(link, class_name) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(".periods_field_" + class_name).hide();
+}
+
 function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g")

@@ -15,6 +15,10 @@ module CoursesHelper
     return img_tag.html_safe + period.hidden_field(type, :class => "period_hidden") 
   end
 
+  def link_to_remove_periods(name, f)
+    f.hidden_field(:_destroy) + link_to_function(name, "remove_periods(this, " + f.index.to_s + ")", :class => "btn btn-warning")
+  end
+
   
   def time_input(builder, name, required)
     value = builder.object.read_attribute(name)
