@@ -34,7 +34,7 @@ class LeadHistoriesController < ApplicationController
     end
 
     from = @date.beginning_of_month
-    to = @date.end_of_month
+    to = @date.end_of_month + 1.day
 
     @lead_histories = LeadHistory.where(user_id: params[:user_id]).where(approach_day: from...to)
   end
