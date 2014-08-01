@@ -22,7 +22,7 @@
   	</thead>
      <tbody class="add_fields">
        <%= f.simple_fields_for :lead_estimate_lines, wrapper: :table_form do |l| %>
-         <%= render :partial => "estimate_line_fields", :locals => { :l => l, :delete_flg => true} %>
+         <%= render :partial => "lead_estimate_line_fields", :locals => { :l => l, :delete_flg => true} %>
        <% end %>
   </tbody>
      <tr>
