@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140709011315) do
+ActiveRecord::Schema.define(version: 20140801064522) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -223,12 +223,13 @@ ActiveRecord::Schema.define(version: 20140709011315) do
   end
 
   create_table "estimates", force: true do |t|
-    t.integer  "company_id",                 null: false
+    t.integer  "client_id",                       null: false
     t.date     "expired"
-    t.boolean  "send_flg",   default: false, null: false
+    t.boolean  "send_flg",    default: false,     null: false
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "client_type", default: "company", null: false
   end
 
   create_table "industries", force: true do |t|
@@ -244,15 +245,6 @@ ActiveRecord::Schema.define(version: 20140709011315) do
     t.integer  "lead_estimate_id",             null: false
     t.integer  "tax_rate",         default: 0, null: false
     t.text     "detail"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "lead_estimates", force: true do |t|
-    t.integer  "lead_id",                    null: false
-    t.date     "expired"
-    t.boolean  "send_flg",   default: false, null: false
-    t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

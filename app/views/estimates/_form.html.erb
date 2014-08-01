@@ -3,7 +3,19 @@
   <% @estimate.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
   <% end %>
-    <%= f.input :company_id , input_html: { class: 'search_company' } %>
+    <%= f.input :client_type  %>
+    <%= f.input :client_id ,as: :hidden %>
+    <div class="form-group">
+     <label for="search_company" class="col-sm-3 control-label">会社名</label>
+    <div class="col-sm-9">
+    <div id="company_search_area">
+    <%= text_field_tag :company_search, @estimate.company_id, class: "search_company form-control" %>
+  </div>
+    <div id="lead_search_area">
+    <%= text_field_tag :lead_search, @estimate.lead_id, class: "search_lead form-control" %>
+  </div>
+    </div>
+    </div>
     <%= f.input :expired, as: :date_picker %>
     <%= f.input :memo %>
 

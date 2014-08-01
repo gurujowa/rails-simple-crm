@@ -1,6 +1,6 @@
 <h1>見積り一覧</h1>
 
-<%= link_to '新規追加', new_estimate_path, :class => 'btn' %>
+<%= link_to '新規追加', new_estimate_path, :class => 'btn btn-default' %>
 <table id="estimates_datatable" class="default_datatables">
   <thead>
     <tr>
@@ -18,7 +18,7 @@
     <% @estimates.each do |estimate| %>
       <tr>
         <td><%= link_to_switch_flg estimate, :send_flg %></td>
-        <td><%= link_to estimate.company.client_name, edit_estimate_path(estimate) %></td>
+        <td><%= link_to estimate.client_name, edit_estimate_path(estimate) %></td>
         <td><%= estimate.expired %></td>
         <td><%= number_to_currency estimate.total_price %></td>
         <td><%= estimate.created_at.strftime("%Y年%m月%d日") %></td>

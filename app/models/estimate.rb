@@ -12,13 +12,34 @@
 #
 
 class Estimate < ActiveRecord::Base
+  extend Enumerize
 
   has_paper_trail 
-  belongs_to :company
   has_many :estimate_lines, :dependent => :destroy
   accepts_nested_attributes_for :estimate_lines, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }
+  enumerize :client_type, in: [:company, :lead]
 
-  validates :company_id, presence: true
+  validates :client_id, presence: true
+  validates :client_type, presence: true
+
+  def client_name
+    if client_type == "company"
+      return Company.find(self.client_id).client_name
+    end
+    raise "invalid client type"
+  end
+
+  def company_id
+    if self.client_type == "company"
+      return client_id
+    end
+  end
+
+  def lead_id
+    if self.client_type == "lead"
+      return client_id
+    end
+  end
 
   def total_price
      price = 0

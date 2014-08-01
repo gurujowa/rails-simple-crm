@@ -57,13 +57,6 @@ Mycrm::Application.routes.draw do
     end
   end
 
-
-  resources :lead_estimates do 
-    member do
-      get 'flag/:type' , :action => "flag"
-    end
-  end
-
   resources :campaigns
   resources :invoices
   resources :client_orders
@@ -77,7 +70,6 @@ Mycrm::Application.routes.draw do
   resources :teachers
   get 'teachers/update/:id/:type' => 'teachers#up_bool'
   get 'teachers_flag' => 'teachers#flag'
-
 
   resources :industries, :task_types, :statuses
   resources :contacts, :only => [:destroy]    

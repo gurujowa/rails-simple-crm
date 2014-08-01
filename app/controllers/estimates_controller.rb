@@ -16,7 +16,7 @@ class EstimatesController < ApplicationController
         redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :estimates, action: :show
       }
       format.pdf {
-        render pdf: @estimate.company.name  + " - 見積書",
+        render pdf: @estimate.client_name  + " - 見積書",
                encoding: 'UTF-8',
                layout: 'pdf.html',
                show_as_html: params[:debug].present?
@@ -27,8 +27,8 @@ class EstimatesController < ApplicationController
   # GET /estimates/new
   def new
     @estimate = Estimate.new
-    if params[:company_id].present?
-      @estimate.company_id = params[:company_id]
+    if params[:client_id].present?
+      @estimate.client_id = params[:client_id]
     end
   end
 
@@ -74,7 +74,7 @@ class EstimatesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def estimate_params
-      params.require(:estimate).permit(:title, :company_id, :expired,  :send_flg, :memo,
+      params.require(:estimate).permit(:title, :client_type, :client_id, :expired,  :send_flg, :memo,
            estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy, :tax_rate, :detail])
     end
 end

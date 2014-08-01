@@ -173,7 +173,7 @@
   <div class="alpha">
     <div  style="min-height: 80px;">
       <p class="recipientName" style="margin-bottom: 10px;">
-      <%= @estimate.company.client_name %>&nbsp;様
+      <%= @estimate.client_name %>&nbsp;様
       </p>
       <p style="line-height:140%">
       <% if @estimate.expired.present? %>有効期限： <%= @estimate.expired.strftime "%Y年%m月%d日" %><% end %>
