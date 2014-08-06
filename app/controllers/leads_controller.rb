@@ -14,6 +14,11 @@ class LeadsController < ApplicationController
       @leads =@q.result.includes(:lead_histories).where(user_id: current_user.id)
   end
 
+  def tag
+      @q = Lead.group(:name).search(params[:q])
+      @leads =@q.result.includes(:lead_histories).tagged_with(params[:id])
+  end
+
   def approach
       @q = Lead.group(:name).search(params[:q])
       inner = "(SELECT id AS last_his_id , lead_id AS last_id, MAX(approach_day) AS max_approach_day FROM lead_histories  WHERE approach_day is not null GROUP BY lead_id) AS last_his"
@@ -88,7 +93,11 @@ class LeadsController < ApplicationController
   # PATCH/PUT /leads/1
   def update
     if @lead.update(lead_params)
-      redirect_to after_update_path_for, notice: 'Lead was successfully updated.'
+      if params[:after_show].present?
+        redirect_to lead_url(@lead), notice: '正しく編集されました'
+      else
+        redirect_to after_update_path_for, notice: 'Lead was successfully updated.'
+      end
     else
       render action: 'edit'
     end
@@ -119,6 +128,6 @@ class LeadsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lead_params
-      params.require(:lead).permit(:corporation_name, :sex, :campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star)
+      params.require(:lead).permit(:corporation_name,{:tag_list => []}, :tag_list, :sex, :campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star)
     end
 end

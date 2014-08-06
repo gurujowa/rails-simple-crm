@@ -12,6 +12,7 @@ Mycrm::Application.routes.draw do
       get "approach"
       get "add_mylist"
       get "find"
+      get "tag"
     end
   end
 

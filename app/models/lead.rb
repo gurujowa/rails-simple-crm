@@ -1,6 +1,7 @@
 class Lead < ActiveRecord::Base
   extend Enumerize
   has_paper_trail 
+  acts_as_taggable 
   belongs_to :user
   has_many :lead_histories
 
@@ -12,6 +13,7 @@ class Lead < ActiveRecord::Base
   validates :zipcode,  length: {maximum: 8, :message => '郵便番号は７文字以内です'}, format: {with: /\d{3}\-\d{4}/, message: "半角数字とハイフンのみで入力してください。（ハイフンが必要です）", allow_blank: true }
   validates :prefecture,  length: {maximum: 4, :message => '都道府県は４文字以内で入力してください'}
   validates :city,  length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
+
 
   ransacker :max_approach_day do |parent|
     ar = Arel.sql('max(lead_histories.approach_day)')
