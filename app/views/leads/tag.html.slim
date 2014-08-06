@@ -1,3 +1,18 @@
-h1 タグ一覧
+h1 = @tag_name + "のタグ一覧"
+
+.panel.panel-default
+  .panel-body
+    = form_tag({action: "tag"}, method: :get)
+      | タグの名前で検索する
+      = text_field_tag :name
+      = submit_tag "タグ検索"
 
 = render 'list_table', locals: {leads: @leads}
+
+.panel.panel-default
+  .panel-heading タグクラウド
+  .panel-body
+    - tag_cloud(@tags, %w(tag_cloud1 tag_cloud2 tag_cloud3 tag_cloud4) )do |tag, css_class|
+      span.tag_cloud_line = link_to tag.name,  { :action => :tag, :name => tag.name }, :class => css_class
+      | &nbsp;
+

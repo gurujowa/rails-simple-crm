@@ -15,8 +15,10 @@ class LeadsController < ApplicationController
   end
 
   def tag
+      @tag_name = params[:name]
       @q = Lead.group(:name).search(params[:q])
-      @leads =@q.result.includes(:lead_histories).tagged_with(params[:id])
+      @leads =@q.result.includes(:lead_histories).tagged_with(@tag_name)
+      @tags = Lead.tag_counts_on(:tags)
   end
 
   def approach

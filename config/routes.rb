@@ -7,12 +7,12 @@ Mycrm::Application.routes.draw do
       match 'search' => 'leads#search', via: [:get, :post], as: :search
       get "mylist"
       get "name"
+      get "tag"
     end
     member do
       get "approach"
       get "add_mylist"
       get "find"
-      get "tag"
     end
   end
 
