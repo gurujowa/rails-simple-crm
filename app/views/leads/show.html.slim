@@ -18,7 +18,7 @@ p#notice = notice
       .edit_tag_field style="display:none;"
         = form_for @lead do |f|
           = hidden_field_tag "after_show", "y"
-          = f.text_field :tag_list,  class: "lead_tag_list_form"
+          = f.text_field :tag_list,  id: "lead_tag_list_form"
           = submit_tag "タグ変更"
     .col-sm-2
       - if @lead.other_user?(current_user.id)

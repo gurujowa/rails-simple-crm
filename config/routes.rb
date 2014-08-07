@@ -8,6 +8,7 @@ Mycrm::Application.routes.draw do
       get "mylist"
       get "name"
       get "tag"
+      get "tag_list"
     end
     member do
       get "approach"

@@ -18,6 +18,12 @@ class LeadsController < ApplicationController
       @tag_name = params[:name]
       @q = Lead.group(:name).search(params[:q])
       @leads =@q.result.includes(:lead_histories).tagged_with(@tag_name)
+
+      tl = Lead.tags_on(:tags)
+      @tag_list = []
+      tl.each do |t|
+        @tag_list.push([t.name, t.name])
+      end
       @tags = Lead.tag_counts_on(:tags)
   end
 
@@ -103,6 +109,10 @@ class LeadsController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def tag_list
+    @tag_list = Lead.tags_on(:tags)
   end
 
   # DELETE /leads/1

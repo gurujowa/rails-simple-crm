@@ -25,6 +25,8 @@ class Estimate < ActiveRecord::Base
   def client_name
     if client_type == "company"
       return Company.find(self.client_id).client_name
+    else client_type == "lead"
+      return Lead.find(self.client_id).name
     end
     raise "invalid client type"
   end
