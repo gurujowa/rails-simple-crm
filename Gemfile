@@ -63,6 +63,7 @@ gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'underscore-rails'
+gem 'gon' 
 
 #------------------------------
 #Format Convert Library

@@ -76,6 +76,8 @@ class LeadsController < ApplicationController
     @status_ing = LeadHistoryStatus.where(progress: "ing")
     @status_done = LeadHistoryStatus.where(progress: "done")
     @status_forbidden = LeadHistoryStatus.where(progress: "forbidden")
+
+    gon.tag_list = Lead.tags_on(:tags).map {|i| i.name}
   end
 
   # GET /leads/new
@@ -109,10 +111,6 @@ class LeadsController < ApplicationController
     else
       render action: 'edit'
     end
-  end
-
-  def tag_list
-    @tag_list = Lead.tags_on(:tags)
   end
 
   # DELETE /leads/1

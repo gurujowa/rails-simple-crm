@@ -4,6 +4,7 @@
 jQuery ->
   $("#lead_tag_list_form").select2
     width: "400px"
-    tags: true
+    tags: gon.tag_list
+    console.log gon.tag_list
   $("#lead_tag_list_search").select2
     width: "400px"
