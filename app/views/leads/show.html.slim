@@ -13,7 +13,7 @@ p#notice = notice
       h4.show_tag_field
         - @lead.tags.each do |t|
           span.glyphicon.glyphicon-tag
-          = link_to t.name, {action: "tag", name: t.name}
+          = link_to t.name, {action: "index", tag_name: t.name}
         = link_to "タグ編集", "#", class: "btn btn-default", onclick: "$('.edit_tag_field').show(); $('.show_tag_field').hide();"
       .edit_tag_field style="display:none;"
         = form_for @lead do |f|
