@@ -22,8 +22,22 @@ h1 見込み客一覧
         label.col-sm-3.control-label 荷電済み
         .col-sm-9
           = check_box_tag 'status_any', 'y', @status_any_checked
+      .form-group
+        label.col-sm-3.control-label タグ
+        .col-sm-9
+          = select_tag :tag_name, options_for_select(@tag_list,@tag_name), id: "lead_tag_list_search", include_blank: true
+
       = f.input :user_id_eq, collection: User.all
       = f.submit "検索する", class: "btn btn-primary"
   #total_entries 件数：#{@leads.total_entries}件
 = render 'list_table', locals: {leads: @leads}
 = will_paginate @leads, renderer: BootstrapPagination::Rails
+
+
+
+.panel.panel-default
+  .panel-heading タグクラウド
+  .panel-body
+    - tag_cloud(@tags, %w(tag_cloud1 tag_cloud2 tag_cloud3 tag_cloud4) )do |tag, css_class|
+      span.tag_cloud_line = link_to tag.name,  { :action => :index, :tag_name => tag.name }, :class => css_class
+      | &nbsp;

@@ -6,13 +6,29 @@ class LeadsController < ApplicationController
   # GET /leads
   def index
       pq = params[:q]
+      leads = Lead.group(:name)
+
       if params[:status_any].present?
         pq.store(:lead_histories_lead_history_status_id_in,[9,10,11,1,2,3,4,5,6,7,8,16])
         @status_any_checked = true
       else
         @status_any_checked = false
       end
-      @q = Lead.group(:name).search(pq)
+
+      if params[:tag_name].present?
+        leads = leads.tagged_with(params[:tag_name])
+        @tag_name = params[:tag_name]
+      end
+
+      tl = Lead.tags_on(:tags)
+      @tag_list = []
+      tl.each do |t|
+        @tag_list.push([t.name, t.name])
+      end
+      @tags = Lead.tag_counts_on(:tags)
+
+
+      @q = leads.search(pq)
       @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
   end
 
@@ -21,18 +37,6 @@ class LeadsController < ApplicationController
       @leads =@q.result.includes(:lead_histories).where(user_id: current_user.id)
   end
 
-  def tag
-      @tag_name = params[:name]
-      @q = Lead.group(:name).search(params[:q])
-      @leads =@q.result.includes(:lead_histories).tagged_with(@tag_name)
-
-      tl = Lead.tags_on(:tags)
-      @tag_list = []
-      tl.each do |t|
-        @tag_list.push([t.name, t.name])
-      end
-      @tags = Lead.tag_counts_on(:tags)
-  end
 
   def approach
       @q = Lead.group(:name).search(params[:q])
