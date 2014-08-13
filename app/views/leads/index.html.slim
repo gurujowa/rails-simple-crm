@@ -21,7 +21,7 @@ h1 見込み客一覧
       .form-group
         label.col-sm-3.control-label 荷電済み
         .col-sm-9
-          = check_box_tag 'status_any', 'y'
+          = check_box_tag 'status_any', 'y', @status_any_checked
       = f.input :user_id_eq, collection: User.all
       = f.submit "検索する", class: "btn btn-primary"
   #total_entries 件数：#{@leads.total_entries}件

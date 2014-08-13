@@ -8,6 +8,9 @@ class LeadsController < ApplicationController
       pq = params[:q]
       if params[:status_any].present?
         pq.store(:lead_histories_lead_history_status_id_in,[9,10,11,1,2,3,4,5,6,7,8,16])
+        @status_any_checked = true
+      else
+        @status_any_checked = false
       end
       @q = Lead.group(:name).search(pq)
       @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
