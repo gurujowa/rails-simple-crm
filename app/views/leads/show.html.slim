@@ -173,6 +173,8 @@ p#notice = notice
                   = h.memo
               tr 
                 td colspan="3" 
+                  - h.tag_list.each do |t|
+                    span.badge = t
                   .pull-right 
                     = link_to "編集", edit_lead_history_path(h)
                     | &nbsp;/&nbsp;

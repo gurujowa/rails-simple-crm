@@ -32,6 +32,7 @@ class LeadsController < ApplicationController
       @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
   end
 
+
   def mylist
       @q = Lead.group(:name).search(params[:q])
       @leads =@q.result.includes(:lead_histories).where(user_id: current_user.id)

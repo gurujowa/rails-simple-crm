@@ -1,0 +1,27 @@
+h1 資料郵送一覧
+
+
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th style="font-size:12px;width:30px" 済
+      th 会社名
+      th 郵便番号
+      th 住所
+      th 担当者
+      th 営業マン
+      th 対応日時
+  tbody
+    - @lead_histories.each do |lh|
+      tr
+        td
+          - if lh.is_sent
+            span.glyphicon.glyphicon-check
+        td 
+          = link_to lh.lead.name , lh.lead
+          = link_to "<span class='glyphicon glyphicon-send'></span> 発送".html_safe , {action: "sent", id: lh.id}, class: "btn btn-default btn-xs"
+        td = lh.lead.zipcode
+        td = lh.lead.full_address false
+        td = lh.lead.person_name
+        td = lh.user.name
+        td = lh.approach_day

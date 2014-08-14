@@ -1,5 +1,5 @@
 class LeadHistoriesController < ApplicationController
-  before_action :set_lead_history, only: [:show, :edit, :update, :destroy]
+  before_action :set_lead_history, only: [:show, :edit, :update, :destroy, :sent]
   before_action :authenticate_user!
 
 
@@ -19,6 +19,16 @@ class LeadHistoriesController < ApplicationController
       @status_forbidden = LeadHistoryStatus.where(progress: "forbidden")
       render template: "leads/show"
     end
+  end
+  
+  def zip
+    @lead_histories = LeadHistory.status_zip.limit(200)
+  end
+
+  def sent
+    @lead_history.tag_list.add(LeadHistory.sent_tag)
+    @lead_history.save
+    redirect_to action: :zip, notice: '発送済みにしました'
   end
 
   def total_all
