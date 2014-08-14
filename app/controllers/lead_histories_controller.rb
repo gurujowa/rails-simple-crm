@@ -26,8 +26,7 @@ class LeadHistoriesController < ApplicationController
   end
 
   def sent
-    @lead_history.tag_list.add(LeadHistory.sent_tag)
-    @lead_history.save
+    @lead_history.send_pamph
     redirect_to action: :zip, notice: '発送済みにしました'
   end
 
