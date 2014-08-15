@@ -154,6 +154,9 @@ ja:
         memo: メモ
       estimate:
         company: 会社
+        display_name: 表示名
+        client_type: 新規or既存
+        expired: 期限
         tax_rate: 税率
         name: 件名
         status: ステータス

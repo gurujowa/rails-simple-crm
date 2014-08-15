@@ -23,12 +23,15 @@ class Estimate < ActiveRecord::Base
   validates :client_type, presence: true
 
   def client_name
-    if client_type == "company"
+    if display_name.present?
+      return self.display_name
+    elsif client_type == "company"
       return Company.find(self.client_id).client_name
-    else client_type == "lead"
+    elsif client_type == "lead"
       return Lead.find(self.client_id).name
+    else
+      raise "invalid client type"
     end
-    raise "invalid client type"
   end
 
   def company_id
