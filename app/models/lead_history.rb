@@ -15,6 +15,7 @@ class LeadHistory < ActiveRecord::Base
 
   @@sent_tag = "資料郵送済"
 
+
   def is_sent
     return self.tag_list.index(@@sent_tag).present?
   end
