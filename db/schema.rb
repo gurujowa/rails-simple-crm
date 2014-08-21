@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815085739) do
+ActiveRecord::Schema.define(version: 20140821084852) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -251,7 +251,7 @@ ActiveRecord::Schema.define(version: 20140815085739) do
   end
 
   create_table "lead_histories", force: true do |t|
-    t.date     "approach_day"
+    t.datetime "approach_day"
     t.integer  "lead_history_status_id"
     t.integer  "user_id"
     t.date     "next_approach_day"

@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
-//= require jquery.ui.datepicker-ja
+//= require jquery.datetimepicker
 //= require bootstrap
 //= require bootstrap-switch.min
 //= require jquery.cookie
@@ -87,7 +87,22 @@
 moment.lang("ja");
 
 $(function(){
-  $( ".datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'});
+
+  $( ".datepicker" ).datetimepicker({lang:'ja',timepicker: false, format: "Y/m/d",
+ i18n:{
+  ja:{
+   months:[ '1月','2月','3月','4月', '5月','6月','7月','8月', '9月','10月','11月','12月', ],
+   dayOfWeek:[ "日", "月", "火", "水", "木", "金", "土", ]
+  }
+ }});
+
+  $( ".datetimepicker" ).datetimepicker({lang:'ja',
+ i18n:{
+  ja:{
+   months:[ '1月','2月','3月','4月', '5月','6月','7月','8月', '9月','10月','11月','12月', ],
+   dayOfWeek:[ "日", "月", "火", "水", "木", "金", "土", ]
+  }
+ }});
   $('.dropdown-toggle').dropdown();
   $("[data-toggle=tooltip]").tooltip()
 });
