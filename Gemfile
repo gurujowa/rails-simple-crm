@@ -84,7 +84,7 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem "ransack", github: "activerecord-hackery/ransack" 
 gem 'acts-as-taggable-on'
-#gem 'acts_as_reportable'
+gem 'moji'
 
 #------------------------------
 #other library

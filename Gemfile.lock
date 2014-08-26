@@ -142,6 +142,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.6.0)
     minitest (4.7.5)
+    moji (1.6)
     multi_json (1.10.1)
     nested_form (0.3.2)
     net-http-digest_auth (1.4)
@@ -283,6 +284,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   lazy_high_charts
+  moji
   nested_form
   paper_trail (>= 3.0.0.rc2)
   rails (= 4.0.0)

@@ -121,7 +121,11 @@ class LeadsController < ApplicationController
         redirect_to after_update_path_for, notice: 'Lead was successfully updated.'
       end
     else
-      render action: 'edit'
+      if params[:after_show].present?
+        @lead.update!(lead_params)
+      else
+        render action: 'edit'
+      end
     end
   end
 

@@ -2,6 +2,7 @@ class Lead < ActiveRecord::Base
   extend Enumerize
   has_paper_trail 
   acts_as_taggable 
+  before_validation :set_tag_list
   belongs_to :user
   has_many :lead_histories
 
@@ -83,5 +84,13 @@ class Lead < ActiveRecord::Base
     end
     return address
 
+  end
+
+
+  def set_tag_list
+    require "moji"
+    tl = self.tag_list
+    tl2 = tl.map{|i| Moji.zen_to_han(i,Moji::ZEN_NUMBER)}
+    self.tag_list = tl2
   end
 end
