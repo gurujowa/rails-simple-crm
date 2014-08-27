@@ -1,3 +1,5 @@
+require "moji"
+
 class Lead < ActiveRecord::Base
   extend Enumerize
   has_paper_trail 
@@ -62,6 +64,7 @@ class Lead < ActiveRecord::Base
     end
   end
 
+
   def last_approach
     if self.lead_histories.present?
       self.lead_histories.last
@@ -83,12 +86,13 @@ class Lead < ActiveRecord::Base
       address.concat(" ").concat(self.building)
     end
     return address
-
   end
 
+  def self.tagged_with(i,options = {})
+    super(Moji.zen_to_han(i,Moji::ZEN_NUMBER) ,options)
+  end
 
   def set_tag_list
-    require "moji"
     tl = self.tag_list
     tl2 = tl.map{|i| Moji.zen_to_han(i,Moji::ZEN_NUMBER)}
     self.tag_list = tl2
