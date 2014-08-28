@@ -20,6 +20,11 @@ class LeadHistoriesController < ApplicationController
       render template: "leads/show"
     end
   end
+
+  def index
+    @lead_histories = LeadHistory.sent_list.limit(200)
+  end
+
   
   def zip
     @lead_histories = LeadHistory.status_zip.limit(200)

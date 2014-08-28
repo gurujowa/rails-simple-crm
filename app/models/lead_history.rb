@@ -12,9 +12,18 @@ class LeadHistory < ActiveRecord::Base
 
   scope  :exclude_initial, lambda{ where('created_at > ?', DateTime.new(2014,06,27))}
   scope  :status_zip, lambda{ where('lead_history_status_id = ?', 8).order("approach_day DESC")}
+  scope  :sent_list, lambda{ tagged_with("資料郵送済").order("approach_day DESC").limit(200)}
 
   @@sent_tag = "資料郵送済"
 
+
+  def is_last
+    if self == self.lead.lead_histories.last
+      return true
+    else
+      return false
+    end
+  end
 
   def is_sent
     return self.tag_list.index(@@sent_tag).present?
