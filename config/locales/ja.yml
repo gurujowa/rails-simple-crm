@@ -24,10 +24,13 @@ ja:
     labels:
       q:
         name_cont: 事業所名
+        client_name_cont: 事業所名
         corporation_name_cont: 法人名
         tel_cont: 電話
         fax_cont: FAX
         email_cont: メールアドレス
+        mail_cont: メールアドレス
+        address_cont: 住所
         person_name_cont: 担当者
         person_kana_cont: 担当者（かな）
         person_post_cont: 役職

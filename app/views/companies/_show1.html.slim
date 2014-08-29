@@ -26,6 +26,34 @@
           tr
             th  非正規職員人数
             td  =@company.nonregular_staff
+
+    .panel.panel-default
+      .panel-heading 連絡先
+      .panel-body
+        ul.nav.nav-pills#company_edit_clients_tab
+          - @company.clients.each_with_index do |c,i|
+            li class=("active" if i==0)
+              a id="company_edit_client_tab_#{i}" href="#company_edit_client_#{i}" data-toggle="tab"
+                = c.name
+        .tab-content#company_edit_clients_tab_content
+          - @company.clients.each do |c|
+            table.table.table-striped.table-bordered
+              tr
+                th  氏名
+                td = c.name
+              tr
+                th  カナ
+                td  = c.last_kana
+              tr
+                th  役職
+                td  = c.official_position
+              tr
+                th  性別
+                td  = c.gender
+              tr
+                th  メモ
+                td  = c.memo
+
   .col-sm-6
     .panel.panel-info
       .panel-heading 連絡先
@@ -53,6 +81,8 @@
               tr
                 th 住所
                 td = @company.full_address
+            a.btn.btn-default#jump_zip 郵便番号
+            a.btn.btn-default#jump_map GoogleMap検索
           .tab-pane#two
             table.table.table-striped.table-bordered
               tr

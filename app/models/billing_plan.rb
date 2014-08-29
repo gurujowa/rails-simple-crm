@@ -16,11 +16,19 @@ class BillingPlan < ActiveRecord::Base
   has_paper_trail 
   belongs_to :company
   has_many :billing_plan_lines, :dependent => :destroy , :order => "bill_date ASC"
-  accepts_nested_attributes_for :billing_plan_lines, reject_if: :all_blank
+  accepts_nested_attributes_for :billing_plan_lines, :allow_destroy => true, reject_if: :all_blank
   
   validates :name, presence: true  
   validates :company_id, presence: true, numericality: true
   validates :tax_rate, presence: true, numericality: true
+
+  def client_name
+    if self.display_name.present?
+      return self.display_name
+    else
+      return self.company.name
+    end
+  end
 
   def bill_start
     if self.billing_plan_lines.present?

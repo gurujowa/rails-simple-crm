@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140821084852) do
+ActiveRecord::Schema.define(version: 20140829091022) do
 
   create_table "bill_lines", force: true do |t|
     t.string   "name",                   null: false
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140821084852) do
     t.datetime "updated_at"
     t.date     "publish_date"
     t.boolean  "send_flg",     default: false, null: false
+    t.string   "display_name"
   end
 
   add_index "billing_plans", ["company_id"], name: "index_billing_plans_on_company_id"

@@ -88,14 +88,7 @@ moment.lang("ja");
 
 $(function(){
 
-  $( ".datepicker" ).datetimepicker({lang:'ja',timepicker: false, format: "Y/m/d",
- i18n:{
-  ja:{
-   months:[ '1月','2月','3月','4月', '5月','6月','7月','8月', '9月','10月','11月','12月', ],
-   dayOfWeek:[ "日", "月", "火", "水", "木", "金", "土", ]
-  }
- }});
-
+  init_date_picker()
   $( ".datetimepicker" ).datetimepicker({lang:'ja',
  i18n:{
   ja:{
@@ -112,6 +105,17 @@ function remove_fields(link) {
   $(link).closest("tr").hide();
 }
 
+function init_date_picker() {
+  $( ".datepicker" ).datetimepicker({lang:'ja',timepicker: false, format: "Y/m/d",
+ i18n:{
+  ja:{
+   months:[ '1月','2月','3月','4月', '5月','6月','7月','8月', '9月','10月','11月','12月', ],
+   dayOfWeek:[ "日", "月", "火", "水", "木", "金", "土", ]
+  }
+ }});
+
+}
+
 function remove_periods(link, class_name) {
   $(link).prev("input[type=hidden]").val("1");
   $(".periods_field_" + class_name).hide();
@@ -121,6 +125,7 @@ function add_fields(link, association, content) {
   var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g")
   $(".add_fields").append(content.replace(regexp, new_id));
+  init_date_picker()
 }
 
 function submit_format(form, format) {

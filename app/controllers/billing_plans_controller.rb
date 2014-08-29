@@ -85,7 +85,7 @@ class BillingPlansController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def billing_plan_params
-      params.require(:billing_plan).permit(:name, :company_id, :tax_rate, :status, :memo, :publish_date,
+      params.require(:billing_plan).permit(:name, :display_name, :send_flg, :company_id, :tax_rate, :status, :memo, :publish_date,
         billing_plan_lines_attributes: [:id,  :bill_date, :accural_date, :price,  :memo, :_destroy]
                                           )
     end
