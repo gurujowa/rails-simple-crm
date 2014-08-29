@@ -87,6 +87,19 @@ extend Enumerize
     end
   end
 
+  def end_date
+    array = []
+    if self.courses.blank?
+      return nil
+    end
+
+    self.courses.each do |p|
+      array.push(p.end_date) if p.end_date.present?
+    end
+    sorted = array.sort { |a, b| b <=> a }
+    sorted[0]
+  end
+
   def salesman
     if self.negos.length >= 2
       user_names = self.negos.map {|x| x.user.name}
@@ -170,48 +183,6 @@ extend Enumerize
     end
     return address
 
-  end
-
-  def getContactMemo
-    array = []
-    self.contacts.each do |c|
-      if c.memo != nil
-        array.push(c.memo)
-      end
-    end
-    return array
-  end
-
-  def contact_memo
-     getContactMemo
-  end
-
-  def appoint_contact
-    unless self.contacts
-      return nil
-    end
-
-    found = nil
-    self.contacts.each do |c|
-      if c.con_type == ContactType.id(:first_appoint)
-        found = c
-      end
-    end
-    found
-  end
-
-  def proposed_contact
-    unless self.contacts
-      return nil
-    end
-
-    found = nil
-    self.contacts.each do |c|
-      if c.con_type == ContactType.id(:proposal)
-        found = c
-      end
-    end
-    found
   end
 
   def status_name
