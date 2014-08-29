@@ -1,0 +1,17 @@
+h1 会社情報
+
+.tabbable
+  ul class="nav nav-tabs" id="edit_tab"
+    li.active
+      a#edit_tab1_link href="#edit_tab1" data-toggle="tab" 会社情報
+    li
+      a#edit_tab2_link href="#edit_tab2" data-toggle="tab" カリキュラム
+    li
+      a#edit_tab3_link href="#edit_tab3" data-toggle="tab" 見積もり・帳票
+  .tab-content
+    .tab-pane.active#edit_tab1
+      = render "show1"
+    .tab-pane#edit_tab2
+      = render "show2"
+    .tab-pane#edit_tab3
+      = render "show3"

@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   def color
     num = self.id.modulo(9)
     case num
+    when 0 then
+      "background-color:Bisque;"
     when 1 then
       "background-color:Beige;"
     when 2 then
@@ -38,6 +40,8 @@ class User < ActiveRecord::Base
       "background-color:Wheat;"
     when 5 then
       "background-color:PeachPuff;"
+    when 6 then
+      "background-color:Bisque;"
     when 7 then
       "background-color:PaleTurquoise;"
     when 8 then
@@ -45,7 +49,7 @@ class User < ActiveRecord::Base
     when 9 then
       "background-color:Azure;"
     else
-      raise "id modulo error"
+      raise " id module error id = " + self.id.to_s
     end
   end
 end

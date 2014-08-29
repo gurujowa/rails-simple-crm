@@ -2,7 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  oTable = new CompanyTable()
   
   $('#label').click ->
     sData = $('input', oTable.fnGetNodes()).serialize()
@@ -34,8 +33,3 @@ jQuery ->
         )
         oTable.fnReloadAjax()
     return false 
-  
-  $("form.search_form").submit(->
-    $.removeCookie("SpryMedia_DataTables_company_search", { path: '/companies/' })
-    return true
-  )

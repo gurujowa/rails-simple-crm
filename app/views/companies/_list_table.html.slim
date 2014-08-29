@@ -1,0 +1,17 @@
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th 会社名
+      th 電話番号
+      th.hidden-xs 住所
+      th 対応内容
+  tbody
+    - @companies.each do |c|
+      tr
+        td 
+          = link_to c.name ,c
+          = link_to "(edit)", edit_company_path(c)
+        td = c.tel
+        td.hidden-xs = c.address
+        td
+          a href="#{company_path(c)}" data-toggle="tooltip" title="test"

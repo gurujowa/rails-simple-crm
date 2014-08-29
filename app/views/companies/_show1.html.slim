@@ -1,0 +1,92 @@
+
+.well
+  = link_to "編集", edit_company_path(@company), class: "btn btn-info"
+  = link_to "削除", company_path(@company), class: "btn btn-warning", method: :delete
+.row
+  .col-sm-6
+    .panel.panel-info
+      .panel-heading お客様詳細情報
+      .panel-body
+        table.table.table-striped.table-bordered
+          tr
+            th  会社名
+            td = @company.client_name
+          tr
+            th  業種
+            td  =@company.industry.name
+          tr
+            th  獲得元
+            td  =@company.campaign.name
+          tr
+            th  ステータス
+            td  =@company.active_st
+          tr
+            th  正規職員人数
+            td  =@company.regular_staff
+          tr
+            th  非正規職員人数
+            td  =@company.nonregular_staff
+  .col-sm-6
+    .panel.panel-info
+      .panel-heading 連絡先
+      .panel-body
+        ul#edit_contact_tab.nav.nav-tabs role="tablist"
+          li.active
+            a href="#one" role="tab" data-toggle="tab" 連絡先1
+          li
+            a href="#two" role="tab" data-toggle="tab" 連絡先2
+        .tab-content
+          .tab-pane.active#one
+            table.table.table-striped.table-bordered
+              tr
+                th 電話番号 
+                td  = @company.tel
+              tr
+                th FAX
+                td = @company.fax
+              tr
+                th Mail
+                td = @company.mail
+              tr
+                th 郵便番号
+                td = @company.zipcode
+              tr
+                th 住所
+                td = @company.full_address
+          .tab-pane#two
+            table.table.table-striped.table-bordered
+              tr
+                th 電話番号 
+                td  = @company.tel2
+              tr
+                th FAX
+                td = @company.fax2
+              tr
+                th 郵便番号
+                td = @company.zipcode2
+              tr
+                th 住所
+                td = @company.full_address2
+
+
+
+
+    .panel.panel-info
+      .panel-heading 作成情報
+      .panel-body
+        table class="table table-striped"
+          tr
+            th カラム
+            th 値
+          tr
+            td 作成者
+            td = get_user_name(@company.created_by)
+          tr
+            td 作成日
+            td = @company.created_at
+          tr
+            td 更新者
+            td = get_user_name(@company.updated_by)
+          tr
+            td 更新日
+            td = @company.updated_at

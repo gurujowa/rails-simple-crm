@@ -53,17 +53,13 @@ Mycrm::Application.routes.draw do
     end
   end
 
-  resources :clients
-
   resources :estimates do 
     member do
       get 'flag/:type' , :action => "flag"
     end
   end
 
-  resources :campaigns
-  resources :invoices
-  resources :client_orders
+  resources :campaigns, :invoices, :client_orders, :clients
 
   resources :teacher_orders do
     member do
@@ -97,33 +93,20 @@ Mycrm::Application.routes.draw do
   end
 
   #会社名
-  resources :companies, except: [:show] do
+  resources :companies do
     collection do
-      get "search"
-      get "map"
       get "invoice"
       get "label"
-      get "usershow"
       get "pdf"
       get "name"
     end
     
     member do
       get 'contact_delete'
-      get "client_sheet"
-      get "usershow"
       get "find"
     end
   end
 
-  #タスク
-  resources :tasks
-  get 'usertasks' => 'tasks#usershow'
-  post 'create_task' => 'tasks#ajax_create'
-  get 'task_status_change' => 'tasks#status_change'
-
-   
-  
 #  get 'current' => 'users#current'
 #  get 'login' => 'users#login'
 

@@ -1,0 +1,21 @@
+h4 既存客検索
+
+.well
+  button type="button" class="btn btn-info" data-toggle="collapse" data-target="#btn-lead-search" 検索ボックス
+  #btn-lead-search.collapse
+    = search_form_for @q, :builder => SimpleForm::FormBuilder, wrapper: :horizontal_form, url: companies_path, html: {class: "form-horizontal",method: :get} do |f|
+      = f.input :client_name_cont
+      = f.input :category_cont
+      = f.input :tel_cont
+      = f.input :fax_cont
+      = f.input :mail_cont
+      = f.input :prefecture_cont
+      = f.input :city_cont
+      = f.input :address_cont
+      = f.input :building_cont
+
+      = f.submit "検索する", class: "btn btn-primary"
+  #total_entries 件数：#{@companies.total_entries}件
+
+.row
+    = render 'list_table'

@@ -154,6 +154,24 @@ extend Enumerize
 
   end
 
+  def full_address2
+    address = ""
+    if self.prefecture2 != nil
+      address.concat(self.prefecture2)    
+    end
+    if self.city2 != nil
+      address.concat(self.city2)
+    end
+    if self.address2 != nil
+      address.concat(self.address2)
+    end
+    if self.building2 != nil
+      address.concat(" ").concat(self.building2)
+    end
+    return address
+
+  end
+
   def getContactMemo
     array = []
     self.contacts.each do |c|

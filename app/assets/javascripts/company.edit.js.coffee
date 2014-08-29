@@ -6,6 +6,9 @@ jQuery ->
   lastTab = localStorage.getItem("lastEditTab")
   $("#" + lastTab).tab "show"  if lastTab
 
+  $("#edit_contact_tab a[data-toggle=\"tab\"]").click (e) -> 
+    e.preventDefault()
+    $(this).tab "show"
 
   #郵便番号検索
   $("#jump_zip").on "click", ->

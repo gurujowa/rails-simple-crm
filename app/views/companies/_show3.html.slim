@@ -26,7 +26,6 @@ table.table.table-bordered
         td  = number_to_currency e.total_price
 
 h4 帳票作成
-= link_to "クライアントシート" , {action: "client_sheet", id: @company.id}, :class => "btn btn-default"
 - if @company.is_active
   = link_to "見積書" , {controller: :estimates ,action: :new, company_id: @company.id}, :class => "btn btn-default"
   = link_to "請求予定表" , {controller: :billing_plans ,action: :new, company_id: @company.id}, :class => "btn btn-default"

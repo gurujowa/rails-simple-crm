@@ -23,6 +23,10 @@ class LeadHistoriesController < ApplicationController
 
   def index
     @lead_histories = LeadHistory.sent_list.limit(200)
+    if params[:user_id].present?
+      @lead_histories = @lead_histories.where(user_id: params[:user_id])
+      @user_id = params[:user_id]
+    end
   end
 
   
