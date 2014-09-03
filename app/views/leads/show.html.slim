@@ -149,7 +149,7 @@ p#notice = notice
                           .color-box style="background-color:##{l.color}"
                           = l.name
                         = f.radio_button :lead_history_status_id, l.id
-            = f.input :next_approach_day, as: :date_picker
+            = f.input :next_approach_day, as: :datetime_picker
             = f.input :memo
             = f.hidden_field :lead_id
           .panel-footer
