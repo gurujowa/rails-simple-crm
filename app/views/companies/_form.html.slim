@@ -49,18 +49,6 @@ a name="memo"
   .panel-body
     = form.input :memo, input_html: {:rows => "20"}
 
-a name="nego"
-.panel.panel-default
-  .panel-heading 商談
-  .panel-body
-    ul.nav.nav-pills#company_edit_negos_tab
-      - @company.negos.each_with_index do |c,i|
-        li class=("active" if i==0)
-          a id="company_edit_nego_tab_#{i}" href="#company_edit_nego_#{i}" data-toggle="tab"
-            = c.name.present? ? c.name : "新しい商談"
-    .tab-content.add_fields#company_edit_negos_tab_content
-      = form.simple_fields_for :negos do |i|
-        = render :partial => "nego_fields", :locals => { :f => i}
 
 a name="people"
 .panel.panel-default

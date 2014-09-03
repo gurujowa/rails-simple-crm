@@ -60,8 +60,6 @@ html
                  li = link_to "カレンダー", {controller: "courses", action: "calendar"}
                  li = link_to "立会カレンダー", {controller: "courses", action: "observe"}
 
-            - if current_user.admin?
-              li = link_to "ステータス", controller: "statuses"
             li.dropdown
               = link_to "講師", "estimates", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}
               ul.dropdown-menu

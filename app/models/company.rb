@@ -38,22 +38,15 @@ extend Enumerize
 
 
   has_paper_trail 
-  geocoded_by :getAddress
-
-  after_validation :geocode
 
   has_many :contacts, :dependent => :destroy
   has_many :logs, :dependent => :destroy
   has_many :clients, :dependent => :destroy
-  has_many :negos, :dependent => :destroy
-  has_many :tasks, :dependent => :destroy  
   has_many :courses, :dependent => :destroy
   has_many :billing_plans
 
   accepts_nested_attributes_for :contacts,  :allow_destroy => true , reject_if: proc { |attributes| attributes['memo'].blank? and attributes['con_type'].blank? }
   accepts_nested_attributes_for :clients,  :allow_destroy => true , reject_if: :all_blank
-  accepts_nested_attributes_for :negos,  :allow_destroy => true , 
-    reject_if: proc{|a| a['name'].blank?}
 
   belongs_to :campaign
   belongs_to :industry
@@ -71,9 +64,8 @@ extend Enumerize
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
   validates :address, presence:true
 
-  enumerize :active_st, in: [:contract , :active_a, :active_b, :active_c, :pending, :notfull,  :impossible]
+  enumerize :active_st, in: [:contract , :impossible]
 
-  scope :sales_where, lambda {|a| joins(:negos).where("negos.user_id = ?", a)}
   scope :has_contract, lambda{ where("active_st = ?", :contract)}
   scope :is_active, lambda { where(:active_st => @@active_in ) }
 
@@ -98,15 +90,6 @@ extend Enumerize
     end
     sorted = array.sort { |a, b| b <=> a }
     sorted[0]
-  end
-
-  def salesman
-    if self.negos.length >= 2
-      user_names = self.negos.map {|x| x.user.name}
-      return user_names.uniq.join("：")
-    else
-      self.negos.first.user.name
-    end
   end
 
   def getAddress
@@ -185,17 +168,6 @@ extend Enumerize
 
   end
 
-  def status_name
-    if self.negos.length >= 2
-      status_names = self.negos.map {|x| x.status.name}
-      return status_names.uniq.join("：")
-    else
-      status =  self.negos.first.status
-      if status.present?
-        status.name
-      end
-    end
-  end
 
   def estimates
     estimates = Estimate.where(client_id: self.id).where(client_type: "company")

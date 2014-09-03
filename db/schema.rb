@@ -11,18 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829091022) do
-
-  create_table "bill_lines", force: true do |t|
-    t.string   "name",                   null: false
-    t.integer  "tax_rate",               null: false
-    t.integer  "unit_price",             null: false
-    t.integer  "bill_id",                null: false
-    t.integer  "quantity",   default: 1, null: false
-    t.text     "memo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140903015609) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -48,19 +37,6 @@ ActiveRecord::Schema.define(version: 20140829091022) do
   end
 
   add_index "billing_plans", ["company_id"], name: "index_billing_plans_on_company_id"
-
-  create_table "bills", force: true do |t|
-    t.string   "name",                                 null: false
-    t.date     "duedate",                              null: false
-    t.integer  "billing_plan_line_id",                 null: false
-    t.boolean  "bill_flg",             default: false, null: false
-    t.boolean  "payment_flg",          default: false, null: false
-    t.text     "memo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "bills", ["billing_plan_line_id"], name: "index_bills_on_billing_plan_line_id"
 
   create_table "campaigns", force: true do |t|
     t.string   "name"
@@ -108,7 +84,6 @@ ActiveRecord::Schema.define(version: 20140829091022) do
     t.string   "tel"
     t.string   "fax"
     t.string   "mail"
-    t.string   "client_person"
     t.string   "zipcode"
     t.string   "prefecture"
     t.string   "city"
@@ -116,13 +91,8 @@ ActiveRecord::Schema.define(version: 20140829091022) do
     t.string   "building"
     t.string   "created_by"
     t.string   "updated_by"
-    t.date     "approach_day"
-    t.integer  "chance"
     t.integer  "industry_id",      default: 1,          null: false
-    t.date     "appoint_plan"
     t.integer  "campaign_id",                           null: false
-    t.float    "latitude"
-    t.float    "longitude"
     t.string   "active_st",        default: "notstart", null: false
     t.integer  "regular_staff"
     t.integer  "nonregular_staff"
@@ -146,39 +116,6 @@ ActiveRecord::Schema.define(version: 20140829091022) do
   add_index "companies", ["tel"], name: "index_companies_on_tel", unique: true
   add_index "companies", ["updated_at"], name: "index_companies_on_updated_at"
   add_index "companies", ["updated_by"], name: "index_companies_on_updated_by"
-
-  create_table "company_contract_plans", force: true do |t|
-    t.date     "duedate",    null: false
-    t.text     "reason"
-    t.text     "memo"
-    t.integer  "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "company_contract_plans", ["company_id"], name: "index_company_contract_plans_on_company_id"
-
-  create_table "company_payment_plans", force: true do |t|
-    t.date     "duedate",    null: false
-    t.text     "reason"
-    t.text     "memo"
-    t.integer  "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "company_payment_plans", ["company_id"], name: "index_company_payment_plans_on_company_id"
-
-  create_table "company_proposed_plans", force: true do |t|
-    t.date     "duedate",    null: false
-    t.text     "reason"
-    t.text     "memo"
-    t.integer  "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "company_proposed_plans", ["company_id"], name: "index_company_proposed_plans_on_company_id"
 
   create_table "contacts", force: true do |t|
     t.integer  "company_id"
@@ -310,16 +247,6 @@ ActiveRecord::Schema.define(version: 20140829091022) do
     t.string   "created_by"
   end
 
-  create_table "negos", force: true do |t|
-    t.string   "name"
-    t.integer  "company_id", null: false
-    t.integer  "user_id",    null: false
-    t.string   "status_id",  null: false
-    t.text     "memo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "periods", force: true do |t|
     t.date     "day",                           null: false
     t.time     "start_time",                    null: false
@@ -341,15 +268,6 @@ ActiveRecord::Schema.define(version: 20140829091022) do
 
   add_index "periods", ["user_id"], name: "index_periods_on_user_id"
 
-  create_table "statuses", force: true do |t|
-    t.string   "name"
-    t.string   "rank"
-    t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "dm_st",      default: false
-  end
-
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -369,28 +287,6 @@ ActiveRecord::Schema.define(version: 20140829091022) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
-
-  create_table "task_types", force: true do |t|
-    t.string   "name"
-    t.integer  "default_due"
-    t.integer  "default_assignee"
-    t.string   "tag"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tasks", force: true do |t|
-    t.integer  "type_id"
-    t.date     "duedate"
-    t.string   "name"
-    t.integer  "assignee"
-    t.integer  "created_by"
-    t.string   "note"
-    t.integer  "progress_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "company_id"
-  end
 
   create_table "teacher_order_courses", force: true do |t|
     t.integer "teacher_order_id"

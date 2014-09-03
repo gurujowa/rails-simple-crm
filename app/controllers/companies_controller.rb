@@ -18,15 +18,6 @@ class CompaniesController < ApplicationController
   def index
     @q = Company.search(params[:q])
     @companies = @q.result.paginate(page: params[:page],per_page: 100)
-    session[:last_search_url] = params[:company]
-    session[:last_search_rank] = params[:rank]
-    if params[:last_rank].present? then
-      params[:rank] = params[:last_rank]
-    end
-    @company = Company.new
-    
-
-    @statuses = Status.order(:rank).find_all_by_active(true)
 
     respond_to do |format|
       format.html
@@ -67,7 +58,6 @@ class CompaniesController < ApplicationController
     @company = Company.new
     @company.contacts.build(:created_by => current_user.id)
     @company.clients.build
-    @company.negos.build(name: "新規商談")
     @industries = Industry.all
   end
 
@@ -92,7 +82,6 @@ class CompaniesController < ApplicationController
     @company = Company.find(params[:id])
     @company.contacts.build(:created_by => current_user.id)
     @company.clients.build
-    @company.negos.build
     @industries = Industry.all
   end
   
@@ -135,12 +124,10 @@ class CompaniesController < ApplicationController
   end
   
   def company_params
-    params.require(:company).permit(:id, :client_name,  :category, :tel, :fax,  :active_st,  :zipcode, :prefecture, :appoint_plan,
-      :city, :address, :building, :tel2, :fax2, :prefecture2, :zipcode2, :city2, :address2, :building2, :mail, :industry_id, :regular_staff, :nonregular_staff, :memo, :approach_day,  :lead, :created_by,  :updated_by, :campaign_id,  
+    params.require(:company).permit(:id, :client_name,  :category, :tel, :fax,  :active_st,  :zipcode, :prefecture, 
+      :city, :address, :building, :tel2, :fax2, :prefecture2, :zipcode2, :city2, :address2, :building2, :mail, :industry_id, :regular_staff, :nonregular_staff, :memo, :lead, :created_by,  :updated_by, :campaign_id,
       contacts_attributes: [:id, :memo, :created_by, :con_type],
-      clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position,  :memo],
-      negos_attributes: [:id, :name, :status_id, :user_id,  :memo],
-                                   )
+      clients_attributes: [:id, :last_name, :first_name, :last_kana, :first_kana, :gender, :official_position,  :memo])
   end
 
 end

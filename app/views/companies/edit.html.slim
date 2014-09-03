@@ -16,8 +16,6 @@ h1 会社編集
           li
             a href="#memo" メモ
           li
-            a href="#nego" 商談
-          li
             a href="#people" 担当者
           li
             a href="#contact" コンタクト
@@ -31,19 +29,3 @@ h1 会社編集
                 = link_to '削除する', @company, method: :delete, data: { confirm: '本当に削除しますか' } ,  :class=>"btn btn-default"
     .col-sm-9
       = render :partial => 'form', :locals => {:form => form}
-      table class="table table-striped"
-        tr
-          th カラム
-          th 値
-        tr
-          td 作成者
-          td = get_user_name(@company.created_by)
-        tr
-          td 作成日
-          td = @company.created_at
-        tr
-          td 更新者
-          td = get_user_name(@company.updated_by)
-        tr
-          td 更新日
-          td = @company.updated_at
