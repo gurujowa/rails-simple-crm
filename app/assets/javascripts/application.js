@@ -89,7 +89,7 @@ moment.lang("ja");
 $(function(){
 
   init_date_picker()
-  $( ".datetimepicker" ).datetimepicker({lang:'ja',
+  $( ".datetimepicker" ).datetimepicker({lang:'ja',scrollInput: false,
  i18n:{
   ja:{
    months:[ '1月','2月','3月','4月', '5月','6月','7月','8月', '9月','10月','11月','12月', ],
@@ -106,7 +106,7 @@ function remove_fields(link) {
 }
 
 function init_date_picker() {
-  $( ".datepicker" ).datetimepicker({lang:'ja',timepicker: false, format: "Y/m/d",
+  $( ".datepicker" ).datetimepicker({lang:'ja',timepicker: false, format: "Y/m/d",scrollInput: false,
  i18n:{
   ja:{
    months:[ '1月','2月','3月','4月', '5月','6月','7月','8月', '9月','10月','11月','12月', ],

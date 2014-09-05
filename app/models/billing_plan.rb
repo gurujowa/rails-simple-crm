@@ -19,6 +19,7 @@ class BillingPlan < ActiveRecord::Base
   accepts_nested_attributes_for :billing_plan_lines, :allow_destroy => true, reject_if: :all_blank
   
   validates :name, presence: true  
+  validates :publish_date, presence: true  
   validates :company_id, presence: true, numericality: true
   validates :tax_rate, presence: true, numericality: true
 

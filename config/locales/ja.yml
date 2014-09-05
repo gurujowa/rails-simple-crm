@@ -164,6 +164,12 @@ ja:
         name: 件名
         status: ステータス
         memo: メモ
+      billing_plan:
+        name: 請求書名
+        company_id: 会社名
+        send_flg: 発行済か
+        display_name: 表示名
+        publish_date: 発行日
       lead:
         name: 事業所名
         corporation_name: 法人名
