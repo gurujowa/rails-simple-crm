@@ -53,7 +53,7 @@ class LeadsController < ApplicationController
     csvs = CSV.generate do |csv|
       csv << ["会社名","郵便番号","住所1","ビル名", "担当者名"]
       leads.each do |l|
-        csv << [l.name, l.zipcode, l.prefecture+l.city+l.street, l.building, l.person_name]
+        csv << [l.name, l.zipcode, l.full_address(false), l.building, l.person_name]
       end
     end
 
