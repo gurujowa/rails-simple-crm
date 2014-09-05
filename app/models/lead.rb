@@ -88,6 +88,10 @@ class Lead < ActiveRecord::Base
     return address
   end
 
+  def estimates
+    Estimate.where(client_type: "lead").where(client_id: self.id)
+  end
+
   def self.tagged_with(i,options = {})
     super(Moji.zen_to_han(i,Moji::ZEN_NUMBER) ,options)
   end

@@ -116,20 +116,6 @@ extend Enumerize
       return client_name
   end
 
-  def got_appoint
-    if self.contacts.blank?
-      return nil
-    end
-
-    count = 0
-    self.contacts.each do |c|
-      if c.con_type == ContactType.id(:appoint)
-        count += 1
-      end
-    end
-    count
-  end
-
 
 
   def full_address
@@ -174,17 +160,6 @@ extend Enumerize
     return estimates
   end
 
-  def self.to_csv
-    CSV.generate do |csv|
-      csv << self.column_names.concat(["担当者名", "コンタクト","キャンペーン","アポイント数","営業マン"])
-      key = 1
-      all.each do |row|
-        memos = row.contacts.map{|c| c.memo}
-        csv << row.attributes.map{|a| a[1]}.concat([row.client_person,  memos.join("\n・"), row.campaign.name, row.got_appoint, row.salesman])
-        key += 1
-      end
-    end
-  end
 
   def updated_name
     if self.updated_user.present?

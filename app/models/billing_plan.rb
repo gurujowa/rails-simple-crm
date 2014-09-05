@@ -26,7 +26,11 @@ class BillingPlan < ActiveRecord::Base
     if self.display_name.present?
       return self.display_name
     else
-      return self.company.name
+      begin
+        return self.company.name
+      rescue
+        return self.company_id
+      end
     end
   end
 

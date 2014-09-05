@@ -53,7 +53,7 @@ class LeadsController < ApplicationController
   end
 
   def find
-    @leads = Lead.find(params[:id])
+    @lead = Lead.find(params[:id])
   end
 
   def add_mylist

@@ -104,6 +104,24 @@ p#notice = notice
     .panel.panel-info
       .panel-heading お客様メモ
       .panel-body = simple_format @lead.memo
+    .panel.panel-info
+      .panel-heading 見積り
+      .panel-body
+        - if @lead.estimates.present?
+          table.table.table-bordered.table-striped
+            thead
+              tr
+                th 期限
+                th 金額
+                th メモ
+            tbody
+              - @lead.estimates.each do |e|
+                th = link_to e.expired, edit_estimate_path(e)
+                th = number_to_currency e.total_price
+                th = e.memo
+      .panel-footer
+        = link_to "新規追加" , { controller: "estimates" ,action: "new"}, class: "btn btn-default"
+        
 
   .col-sm-6
     - if @lead.next_approach_day.present?
