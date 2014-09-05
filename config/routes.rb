@@ -100,6 +100,7 @@ Mycrm::Application.routes.draw do
       get "label"
       get "pdf"
       get "name"
+      get "address"
     end
     
     member do

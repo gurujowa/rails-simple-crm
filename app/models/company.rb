@@ -92,20 +92,6 @@ extend Enumerize
     sorted[0]
   end
 
-  def getAddress
-    address = ""
-    if self.prefecture != nil
-      address.concat(self.prefecture)    
-    end
-    if self.city != nil
-      address.concat(self.city)
-    end
-    if self.address != nil
-      address.concat(self.address)
-    end
-    return address
-  end
-
   def client_person
     if self.clients.present?
       return self.clients.first.name
@@ -118,7 +104,7 @@ extend Enumerize
 
 
 
-  def full_address
+  def full_address(building=true)
     address = ""
     if self.prefecture != nil
       address.concat(self.prefecture)    
@@ -129,7 +115,7 @@ extend Enumerize
     if self.address != nil
       address.concat(self.address)
     end
-    if self.building != nil
+    if self.building != nil and building == true
       address.concat(" ").concat(self.building)
     end
     return address

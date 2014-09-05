@@ -102,6 +102,20 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def address
+    cs = Company.where(id: params[:companies].values)
+    csvs = CSV.generate do |csv|
+      csv << ["会社名","郵便番号","住所1","ビル名", "担当者名"]
+      cs.each do |l|
+        csv << [l.name, l.zipcode, l.full_address(false), l.building, l.client_person]
+      end
+    end
+
+    respond_to do |format|
+      format.csv { send_csv csvs }
+    end
+  end
+
   def destroy
     @company = Company.find(params[:id])
     @company.destroy

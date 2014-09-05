@@ -3,33 +3,14 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
   
-  $('#label').click ->
-    sData = $('input', oTable.fnGetNodes()).serialize()
+  $('#companies_address_label').click ->
+    sData = $('input.companies_index_checkbox').serialize()
     if sData == "" 
       alert("チェックがありません")
       return false
     w = window.open()
-    w.location.href = "/companies/pdf?" + sData
+    w.location.href = "/companies/address.csv?" + sData
     return false 
   
-  $('#up_postsend').click ->
-    sData = $('input', oTable.fnGetNodes()).serialize()
-    console.log(sData)
-    if sData == "" 
-      alert("チェックがありません")
-      return false
-    $.ajax '/companies/up_postsend',
-      type: 'GET'
-      dataType: 'json'
-      timeout: 1000
-      data : sData
-      error:(jqXHR, textStatus, errorThrown) ->
-        alert(errorThrown)
-      success: (data, textStatus, jqXHR) ->
-        noty(
-          text: data["text"]
-          type: data["type"]
-          timeout: 2000
-        )
-        oTable.fnReloadAjax()
-    return false 
+  $('#companies_all_checkbox').on 'change', ->
+    $('input[name=companies]').prop('checked', this.checked)
