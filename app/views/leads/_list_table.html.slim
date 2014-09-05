@@ -1,6 +1,7 @@
 table.table.table-striped.table-bordered
   thead
     tr
+      th style="width:30px" = check_box_tag "leads_all", 1, false, {id: "index_all_checkbox"}
       th style="font-size:12px;width:30px" 本日
       th 会社名
       th 電話番号
@@ -10,6 +11,7 @@ table.table.table-striped.table-bordered
   tbody
     - @leads.each do |lead|
       tr class="#{"warning" if lead.other_user?(current_user.id)}"
+        td = check_box_tag "leads[" + lead.id.to_s + "]", lead.id, false, { class: "leads_index_checkbox"}
         td
           - if lead.today?
             span.glyphicon.glyphicon-check

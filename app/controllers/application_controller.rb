@@ -32,6 +32,16 @@ class ApplicationController < ActionController::Base
       render_noty :error, @to.errors.full_messages.to_s + "model_name = " + model_name
     end
   end
+
+  protected
+ 
+    def send_csv(csv, options = {})
+      bom = "   "
+      bom.setbyte(0, 0xEF)
+      bom.setbyte(1, 0xBB)
+      bom.setbyte(2, 0xBF)
+      send_data bom + csv.to_s, options
+    end
   
   private
   def reverse_bool(flag)

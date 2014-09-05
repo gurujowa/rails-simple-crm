@@ -48,6 +48,20 @@ class LeadsController < ApplicationController
       @lead_histories = result
   end
 
+  def address
+    leads = Lead.where(id: params[:leads].values)
+    csvs = CSV.generate do |csv|
+      csv << ["会社名","郵便番号","住所1","ビル名", "担当者名"]
+      leads.each do |l|
+        csv << [l.name, l.zipcode, l.prefecture+l.city+l.street, l.building, l.person_name]
+      end
+    end
+
+    respond_to do |format|
+      format.csv { send_csv csvs }
+    end
+  end
+
   def name
     @leads = Lead.where("name like :search", search: "%#{params[:q]}%")
   end
