@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
       bom.setbyte(0, 0xEF)
       bom.setbyte(1, 0xBB)
       bom.setbyte(2, 0xBF)
-      send_data bom + csv.to_s, options
+      send_data csv.to_s.encode("Shift_JIS"), options
     end
   
   private
