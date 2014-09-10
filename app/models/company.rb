@@ -64,7 +64,7 @@ extend Enumerize
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
   validates :address, presence:true
 
-  enumerize :active_st, in: [:contract , :impossible]
+  enumerize :active_st, in: [:contract , :impossible, :pending]
 
   scope :has_contract, lambda{ where("active_st = ?", :contract)}
   scope :is_active, lambda { where(:active_st => @@active_in ) }

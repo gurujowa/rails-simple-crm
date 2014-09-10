@@ -32,13 +32,8 @@ ja:
         lead: 新規客
     company:
       active_st:
-        notstart: 接触前
-        active_a: "A - 今月～来月"
-        active_b: "B - 半年以内"
-        active_c: "C - 1年以内"
-        pending: そのうち客
-        contract: 契約済み
-        notfull: 要件が合わない
+        pending: 延期・休止中
+        contract: 有効
         impossible: 接触禁止
     lead:
       sex:
