@@ -17,8 +17,8 @@
 				<% @alerts.courses.each do |c|%>
 				<tr>
 					<td><%= c.course.id %></td>
-          <td><%= link_to c.client_name, {controller: "companies", action: "edit", id: c.course.company.id} %></td>
-					<td><%= link_to c.course.name, {controller: "courses", action: "edit", id: c.course.id} %></td>
+          <td><%= link_to c.client_name, {controller: "companies", action: "show", id: c.course.company.id} %></td>
+					<td><%= link_to c.course.name, {controller: "companies", action: "show", id: c.course.id} %></td>
 					<td><%= c.start_date %></td>
           <td><%= c.end_date %></td>
 					<td><%= c.message %></td>
@@ -49,7 +49,7 @@
 				<% @alerts.periods.each do |c|%>
 				<tr>
 					<td><%= c.period.id %></td>
-          <td><%= link_to c.client_name, {controller: "companies", action: "edit", id: c.course.company.id} %></td>
+          <td><%= link_to c.client_name, {controller: "companies", action: "show", id: c.course.company.id} %></td>
 					<td><%= link_to c.course.name, {controller: "courses", action: "edit", id: c.course.id} %></td>
 					<td><%= c.day %></td>
 					<td><%= c.message %></td>
