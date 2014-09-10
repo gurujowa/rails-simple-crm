@@ -2,7 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
-  
   $('#companies_address_label').click ->
     sData = $('input.companies_index_checkbox').serialize()
     if sData == "" 
@@ -11,6 +10,5 @@ jQuery ->
     w = window.open()
     w.location.href = "/companies/address.csv?" + sData
     return false 
-  
   $('#companies_all_checkbox').on 'change', ->
-    $('input[name=companies]').prop('checked', this.checked)
+    $('.companies_index_checkbox').prop('checked', this.checked)
