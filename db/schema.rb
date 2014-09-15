@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140903024832) do
+ActiveRecord::Schema.define(version: 20140915105730) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -210,6 +210,18 @@ ActiveRecord::Schema.define(version: 20140903024832) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "lead_interviews", force: true do |t|
+    t.integer  "regular_staff"
+    t.integer  "nonregular_staff"
+    t.string   "solvency"
+    t.string   "time"
+    t.integer  "lead_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lead_interviews", ["lead_id"], name: "index_lead_interviews_on_lead_id"
 
   create_table "leads", force: true do |t|
     t.string   "name",             null: false

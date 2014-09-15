@@ -21,7 +21,7 @@ class LeadHistoriesController < ApplicationController
     end
   end
 
-  def index
+  def shipped
     @lead_histories = LeadHistory.sent_list.limit(200)
     if params[:user_id].present?
       @lead_histories = @lead_histories.where(user_id: params[:user_id])
@@ -36,6 +36,9 @@ class LeadHistoriesController < ApplicationController
 
   def sent
     @lead_history.send_pamph
+    lead = @lead_history.lead
+    lead.tag_list.add("初回資料郵送済")
+    lead.save
     redirect_to action: :zip, notice: '発送済みにしました'
   end
 

@@ -21,6 +21,7 @@ Mycrm::Application.routes.draw do
       get "total_all"
       get "total"
       get "zip"
+      get "shipped"
     end
     member do
       get "sent"

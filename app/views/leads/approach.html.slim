@@ -3,14 +3,16 @@ h1 再アプローチ一覧
 table.table.table-striped.table-bordered
   thead
     tr
+      th 次回対応日時
       th 会社名
       th 電話番号
-      th.hidden-xs 住所
-      th 再アプローチ日時
+      th 前回対応
+      th 最終資料送付日時
   tbody
     - @lead_histories.each do |his|
       tr
+        td = his.next_approach_day
         td = link_to his.lead.name , his.lead
         td = his.lead.tel
-        td.hidden-xs = his.lead.full_address false
-        td = his.next_approach_day
+        td = his.status_name
+        td = his.lead.last_sent_date

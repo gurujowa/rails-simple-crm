@@ -1,0 +1,18 @@
+h1 見込み客郵送済み一覧
+= form_tag({action: :shipped} , method: :get ) do
+  = select_tag 'user_id', options_from_users(@user_id), include_blank: true
+  = submit_tag "検索"
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th 発送日時
+      th 会社名
+      th 電話番号
+      th 営業マン
+  tbody
+    - @lead_histories.each do |lh|
+      tr
+        td = lh.zip_created_at
+        td = link_to lh.lead.name , lh.lead
+        td = lh.lead.tel
+        td = lh.user.name

@@ -8,6 +8,9 @@ class Lead < ActiveRecord::Base
   belongs_to :user
   has_many :lead_histories
 
+  has_one :lead_interview
+  accepts_nested_attributes_for :lead_interview
+
   enumerize :campaign, in: [:fax,:homepage,:tel,:introduce,:other]
   enumerize :sex, in: [:male,:female]
 
@@ -20,6 +23,18 @@ class Lead < ActiveRecord::Base
 
   ransacker :max_approach_day do |parent|
     ar = Arel.sql('max(lead_histories.approach_day)')
+  end
+
+  def last_sent_date
+    sent_date = []
+    self.lead_histories.each do |lh|
+      if lh.is_sent
+        sent_date.push lh.zip_created_at
+      end
+    end
+
+    sent_date.sort!
+    return sent_date.last
   end
 
   def today?

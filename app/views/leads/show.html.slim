@@ -191,9 +191,16 @@ p#notice = notice
                   = h.memo
               tr 
                 td colspan="3" 
-                  - h.tag_list.each do |t|
-                    span.badge = t
+                  - h.tag_all_list.each do |t|
+                    span.badge = t[:name]
+                    span （#{t[:created_at]}）
                   .pull-right 
                     = link_to "編集", edit_lead_history_path(h)
                     | &nbsp;/&nbsp;
                     = link_to '削除', h, method: :delete, data: { confirm: '本当に削除しますか' }
+
+    .panel.panel-info
+      .panel-heading ヒアリング内容
+      .panel-body
+      .panel-footer
+        = link_to '編集', edit_lead_path(@lead), class: "btn btn-info"

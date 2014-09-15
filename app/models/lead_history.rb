@@ -25,6 +25,10 @@ class LeadHistory < ActiveRecord::Base
     end
   end
 
+  def status_name
+    return self.lead_history_status.name
+  end
+
   def is_sent
     return self.tag_list.index(@@sent_tag).present?
   end
@@ -37,6 +41,22 @@ class LeadHistory < ActiveRecord::Base
       self.tag_list.add(@@sent_tag)
       self.save
     end
+  end
+
+  def zip_created_at
+    tagging = self.tag_all_list.find {|t| t[:name] == @@sent_tag}
+    return tagging[:created_at]
+  end
+
+  def tag_all_list
+    tag_list = []
+    tags = tags_on(:tags)
+    tags.each do |tag|
+      tagging = tag.taggings.find_by(taggable_id: self.id)
+      tag_list.push({name: tag.name, created_at: tagging.created_at})
+    end
+    tag_list
+
   end
 
 end

@@ -170,6 +170,11 @@ ja:
         send_flg: 発行済か
         display_name: 表示名
         publish_date: 発行日
+      lead_interview:
+        regular_staff: 正規職員数
+        nonregular_staff: 非正規職員数
+        solvency: 支払余力
+        time: 時間余力
       lead:
         name: 事業所名
         corporation_name: 法人名
