@@ -1,3 +1,7 @@
 h1 マイリスト一覧
 
+.well
+  = form_tag url_for(action: "mylist"), method: :get do
+    = render 'date_form'
+    = submit_tag "検索する", class: "btn btn-primary"
 = render 'list_table', locals: {leads: @leads}

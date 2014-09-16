@@ -27,6 +27,7 @@ h1 見込み客一覧
         label.col-sm-3.control-label 荷電済み
         .col-sm-9
           = check_box_tag 'status_any', 'y', @status_any_checked
+      = render 'date_form'
       .form-group
         label.col-sm-3.control-label タグ
         .col-sm-9

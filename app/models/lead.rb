@@ -4,7 +4,6 @@ class Lead < ActiveRecord::Base
   extend Enumerize
   has_paper_trail 
   acts_as_taggable 
-  before_validation :set_tag_list
   belongs_to :user
   has_many :lead_histories
 
@@ -20,6 +19,19 @@ class Lead < ActiveRecord::Base
   validates :prefecture,  length: {maximum: 4, :message => '都道府県は４文字以内で入力してください'}
   validates :city,  length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
 
+  scope :between_last_approach , lambda {|gt, lt| 
+    sc = current_scope || relation
+    sc = sc.where("lead_histories.approach_day > ?", DateTime.parse(gt)) if gt.present?
+    sc = sc.where("lead_histories.approach_day < ?", DateTime.parse(lt)) if lt.present?
+    sc
+  }
+
+  scope :between_next_approach , lambda {|gt, lt| 
+    sc = current_scope || relation
+    sc = sc.where("lead_histories.next_approach_day > ?", DateTime.parse(gt)) if gt.present?
+    sc = sc.where("lead_histories.next_approach_day < ?", DateTime.parse(lt)) if lt.present?
+    sc
+  }
 
   ransacker :max_approach_day do |parent|
     ar = Arel.sql('max(lead_histories.approach_day)')
@@ -107,13 +119,4 @@ class Lead < ActiveRecord::Base
     Estimate.where(client_type: "lead").where(client_id: self.id)
   end
 
-  def self.tagged_with(i,options = {})
-    super(Moji.zen_to_han(i,Moji::ZEN_NUMBER) ,options)
-  end
-
-  def set_tag_list
-    tl = self.tag_list
-    tl2 = tl.map{|i| Moji.zen_to_han(i,Moji::ZEN_NUMBER)}
-    self.tag_list = tl2
-  end
 end

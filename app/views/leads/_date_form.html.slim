@@ -1,0 +1,16 @@
+.form-group
+  label.col-sm-3.control-label 最終対応日時
+  .col-sm-4
+    = text_field_tag "last_approach_gt" , @last_approach_gt, class: "datetimepicker form-control"
+  .col-sm-1
+    |～
+  .col-sm-4
+    = text_field_tag "last_approach_lt" , @last_approach_lt, class: "datetimepicker form-control"
+.form-group
+  label.col-sm-3.control-label 次回対応日時
+  .col-sm-4
+    = text_field_tag "next_approach_gt" , @next_approach_gt, class: "datetimepicker form-control"
+  .col-sm-1
+    |～
+  .col-sm-4
+    = text_field_tag "next_approach_lt" , @next_approach_lt, class: "datetimepicker form-control"

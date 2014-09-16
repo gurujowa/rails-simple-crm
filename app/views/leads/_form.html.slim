@@ -19,7 +19,10 @@
     = f.input :building 
     = f.input :campaign
     = f.input :campaign_detail
-    = f.input :tag_list, input_html: {multiple: true, class: "lead_tag_list_form"}
+    .form-group
+      label.col-sm-3.control-label タグ一覧
+      .col-sm-4
+        = f.text_field :tag_list, id: "lead_tag_list_form"
     = f.association :user 
     = f.input :memo 
     .panel.panel-default

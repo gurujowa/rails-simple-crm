@@ -7,6 +7,7 @@ class LeadsController < ApplicationController
   def index
       pq = params[:q]
       leads = Lead.group(:name)
+      leads = set_between_dates(leads)
 
       if params[:status_any].present?
         pq.store(:lead_histories_lead_history_status_id_in,[9,10,11,1,2,3,4,5,6,7,8,16])
@@ -19,6 +20,7 @@ class LeadsController < ApplicationController
         leads = leads.tagged_with(params[:tag_name])
         @tag_name = params[:tag_name]
       end
+
 
       tl = Lead.tags_on(:tags)
       @tag_list = []
@@ -36,6 +38,7 @@ class LeadsController < ApplicationController
   def mylist
       @q = Lead.group(:name).search(params[:q])
       @leads =@q.result.includes(:lead_histories).where(user_id: current_user.id)
+      @leads = set_between_dates(@leads)
   end
 
 
@@ -103,7 +106,6 @@ class LeadsController < ApplicationController
     @status_done = LeadHistoryStatus.where(progress: "done")
     @status_forbidden = LeadHistoryStatus.where(progress: "forbidden")
 
-    gon.tag_list = Lead.tags_on(:tags).map {|i| i.name}
   end
 
   # GET /leads/new
@@ -160,6 +162,17 @@ class LeadsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_lead
       @lead = Lead.find(params[:id])
+      gon.tag_list = Lead.tags_on(:tags).map {|i| i.name}
+    end
+
+    def set_between_dates(leads)
+      leads = leads.between_last_approach(params[:last_approach_gt], params[:last_approach_lt])
+      leads = leads.between_next_approach(params[:next_approach_gt], params[:next_approach_lt])
+      @last_approach_gt = params[:last_approach_gt]
+      @last_approach_lt = params[:last_approach_lt]
+      @next_approach_gt = params[:next_approach_gt]
+      @next_approach_lt = params[:next_approach_lt]
+      leads
     end
 
     # Only allow a trusted parameter "white list" through.
