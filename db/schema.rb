@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140915105730) do
+ActiveRecord::Schema.define(version: 20140916003351) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false

@@ -109,10 +109,14 @@ class LeadsController < ApplicationController
   # GET /leads/new
   def new
     @lead = Lead.new
+    @lead.lead_interview = LeadInterview.new
   end
 
   # GET /leads/1/edit
   def edit
+    if @lead.lead_interview.blank?
+      @lead.lead_interview = LeadInterview.new
+    end
   end
 
   # POST /leads
@@ -120,7 +124,7 @@ class LeadsController < ApplicationController
     @lead = Lead.new(lead_params)
 
     if @lead.save
-      redirect_to leads_url, notice: 'Lead was successfully created.'
+      redirect_to lead_url(@lead), notice: 'Lead was successfully created.'
     else
       render action: 'new'
     end
@@ -129,11 +133,7 @@ class LeadsController < ApplicationController
   # PATCH/PUT /leads/1
   def update
     if @lead.update(lead_params)
-      if params[:after_show].present?
         redirect_to lead_url(@lead), notice: '正しく編集されました'
-      else
-        redirect_to after_update_path_for, notice: 'Lead was successfully updated.'
-      end
     else
       if params[:after_show].present?
         @lead.update!(lead_params)
@@ -147,10 +147,6 @@ class LeadsController < ApplicationController
   def destroy
     @lead.destroy
     redirect_to leads_url, notice: 'Lead was successfully destroyed.'
-  end
-
-  def after_update_path_for
-    session[:previous_url] || leads_url
   end
 
   def store_location
@@ -168,6 +164,7 @@ class LeadsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lead_params
-      params.require(:lead).permit(:corporation_name,{:tag_list => []}, :tag_list, :sex, :campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star)
+      params.require(:lead).permit(:corporation_name,{:tag_list => []}, :tag_list, :sex, :campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star,
+                                   lead_interview_attributes: [:id, :regular_staff, :nonregular_staff, :solvency, :time])
     end
 end

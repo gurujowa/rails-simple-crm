@@ -22,6 +22,14 @@
     = f.input :tag_list, input_html: {multiple: true, class: "lead_tag_list_form"}
     = f.association :user 
     = f.input :memo 
+    .panel.panel-default
+      .panel-heading ヒアリング内容
+      .panel-body
+        = f.simple_fields_for :lead_interview do |li|
+          = li.input :regular_staff
+          = li.input :nonregular_staff
+          = li.input :solvency
+          = li.input :time
 
   .form-actions
     = f.button :submit

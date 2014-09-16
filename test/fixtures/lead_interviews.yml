@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  regular_staff: 1
+  nonregular_staff: 1
+  solvency: MyString
+  time: MyString
+  lead_id: 
+
+two:
+  regular_staff: 1
+  nonregular_staff: 1
+  solvency: MyString
+  time: MyString
+  lead_id: 

@@ -202,5 +202,19 @@ p#notice = notice
     .panel.panel-info
       .panel-heading ヒアリング内容
       .panel-body
+        - if @lead.lead_interview.present?
+          table.table.table-bordered.table-striped
+            tr
+              th 正規職員人数
+              td = @lead.lead_interview.regular_staff
+            tr
+              th 非正規職員人数
+              td = @lead.lead_interview.nonregular_staff
+            tr
+              th 支払余力
+              td = @lead.lead_interview.solvency
+            tr
+              th 時間余力
+              td = @lead.lead_interview.time
       .panel-footer
         = link_to '編集', edit_lead_path(@lead), class: "btn btn-info"
