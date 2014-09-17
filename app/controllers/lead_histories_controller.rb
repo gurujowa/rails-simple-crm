@@ -22,16 +22,12 @@ class LeadHistoriesController < ApplicationController
   end
 
   def shipped
-    @lead_histories = LeadHistory.sent_list.limit(200)
-    if params[:user_id].present?
-      @lead_histories = @lead_histories.where(user_id: params[:user_id])
-      @user_id = params[:user_id]
-    end
+    @lead_histories = LeadHistory.sent_list
   end
 
   
   def zip
-    @lead_histories = LeadHistory.status_zip.limit(200)
+    @lead_histories = LeadHistory.status_zip
   end
 
   def sent

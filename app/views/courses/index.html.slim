@@ -1,7 +1,7 @@
 h1 コース 一覧
 = link_to "新規追加" , {controller: "courses", action: "new"}, class: "btn btn-default"
 .row
-  table id="courses_datatable"
+  table.table.table-bordered.table-striped.default_datatables
     thead
       tr
         th 会社名

@@ -1,6 +1,20 @@
 h1 再アプローチ一覧
 
-table.table.table-striped.table-bordered
+.well
+  = form_tag url_for(action: "approach"), method: :get do
+    .form-group
+      label.col-sm-3.control-label 次回対応日時
+      .col-sm-4
+        = text_field_tag "next_approach_gt" , @next_approach_gt, class: "datetimepicker form-control"
+      .col-sm-1
+        |～
+      .col-sm-4
+        = text_field_tag "next_approach_lt" , @next_approach_lt, class: "datetimepicker form-control"
+    = submit_tag "検索する", class: "btn btn-primary"
+
+
+
+table.table.table-striped.table-bordered.default_datatables
   thead
     tr
       th 次回対応日時

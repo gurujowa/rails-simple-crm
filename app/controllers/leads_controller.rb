@@ -43,12 +43,17 @@ class LeadsController < ApplicationController
 
 
   def approach
-      @q = Lead.group(:name).search(params[:q])
-      inner = "(SELECT id AS last_his_id , lead_id AS last_id, MAX(approach_day) AS max_approach_day, lead_history_status_id AS lead_history_status_id FROM lead_histories  WHERE approach_day is not null GROUP BY lead_id) AS last_his"
-      result = LeadHistory.find_by_sql(["SELECT his.id, last_his.max_approach_day, his.next_approach_day , his.lead_id, his.lead_history_status_id
-                                       FROM lead_histories AS his INNER JOIN #{inner} ON his.id = last_his.last_his_id where next_approach_day is not null AND his.user_id = :user_id  order by next_approach_day asc",{ user_id: params[:id]}])
+    inner = "(SELECT id AS last_his_id , lead_id AS last_id, MAX(approach_day) AS max_approach_day, lead_history_status_id AS lead_history_status_id FROM lead_histories  WHERE approach_day is not null GROUP BY lead_id) AS last_his"
+      
+    gt = "AND next_approach_day >= \"#{DateTime.parse(params[:next_approach_gt] + " " + Time.zone.to_s).utc.strftime("%Y-%m-%d %H:%M:00")}\"" if params[:next_approach_gt].present?
+      
+    lt = "AND next_approach_day <= \"#{DateTime.parse(params[:next_approach_lt] + " " + Time.zone.to_s).utc.strftime("%Y-%m-%d %H:%M:00")}\"" if params[:next_approach_lt].present?
+    @next_approach_gt = params[:next_approach_gt]
+    @next_approach_lt = params[:next_approach_lt]
+    result = LeadHistory.find_by_sql(["SELECT his.id, last_his.max_approach_day, his.next_approach_day , his.lead_id, his.lead_history_status_id
+                                       FROM lead_histories AS his INNER JOIN #{inner} ON his.id = last_his.last_his_id where next_approach_day is not null AND his.user_id = :user_id #{gt} #{lt} order by next_approach_day asc",{ user_id: params[:id]}])
 
-      @lead_histories = result
+    @lead_histories = result
   end
 
   def address

@@ -1,4 +1,8 @@
-json.array!(@leads) do |lead|
-  json.extract! lead, :name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zip_code, :prefecture, :street, :building, :memo, :user_id, :star
-  json.url lead_url(lead, format: :json)
+json.draw 1
+json.recordsTotal 1000
+json.recordsFiltered 100
+json.data do |json|
+  json.array!(@leads) do |lead|
+    json.extract! lead, :name, :tel, :full_address, :last_approach_day
+  end
 end

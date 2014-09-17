@@ -58,7 +58,6 @@ end
 gem "select2-rails"
 gem 'icheck-rails'
 gem 'fullcalendar-rails'
-gem 'jquery-datatables-rails'
 gem 'jquery-ui-rails'
 gem 'lazy_high_charts'
 gem 'bootstrap-sass', '~> 3.1.1'

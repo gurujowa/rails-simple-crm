@@ -1,15 +1,15 @@
 h1 資料郵送一覧
 
 
-table.table.table-striped.table-bordered
+table.table.table-striped.table-bordered.default_datatables
   thead
     tr
       th style="font-size:12px;width:30px" 済
       th 会社名
-      th 郵便番号
+      th 〒
       th 住所
       th 担当者
-      th 営業マン
+      th 営業
       th 対応日時
   tbody
     - @lead_histories.each do |lh|

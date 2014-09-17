@@ -20,7 +20,6 @@
 //= require noty/jquery.noty
 //= require noty/layouts/top
 //= require noty/themes/default
-//= require dataTables/jquery.dataTables
 //= require jquery.balloon.min
 //= require jquery.timepicker.min
 //= require fullcalendar
@@ -87,7 +86,11 @@
 moment.lang("ja");
 
 $(function(){
-
+  
+  $('.default_datatables').dataTable( {
+        "lengthChange":     false,
+        "pageLength":     100
+    } );  
   init_date_picker()
   $( ".datetimepicker" ).datetimepicker({lang:'ja',scrollInput: false,
  i18n:{

@@ -1,13 +1,13 @@
 <h1>講師 一覧</h1>
 
 <%= link_to '新規追加', new_teacher_path, :class => 'btn btn-info' %>
-<table class="default_datatables">
+<table class="default_datatables table table-bordered table-striped">
   <thead>
     <tr>
       <th>名前</th>
       <th>rank</th>
       <th>ジャンル</th>
-      <th>ディレクター</th>
+      <th>Director</th>
       <th>電話</th>
       <th>メール</th>
       <th>メモ</th>
@@ -23,7 +23,7 @@
         <td><%= teacher.genre %></td>
         <td><%= teacher.director_name %></td>
         <td><%= teacher.tel %></td>
-        <td><%= teacher.email %></td>
+        <td><%= truncate(teacher.email, length: 30) %></td>
         <td><%= teacher.memo %></td>
         <td><%= link_to '編集', edit_teacher_path(teacher), :class => "btn btn-info" %></td>
       </tr>

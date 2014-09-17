@@ -1,8 +1,5 @@
 h1 見込み客郵送済み一覧
-= form_tag({action: :shipped} , method: :get ) do
-  = select_tag 'user_id', options_from_users(@user_id), include_blank: true
-  = submit_tag "検索"
-table.table.table-striped.table-bordered
+table.table.table-striped.table-bordered.default_datatables
   thead
     tr
       th 発送日時
