@@ -93,7 +93,6 @@ gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'business_time'
 gem "nested_form"
-gem "geocoder"
 
 gem 'whenever'
 

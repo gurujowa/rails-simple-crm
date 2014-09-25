@@ -2,11 +2,14 @@ Mycrm::Application.routes.draw do
 
   resources :lead_history_statuses
 
+  resources :lead_interviews, only: [:update]
+
   resources :leads do
     collection do
       match 'search' => 'leads#search', via: [:get, :post], as: :search
       get "mylist"
       get "name"
+      post "up_column"
       get "address"
     end
     member do
@@ -75,11 +78,6 @@ Mycrm::Application.routes.draw do
 
   resources :industries, :task_types, :statuses
   resources :contacts, :only => [:destroy]    
-
-  get "graphs/index"
-  get "graphs/created"
-  get "graphs/action"
-
 
   #コース
   resources :courses  do

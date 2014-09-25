@@ -4,14 +4,14 @@
   .form-inputs
     = f.input :name 
     = f.input :corporation_name 
-    = f.input :tel 
-    = f.input :fax 
-    = f.input :email 
+    = f.input :tel ,as: :tel
+    = f.input :fax ,as: :tel
+    = f.input :email, as: :email
     = f.input :person_name 
     = f.input :person_kana 
     = f.input :person_post 
     = f.input :sex 
-    = f.input :url 
+    = f.input :url, as: :url
     = f.input :zipcode 
     = f.input :prefecture 
     = f.input :city 
@@ -29,8 +29,8 @@
       .panel-heading ヒアリング内容
       .panel-body
         = f.simple_fields_for :lead_interview do |li|
-          = li.input :regular_staff
-          = li.input :nonregular_staff
+          = li.input :regular_staff, as: :number
+          = li.input :nonregular_staff, as: :number
           = li.input :solvency
           = li.input :time
 

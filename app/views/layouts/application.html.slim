@@ -8,6 +8,8 @@ html
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = stylesheet_link_tag  "//cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"
     = javascript_include_tag "//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"
+    = stylesheet_link_tag  "//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"
     = csrf_meta_tags
     = yield :head
   body
@@ -27,23 +29,24 @@ html
         .collapse.navbar-collapse
           ul.nav.navbar-nav
             li.dropdown
-              a.dropdown-toggle href="/" data-toggle="dropdown" 
-                | コクピット
               ul.dropdown-menu
                 li = link_to "コースタスク" , {controller: "courses", action: "task"}
                 - if current_user.admin?
                   li = link_to "コースアラート" , {controller: "courses", action: "alert"}
+            li.dropdown
+              = link_to "対応履歴" , "lead_histories", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}
+              ul.dropdown-menu
+                li = link_to "全体集計" , {controller: "lead_histories", action: "total_all"}
+                li = link_to "個人集計" , {controller: "lead_histories", action: "total", user_id: current_user.id}
+                li = link_to "資料郵送一覧" , {controller: "lead_histories", action: "zip"}
+                li = link_to "資料発送済み一覧" , {controller: "lead_histories", action: "shipped"}
             li.dropdown
               = link_to "新規客" , "leads", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}
               ul.dropdown-menu
                 li = link_to "見込み客一覧" , leads_path
                 li = link_to "マイリスト一覧" , {controller: "leads", action: "mylist"}
                 li = link_to "再アプローチ一覧" , {controller: "leads", action: "approach", id: current_user.id}
-                li = link_to "資料郵送一覧" , {controller: "lead_histories", action: "zip"}
-                li = link_to "資料発送済み一覧" , {controller: "lead_histories", action: "shipped"}
                 li = link_to "新規作成" , new_lead_path
-                li = link_to "全体集計" , {controller: "lead_histories", action: "total_all"}
-                li = link_to "個人集計" , {controller: "lead_histories", action: "total", user_id: current_user.id}
             li.dropdown
               = link_to "既存客", "companies", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}
               ul.dropdown-menu

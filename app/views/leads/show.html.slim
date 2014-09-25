@@ -37,7 +37,9 @@ p#notice = notice
               span 事業所名
               a.btn.btn-default href="http://www.google.co.jp/search?q=#{@lead.name}" target="_blank"
                 span.glyphicon.glyphicon-search
-            td = @lead.name
+            td 
+              a.lead_editable data-type="text" data-title="入力してください" data-name="name"
+                = @lead.name
           tr
             th
               span 法人名
@@ -46,34 +48,54 @@ p#notice = notice
               - @search_q = {corporation_name_cont: @lead.corporation_name}
               a.btn.btn-default href="#{ url_for controller: :leads, action: :search, q: @search_q}" target="_blank"
                 span.glyphicon.glyphicon-list-alt
-            td = @lead.corporation_name
+            td 
+              a.lead_editable data-type="text" data-title="入力してください" data-name="corporation_name"
+                = @lead.corporation_name
           tr
             th 電話番号
-            td = @lead.tel
+            td 
+              a.lead_editable data-type="tel" data-title="電話番号を入力してください" data-name="tel"
+                = @lead.tel
           tr
             th FAX
-            td = @lead.fax
+            td 
+              a.lead_editable data-type="tel" data-title="FAXを入力してください" data-name="fax"
+                = @lead.fax
           tr
             th Eメール
-            td = @lead.email
+            td 
+              a.lead_editable data-type="text" data-title="EMAILを入力してください" data-name="email"
+                = @lead.email
           tr
             th 担当者名
-            td = @lead.person_name
+            td 
+              a.lead_editable data-type="text" data-title="担当者名を入力してください" data-name="person_name"
+                = @lead.person_name
           tr
             th 担当者かな
-            td = @lead.person_kana
+            td 
+              a.lead_editable data-type="text" data-title="担当者（かな）を入力してください" data-name="person_kana"
+                = @lead.person_kana
           tr
             th 担当者性別
-            td = @lead.sex_text
+            td 
+              a#lead_sex_editable
+                = @lead.sex_text
           tr
             th 役職
-            td = @lead.person_post
+            td 
+              a.lead_editable data-type="text" data-title="役職を入力してください" data-name="person_post"
+                = @lead.person_post
           tr
             th URL
-            td = @lead.url
+            td 
+              a.lead_editable data-type="url" data-title="URLを入力してください" data-name="url"
+                = @lead.url
           tr
             th 郵便番号
-            td = @lead.zipcode
+            td 
+              a.lead_editable data-type="text" data-title="郵便番号を入力してください" data-name="zipcode"
+                = @lead.zipcode
           tr
             th
               span 住所
@@ -202,19 +224,26 @@ p#notice = notice
     .panel.panel-info
       .panel-heading ヒアリング内容
       .panel-body
-        - if @lead.lead_interview.present?
-          table.table.table-bordered.table-striped
-            tr
-              th 正規職員人数
-              td = @lead.lead_interview.regular_staff
-            tr
-              th 非正規職員人数
-              td = @lead.lead_interview.nonregular_staff
-            tr
-              th 支払余力
-              td = @lead.lead_interview.solvency
-            tr
-              th 時間余力
-              td = @lead.lead_interview.time
+        table.table.table-bordered.table-striped
+          tr
+            th 正規職員人数
+            td 
+              a.lead_interview_editable data-type="number" data-title="正規職員数を入力してください" data-name="regular_staff"
+                = @lead.lead_interview.regular_staff if @lead.lead_interview.present?
+          tr
+            th 非正規職員人数
+            td 
+              a.lead_interview_editable data-type="number" data-title="非正規職員数を入力してください" data-name="nonregular_staff"
+                = @lead.lead_interview.nonregular_staff if @lead.lead_interview.present?
+          tr
+            th 支払余力
+            td 
+              a.lead_interview_editable data-type="text" data-title="支払余力を入力してください" data-name="solvency"
+                = @lead.lead_interview.solvency if @lead.lead_interview.present?
+          tr
+            th 時間余力
+            td 
+              a.lead_interview_editable data-type="text" data-title="時間余力を入力してください" data-name="time"
+                = @lead.lead_interview.time if @lead.lead_interview.present?
       .panel-footer
         = link_to '編集', edit_lead_path(@lead), class: "btn btn-info"

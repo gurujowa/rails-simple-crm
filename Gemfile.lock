@@ -93,7 +93,6 @@ GEM
     erubis (2.7.0)
     execjs (2.2.0)
     fullcalendar-rails (1.6.4.0)
-    geocoder (1.2.2)
     gon (5.1.2)
       actionpack (>= 2.3.0)
       json
@@ -272,7 +271,6 @@ DEPENDENCIES
   devise
   enumerize
   fullcalendar-rails
-  geocoder
   gon
   i18n_generators
   icalendar

@@ -32,6 +32,10 @@ class LeadsController < ApplicationController
 
       @q = leads.search(pq)
       @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
+      respond_to do |format|
+        format.html
+        format.csv { send_csv @leads.to_csv }
+      end
   end
 
 
@@ -110,6 +114,8 @@ class LeadsController < ApplicationController
     @status_ing = LeadHistoryStatus.where(progress: "ing")
     @status_done = LeadHistoryStatus.where(progress: "done")
     @status_forbidden = LeadHistoryStatus.where(progress: "forbidden")
+    sex_list
+    gon.pk = @lead.id
 
   end
 
@@ -134,6 +140,19 @@ class LeadsController < ApplicationController
       redirect_to lead_url(@lead), notice: 'Lead was successfully created.'
     else
       render action: 'new'
+    end
+  end
+
+  def up_column
+    begin
+      @lead = Lead.find(params[:pk])
+      if @lead.update({params[:name] => params[:value]})
+        render nothing: true, status: 200
+      else
+        render text: @lead.errors.full_messages, status: 400
+      end
+    rescue => ex
+        render text: ex.message, status: 400
     end
   end
 
@@ -168,6 +187,15 @@ class LeadsController < ApplicationController
     def set_lead
       @lead = Lead.find(params[:id])
       gon.tag_list = Lead.tags_on(:tags).map {|i| i.name}
+    end
+
+    def sex_list
+      sex = Lead.sex.options
+      result = []
+      sex.each do |s|
+        result.append({value: s[1], text: s[0]})
+      end
+      gon.sex_list = result.to_json
     end
 
     def set_between_dates(leads)

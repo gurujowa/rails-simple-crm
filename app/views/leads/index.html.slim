@@ -2,13 +2,14 @@ h1 見込み客一覧
 
 .well
   button type="button" class="btn btn-info" data-toggle="collapse" data-target="#btn-lead-search" 検索ボックス
+  = button_to_function "Export CSV", "reloadWithFormat('csv');", class: "btn btn-default"
   span.dropdown
     button.btn.btn-success data-toggle="dropdown" チェックしたものを
     ul.dropdown-menu role="menu"
       li
         a#leads_address_label href="#"  data-source="#{url_for action: "address"}"  ラベルCSV出力
   #btn-lead-search.collapse
-    = search_form_for @q, :builder => SimpleForm::FormBuilder, wrapper: :horizontal_form,url: search_leads_path, html: {class: "form-horizontal",method: :get} do |f|
+    = search_form_for @q, :builder => SimpleForm::FormBuilder, wrapper: :horizontal_form,url: leads_path, html: {class: "form-horizontal",method: :get} do |f|
       = f.input :name_cont
       = f.input :corporation_name_cont
       = f.input :tel_cont

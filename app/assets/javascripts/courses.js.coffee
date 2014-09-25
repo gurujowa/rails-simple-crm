@@ -16,7 +16,8 @@ jQuery ->
   pickerReady()
   calcTime()
   periodCalendarRender()
-  courseCalendarRender()
+  if ($(".full_calendar") != null)
+    courseCalendarRender()
 
   $(document).on 'click' , '.period_img',  ->
     hidden_value = $(this).parent().find('.period_hidden').val()

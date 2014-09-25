@@ -91,6 +91,35 @@ class Lead < ActiveRecord::Base
     end
   end
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names + ["タグ", "対応日時", "対応ステータス", "対応メモ"] +  LeadInterview.column_names
+
+      all.each do |l|
+
+        values = l.attributes.values_at(*column_names)
+
+        if l.tag_list.present?
+            values << l.tag_list.to_s
+        else
+            values << ""
+        end
+
+        if l.lead_histories.present?
+          lh = l.lead_histories.last
+          values = values + [lh.approach_day, lh.lead_history_status.name , lh.memo]
+        else
+          values = values + ["","",""]
+        end
+
+        if l.lead_interview.present?
+          interview_values = l.lead_interview.attributes.values_at(*LeadInterview.column_names)
+          values = values + interview_values
+        end
+        csv << values
+      end
+    end
+  end
 
   def last_approach
     if self.lead_histories.present?
