@@ -15,13 +15,13 @@ jQuery ->
   if(0 < $(".lead_editable").size())
     $(".lead_editable").editable
       url: "/leads/up_column"
-      method: "POST"
       pk: gon.pk
 
   if(0 < $(".lead_interview_editable").size())
     $(".lead_interview_editable").editable
-      url: "/lead_interviews/update"
-      method: "POST"
+      url: "/lead_interviews/" + gon.pk
+      ajaxOptions:
+        type: "PUT"
       pk: gon.pk
 
   if(0 < $("#lead_sex_editable").size())

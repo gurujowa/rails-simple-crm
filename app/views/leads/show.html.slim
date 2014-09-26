@@ -228,12 +228,12 @@ p#notice = notice
           tr
             th 正規職員人数
             td 
-              a.lead_interview_editable data-type="number" data-title="正規職員数を入力してください" data-name="regular_staff"
+              a.lead_interview_editable data-type="text" data-title="正規職員数を入力してください" data-name="regular_staff"
                 = @lead.lead_interview.regular_staff if @lead.lead_interview.present?
           tr
             th 非正規職員人数
             td 
-              a.lead_interview_editable data-type="number" data-title="非正規職員数を入力してください" data-name="nonregular_staff"
+              a.lead_interview_editable data-type="text" data-title="非正規職員数を入力してください" data-name="nonregular_staff"
                 = @lead.lead_interview.nonregular_staff if @lead.lead_interview.present?
           tr
             th 支払余力
