@@ -29,8 +29,8 @@
       .panel-heading ヒアリング内容
       .panel-body
         = f.simple_fields_for :lead_interview do |li|
-          = li.input :regular_staff, as: :number
-          = li.input :nonregular_staff, as: :number
+          = li.input :regular_staff
+          = li.input :nonregular_staff
           = li.input :solvency
           = li.input :time
 
