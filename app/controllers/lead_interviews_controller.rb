@@ -5,7 +5,7 @@ class LeadInterviewsController < ApplicationController
       lead = Lead.find(params[:id])
       lead_interview = lead.lead_interview
       if lead_interview.blank?
-        lead_interview = lead.lead_interview.new
+        lead_interview = LeadInterview.create(lead_id: lead.id)
       end
       if lead_interview.update({params[:name] => params[:value]})
         render nothing: true, status: 200
