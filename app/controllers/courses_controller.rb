@@ -67,10 +67,11 @@ class CoursesController < ApplicationController
      @course = Course.new(course_params)     
      if @course.save
         flash[:notice] = @course.name + 'を追加しました。'
+        redirect_to :controller => "courses", :action => "show", :id => @course.id
      else
        flash[:alert] = @course.errors.full_messages.join(',')
+       render "new"
      end
-     redirect_to :controller => "courses", :action => "show", :id => @course.id
   end
 
   def new
