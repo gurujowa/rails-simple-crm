@@ -12,16 +12,16 @@ jQuery ->
 
   #郵便番号検索
   $("#jump_zip").on "click", ->
-    url = "http://www.google.co.jp/search?q=" + $("#company_prefecture").val() + $("#company_city").val() + $("#company_address").val() + " 郵便番号"
+    url = "http://www.google.co.jp/search?q=" + $("#company_fulladdress").text() + " 郵便番号"
     window.open(url,"_blank")
   #GoogleMap検索
   $("#jump_map").on "click", ->
-    url = "http://maps.google.co.jp/maps?q=" + $("#company_prefecture").val() + $("#company_city").val() + $("#company_address").val()
+    url = "http://maps.google.co.jp/maps?q=" + $("#company_fulladdress").text()
     window.open(url,"_blank")
 
   #GoogleMap検索
   $("#jump_map2").on "click", ->
-    url = "http://maps.google.co.jp/maps?q=" + $("#company_prefecture2").val() + $("#company_city2").val() + $("#company_address2").val()
+    url = "http://maps.google.co.jp/maps?q=" + $("#company_fulladdress2").text()
     window.open(url,"_blank")
 
   $('form#new_task_form').submit ->

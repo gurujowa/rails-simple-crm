@@ -80,7 +80,7 @@
                 td = @company.zipcode
               tr
                 th 住所
-                td = @company.full_address
+                td#company_fulladdress = @company.full_address
             a.btn.btn-default#jump_zip 郵便番号
             a.btn.btn-default#jump_map GoogleMap検索
           .tab-pane#two
@@ -96,7 +96,7 @@
                 td = @company.zipcode2
               tr
                 th 住所
-                td = @company.full_address2
+                td#company_fulladdress2 = @company.full_address2
 
 
 
