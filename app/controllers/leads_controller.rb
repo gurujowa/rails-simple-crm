@@ -34,7 +34,7 @@ class LeadsController < ApplicationController
       @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
       respond_to do |format|
         format.html
-        format.csv { send_csv @leads.to_csv }
+        format.csv { send_csv @q.result.includes(:lead_histories).paginate(page: 1,per_page: 3000).to_csv }
       end
   end
 

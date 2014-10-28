@@ -36,6 +36,7 @@ group :development do
   # エラー画面をわかりやすく整形してくれる
   gem 'better_errors'
   # better_errorsの画面上にirb/pry(PERL)を表示する
+  gem 'pry-rails'
   gem 'binding_of_caller'
 
   #capistano
@@ -93,6 +94,8 @@ gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'business_time'
 gem "nested_form"
+
+gem 'rest-client'
 
 gem 'whenever'
 

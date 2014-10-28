@@ -26,7 +26,7 @@ namespace :tags do
   def env_set
     leads = Lead.where(user_id: nil)
 
-    leads = leads.where(prefecture: ENV['prefecture']) if ENV['preffecture'].present?
+    leads = leads.where(prefecture: ENV['prefecture']) if ENV['prefecture'].present?
     leads = leads.tagged_with(ENV['tag']).tagged_with(ENV['to'],:exclude => true) if ENV['tag'].present?
     leads = leads.limit(ENV['limit']) if ENV['limit'].present?
     leads = leads.offset(ENV['offset']) if ENV['offset'].present?
