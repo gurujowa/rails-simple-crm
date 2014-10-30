@@ -1,5 +1,6 @@
 class LeadHistory < ActiveRecord::Base
   has_paper_trail 
+  acts_as_taggable 
 
   belongs_to :lead
   belongs_to :lead_history_status
