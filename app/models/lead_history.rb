@@ -1,6 +1,5 @@
 class LeadHistory < ActiveRecord::Base
   has_paper_trail 
-  acts_as_taggable 
 
   belongs_to :lead
   belongs_to :lead_history_status
@@ -12,9 +11,8 @@ class LeadHistory < ActiveRecord::Base
 
   scope  :exclude_initial, lambda{ where('created_at > ?', DateTime.new(2014,06,27))}
   scope  :status_zip, lambda{ where('lead_history_status_id = ?', 8).order("approach_day DESC")}
-  scope  :sent_list, lambda{ tagged_with("資料郵送済").order("approach_day DESC")}
+  scope  :sent_list, lambda{ where('lead_histories.shipped_at is not null').order("approach_day DESC")}
 
-  @@sent_tag = "資料郵送済"
 
 
   def is_last
@@ -30,22 +28,17 @@ class LeadHistory < ActiveRecord::Base
   end
 
   def is_sent
-    return self.tag_list.index(@@sent_tag).present?
+    return self.shipped_at.present?
   end
 
   def send_pamph
     if self.is_sent
-      self.tag_list.remove(@@sent_tag)
+      self.shipped_at = nil
       self.save
     else
-      self.tag_list.add(@@sent_tag)
+      self.shipped_at = DateTime.now
       self.save
     end
-  end
-
-  def zip_created_at
-    tagging = self.tag_all_list.find {|t| t[:name] == @@sent_tag}
-    return tagging[:created_at]
   end
 
   def tag_all_list

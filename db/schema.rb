@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916003351) do
+ActiveRecord::Schema.define(version: 20141030064350) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20140916003351) do
     t.integer  "lead_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "shipped_at"
   end
 
   add_index "lead_histories", ["lead_history_status_id"], name: "index_lead_histories_on_lead_history_status_id"

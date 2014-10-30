@@ -9,7 +9,7 @@ table.table.table-striped.table-bordered.default_datatables
   tbody
     - @lead_histories.each do |lh|
       tr
-        td = lh.zip_created_at
+        td = lh.shipped_at
         td = link_to lh.lead.name , lh.lead
         td = lh.lead.tel
         td = lh.user.name

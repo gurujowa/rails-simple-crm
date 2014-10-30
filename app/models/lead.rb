@@ -121,6 +121,7 @@ class Lead < ActiveRecord::Base
     end
   end
 
+
   def last_approach
     if self.lead_histories.present?
       self.lead_histories.last

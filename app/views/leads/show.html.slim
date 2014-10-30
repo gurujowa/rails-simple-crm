@@ -213,9 +213,9 @@ p#notice = notice
                   = h.memo
               tr 
                 td colspan="3" 
-                  - h.tag_all_list.each do |t|
-                    span.badge = t[:name]
-                    span （#{t[:created_at]}）
+                  - if h.shipped_at.present?
+                    span.badge 資料郵送済
+                    = h.shipped_at
                   .pull-right 
                     = link_to "編集", edit_lead_history_path(h)
                     | &nbsp;/&nbsp;

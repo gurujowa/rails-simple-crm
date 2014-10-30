@@ -16,6 +16,13 @@ class LeadsController < ApplicationController
         @status_any_checked = false
       end
 
+      if params[:status_shipped].present?
+        pq.store(:lead_histories_shipped_at_present,1)
+        @status_shipped_checked = true
+      else
+        @status_shipped_checked = false
+      end
+
       if params[:tag_name].present?
         leads = leads.tagged_with(params[:tag_name])
         @tag_name = params[:tag_name]
@@ -32,6 +39,9 @@ class LeadsController < ApplicationController
 
       @q = leads.search(pq)
       @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
+
+
+
       respond_to do |format|
         format.html
         format.csv { send_csv @q.result.includes(:lead_histories).paginate(page: 1,per_page: 3000).to_csv }
