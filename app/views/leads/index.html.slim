@@ -33,7 +33,8 @@ h1 見込み客一覧
         label.col-sm-3.control-label タグ
         .col-sm-9
           = select_tag :tag_name, options_for_select(@tag_list,@tag_name), id: "lead_tag_list_search", include_blank: true
-
+      = f.input :lead_histories_user_id_eq, collection: User.all
+      = f.input :lead_histories_lead_history_status_id_eq, collection: LeadHistoryStatus.all
       = f.input :user_id_eq, collection: User.all
       = f.submit "検索する", class: "btn btn-primary"
   #total_entries 件数：#{@leads.total_entries}件
