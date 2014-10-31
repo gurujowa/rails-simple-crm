@@ -41,7 +41,7 @@ class Lead < ActiveRecord::Base
     sent_date = []
     self.lead_histories.each do |lh|
       if lh.is_sent
-        sent_date.push lh.zip_created_at
+        sent_date.push lh.shipped_at
       end
     end
 

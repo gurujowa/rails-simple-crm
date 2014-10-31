@@ -2,6 +2,11 @@ class LeadHistoriesController < ApplicationController
   before_action :set_lead_history, only: [:show, :edit, :update, :destroy, :sent]
   before_action :authenticate_user!
 
+  def approach
+    @next_approach_gt = params[:next_approach_gt].present? ? DateTime.parse(params[:next_approach_gt]) : DateTime.now.prev_year
+    @next_approach_lt = params[:next_approach_lt].present? ? DateTime.parse(params[:next_approach_lt]) : DateTime.now.next_year
+    @lead_histories = LeadHistory.where(next_approach_day: @next_approach_gt...@next_approach_lt)
+  end
 
   # POST /leads
   def create

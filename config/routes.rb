@@ -13,7 +13,6 @@ Mycrm::Application.routes.draw do
       get "address"
     end
     member do
-      get "approach"
       get "add_mylist"
       get "find"
     end
@@ -25,6 +24,7 @@ Mycrm::Application.routes.draw do
       get "total"
       get "zip"
       get "shipped"
+      get "approach"
     end
     member do
       get "sent"
@@ -111,7 +111,7 @@ Mycrm::Application.routes.draw do
 #  get 'current' => 'users#current'
 #  get 'login' => 'users#login'
 
-  root :to => 'leads#approach'
+  root :to => 'lead_histories#approach'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
