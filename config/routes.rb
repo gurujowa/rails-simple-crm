@@ -8,6 +8,8 @@ Mycrm::Application.routes.draw do
     collection do
       match 'search' => 'leads#search', via: [:get, :post], as: :search
       get "mylist"
+      get "add_tag"
+      post "add_tag_finish"
       get "name"
       post "up_column"
       get "address"

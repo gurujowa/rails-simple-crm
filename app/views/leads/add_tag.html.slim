@@ -1,0 +1,6 @@
+= form_tag(url_for(action: "add_tag_finish"))
+  .tag_name タグ名 
+  = text_field_tag "tag_name"
+  .tag_list タグのID 
+  = text_area_tag "ids"
+  .submit = submit_tag

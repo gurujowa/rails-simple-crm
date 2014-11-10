@@ -48,6 +48,20 @@ class LeadsController < ApplicationController
       end
   end
 
+  def add_tag
+  end
+  def add_tag_finish
+    tag_name = params[:tag_name]
+    tag_list = params[:ids]
+    Lead.transaction do
+      tag_list.each_line do |id|
+        lead = Lead.find(id)
+        lead.tag_list.add(tag_name)
+        lead.save!
+      end
+    end
+    redirect_to leads_url, notice: '正しくタグがつきました'
+  end
 
   def mylist
       @q = Lead.group(:name).search(params[:q])
