@@ -19,6 +19,10 @@ h4 既存客検索
       = f.input :city_cont
       = f.input :address_cont
       = f.input :building_cont
+      .form-group
+        label.col-sm-3.control-label タグ
+        .col-sm-9
+          = select_tag :tag_name, options_for_select(@tag_list,@tag_name), id: "company_tag_list_search", include_blank: true
 
       = f.submit "検索する", class: "btn btn-primary"
   #total_entries 件数：#{@companies.total_entries}件

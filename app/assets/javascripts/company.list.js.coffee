@@ -12,3 +12,6 @@ jQuery ->
     return false 
   $('#companies_all_checkbox').on 'change', ->
     $('.companies_index_checkbox').prop('checked', this.checked)
+
+  $("#company_tag_list_search").select2
+    width: "400px"

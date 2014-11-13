@@ -7,6 +7,7 @@ table.table.table-striped.table-bordered
       th.hidden-xs 住所
       th ステータス
       th 最終コース
+      th タグ
   tbody
     - @companies.each do |c|
       tr
@@ -18,3 +19,4 @@ table.table.table-striped.table-bordered
         td.hidden-xs = c.full_address
         td = c.active_st_text
         td = c.end_date
+        td = c.tag_list

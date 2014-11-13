@@ -1,5 +1,11 @@
 
 .well
+  .edit_tag_field
+    = form_for @company do |f|
+      = hidden_field_tag "after_show", "y"
+      = f.text_field :tag_list,  id: "company_tag_list_form"
+      = submit_tag "タグ変更"
+
   = link_to "編集", edit_company_path(@company), class: "btn btn-info"
   = link_to "削除", company_path(@company), class: "btn btn-warning", method: :delete
 .row

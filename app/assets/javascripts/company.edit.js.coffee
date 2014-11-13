@@ -1,5 +1,11 @@
 
 jQuery ->
+
+  if(0 < $("#company_tag_list_form").size())
+    $("#company_tag_list_form").select2
+      width: "400px"
+      tags: gon.tag_list
+
   $('.balloon').balloon({contents: $('#balloon_popup').clone().show(), position: "right"})
   $("#edit_tab a[data-toggle=\"tab\"]").on "shown", (e) -> 
     localStorage.setItem "lastEditTab", $(e.target).attr("id")

@@ -36,7 +36,7 @@
 class Company < ActiveRecord::Base
 extend Enumerize
 
-
+  acts_as_taggable 
   has_paper_trail 
 
   has_many :contacts, :dependent => :destroy
