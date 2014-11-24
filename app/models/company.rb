@@ -64,12 +64,12 @@ extend Enumerize
   validates :city, presence: true, length: {maximum: 8, :message => '市町村区は、検索しやすいよう市のみをいれてください。（例：横浜市）'}
   validates :address, presence:true
 
-  enumerize :active_st, in: [:contract , :impossible, :pending]
+  enumerize :active_st, in: [:draft, :contract , :impossible, :pending]
 
   scope :has_contract, lambda{ where("active_st = ?", :contract)}
   scope :is_active, lambda { where(:active_st => @@active_in ) }
 
-  @@active_in = ["active_a", "active_b", "active_c", "contract"]
+  @@active_in = ["contract"]
 
   def is_active
     if @@active_in.include?(self.active_st)

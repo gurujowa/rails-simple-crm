@@ -10,6 +10,11 @@ class CourseAlert
     unless course_present_check course
       return false
     end
+
+    if course.periods.blank?
+      return false
+    end
+
     if type == :alert
       order_flg_check course,14.days.since
       book_flg_check course, 14.days.since

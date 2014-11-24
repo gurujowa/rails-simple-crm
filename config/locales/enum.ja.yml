@@ -32,6 +32,7 @@ ja:
         lead: 新規客
     company:
       active_st:
+        draft: 契約前
         pending: 延期・休止中
         contract: 有効
         impossible: 接触禁止
