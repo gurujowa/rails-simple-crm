@@ -2,33 +2,98 @@ ul.breadcrumb
   li Home 
   li.active = @teacher_order.teacher.name
 
+.well
+  - if @teacher_order.status == "draft"
+    = link_to '編集', edit_teacher_order_path(@teacher_order), class: "btn btn-default"
+    = link_to '発行する', {action: :active, id: @teacher_order.id}, class: "btn btn-success"
+    = link_to '削除', teacher_order_path(@teacher_order),  method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
+  - if @teacher_order.status == "active"
+    = link_to '業務依頼書出力', {action: :report, id: @teacher_order}, class: "btn btn-success"
+    = link_to 'キャンセルする', {action: :cancel, id: @teacher_order}, class: "btn btn-danger"
 
-h1 詳細情報
+
+h1 講師発注詳細情報
 .row
-  .col-sm-5
-    h2 発注情報
-    table.table.table-striped
-      tr
-        th 発注日
-        td = @teacher_order.order_date
-      tr
-        th 支払日
-        td = @teacher_order.payment_date
-      tr
-        th 請求美
-        td = @teacher_order.invoice_date
-      tr
-        th 受講者数
-        td = @teacher_order.students
-      tr
-        th 金額
-        td = @teacher_order.price
-      tr
-        th 金額詳細
-        td = @teacher_order.price_detail
-      tr
-        th 要約
-        td = @teacher_order.description
-      tr
-        th メモ
-        td = @teacher_order.memo
+  .col-sm-12
+    .panel.panel-default
+      .panel-heading 発注情報
+      table.table.table-striped
+        tr
+          th 受講者数
+          td = @teacher_order.students
+        tr
+          th ステータス
+          td = @teacher_order.status_text
+        - if @teacher_order.status == "active"
+          tr
+            th 発行日
+            td = @teacher_order.order_date
+        tr
+          th 金額
+          td = number_to_currency @teacher_order.price
+        tr
+          th 金額詳細
+          td = @teacher_order.price_detail
+        tr
+          th 研修内容概要
+          td = @teacher_order.description
+        tr
+          th メモ
+          td = @teacher_order.memo
+  - if @teacher_order.courses.present?
+    - @teacher_order.courses.each do |c|
+      h2 = c.name
+      .col-sm-5
+        .panel.panel-default
+          .panel-heading コース情報
+          table.table.table-striped
+            tr
+              th 会場住所
+              td = c.address
+            tr
+              th 最寄り駅と駅からの時間
+              td = c.station
+            tr
+              th 先方研修担当者
+              td = c.responsible
+            tr
+              th 先方緊急連絡先
+              td = c.tel
+            tr
+              th 立会
+              td = c.observe_text
+            tr
+              th 受講者数
+              td = c.students
+            tr
+              th 合計時間
+              td = convert_min c.total_time
+            tr
+              th メモ
+              td = c.memo
+      .col-sm-7
+        .panel.panel-default
+          .panel-heading コマ
+          table.table.table-bordered.table-striped
+            thead
+              tr
+                th 日付
+                th 開始時刻
+                th 終了時刻
+                th 休憩開始
+                th 休憩終了
+                th 立会人
+                th 合計時間
+                th メモ
+            tbody
+              - c.periods.each do |p|
+                - if p.teacher.id == @teacher_order.teacher.id
+                  tr
+                    td = p.day.to_s(:jp)
+                    td = p.start_date.to_s(:time)
+                    td = p.end_date.to_s(:time)
+                    td = p.break_start(:time)
+                    td = p.break_end(:time)
+                    td = p.user_name
+                    td = convert_min p.total_time
+                    td style="width:40%" = p.memo

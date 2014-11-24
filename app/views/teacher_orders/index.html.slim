@@ -1,27 +1,25 @@
 h1 講師発注管理  一覧
 
 = link_to '新規追加', new_teacher_order_path, :class => 'btn btn-info'
-table#teacher_orders_datatable.default_datatables
+table.default_datatables
   thead
     tr
       th 会社名
+      th ステータス
       th 講師
       th 開始日
       th 終了日
-      th 作成日
       th 合計時間
       th 合計金額
-      th 編集
   tbody
     - @teacher_orders.each do |teacher_order|
       tr
-        td = link_to teacher_order.company_name, edit_teacher_order_path(teacher_order)
-        td = teacher_order.teacher.name
+        td = link_to teacher_order.company_name, teacher_order_path(teacher_order)
+        td = link_to teacher_order.status_text, teacher_order_path(teacher_order)
+        td 
+          span style="display:none;" = teacher_order.teacher.kana
+          span = teacher_order.teacher.name
         td = teacher_order.start_date
         td = teacher_order.end_date
-        td = teacher_order.created_at.to_s(:date)
         td = convert_min(teacher_order.total_time)
         td = number_to_currency(teacher_order.price)
-        td 
-          = link_to '表示', teacher_order_path(teacher_order), :class => "btn btn-default"
-          = link_to '編集', edit_teacher_order_path(teacher_order), :class => "btn btn-info"

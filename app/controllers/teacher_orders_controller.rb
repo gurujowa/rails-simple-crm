@@ -1,5 +1,5 @@
 class TeacherOrdersController < ApplicationController
-  before_action :set_teacher_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_teacher_order, only: [:report, :active, :cancel, :show, :edit, :update, :destroy]
   before_action :set_default_form, only: [:edit, :update, :new, :create]
   before_action :authenticate_user!
 
@@ -10,6 +10,23 @@ class TeacherOrdersController < ApplicationController
 
   def show
 
+  end
+
+  def cancel
+    if @teacher_order.update({status:  "cancel"})
+      redirect_to teacher_order_url(@teacher_order), notice: '講師発注をキャンセルしました。'
+    else
+      redirect_to teacher_order_url(@teacher_order), error: '講師発注のキャンセルに失敗しました。'
+    end
+
+  end
+
+  def active
+    if @teacher_order.update({status:  "active", order_date:  DateTime.now})
+      redirect_to teacher_order_url(@teacher_order), notice: '講師発注を発行しました。'
+    else
+      redirect_to teacher_order_url(@teacher_order), error: '講師発注の発行に失敗しました。'
+    end
   end
 
   # GET /teacher_orders/1

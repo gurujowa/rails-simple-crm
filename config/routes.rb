@@ -71,6 +71,9 @@ Mycrm::Application.routes.draw do
   resources :teacher_orders do
     member do
       get 'flag/:type' , :action => "flag"
+      get 'active'
+      get 'cancel'
+      get 'report'
     end
   end
 

@@ -17,6 +17,7 @@
 #
 
 class TeacherOrder < ActiveRecord::Base
+extend Enumerize
 
   has_paper_trail 
   has_many :teacher_order_courses
@@ -26,6 +27,8 @@ class TeacherOrder < ActiveRecord::Base
   validates :teacher_id, presence: true
   validates :description, presence: true
   validates :courses, presence: true
+
+  enumerize :status, in: [:draft, :active , :cancel]
 
   validate :check_company_name
   validate :check_teacher_include
