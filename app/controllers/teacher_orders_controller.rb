@@ -8,8 +8,12 @@ class TeacherOrdersController < ApplicationController
     @teacher_orders = TeacherOrder.all
   end
 
-  # GET /teacher_orders/1
   def show
+
+  end
+
+  # GET /teacher_orders/1
+  def report
     report = Report.new "gyoumu.xls"
 
     company = @teacher_order.courses.first.company
@@ -51,7 +55,6 @@ class TeacherOrdersController < ApplicationController
 
     filename = "【" + @teacher_order.teacher.name + "】講師依頼書_" + Date.today.strftime('%Y%m%d') + "_" + company.client_name + ".xls"
 
-    @teacher_order.update_attributes!({:order_date => Date.today})
     send_file report.write  , :type=>"application/ms-excel", :filename => ERB::Util.url_encode(filename)
   end
 

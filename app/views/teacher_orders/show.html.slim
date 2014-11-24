@@ -1,0 +1,34 @@
+ul.breadcrumb
+  li Home 
+  li.active = @teacher_order.teacher.name
+
+
+h1 詳細情報
+.row
+  .col-sm-5
+    h2 発注情報
+    table.table.table-striped
+      tr
+        th 発注日
+        td = @teacher_order.order_date
+      tr
+        th 支払日
+        td = @teacher_order.payment_date
+      tr
+        th 請求美
+        td = @teacher_order.invoice_date
+      tr
+        th 受講者数
+        td = @teacher_order.students
+      tr
+        th 金額
+        td = @teacher_order.price
+      tr
+        th 金額詳細
+        td = @teacher_order.price_detail
+      tr
+        th 要約
+        td = @teacher_order.description
+      tr
+        th メモ
+        td = @teacher_order.memo

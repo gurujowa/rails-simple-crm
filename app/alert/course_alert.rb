@@ -51,11 +51,6 @@ class CourseAlert
       return false
     end
 
-    unless c.periods.present?
-      push_error  c, "コマ情報がありません"
-      return false
-    end
-
     return true
 
   end
