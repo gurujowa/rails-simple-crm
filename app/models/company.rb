@@ -69,7 +69,7 @@ extend Enumerize
   scope :has_contract, lambda{ where("active_st = ?", :contract)}
   scope :is_active, lambda { where(:active_st => @@active_in ) }
 
-  @@active_in = ["contract"]
+  @@active_in = ["draft","contract"]
 
   def is_active
     if @@active_in.include?(self.active_st)
