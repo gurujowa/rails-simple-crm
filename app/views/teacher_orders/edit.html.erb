@@ -1,5 +1,2 @@
 <h1>講師発注　編集</h1>
 <%= render 'form' %>
-<%= link_to '依頼書', teacher_order_path(@teacher_order), :class => "btn btn-info" %>
-<%= link_to '削除', @teacher_order, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-default" %>
-<%= link_to '戻る', teacher_orders_path %>

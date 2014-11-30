@@ -1,5 +1,18 @@
 module TeacherOrdersHelper
 
+  def teacher_order_status_button to
+    if to.status == "draf"
+      cl = "btn-default"
+    elsif to.status == "active"
+      cl = "btn-success"
+    elsif to.status == "cancel"
+      cl = "btn-danger"
+    else
+      cl = "btn-default"
+    end
+    return link_to to.status_text, teacher_order_path(to), class: "btn " + cl
+  end
+
   def to_order_date model, attr
     date = model.read_attribute(attr)
     if date.present?

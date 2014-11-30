@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124120651) do
+ActiveRecord::Schema.define(version: 20141128052714) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -306,19 +306,26 @@ ActiveRecord::Schema.define(version: 20141124120651) do
     t.integer "course_id"
   end
 
+  create_table "teacher_order_lines", force: true do |t|
+    t.integer "teacher_order_id"
+    t.integer "price"
+    t.date    "payment_date"
+    t.boolean "invoice_flg"
+    t.boolean "payment_flg"
+    t.string  "memo"
+  end
+
   create_table "teacher_orders", force: true do |t|
     t.integer  "teacher_id"
     t.text     "memo"
     t.date     "order_date"
-    t.date     "payment_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "students"
     t.string   "description"
-    t.date     "invoice_date"
-    t.integer  "price",        default: 0,       null: false
     t.string   "price_detail"
-    t.string   "status",       default: "draft", null: false
+    t.string   "status",         default: "draft", null: false
+    t.text     "course_mention"
   end
 
   create_table "teachers", force: true do |t|

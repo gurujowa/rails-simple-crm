@@ -1,0 +1,25 @@
+= simple_form_for @teacher_order, :html => {:class => 'form-horizontal'}, wrapper: :horizontal_form do |f| 
+  = f.input :teacher_id, collection: @teachers
+  = f.input :price_detail 
+  = f.association :courses,
+      selected: @teacher_order.courses.map{|i| i.id},
+      label_method: :to_select_label,
+      input_html: { class: 'with-select2' } 
+  = f.input :description, input_html: {class: "input-xxlarge"}
+  = f.input :course_mention
+  = f.input :memo
+
+
+  table.table.table-borderd.table-striped.billing_plan_lines#tasks
+    thead
+      tr
+        th 支払期限
+        th 価格
+        th メモ
+        th 削除
+    tbody.add_fields
+      = f.simple_fields_for :teacher_order_lines, wrapper: :table_form do  |l|
+        = render :partial => "teacher_order_line_fields", locals: {l: l, delete_flg: true}
+  .form-actions
+    = f.button :submit, class: "btn btn-primary"
+    = link_to_add_simple_fields "行を追加する", f, :teacher_order_lines 

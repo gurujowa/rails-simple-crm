@@ -23,7 +23,10 @@ extend Enumerize
   has_many :teacher_order_courses
   has_many :courses, through: :teacher_order_courses
   belongs_to :teacher
-  validates :price, presence: true, numericality: {only_integer: true, greater_than: 1000}
+
+  has_many :teacher_order_lines, :dependent => :destroy
+  accepts_nested_attributes_for :teacher_order_lines, :allow_destroy => true, reject_if: proc { |attributes| attributes['price'].blank? }
+
   validates :teacher_id, presence: true
   validates :description, presence: true
   validates :courses, presence: true
@@ -77,6 +80,10 @@ extend Enumerize
   end
 
   def total_price
+    price = 0
+    self.teacher_order_lines.each do |l|
+      price += l.price
+    end
     return price
   end
 

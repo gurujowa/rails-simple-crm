@@ -1,0 +1,7 @@
+tr
+  td = l.input :payment_date,as: "date_picker"
+  td = l.input :price
+  td = l.input :memo
+  td
+    - if delete_flg == true
+      = link_to_remove_fields "削除", l

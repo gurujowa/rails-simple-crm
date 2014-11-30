@@ -29,8 +29,23 @@ class TeacherOrdersController < ApplicationController
     end
   end
 
-  # GET /teacher_orders/1
   def report
+    @to = @teacher_order
+    respond_to do |format|
+      format.html { 
+        redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :teacher_orders, action: :report
+      }
+      format.pdf {
+        render pdf: @teacher_order.description + " - 請求予定表",
+               encoding: 'UTF-8',
+               layout: 'pdf.html',
+               show_as_html: params[:debug].present?
+      }
+    end
+  end
+
+  # GET /teacher_orders/1
+  def report2
     report = Report.new "gyoumu.xls"
 
     company = @teacher_order.courses.first.company
@@ -137,7 +152,7 @@ class TeacherOrdersController < ApplicationController
   def teacher_order_params
     params.require(:teacher_order).permit(
     :teacher_id,:price, :price_detail, :memo, :invoice_flg,:students, :description,
-    :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [])
+    :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [], teacher_order_lines_attributes: [:id, :_destroy, :payment_date, :price, :memo])
   end
 
 end

@@ -15,11 +15,11 @@ table.default_datatables
     - @teacher_orders.each do |teacher_order|
       tr
         td = link_to teacher_order.company_name, teacher_order_path(teacher_order)
-        td = link_to teacher_order.status_text, teacher_order_path(teacher_order)
+        td = teacher_order_status_button teacher_order
         td 
           span style="display:none;" = teacher_order.teacher.kana
           span = teacher_order.teacher.name
         td = teacher_order.start_date
         td = teacher_order.end_date
         td = convert_min(teacher_order.total_time)
-        td = number_to_currency(teacher_order.price)
+        td = number_to_currency(teacher_order.total_price)

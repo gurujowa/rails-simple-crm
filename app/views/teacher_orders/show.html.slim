@@ -3,8 +3,8 @@ ul.breadcrumb
   li.active = @teacher_order.teacher.name
 
 .well
+  = link_to '編集', edit_teacher_order_path(@teacher_order), class: "btn btn-default"
   - if @teacher_order.status == "draft"
-    = link_to '編集', edit_teacher_order_path(@teacher_order), class: "btn btn-default"
     = link_to '発行する', {action: :active, id: @teacher_order.id}, class: "btn btn-success"
     = link_to '削除', teacher_order_path(@teacher_order),  method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
   - if @teacher_order.status == "active"
@@ -30,7 +30,7 @@ h1 講師発注詳細情報
             td = @teacher_order.order_date
         tr
           th 金額
-          td = number_to_currency @teacher_order.price
+          td = number_to_currency @teacher_order.total_price
         tr
           th 金額詳細
           td = @teacher_order.price_detail
@@ -40,6 +40,21 @@ h1 講師発注詳細情報
         tr
           th メモ
           td = @teacher_order.memo
+
+  .col-sm-12
+    .panel.panel-default
+      .panel-heading 請求情報
+      table.table.table-striped.table-bordered
+        tr
+          th  支払日
+          th  金額
+          th  メモ
+        - @teacher_order.teacher_order_lines.each do |l|
+          tr
+            td = l.payment_date
+            td = l.price
+            td = l.memo
+
   - if @teacher_order.courses.present?
     - @teacher_order.courses.each do |c|
       h2 = c.name
