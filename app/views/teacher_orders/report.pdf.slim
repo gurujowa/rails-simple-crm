@@ -1,0 +1,121 @@
+.wrapper
+  .content
+    .alnright
+     p 発注番号 = @teacher_order.id
+
+    h1 業務依頼書
+    .clearfix
+      .alpha
+        p.recipientName style="margin-bottom: 10px;"
+          = @teacher_order.teacher.short_name
+          span 様
+        p.titleName style="margin-bottom: 10px;"
+          = @teacher_order.description
+        p  下記のとおりの業務の委託をご依頼（発注）いたします。
+        dl class="totalAmountPrice clearfix"
+          dt  発注金額
+          dd
+            = number_to_currency @teacher_order.total_price
+      .gamma
+        =  params[:debug].present? ? image_tag('logo.gif') : wicked_pdf_image_tag('logo.gif')
+      .beta
+        .senderName ユアブライト株式会社
+        p 
+          | 〒169-0075東京都新宿区高田馬場3-3-9<br>
+            山下ビル5F<br>
+            TEL:03-6908-6143<br>
+            FAX:03-6908-6145<br>
+            info@yourbright.co.jp
+    table.table_main width="100%"
+      tr
+        th rowspan="4" width="15%" style="background-color:#CCC;" 委託企業
+        td width="20%" 所在地
+        td = @to.company.address
+      tr
+        td 企業名
+        td = @to.company.name
+      tr
+        td 電話番号
+        td = @to.company.tel
+      tr
+        td 担当者名
+        td = @to.company.client_person
+    br
+
+
+    h3 支払情報
+    table width="100%" class="table_main"
+      tr
+        th.gray 支払予定日
+        th.gray 支払金額
+        th.gray メモ
+      - @teacher_order.teacher_order_lines.each do |e|
+        tr
+          td = e.payment_date 
+          td = number_to_currency e.price
+          td = e.memo
+      tr
+        td.gray colspan="2" 合計金額
+        td class="alnright" = number_to_currency @teacher_order.total_price 
+    p
+      | ※月末締め翌々月５日払いとなります。<br>
+        ※請求書が必要です。<br>
+        ※支払い方法は、指定銀行口座に振込となります。<br>
+        ※企業側からのキャンセル（前日および当日を除く）および講師の自己都合により不実施となった研修については支払いの対象となりません。<br>
+        ※契約金額には消費税8%が含まれています
+    .page-break
+
+
+    - @to.courses.each do |c|
+      h3 = c.name
+      table.table_main width="100%"
+        tr
+          th rowspan="8" width="15%"style="background-color:#CCC;" コース情報
+          td width="20%" コース名
+          td = c.name
+        tr
+          td 会場住所
+          td = c.address
+        tr
+          td 最寄り駅
+          td = c.station
+        tr
+          td 先方研修担当者
+          td = c.responsible
+        tr
+          td 先方緊急連絡先
+          td = c.tel
+        tr
+          td 受講者数
+          td = c.students
+        tr
+          td 合計時間
+          td = convert_min c.total_time
+        tr
+          td 特記
+          td 
+            | テキスト、レジュメ等は研修日の１週間前までに下記にお送りください。<br>
+              また、レジュメとともに、必要な備品（ホワイトボード、プロジェクタなど）もお知らせください。<br>
+              送り先： kenshu@yourbright.co.jp　山下勇登　宛<br>
+              連絡先：　03-6908-6143（代）　090-8276-3312(山下携帯)
+
+      br
+      h3 コマ情報
+      table.table_main width="100%"
+        tr
+          th.gray 実施日
+          th.gray 開始時刻
+          th.gray 終了時刻
+          th.gray 休憩開始
+          th.gray 休憩終了
+          th.gray 講師名
+        - c.periods.each do |p|
+          - if p.teacher.id == @teacher_order.teacher.id
+            tr
+              td = p.day
+              td = p.start_time.to_s(:time)
+              td = p.end_time.to_s(:time)
+              td = p.break_start(:time)
+              td = p.break_end(:time)
+              td = p.teacher.short_name
+      p ※研修日・時間は変更・キャンセルになる場合があります。		

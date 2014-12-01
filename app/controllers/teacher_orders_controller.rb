@@ -31,6 +31,7 @@ class TeacherOrdersController < ApplicationController
 
   def report
     @to = @teacher_order
+    @until = 10 - @teacher_order.teacher_order_lines.length
     respond_to do |format|
       format.html { 
         redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :teacher_orders, action: :report

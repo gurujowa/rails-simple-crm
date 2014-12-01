@@ -36,6 +36,10 @@ extend Enumerize
   validate :check_company_name
   validate :check_teacher_include
 
+  def company
+    self.courses.first.company
+  end
+
   def check_company_name
     courses = self.courses
     ar = []
