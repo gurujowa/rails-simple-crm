@@ -8,7 +8,10 @@ table.table.table-bordered
     - @company.estimates.each do |e|
       tr
         td  
-          = link_to e.estimate_lines.first.name,estimate_path(e)
+          - if e.estimate_lines.present?
+            = link_to e.estimate_lines.first.name,estimate_path(e)
+          - else
+            = link_to "名前なし", estimate_path(e)
           = link_to "(edit)" , edit_estimate_path(e)
         td  = number_to_currency e.total_price
 h4 請求予定表一覧
