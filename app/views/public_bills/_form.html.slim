@@ -1,0 +1,30 @@
+= simple_form_for(@public_bill) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :publish_date, as: :date_picker
+    = f.input :send_flg
+    = f.input :company_name
+    = f.input :invoice_date, as: :date_picker
+    = f.input :payment_date, as: :date_picker
+    = f.input :memo
+
+  table.table.table-striped.table-bordered
+    thead
+      tr
+        th 名前
+        th 詳細
+        th 単価
+        th 個数
+        th 税率
+        th 削除
+    tbody.add_fields
+      = f.simple_fields_for :public_bill_lines, wrapper: :table_form do |l|
+        = render :partial => "public_bill_line_fields", :locals => { :l => l, :delete_flg => true}
+
+
+  .form-actions
+    = f.button :submit, :class => "btn btn-info" 
+    = link_to '削除', @public_bill, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning" 
+    = link_to_add_simple_fields "行を追加する", f, :public_bill_lines

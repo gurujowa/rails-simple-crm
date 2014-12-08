@@ -9,6 +9,15 @@ require 'yaml'
 backup_config = YAML.load_file(backup_yml)
 
 
+Backup::Model.new(:crm_dropbox_live, 'CRM SQLite File dropbox live') do
+  store_with Dropbox do |db|
+    db.api_key    = 'e2ym1h50dfmfsiy'
+    db.api_secret = 's4g7fz1o6mmn60l'
+    db.path       = '/backups'
+    db.cache_path  = ".cache"
+  end
+end
+
 Backup::Model.new(:crm_dropbox, 'CRM SQLite File dropbox') do
 
   archive :my_archive do |archive|
@@ -19,7 +28,7 @@ Backup::Model.new(:crm_dropbox, 'CRM SQLite File dropbox') do
     db.api_key    = 'e2ym1h50dfmfsiy'
     db.api_secret = 's4g7fz1o6mmn60l'
     db.path       = '/backups'
-    db.keep       = 2
+    db.keep       = 5
   end
 
   compress_with Bzip2 do |compression|

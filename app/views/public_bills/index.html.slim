@@ -1,0 +1,30 @@
+h1 役所用請求書 一覧
+
+= link_to '新規追加', new_public_bill_path, :class => 'btn btn-default'
+table.default_datatables
+  thead
+    tr
+      
+      th 請求書名
+      th 発行日
+      th 送信済
+      th 会社名
+      th 請求日時
+      th 支払い日時
+      th メモ
+      th チェック
+  tbody
+    - @public_bills.each do |public_bill|
+      tr
+        
+        td = public_bill.name 
+        td = public_bill.publish_date 
+        td = public_bill.send_flg 
+        td = public_bill.company_name 
+        td = public_bill.invoice_date 
+        td = public_bill.payment_date 
+        td = public_bill.memo 
+        td 
+          = link_to '表示', public_bill_path(public_bill), :class => "btn btn-default"
+          = link_to '編集', edit_public_bill_path(public_bill), :class => "btn btn-info"
+          = link_to '削除', public_bill, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"

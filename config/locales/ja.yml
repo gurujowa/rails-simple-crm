@@ -157,6 +157,14 @@ ja:
         tax_rate: 消費税
         send_flg: 発行フラグ
         memo: メモ
+      public_bill:
+        company_name: 会社名
+        publish_date: 発行日
+        send_flg: 発行済か
+        name: 件名
+        invoice_date: 請求書送付日
+        payment_date: 支払い日
+        memo: メモ
       estimate:
         company: 会社
         display_name: 表示名

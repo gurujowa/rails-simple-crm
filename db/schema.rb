@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141128052714) do
+ActiveRecord::Schema.define(version: 20141208072734) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -280,6 +280,29 @@ ActiveRecord::Schema.define(version: 20141128052714) do
   end
 
   add_index "periods", ["user_id"], name: "index_periods_on_user_id"
+
+  create_table "public_bill_lines", force: true do |t|
+    t.string   "name",                       null: false
+    t.integer  "unit_price",                 null: false
+    t.integer  "quantity",                   null: false
+    t.integer  "public_bill_id",             null: false
+    t.integer  "tax_rate",       default: 0, null: false
+    t.text     "detail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "public_bills", force: true do |t|
+    t.string   "name",                         null: false
+    t.date     "publish_date"
+    t.boolean  "send_flg",     default: false, null: false
+    t.string   "company_name",                 null: false
+    t.date     "invoice_date"
+    t.date     "payment_date"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

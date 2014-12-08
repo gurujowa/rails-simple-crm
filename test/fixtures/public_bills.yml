@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  publish_date: 2014-12-08
+  send_flg: false
+  company_name: MyString
+  invoice_date: 2014-12-08
+  payment_date: 2014-12-08
+  memo: MyText
+
+two:
+  name: MyString
+  publish_date: 2014-12-08
+  send_flg: false
+  company_name: MyString
+  invoice_date: 2014-12-08
+  payment_date: 2014-12-08
+  memo: MyText
