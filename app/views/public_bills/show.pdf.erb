@@ -204,7 +204,7 @@
   <tr>
     <td><%= @public_bill.invoice_date %></td>
     <td><%= @public_bill.payment_date %></td>
-    <td><%= @public_bill.total_price %></td>
+    <td class="alnright"><%= number_to_currency @public_bill.total_price %></td>
   </tr>
 </table>
 <br>
