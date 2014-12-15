@@ -159,10 +159,6 @@
 
 <div class="alnright">
   <p>
-  <%= Date.today.strftime "%Y年%m月%d日" %>
-  </p>
-
-  <p>
     請求番号:BILL<%= @public_bill.id %>
   </p>
 </div>
@@ -178,7 +174,7 @@
     </div>
 
     <p>
-      下記のとおりお見積申し上げます。
+      下記のとおりご請求申し上げます。
     </p>
     <dl class="totalAmountPrice clearfix">
       <dt>ご請求金額</dt>
@@ -199,7 +195,20 @@
   </div>
 </div>
 
-
+<table width="100%" class="table_main">
+  <tr>
+    <th>ご請求日</th>
+    <th>お支払期限</th>
+    <th>当月お支払い額</th>
+  </tr>
+  <tr>
+    <td><%= @public_bill.invoice_date %></td>
+    <td><%= @public_bill.payment_date %></td>
+    <td><%= @public_bill.total_price %></td>
+  </tr>
+</table>
+<br>
+<br>
 <table width="100%" class="table_main">
   <tr>
     <th>品番・品名</th>
@@ -240,6 +249,7 @@
   </tr>
 </table>
 
+  <p> 取引銀行: 三菱東京ＵＦＪ銀行  麻布支店<br> 普通預金  4707113 </p>
   <p><%= @public_bill.memo %></p>
 
 
