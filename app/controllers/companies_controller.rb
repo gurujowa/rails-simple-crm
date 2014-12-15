@@ -31,15 +31,6 @@ class CompaniesController < ApplicationController
       tl.each do |t|
         @tag_list.push([t.name, t.name])
       end
-
-    respond_to do |format|
-      format.html
-      format.csv  { 
-        send_data @datatables.all.to_csv.tosjis,
-               :type => 'text/csv; charset=shift_jis; header=present',
-                :disposition => "attachment; filename=companies_#{Time.now.strftime('%Y_%m_%d_%H_%M_%S')}.csv"
-      }
-    end
   end
 
  def pdf

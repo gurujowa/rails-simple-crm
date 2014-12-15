@@ -70,6 +70,12 @@ Mycrm::Application.routes.draw do
 
   resources :campaigns, :invoices, :client_orders, :clients
 
+  resources :teacher_order_lines, only: [:index] do
+    member do
+      get 'flag/:type' , :action => "flag"
+    end
+  end
+
   resources :teacher_orders do
     member do
       get 'flag/:type' , :action => "flag"

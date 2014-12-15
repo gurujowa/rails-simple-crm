@@ -74,6 +74,7 @@ html
               ul.dropdown-menu
                 li = link_to "講師検索", {controller: "teachers", action: "index"}
                 li = link_to "発注管理", {controller: "teacher_orders", action: "index"}
+                li = link_to "講師月ごと発注一覧", {controller: "teacher_order_lines", action: "index"}
                 li = link_to "登録ステータス", {controller: "teachers", action: "flag"}
             li.dropdown
               = link_to "役所用", "public", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}

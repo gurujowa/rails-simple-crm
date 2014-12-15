@@ -1,0 +1,25 @@
+h1 講師発注管理  一覧
+
+= link_to '新規追加', new_teacher_order_path, :class => 'btn btn-info'
+table.default_datatables
+  thead
+    tr
+      th 会社名
+      th 請求
+      th 支払
+      th 講師
+      th 価格
+      th 支払日
+      th メモ
+  tbody
+    - @teacher_order_lines.each do |l|
+      tr
+        td = link_to l.teacher_order.company_name, teacher_order_path(l.teacher_order)
+        td = link_to_switch_flg l, :invoice_flg
+        td = link_to_switch_flg l, :payment_flg
+        td 
+          span style="display:none;" = l.teacher_order.teacher.kana
+          span = l.teacher_order.teacher.name
+        td = number_to_currency l.price
+        td = l.payment_date
+        td = l.memo

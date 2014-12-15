@@ -53,6 +53,13 @@ ja:
         send_flg:
           flag_on: 発送済
           flag_off: 未発送
+      teacher_order_line:
+        invoice_flg:
+          flag_on: 請求済
+          flag_off: 未請求
+        payment_flg:
+          flag_on: 支払済
+          flag_off: 未支払
       lead_estimate:
         send_flg:
           flag_on: 発行済

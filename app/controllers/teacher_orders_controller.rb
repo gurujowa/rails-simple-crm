@@ -8,8 +8,11 @@ class TeacherOrdersController < ApplicationController
     @teacher_orders = TeacherOrder.all
   end
 
-  def show
+  def line
+    @teacher_order_lines = TeacherOrderLine.all
+  end
 
+  def show
   end
 
   def cancel
