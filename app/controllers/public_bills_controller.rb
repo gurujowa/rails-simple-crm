@@ -24,7 +24,13 @@ class PublicBillsController < ApplicationController
 
   # GET /public_bills/new
   def new
-    @public_bill = PublicBill.new
+    if params[:dup_id].present?
+      parent = PublicBill.find(params[:dup_id])
+      clone = parent.deep_clone :include => :public_bill_lines
+      @public_bill = clone
+    else
+      @public_bill = PublicBill.new
+    end
   end
 
   # GET /public_bills/1/edit

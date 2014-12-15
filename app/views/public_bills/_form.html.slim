@@ -27,4 +27,5 @@
   .form-actions
     = f.button :submit, :class => "btn btn-info" 
     = link_to '削除', @public_bill, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning" 
+    = link_to '複製', new_public_bill_path(dup_id: @public_bill.id), :class => "btn btn-default"
     = link_to_add_simple_fields "行を追加する", f, :public_bill_lines
