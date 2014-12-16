@@ -73,7 +73,7 @@ gem 'spreadsheet'
 gem 'slim-rails'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
-
+gem "dropbox-api"
 
 #------------------------------
 #activerecord and model
