@@ -6,7 +6,8 @@ namespace :backup do
     Dropbox::API::Config.mode       = "sandbox"
     
     client = Dropbox::API::Client.new(:token  => '9qfxnpa3swd080od', :secret => 'f4emrr6qhlr2ob6')
-    path = Rails.root.join('db','production.db')
+    config   = Rails.configuration.database_configuration
+    path = Rails.root.join(config[Rails.env]["database"])
     client.upload 'clone.db' , File.read(path)
   end
 end
