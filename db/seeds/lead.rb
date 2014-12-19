@@ -14,52 +14,64 @@ def tel_encode(input)
     i
 end
 
-#社会福祉法人（社協以外）　医療法人　営利法人　NPO法人　その他法人
-open("db/wamnet.csv", "rb:Shift_JIS:UTF-8", undef: :replace) do |f|
-CSV.new(f).each do |row|
-  if row[4].blank?
+table = CSV.table('db/saitama.csv')
+
+table.each do |r|
+  if r[:client_name].blank?
     next
   end
-  lead = Lead.find_by(tel: tel_encode(row[5]))
+  lead = Lead.find_by(tel: tel_encode(r[:tel]))
+
   if lead.blank?
-    lead = Lead.new(:name => row[0],:zipcode => row[1])
-    lead.tel =  tel_encode(row[5])
-    lead.fax = tel_encode(row[6])
-    lead.tag_list.add(row[7])
+    lead = Lead.new(:name => r[:client_name],:zipcode => r[:zip_code])
+    lead.tel =  tel_encode(r[:tel])
+    lead.fax = tel_encode(r[:fax])
+    lead.tag_list.add(r[:category])
+    lead.url = r[:url]
     #郵便番号
     lead.zipcode.gsub! "〒",""
-  end
-
 
     #住所
-    st = row[2].split(" ")
+    st = r[:address].split(" ")
     ad = nil
     if st.length == 2
       ad = st[0]
       lead.building = st[1]
     else
-      ad = row[2]
+      ad = r[:address]
     end
 
     adb = ad.match(/^(京都府|.+?[都道府県])(大和郡山市|蒲郡市|小郡市|郡上市|杵島郡大町町|佐波郡玉村町|(?:[^市]*?|余市|高市)郡.+?[町村]|(?:石狩|伊達|八戸|盛岡|奥州|南相馬|上越|姫路|宇陀|黒部|小諸|富山|岩国|周南|佐伯|西海)市|.*?[^0-9一二三四五六七八九十上下]区|四日市市|廿日市市|.+?市|.+?町|.+?村)(.*?)([0-9-]*?)$/)
     if adb.present?
       lead.prefecture = adb[1].strip
-      lead.city = row[4]
+      lead.city = adb[2]
       lead.street = adb[3] + adb[4]
+      lead.street.strip
     else
-      p row[2]
+      p r[:address]
     end
+  end
 
-  Lead.transaction do
+
+
+  lead.memo = <<EOL
+カテゴリ：#{r[:category]}
+管理者：#{r[:client_person]}
+管理者の役職：#{r[:client_post]}
+法人の種類：#{r[:company]}
+法人名：#{r[:company_name]}
+法人の住所：#{r[:company_address]}
+法人の電話番号：#{r[:company_tel]}
+法人のFAX：#{r[:company_fax]}
+法人代表者：#{r[:company_person]}
+法人代表者の役職名：#{r[:company_post]}
+EOL
+
     unless lead.save
       p lead.tel
       p lead.prefecture
       p lead.city
       raise lead.errors.full_messages.inspect
     end
-  end
-  #p lead.tel
-end
-end
 
-
+end
