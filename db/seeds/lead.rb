@@ -31,6 +31,8 @@ table.each do |r|
     #郵便番号
     lead.zipcode.gsub! "〒",""
 
+  end
+
     #住所
     st = r[:address].split(" ")
     ad = nil
@@ -50,8 +52,6 @@ table.each do |r|
     else
       p r[:address]
     end
-  end
-
 
 
   lead.memo = <<EOL
@@ -71,7 +71,7 @@ EOL
       p lead.tel
       p lead.prefecture
       p lead.city
-      raise lead.errors.full_messages.inspect
+      p lead.errors.full_messages.inspect
     end
 
 end
