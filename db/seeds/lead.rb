@@ -43,15 +43,10 @@ table.each do |r|
       ad = r[:address]
     end
 
-    adb = ad.match(/^(京都府|.+?[都道府県])(大和郡山市|蒲郡市|小郡市|郡上市|杵島郡大町町|佐波郡玉村町|(?:[^市]*?|余市|高市)郡.+?[町村]|(?:石狩|伊達|八戸|盛岡|奥州|南相馬|上越|姫路|宇陀|黒部|小諸|富山|岩国|周南|佐伯|西海)市|.*?[^0-9一二三四五六七八九十上下]区|四日市市|廿日市市|.+?市|.+?町|.+?村)(.*?)([0-9-]*?)$/)
-    if adb.present?
-      lead.prefecture = adb[1].strip
-      lead.city = adb[2]
-      lead.street = adb[3] + adb[4]
-      lead.street.strip
-    else
-      p r[:address]
-    end
+    lead.prefecture = r[:prefecture]
+    lead.city = r[:city]
+    lead.street = ad
+    lead.street.strip
 
 
   lead.memo = <<EOL
