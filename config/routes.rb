@@ -120,6 +120,9 @@ Mycrm::Application.routes.draw do
       get "find"
     end
   end
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 
 #  get 'current' => 'users#current'
 #  get 'login' => 'users#login'
