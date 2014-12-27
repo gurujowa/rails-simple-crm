@@ -38,6 +38,7 @@ group :development do
   # better_errorsの画面上にirb/pry(PERL)を表示する
   gem 'pry-rails'
   gem 'binding_of_caller'
+  gem "letter_opener"
 
   #capistano
   gem 'capistrano', '~>3.0.0'
