@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215062403) do
+ActiveRecord::Schema.define(version: 20150105091730) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(version: 20141215062403) do
     t.integer  "students"
     t.boolean  "attendee_table_flg", default: false, null: false
     t.text     "memo"
+    t.integer  "user_id"
   end
 
   create_table "estimate_lines", force: true do |t|

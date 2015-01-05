@@ -24,6 +24,9 @@ h1 コース詳細画面
         th コース名
         td = @course.name
       tr
+        th 担当者名
+        td = @course.user.name if @course.user.present?
+      tr
         th 会場住所
         td = @course.address
       tr

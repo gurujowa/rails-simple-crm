@@ -10,6 +10,7 @@ ul.breadcrumb
     - @course.errors.full_messages.each do |msg|
       li = msg
     = f.input :name
+    = f.input :user_id , as: :select, collection: User.all
     = f.input :address
     = f.input :station
     = f.input :responsible

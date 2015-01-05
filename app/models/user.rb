@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
-
+  default_scope { order(:name) }
 
   def color
     num = self.id.modulo(9)
