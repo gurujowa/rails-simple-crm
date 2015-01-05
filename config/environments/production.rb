@@ -36,6 +36,7 @@ Mycrm::Application.configure do
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
 
+  config.action_mailer.delivery_method = :sendmail
   config.action_mailer.default_url_options = { :host => 'deppu.yourbright.co.jp' , :port => '11223' }
   config.action_mailer.smtp_settings = {
       :address => 'localhost'
