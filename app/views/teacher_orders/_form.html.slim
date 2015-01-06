@@ -22,4 +22,6 @@
         = render :partial => "teacher_order_line_fields", locals: {l: l, delete_flg: true}
   .form-actions
     = f.button :submit, class: "btn btn-primary"
+
+    = link_to '削除', @teacher_order, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-default"
     = link_to_add_simple_fields "行を追加する", f, :teacher_order_lines 
