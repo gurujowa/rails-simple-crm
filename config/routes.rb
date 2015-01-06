@@ -127,7 +127,7 @@ Mycrm::Application.routes.draw do
 #  get 'current' => 'users#current'
 #  get 'login' => 'users#login'
 
-  root :to => 'lead_histories#approach'
+  root :to => 'companies/index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
