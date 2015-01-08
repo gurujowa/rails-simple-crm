@@ -40,7 +40,7 @@ class TeacherOrdersController < ApplicationController
         redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :teacher_orders, action: :report
       }
       format.pdf {
-        render pdf: @teacher_order.description + " - 請求予定表",
+        render pdf: @teacher_order.teacher.name + " - " + @teacher_order.company.name + " - 業務依頼書",
                encoding: 'UTF-8',
                layout: 'pdf.html',
                show_as_html: params[:debug].present?

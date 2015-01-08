@@ -8,7 +8,8 @@ ul.breadcrumb
     = link_to '発行する', {action: :active, id: @teacher_order.id}, class: "btn btn-success"
     = link_to '削除', teacher_order_path(@teacher_order),  method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
   - if @teacher_order.status == "active"
-    = link_to '業務依頼書出力', {action: :report, id: @teacher_order}, class: "btn btn-success"
+    = link_to '業務依頼書表示', {action: :report, id: @teacher_order}, class: "btn btn-default"
+    = link_to '業務依頼書出力', {action: :report, id: @teacher_order, format: "pdf"}, class: "btn btn-success"
     = link_to 'キャンセルする', {action: :cancel, id: @teacher_order}, class: "btn btn-danger"
 
 
