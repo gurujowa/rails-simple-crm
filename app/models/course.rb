@@ -46,7 +46,7 @@ extend Enumerize
   def wrike_flg course_flg
     flg = self.read_attribute(course_flg)
     if flg == true
-      return "Complete"
+      return "Completed"
     elsif flg == false
       return "Active"
     else

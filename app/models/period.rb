@@ -58,7 +58,7 @@ class Period < ActiveRecord::Base
   def wrike_flg period_flg
     flg = self.read_attribute(period_flg)
     if flg == true
-      return "Complete"
+      return "Completed"
     elsif flg == false
       return "Active"
     else
