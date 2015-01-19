@@ -55,8 +55,30 @@ class Period < ActiveRecord::Base
     c_min
   end
 
+  def wrike_flg period_flg
+    flg = self.read_attribute(period_flg)
+    if flg == true
+      return "Complete"
+    elsif flg == false
+      return "Active"
+    else
+      raise period_flg + " is not flag"
+    end
+  end
+  
+
   def total_time
      getTotal
+  end
+
+  def total_time_format
+    b_time = 0
+    c_time = end_date - start_date 
+    b_time = break_end - break_start if break_end.present? && break_start.present?
+    
+    time = c_time - b_time
+    c_min = time/ 60
+    Time.at(time).gmtime.strftime("%H:%M")
   end
 
   def start_date

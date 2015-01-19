@@ -18,6 +18,7 @@
 #
 
 class Course < ActiveRecord::Base
+extend Enumerize
 
   has_paper_trail 
   belongs_to :company
@@ -34,11 +35,23 @@ class Course < ActiveRecord::Base
   validates :tel, presence: true
   validates :company_id, presence: true
 
+  enumerize :status, in: [:draft, :active , :cancel]
   @@color = ["MidnightBlue", "DarkViolet", "Crimson", "Navy", "Black", "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta"]
 
   def color
     key = self.id % 10
     return @@color[key]
+  end
+
+  def wrike_flg course_flg
+    flg = self.read_attribute(course_flg)
+    if flg == true
+      return "Complete"
+    elsif flg == false
+      return "Active"
+    else
+      raise course_flg + " is not flag"
+    end
   end
 
   def text_color

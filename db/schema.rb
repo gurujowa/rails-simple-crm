@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105091730) do
+ActiveRecord::Schema.define(version: 20150117114501) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -126,29 +126,8 @@ ActiveRecord::Schema.define(version: 20150105091730) do
     t.integer  "con_type"
   end
 
-  create_table "courses", force: true do |t|
-    t.string   "name",                               null: false
-    t.integer  "company_id",                         null: false
-    t.boolean  "order_flg",          default: false, null: false
-    t.boolean  "book_flg",           default: false, null: false
-    t.boolean  "resume_flg",         default: false, null: false
-    t.boolean  "end_report_flg",     default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "end_form_flg",       default: false, null: false
-    t.boolean  "diploma_flg",        default: false, null: false
-    t.boolean  "reception_seal_flg", default: false, null: false
-    t.boolean  "cert_seal_flg",      default: false, null: false
-    t.string   "address"
-    t.string   "station"
-    t.string   "responsible"
-    t.string   "tel"
-    t.boolean  "observe_flg",        default: false, null: false
-    t.integer  "students"
-    t.boolean  "attendee_table_flg", default: false, null: false
-    t.text     "memo"
-    t.integer  "user_id"
-  end
+# Could not dump table "courses" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "estimate_lines", force: true do |t|
     t.string   "name",                    null: false

@@ -22,12 +22,12 @@ h1 コース 一覧
             = link_to b.name,{action: "show", id: b.id}
             = link_to "(edit)", edit_course_path(b.id)
           td = b.user.name if b.user.present?
-          td= check_course_img(b, "order_flg")
-          td= check_course_img(b, "book_flg")
-          td= check_course_img(b, "attendee_table_flg")
-          td= check_course_img(b, "diploma_flg")
-          td= b.getStartDate
-          td= b.getEndDate
+          td = check_course_img(b, "order_flg")
+          td = check_course_img(b, "book_flg")
+          td = check_course_img(b, "attendee_table_flg")
+          td = check_course_img(b, "diploma_flg")
+          td = b.getStartDate
+          td = b.getEndDate
           td
             - if b.memo.present?
               span.glyphicon.glyphicon-paperclip data-toggle="tooltip" title="#{b.memo}" 

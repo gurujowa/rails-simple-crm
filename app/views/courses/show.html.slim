@@ -77,8 +77,12 @@ table.table.table-bordered.table-striped
         td = convert_min p.total_time
         td style="width:40%" = p.memo
 
+.edit_button
 = link_to '編集', edit_course_path, :class => "btn btn-info"
 = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
+.export_button
+= link_to 'Wrike用エクセル', {action: :show, format: :xls},  :class => "btn btn-default"
+span.caution ※一度、エクセルを編集しないと読み込み出来ません
 .row
   .col-sm-6
     h3 メール用　テキスト（コピペ用)
