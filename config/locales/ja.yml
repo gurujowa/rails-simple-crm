@@ -121,21 +121,22 @@ ja:
         tel: 電話番号
         order_flg: 発注フラグ
         book_flg: 書籍送付
-        report_flg: ３点セット
         students: 受講者数
+        total_time_manual_flg: 合計時間を手動で入力
+        total_time_minute: 合計時間（分）
         memo: メモ
         observe_flg: 立ち会い必要かどうか
       teacher_order:  #モデル毎に階層化しておく。
         teacher_id: 講師
+        mention: 特記
         price: 価格
-        price_detail: 価格に関する説明
         memo: メモ
         invoice_flg: 請求書受領
         payment_flg: 支払い完了
         text_flg: テキスト持ち込み
         students: 予定受講人数
         description: 研修内容概要
-        payment_term: 特記事項
+        mention: 特記事項
         order_date: 発注日
       nego:
         name: 商談名

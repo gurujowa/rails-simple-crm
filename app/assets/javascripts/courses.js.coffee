@@ -1,4 +1,6 @@
 jQuery ->
+  $('#course_total_time_manual_flg').click ->
+    $(".course_total_time_minute").slideToggle @checked
   $("#course_company_id").select2
     placeholder: "検索してください"
     minimumInputLength: 1

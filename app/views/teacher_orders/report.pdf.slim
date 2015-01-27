@@ -40,6 +40,9 @@
       tr
         td 担当者名
         td = @to.company.client_person
+      tr
+        td 特記
+        td = @to.mention
     br
 
 
@@ -91,13 +94,6 @@
         tr
           td 合計時間
           td = convert_min c.total_time
-        tr
-          td 特記
-          td 
-            | テキスト、レジュメ等は研修日の１週間前までに下記にお送りください。<br>
-              また、レジュメとともに、必要な備品（ホワイトボード、プロジェクタなど）もお知らせください。<br>
-              送り先： kenshu@yourbright.co.jp　山下勇登　宛<br>
-              連絡先：　03-6908-6143（代）　090-8276-3312(山下携帯)
 
       br
       h3 コマ情報

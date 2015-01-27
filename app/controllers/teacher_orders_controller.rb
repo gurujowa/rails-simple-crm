@@ -108,6 +108,10 @@ class TeacherOrdersController < ApplicationController
   # GET /teacher_orders/new
   def new
     @teacher_order = TeacherOrder.new
+    @teacher_order.mention = "テキスト、レジュメ等は研修日の１週間前までに下記にお送りください。
+また、レジュメとともに、必要な備品（ホワイトボード、プロジェクタなど）もお知らせください。
+送り先： kenshu@yourbright.co.jp　山下勇登　宛
+連絡先：　03-6908-6143（代）　090-8276-3312(山下携帯)"
   end
 
   # GET /teacher_orders/1/edit
@@ -156,7 +160,7 @@ class TeacherOrdersController < ApplicationController
   def teacher_order_params
     params.require(:teacher_order).permit(
     :teacher_id,:price, :price_detail, :memo, :invoice_flg,:students, :description,
-    :payment_flg, :payment_term, :memo, :order_date, :payment_date, course_ids: [], teacher_order_lines_attributes: [:id, :_destroy, :payment_date, :price, :memo])
+    :payment_flg,:mention,  :payment_term, :memo, :order_date, :payment_date, course_ids: [], teacher_order_lines_attributes: [:id, :_destroy, :payment_date, :price, :memo])
   end
 
 end

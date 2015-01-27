@@ -33,11 +33,11 @@ h1 講師発注詳細情報
           th 金額
           td = number_to_currency @teacher_order.total_price
         tr
-          th 金額詳細
-          td = @teacher_order.price_detail
-        tr
           th 研修内容概要
           td = @teacher_order.description
+        tr
+          th 特記事項
+          td = @teacher_order.mention
         tr
           th メモ
           td = @teacher_order.memo

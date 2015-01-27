@@ -59,10 +59,14 @@ extend Enumerize
   end
 
   def total_time
-    getTotalTime
+    if total_time_manual_flg == true
+      return total_time_minute
+    else
+      return total_time_cal
+    end
   end
 
-  def getTotalTime
+  def total_time_cal
     periods = self.periods
     total = 0
 

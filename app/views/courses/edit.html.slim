@@ -6,18 +6,7 @@ ul.breadcrumb
 
 
 = simple_form_for @course , html: {class: "form-horizontal"}, wrapper: :horizontal_form  do |f|
-  ul
-    - @course.errors.full_messages.each do |msg|
-      li = msg
-    = f.input :name
-    = f.input :user_id , as: :select, collection: User.all
-    = f.input :address
-    = f.input :station
-    = f.input :responsible
-    = f.input :tel
-    = f.input :observe_flg, default: true
-    = f.input :students
-    = f.input :memo
+  = render partial: 'form', :locals => {:f=> f} 
 
   table.table.table-bordered.table-striped#periods_table
     thead

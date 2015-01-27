@@ -1,13 +1,12 @@
 = simple_form_for @teacher_order, :html => {:class => 'form-horizontal'}, wrapper: :horizontal_form do |f| 
   = f.input :teacher_id, collection: @teachers
-  = f.input :price_detail 
   = f.association :courses,
       selected: @teacher_order.courses.map{|i| i.id},
       label_method: :to_select_label,
       input_html: { class: 'with-select2' } 
-  = f.input :description, input_html: {class: "input-xxlarge"}
-  = f.input :course_mention
-  = f.input :memo
+  = f.input :description, hint: "業務依頼書のタイトルになります"
+  = f.input :mention, hint: "業務依頼書の「特記事項」欄です。通常は、テキスト・レジュメなどの注意や、連絡先が書いています", input_html: {rows: 10}
+  = f.input :memo, hint: "こちらに書かれた内容は、業務依頼書には表示されません"
 
 
   table.table.table-borderd.table-striped.billing_plan_lines#tasks
