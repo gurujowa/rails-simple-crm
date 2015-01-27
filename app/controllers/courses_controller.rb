@@ -43,7 +43,7 @@ class CoursesController < ApplicationController
       name = "第"+ (i+1).to_s + "回研修(" + p.teacher.name + ")"
       sheet.row(idx).push idx, "/", "", name, "Active", "Normal", user, p.day,"",p.total_time_format,"",p.day,"","",p.memo
       idx += 1
-      sheet.row(idx).push idx, "/", name, "レジュメの送付", p.wrike_flg("resume_flg"), "Normal", user, p.day.ago(7.day),"",p.total_time_format,"",p.day,"","",""
+      sheet.row(idx).push idx, "/", name, "レジュメの送付", p.wrike_flg("resume_flg"), "Normal", user, p.day.ago(7.day),"",p.total_time_format,"",p.day.ago(5.day),"","",""
       idx += 1
       sheet.row(idx).push idx, "/", name, "実施報告書の回収", p.wrike_flg("report_flg"), "Normal", user, p.day,"",p.total_time_format,"",p.day.since(3.day),"","",""
       idx += 1
