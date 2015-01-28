@@ -62,6 +62,12 @@ Mycrm::Application.routes.draw do
     end
   end
 
+  resources :public_estimates do 
+    member do
+      get 'flag/:type' , :action => "flag"
+    end
+  end
+
   resources :estimates do 
     member do
       get 'flag/:type' , :action => "flag"

@@ -1,0 +1,33 @@
+<h1>役所用見積り一覧</h1>
+
+<%= link_to '新規追加', new_public_estimate_path, :class => 'btn btn-default' %>
+<table id="public_estimates_datatable" class="default_datatables">
+  <thead>
+    <tr>
+      <th>発行済</th>
+      <th>会社名</th>
+      <th>期日</th>
+      <th>合計金額</th>
+      <th>作成日</th>
+      <th>Memo</th>
+      <th>PDF</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @public_estimates.each do |public_estimate| %>
+      <tr>
+        <td><%= link_to_switch_flg public_estimate, :send_flg %></td>
+        <td><%= link_to public_estimate.client_name, edit_public_estimate_path(public_estimate) %></td>
+        <td><%= public_estimate.expired %></td>
+        <td><%= number_to_currency public_estimate.total_price %></td>
+        <td><%= public_estimate.created_at.strftime("%Y年%m月%d日") %></td>
+        <td><%= public_estimate.memo %></td>
+        <td><%= link_to 'PDF', public_estimate_path(public_estimate, format: :pdf) , class: "btn btn-default"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

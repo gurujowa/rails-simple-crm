@@ -31,6 +31,10 @@ ja:
         draft: 下書き
         completed: 発送済み
         canceled: キャンセル
+    public_estimate:
+      client_type:
+        company: 既存客
+        lead: 新規客
     estimate:
       client_type:
         company: 既存客

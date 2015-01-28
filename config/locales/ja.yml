@@ -64,6 +64,10 @@ ja:
         send_flg:
           flag_on: 発行済
           flag_off: 未発行
+      public_estimate:
+        send_flg:
+          flag_on: 発行済
+          flag_off: 未発行
       estimate:
         send_flg:
           flag_on: 発行済
@@ -159,13 +163,6 @@ ja:
         invoice_date: 請求書送付日
         payment_date: 支払い日
         memo: メモ
-      estimate:  #モデル毎に階層化しておく。
-        company_id: 会社
-        expired: 期日
-        title: 件名
-        tax_rate: 消費税
-        send_flg: 発行フラグ
-        memo: メモ
       public_bill:
         company_name: 会社名
         publish_date: 発行日
@@ -173,6 +170,15 @@ ja:
         name: 件名
         invoice_date: 請求書送付日
         payment_date: 支払い日
+        memo: メモ
+      public_estimate:
+        company: 会社
+        display_name: 表示名
+        client_type: 新規or既存
+        expired: 期限
+        tax_rate: 税率
+        name: 件名
+        status: ステータス
         memo: メモ
       estimate:
         company: 会社
