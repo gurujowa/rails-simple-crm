@@ -25,7 +25,7 @@
   <td><%= check_course_img(c, "cert_seal_flg") %></td>
   <td><%= check_course_img(c, "end_form_flg") %></td>
   <td><%= check_course_img(c, "diploma_flg") %></td>
-  <td><%= convert_min(c.getTotalTime) %></td>
+  <td><%= convert_min(c.total_time) %></td>
   <td><%= link_to "コマ編集", :controller => "courses", :action => "edit", :id => c.id%></td>
 </tr>
 <% end %>

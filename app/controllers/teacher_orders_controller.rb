@@ -132,7 +132,7 @@ class TeacherOrdersController < ApplicationController
   # PATCH/PUT /teacher_orders/1
   def update
     if @teacher_order.update(teacher_order_params)
-      redirect_to teacher_orders_url, notice: 'Teacher order was successfully updated.'
+      redirect_to @teacher_order, notice: '発注情報が更新されました'
     else
       render action: 'edit'
     end
