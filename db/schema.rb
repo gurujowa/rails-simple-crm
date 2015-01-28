@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128041212) do
+ActiveRecord::Schema.define(version: 20150128072312) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20150128041212) do
     t.datetime "updated_at"
     t.string   "client_type",  default: "company", null: false
     t.string   "display_name"
+    t.date     "publish_date"
   end
 
   create_table "industries", force: true do |t|
@@ -304,6 +305,7 @@ ActiveRecord::Schema.define(version: 20150128041212) do
     t.datetime "updated_at"
     t.string   "client_type",  default: "company", null: false
     t.string   "display_name"
+    t.date     "publish_date"
   end
 
   create_table "taggings", force: true do |t|

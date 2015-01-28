@@ -79,7 +79,7 @@ class PublicEstimatesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def public_estimate_params
-      params.require(:public_estimate).permit(:title, :display_name, :client_type, :client_id, :expired,  :send_flg, :memo,
+      params.require(:public_estimate).permit(:title, :publish_date, :display_name, :client_type, :client_id, :expired,  :send_flg, :memo,
            public_estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy, :tax_rate, :detail])
     end
 end

@@ -8,6 +8,7 @@
       <th>会社名</th>
       <th>期日</th>
       <th>合計金額</th>
+      <th>発行日</th>
       <th>作成日</th>
       <th>Memo</th>
       <th>PDF</th>
@@ -21,6 +22,7 @@
         <td><%= link_to estimate.client_name, edit_estimate_path(estimate) %></td>
         <td><%= estimate.expired %></td>
         <td><%= number_to_currency estimate.total_price %></td>
+        <td><%= estimate.publish_date %></td>
         <td><%= estimate.created_at.strftime("%Y年%m月%d日") %></td>
         <td><%= estimate.memo %></td>
         <td><%= link_to '複製', new_estimate_path(dup_id: estimate.id), :class => "btn btn-default"%><%= link_to 'PDF', estimate_path(estimate, format: :pdf) , class: "btn btn-default"%></td>
