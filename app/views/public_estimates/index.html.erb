@@ -23,7 +23,7 @@
         <td><%= number_to_currency public_estimate.total_price %></td>
         <td><%= public_estimate.created_at.strftime("%Y年%m月%d日") %></td>
         <td><%= public_estimate.memo %></td>
-        <td><%= link_to 'PDF', public_estimate_path(public_estimate, format: :pdf) , class: "btn btn-default"%></td>
+        <td><%= link_to '複製', new_public_estimate_path(dup_id: public_estimate.id), :class => "btn btn-default"%><%= link_to 'PDF', public_estimate_path(public_estimate, format: :pdf) , class: "btn btn-default"%></td>
       </tr>
     <% end %>
   </tbody>

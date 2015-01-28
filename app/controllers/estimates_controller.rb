@@ -26,7 +26,13 @@ class EstimatesController < ApplicationController
 
   # GET /estimates/new
   def new
-    @estimate = Estimate.new
+    if params[:dup_id].present?
+      parent = Estimate.find(params[:dup_id])
+      clone = parent.deep_clone :include => :estimate_lines
+      @estimate = clone
+    else
+      @estimate = Estimate.new
+    end
     if params[:client_id].present?
       @estimate.client_id = params[:client_id]
     end

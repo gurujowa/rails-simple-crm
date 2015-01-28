@@ -25,7 +25,13 @@ class PublicEstimatesController < ApplicationController
 
   # GET /public_estimates/new
   def new
-    @public_estimate = PublicEstimate.new
+    if params[:dup_id].present?
+      parent = PublicEstimate.find(params[:dup_id])
+      clone = parent.deep_clone :include => :public_estimate_lines
+      @public_estimate = clone
+    else
+      @public_estimate = PublicEstimate.new
+    end
     if params[:client_id].present?
       @public_estimate.client_id = params[:client_id]
     end
