@@ -3,6 +3,8 @@ ul
     li = msg
 = f.input :name
 = f.input :user_id , as: :select, collection: User.all, hint: "ユアブライト社内における、本コースの担当者です"
+= f.input :company_id, input_html:{ class: "search_company"}
+
 = f.input :address
 = f.input :station
 = f.input :responsible
