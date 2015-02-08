@@ -1,8 +1,9 @@
 require "csv"
-require 'nkf' 
+require 'kconv'
+require 'tempfile'
 
 def tel_encode(input)
-    i = input.gsub "－", "-"
+    i = input.to_s.gsub "－", "-"
     i = i.gsub "－","-"
     i = i.gsub "/" , ""
     i = i.gsub "." , ""
@@ -14,8 +15,7 @@ def tel_encode(input)
     i
 end
 
-table = CSV.table('db/saitama.csv')
-
+table = CSV.table('db/kanagawa2.csv',encoding: "Windows-31J:UTF-8")
 table.each do |r|
   if r[:client_name].blank?
     next
@@ -34,7 +34,7 @@ table.each do |r|
   end
 
     #住所
-    st = r[:address].split(" ")
+    st = r[:address].to_s.split(" ")
     ad = nil
     if st.length == 2
       ad = st[0]
@@ -46,7 +46,7 @@ table.each do |r|
     lead.prefecture = r[:prefecture]
     lead.city = r[:city]
     lead.street = ad
-    lead.street.strip
+    lead.street.to_s.strip
 
 
   lead.memo = <<EOL
