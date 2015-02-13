@@ -10,7 +10,8 @@ class EstimatesController < ApplicationController
 
   # GET /estimates/1
   def show
-    @until = 10 - @estimate.estimate_lines.length
+    @until = 5 - @estimate.estimate_lines.length
+    @until = 0 if @until < 0
     respond_to do |format|
       format.html { 
         redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :estimates, action: :show
@@ -81,6 +82,7 @@ class EstimatesController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def estimate_params
       params.require(:estimate).permit(:title, :display_name, :client_type, :client_id, :expired,  :send_flg, :memo, :publish_date,
-           estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy, :tax_rate, :detail])
+           estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy, :tax_rate, :detail],
+           estimate_subsities_attributes: [:id, :name, :price, :people, :_destroy])
     end
 end

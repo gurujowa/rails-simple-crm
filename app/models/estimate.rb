@@ -16,7 +16,9 @@ class Estimate < ActiveRecord::Base
 
   has_paper_trail 
   has_many :estimate_lines, :dependent => :destroy
+  has_many :estimate_subsities, :dependent => :destroy
   accepts_nested_attributes_for :estimate_lines, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }
+  accepts_nested_attributes_for :estimate_subsities, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }
   enumerize :client_type, in: [:company, :lead]
 
   validates :client_id, presence: true
@@ -44,6 +46,18 @@ class Estimate < ActiveRecord::Base
     if self.client_type == "lead"
       return client_id
     end
+  end
+
+  def total_subsities_price
+     price = 0
+     self.estimate_subsities.each do |c|
+       price += c.price
+     end
+     return price
+  end
+
+  def own_pay
+    return total_price - total_subsities_price
   end
 
   def total_price

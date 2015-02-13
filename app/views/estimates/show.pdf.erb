@@ -202,7 +202,7 @@
   </div>
 </div>
 
-
+<p>　＜　品名　＞　</p>
 <table width="100%" class="table_main">
   <tr>
     <th>品番・品名</th>
@@ -238,10 +238,40 @@
     <td class="blank"></td>
     <td class="blank"></td>
     <td class="blank"></td>
-    <td colspan="2">合計金額</td>
+    <th colspan="2">合計金額</td>
     <td class="alnright"><%= number_to_currency @estimate.total_price %></td>
   </tr>
 </table>
+
+<% if @estimate.estimate_subsities.length > 0 %>
+<p>　＜　助成金　＞</p>
+<table width="100%" class="table_main">
+  <tr>
+    <th>助成金名</th>
+    <th width="20%">出席人数</th>
+    <th width="20%">助成金額</th>
+  </tr>
+  <% @estimate.estimate_subsities.each do |e| %>
+  <tr>
+    <td><%= e.name %></td>
+    <td><%= e.people %>人</td>
+    <td><%=  number_to_currency e.price %></td>
+  </tr>
+  <% end %>
+  <tr>
+    <td class="blank"></td>
+    <th>合計助成金額</td>
+    <td class="alnright">
+      <%= number_to_currency @estimate.total_subsities_price %>
+    </td>
+  </tr>
+  <tr>
+    <td class="blank"></td>
+    <th style="font-size: 120%">実質負担金額</td>
+    <td class="alnright" style="font-size: 120%; text-decoration: underline;"><%= number_to_currency @estimate.own_pay %></td>
+  </tr>
+</table>
+<% end %>
 
   <p><%= @estimate.memo %></p>
 

@@ -1,18 +1,12 @@
-tr
-  td
-    = l.input :name
-  td
-    = l.input :detail, input_html: {rows: 7, cols: 50}
-  td
-    = l.input :unit_price, class: "estimate_lines_trigger estimate_line_unit_price input-small"
-  td
-    = l.input :quantity, class: "estimate_lines_trigger estimate_line_quantity input-small"
-  td
-    = l.input :tax_rate, class: "estimate_lines_trigger estimate_line_tax_rate input-mini"
-  td.estimate_line_tax_price
-    = number_to_currency l.object.tax_price
-  td.estimate_line_total_price
-    = number_to_currency l.object.total_price
-  td
-    - if delete_flg == true
-      = link_to_remove_fields "削除", l
+tr.fields
+  td.col-xs-2
+    .col-xs-11 = f.input :name, label: false
+  td.col-xs-4
+    .col-xs-11 = f.input :detail, input_html: {rows: 7}, label: false
+  td.col-xs-2
+    .col-xs-11 = f.input :unit_price, class: "estimate_lines_trigger estimate_line_unit_price", label: false
+  td.col-xs-1
+    .col-xs-11 = f.input :quantity, class: "estimate_lines_trigger estimate_line_quantity", label: false
+  td.col-xs-1
+    .col-xs-11 = f.input :tax_rate, class: "estimate_lines_trigger estimate_line_tax_rate", label: false
+  td.col-xs-1 = f.link_to_remove "行を削除", class: "btn btn-default"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150128072312) do
+ActiveRecord::Schema.define(version: 20150210115326) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -138,6 +138,15 @@ ActiveRecord::Schema.define(version: 20150128072312) do
     t.datetime "updated_at"
     t.integer  "tax_rate",    default: 0, null: false
     t.text     "detail"
+  end
+
+  create_table "estimate_subsities", force: true do |t|
+    t.string   "name"
+    t.integer  "price",       default: 0, null: false
+    t.integer  "people"
+    t.integer  "estimate_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "estimates", force: true do |t|
