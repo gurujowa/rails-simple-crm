@@ -134,6 +134,7 @@ ja:
         teacher_id: 講師
         mention: 特記
         price: 価格
+        display_period_flg: コマ情報の表示
         memo: メモ
         invoice_flg: 請求書受領
         payment_flg: 支払い完了

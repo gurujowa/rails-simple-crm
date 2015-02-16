@@ -25,7 +25,7 @@ class TeacherOrdersController < ApplicationController
   end
 
   def active
-    if @teacher_order.update({status:  "active", order_date:  DateTime.now})
+    if @teacher_order.update({status:  "active"})
       redirect_to teacher_order_url(@teacher_order), notice: '講師発注を発行しました。'
     else
       redirect_to teacher_order_url(@teacher_order), error: '講師発注の発行に失敗しました。'
@@ -46,52 +46,6 @@ class TeacherOrdersController < ApplicationController
                show_as_html: params[:debug].present?
       }
     end
-  end
-
-  # GET /teacher_orders/1
-  def report2
-    report = Report.new "gyoumu.xls"
-
-    company = @teacher_order.courses.first.company
-    price_string = ActionController::Base.helpers.number_to_currency(@teacher_order.price) 
-    if @teacher_order.price_detail.present?
-      price_string << "(" + @teacher_order.price_detail.to_s + ")"
-    end
-
-    report.cell("F5",Date.today.strftime('%Y年%m月%d日'))
-    if @teacher_order.teacher.director_name
-      report.cell("B7",@teacher_order.teacher.director_name + "様")
-    else
-      report.cell("B7",@teacher_order.teacher.short_name + "様")
-    end
-    report.cell("D15",@teacher_order.id)
-    report.cell("D17",company.full_address)
-    report.cell("D18",company.client_name)
-    report.cell("D19",company.tel)
-    report.cell("D20",company.client_person)
-    report.cell("D21",@teacher_order.course_address)
-    report.cell("D22",@teacher_order.course_station)
-    report.cell("D23",@teacher_order.description)
-    report.cell("D24",@teacher_order.start_date.strftime("%Y年%m月%d日") + "から")
-    report.cell("D25",@teacher_order.end_date.strftime("%Y年%m月%d日") + "まで")
-    report.cell("F24","全" + @teacher_order.total_period.to_s + "回")
-    report.cell("D26",price_string)
-    report.cell("D31",@teacher_order.course_students.to_s + "名")
-    report.cell("D32",@teacher_order.teacher.short_name)
-    report.cell("D35",@teacher_order.course_responsible)
-    report.cell("D36",@teacher_order.course_tel)
-    ind = 1
-    @teacher_order.course_where.each do |c|
-        index_string =  "[ " + (ind).to_s + " ]"
-        value_string =  c.day.strftime("%Y年%m月%d日") + " " + c.start_time.strftime("%R") + "～" + c.end_time.strftime("%R")
-        report.cell("C"+(36+ind).to_s, index_string)
-        report.cell("D"+(36+ind).to_s, value_string)
-        ind += 1
-      end
-
-    filename = "【" + @teacher_order.teacher.name + "】講師依頼書_" + Date.today.strftime('%Y%m%d') + "_" + company.client_name + ".xls"
-
-    send_file report.write  , :type=>"application/ms-excel", :filename => ERB::Util.url_encode(filename)
   end
 
 
@@ -159,8 +113,8 @@ class TeacherOrdersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
   def teacher_order_params
     params.require(:teacher_order).permit(
-    :teacher_id,:price, :price_detail, :memo, :invoice_flg,:students, :description,
-    :payment_flg,:mention,  :payment_term, :memo, :order_date, :payment_date, course_ids: [], teacher_order_lines_attributes: [:id, :_destroy, :payment_date, :price, :memo])
+    :teacher_id,:price, :price_detail, :order_date, :memo, :invoice_flg,:students, :description,
+    :payment_flg, :display_period_flg,:mention,  :payment_term, :memo, :order_date, :payment_date, course_ids: [], teacher_order_lines_attributes: [:id, :_destroy, :payment_date, :price, :memo])
   end
 
 end

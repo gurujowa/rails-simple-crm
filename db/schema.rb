@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210115326) do
+ActiveRecord::Schema.define(version: 20150216084813) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -360,8 +360,9 @@ ActiveRecord::Schema.define(version: 20150210115326) do
     t.integer  "students"
     t.string   "description"
     t.string   "price_detail"
-    t.string   "status",       default: "draft", null: false
+    t.string   "status",             default: "draft", null: false
     t.text     "mention"
+    t.boolean  "display_period_flg", default: true
   end
 
   create_table "teachers", force: true do |t|

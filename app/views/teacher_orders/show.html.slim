@@ -39,6 +39,9 @@ h1 講師発注詳細情報
           th 特記事項
           td = @teacher_order.mention
         tr
+          th コマ情報の表示
+          td = @teacher_order.display_period_flg
+        tr
           th メモ
           td = @teacher_order.memo
 

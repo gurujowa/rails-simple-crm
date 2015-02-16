@@ -45,13 +45,4 @@ namespace :mail do
       end
   end
 
-  desc "コースアラートのメール"
-  task :alert => :environment do
-      puts "アラートのメール開始"
-      alerts = Alert.check
-
-      if alerts.length != 0
-        AlertMailer.course(alerts).deliver
-      end
-  end
 end

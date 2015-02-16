@@ -4,7 +4,6 @@ set :output, "/home/yamashita/whenever.log"
 every 1.day, :at => '7:30 pm' do
   rake "mail:contact"
   rake "backup:dropbox"
-  rake "mail:alert"
 end
 
 every 1.day, :at => '5:00 pm' do
