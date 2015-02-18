@@ -113,8 +113,10 @@ class TeacherOrdersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
   def teacher_order_params
     params.require(:teacher_order).permit(
-    :teacher_id,:price, :price_detail, :order_date, :memo, :invoice_flg,:students, :description,
-    :payment_flg, :display_period_flg,:mention,  :payment_term, :memo, :order_date, :payment_date, course_ids: [], teacher_order_lines_attributes: [:id, :_destroy, :payment_date, :price, :memo])
+    :teacher_id,:price, :price_detail, :order_date, :memo, :invoice_flg,:students, :description, :period_type,
+    :payment_flg, :display_period_flg,:mention,  :payment_term, :memo, :order_date, :payment_date, course_ids: [],
+    teacher_order_lines_attributes: [:id, :_destroy, :payment_date, :price, :memo],
+    teacher_order_periods_attributes: [:id, :_destroy, :day,:start_time, :end_time, :break_start, :break_end, :memo])
   end
 
 end

@@ -1,17 +1,18 @@
-= simple_form_for @teacher_order, :html => {:class => 'form-horizontal'}, wrapper: :horizontal_form do |f| 
+= simple_nested_form_for @teacher_order, :html => {:class => 'form-horizontal'}, wrapper: :horizontal_form do |f| 
   = f.input :teacher_id, collection: @teachers
   = f.association :courses,
       selected: @teacher_order.courses.map{|i| i.id},
       label_method: :to_select_label,
       input_html: { class: 'with-select2' } 
-  = f.input :display_period_flg, hint: "業務依頼書に、コマ情報を表示するかどうかを選びます"
+  = f.input :period_type, hint: "業務依頼書の、コマ情報の表示の仕方です"
   = f.input :order_date, as: :date_picker, hint: "業務依頼書の発行日を記入します。通常は当日で構いません"
   = f.input :description, hint: "業務依頼書のタイトルになります"
   = f.input :mention, hint: "業務依頼書の「特記事項」欄です。通常は、テキスト・レジュメなどの注意や、連絡先が書いています", input_html: {rows: 10}
   = f.input :memo, hint: "こちらに書かれた内容は、業務依頼書には表示されません"
 
 
-  table.table.table-borderd.table-striped.billing_plan_lines#tasks
+  h2 請求情報
+  table.table.table-borderd.table-striped#to_lines
     thead
       tr
         th 請求予定日
@@ -19,10 +20,24 @@
         th メモ
         th 削除
     tbody.add_fields
-      = f.simple_fields_for :teacher_order_lines, wrapper: :table_form do  |l|
-        = render :partial => "teacher_order_line_fields", locals: {l: l, delete_flg: true}
+      = f.simple_fields_for :teacher_order_lines, wrapper: false
+  = f.link_to_add "行を追加する", :teacher_order_lines, data: {target: "#to_lines"}, class: "btn btn-default"
+
+  h2 コマ情報
+  table.table.table-striped.table-bordered#to_periods
+    thead
+      tr
+        th 日付
+        th 開始時間
+        th 終了時間
+        th 休憩開始
+        th 休憩終了
+        th メモ
+        th 削除
+    tbody.add_fields
+      = f.simple_fields_for :teacher_order_periods, wrapper: false
+  = f.link_to_add "行を追加する", :teacher_order_periods, data: {target: "#to_periods"}, class: "btn btn-default"
+
   .form-actions
     = f.button :submit, class: "btn btn-primary"
-
     = link_to '削除', @teacher_order, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-default"
-    = link_to_add_simple_fields "行を追加する", f, :teacher_order_lines 

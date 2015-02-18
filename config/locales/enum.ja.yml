@@ -26,6 +26,10 @@ ja:
         draft: 下書き
         active: 発行済
         cancel: キャンセル
+      period_type:
+        auto: 自動（コマ情報より取得）
+        manual: 手動
+        none: 表示なし
     billing_plan:
       status:
         draft: 下書き

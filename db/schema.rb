@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216084813) do
+ActiveRecord::Schema.define(version: 20150218071723) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -351,6 +351,18 @@ ActiveRecord::Schema.define(version: 20150216084813) do
     t.string  "memo"
   end
 
+  create_table "teacher_order_periods", force: true do |t|
+    t.date     "day",              null: false
+    t.time     "start_time",       null: false
+    t.time     "end_time",         null: false
+    t.time     "break_start"
+    t.time     "break_end"
+    t.text     "memo"
+    t.integer  "teacher_order_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "teacher_orders", force: true do |t|
     t.integer  "teacher_id"
     t.text     "memo"
@@ -360,9 +372,9 @@ ActiveRecord::Schema.define(version: 20150216084813) do
     t.integer  "students"
     t.string   "description"
     t.string   "price_detail"
-    t.string   "status",             default: "draft", null: false
+    t.string   "status",       default: "draft", null: false
     t.text     "mention"
-    t.boolean  "display_period_flg", default: true
+    t.string   "period_type",  default: "auto"
   end
 
   create_table "teachers", force: true do |t|

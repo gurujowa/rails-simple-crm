@@ -25,13 +25,16 @@ extend Enumerize
   belongs_to :teacher
 
   has_many :teacher_order_lines, :dependent => :destroy
+  has_many :teacher_order_periods, :dependent => :destroy
   accepts_nested_attributes_for :teacher_order_lines, :allow_destroy => true, reject_if: proc { |attributes| attributes['price'].blank? }
+  accepts_nested_attributes_for :teacher_order_periods, :allow_destroy => true, reject_if: proc { |attributes| attributes['day'].blank? }
 
   validates :teacher_id, presence: true
   validates :description, presence: true
   validates :courses, presence: true
 
   enumerize :status, in: [:draft, :active , :cancel]
+  enumerize :period_type, in: [:auto, :manual , :none]
 
   validate :check_company_name
   validate :check_teacher_include

@@ -15,12 +15,12 @@ ul.breadcrumb
 
 h1 講師発注詳細情報
 .row
-  .col-sm-12
+  .col-sm-6
     .panel.panel-default
       .panel-heading 発注情報
       table.table.table-striped
         tr
-          th 受講者数
+          th width="20%" 受講者数
           td = @teacher_order.students
         tr
           th ステータス
@@ -36,16 +36,16 @@ h1 講師発注詳細情報
           th 研修内容概要
           td = @teacher_order.description
         tr
+          th コマ情報の種別
+          td = @teacher_order.period_type_text
+        tr
           th 特記事項
           td = @teacher_order.mention
-        tr
-          th コマ情報の表示
-          td = @teacher_order.display_period_flg
         tr
           th メモ
           td = @teacher_order.memo
 
-  .col-sm-12
+  .col-sm-6
     .panel.panel-default
       .panel-heading 請求情報
       table.table.table-striped.table-bordered
@@ -59,60 +59,71 @@ h1 講師発注詳細情報
             td = l.price
             td = l.memo
 
-  - if @teacher_order.courses.present?
-    - @teacher_order.courses.each do |c|
-      h2 = c.name
-      .col-sm-5
-        .panel.panel-default
-          .panel-heading コース情報
-          table.table.table-striped
+  - if @teacher_order.period_type.manual?
+    .col-sm-12
+      .panel.panel-default
+        .panel-heading コマ
+        table.table.table-bordered.table-striped
+          thead
             tr
-              th 会場住所
-              td = c.address
-            tr
-              th 最寄り駅と駅からの時間
-              td = c.station
-            tr
-              th 先方研修担当者
-              td = c.responsible
-            tr
-              th 先方緊急連絡先
-              td = c.tel
-            tr
-              th 立会
-              td = c.observe_text
-            tr
-              th 受講者数
-              td = c.students
-            tr
-              th 合計時間
-              td = convert_min c.total_time
-            tr
+              th 日付
+              th 開始時刻
+              th 終了時刻
+              th 休憩開始
+              th 休憩終了
               th メモ
-              td = c.memo
-      .col-sm-7
-        .panel.panel-default
-          .panel-heading コマ
-          table.table.table-bordered.table-striped
-            thead
-              tr
-                th 日付
-                th 開始時刻
-                th 終了時刻
-                th 休憩開始
-                th 休憩終了
-                th 立会人
-                th 合計時間
-                th メモ
-            tbody
-              - c.periods.each do |p|
-                - if p.teacher.id == @teacher_order.teacher.id
+          tbody
+            - @teacher_order.teacher_order_periods.each do |p|
+              = render :partial => "period_show", :locals => { :p => p }
+
+  - if @teacher_order.period_type.auto?
+    .col-sm-12
+      - if @teacher_order.courses.present?
+        - @teacher_order.courses.each do |c|
+          h2 = c.name
+          .col-sm-5
+            .panel.panel-default
+              .panel-heading コース情報
+              table.table.table-striped
+                tr
+                  th 会場住所
+                  td = c.address
+                tr
+                  th 最寄り駅と駅からの時間
+                  td = c.station
+                tr
+                  th 先方研修担当者
+                  td = c.responsible
+                tr
+                  th 先方緊急連絡先
+                  td = c.tel
+                tr
+                  th 立会
+                  td = c.observe_text
+                tr
+                  th 受講者数
+                  td = c.students
+                tr
+                  th 合計時間
+                  td = str_total_time c
+                tr
+                  th メモ
+                  td = c.memo
+          .col-sm-7
+            .panel.panel-default
+              .panel-heading コマ
+              table.table.table-bordered.table-striped
+                thead
                   tr
-                    td = p.day.to_s(:jp)
-                    td = p.start_date.to_s(:time)
-                    td = p.end_date.to_s(:time)
-                    td = p.break_start(:time)
-                    td = p.break_end(:time)
-                    td = p.user_name
-                    td = convert_min p.total_time
-                    td style="width:40%" = p.memo
+                    th 日付
+                    th 開始時刻
+                    th 終了時刻
+                    th 休憩開始
+                    th 休憩終了
+                    th 立会人
+                    th 合計時間
+                    th メモ
+                tbody
+                  - c.periods.each do |p|
+                    - if p.teacher.id == @teacher_order.teacher.id
+                      = render :partial => "period_show", :locals => { :p => p }

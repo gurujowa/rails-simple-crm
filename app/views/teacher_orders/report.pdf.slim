@@ -49,7 +49,6 @@
         td colspan="2" = @to.mention
     br
 
-
     h3 以下の日付で請求書を必ずお送りください
     table width="100%" class="table_main"
       tr
@@ -72,7 +71,52 @@
         ※契約金額には消費税8%が含まれています
 
 
-    - if @to.display_period_flg.present?
+    - if @to.period_type.manual?
+      .page-break
+      - @to.courses.each do |c|
+        h3 = c.name
+        table.table_main width="100%"
+          tr
+            th rowspan="8" width="15%"style="background-color:#CCC;" コース情報
+            td width="20%" コース名
+            td = c.name
+          tr
+            td 会場住所
+            td = c.address
+          tr
+            td 最寄り駅
+            td = c.station
+          tr
+            td 先方研修担当者
+            td = c.responsible
+          tr
+            td 先方緊急連絡先
+            td = c.tel
+          tr
+            td 受講者数
+            td = c.students
+          tr
+            td 合計時間
+            td = convert_min c.total_time
+        br
+        h3 コマ情報
+        table.table_main width="100%"
+          tr
+            th.gray 実施日
+            th.gray 開始時刻
+            th.gray 終了時刻
+            th.gray 休憩開始
+            th.gray 休憩終了
+          - @to.teacher_order_periods.each do |p|
+            tr
+              td = p.day
+              td = p.start_time.to_s(:time)
+              td = p.end_time.to_s(:time)
+              td = p.break_start.to_s(:time)
+              td = p.break_end.to_s(:time)
+        p ※研修日・時間は変更・キャンセルになる場合があります。		
+
+    - if @to.period_type.auto?
       .page-break
       - @to.courses.each do |c|
         h3 = c.name
