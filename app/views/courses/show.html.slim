@@ -21,7 +21,7 @@ h1 コース詳細画面
     h2 コース情報
     table.table.table-striped
       tr
-        th コース名
+        th width="30%" コース名
         td = @course.name
       tr
         th 担当者名
@@ -46,7 +46,7 @@ h1 コース詳細画面
         td = @course.students
       tr
         th 合計時間
-        td = convert_min @course.total_time
+        td = str_total_time @course
       tr
         th メモ
         td = @course.memo
