@@ -85,8 +85,19 @@
 }));
 moment.lang("ja");
 
+$(document).on('nested:fieldAdded', function(event){
+  init_date_picker();
+  $( ".datetimepicker" ).datetimepicker({lang:'ja',scrollInput: false,
+ i18n:{
+  ja:{
+   months:[ '1月','2月','3月','4月', '5月','6月','7月','8月', '9月','10月','11月','12月', ],
+   dayOfWeek:[ "日", "月", "火", "水", "木", "金", "土", ]
+  }
+ }});
+  $( ".timepicker ").timepicker();
+})
+
 $(function(){
-  
   $('.default_datatables').dataTable( {
         "lengthChange":     false,
         "pageLength":     100
@@ -101,6 +112,7 @@ $(function(){
  }});
   $('.dropdown-toggle').dropdown();
   $("[data-toggle=tooltip]").tooltip()
+  $( ".timepicker ").timepicker();
 });
 
 function remove_fields(link) {

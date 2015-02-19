@@ -1,8 +1,8 @@
 tr
   td = f.input :day ,as: "date_picker", label: false
-  td = time_input(f, "start_time", true)
-  td = time_input(f, "end_time", true)
-  td = time_input(f, "break_start", false)
-  td = time_input(f, "break_end", false)
+  td = f.input :start_time, as: "time_picker", label: false
+  td = f.input :end_time, as: "time_picker", label: false
+  td = f.input :break_start, as: "time_picker", label: false
+  td = f.input :break_end, as: "time_picker", label: false
   td = f.input :memo, label: false
   td = f.link_to_remove "削除",  class: "btn btn-default"

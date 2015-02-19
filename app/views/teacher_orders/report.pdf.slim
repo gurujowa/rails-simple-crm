@@ -112,8 +112,8 @@
               td = p.day
               td = p.start_time.to_s(:time)
               td = p.end_time.to_s(:time)
-              td = p.break_start.to_s(:time)
-              td = p.break_end.to_s(:time)
+              td = p.break_start.to_s(:time) if p.break_start.present?
+              td = p.break_end.to_s(:time) if p.break_end.present?
         p ※研修日・時間は変更・キャンセルになる場合があります。		
 
     - if @to.period_type.auto?
@@ -160,7 +160,7 @@
                 td = p.day
                 td = p.start_time.to_s(:time)
                 td = p.end_time.to_s(:time)
-                td = p.break_start(:time)
-                td = p.break_end(:time)
+                td = p.break_start(:time) if p.break_start.present?
+                td = p.break_end(:time) if p.break_end.present?
                 td = p.teacher.short_name
         p ※研修日・時間は変更・キャンセルになる場合があります。		

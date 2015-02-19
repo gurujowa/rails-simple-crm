@@ -17,7 +17,6 @@ jQuery ->
         results: data.companies
 
   pickerReady()
-  calcTime()
   periodCalendarRender()
   if ($(".full_calendar") != null)
     courseCalendarRender()
@@ -32,10 +31,6 @@ jQuery ->
       $(this).parent().find('.period_hidden').val("t")
     else
       alert("チェックの状況が正しくありません。管理者を呼んでください")
-  $('#calc_button').on 'click', ->
-    calcTime()
-    calendarRender("render")
-    return false
 
   $('#add_field_button').on 'click', ->
      lastPickerReady()
@@ -79,19 +74,6 @@ courseCalendarRender = (method) ->
     calendar_settings.eventSources = json.eventSources
     $('#observe_calendar').fullCalendar(calendar_settings)
 
-
-calcTime = ->
-  total_time = 0
-  $(".total_period_time").each ->
-     st = $(this).parents("tr").find(".start_timepicker").timepicker('getTime')
-     ed = $(this).parents("tr").find(".end_timepicker").timepicker('getTime')
-     bs = $(this).parents("tr").find(".break_startpicker").timepicker('getTime')
-     be = $(this).parents("tr").find(".break_endpicker").timepicker('getTime')
-     total_minute = (ed - st)/(1000*60) - (be - bs)/ (1000*60)
-     total_string = Math.floor(total_minute / 60) + "時間" + total_minute % 60 + "分"
-     total_time += total_minute
-     $(this).text(total_string)
-  $("#total_course_time").text(Math.floor(total_time / 60) + "時間" + total_time % 60 + "分")
 
 pickerReady = ->
   $('.start_timepicker').each ->
