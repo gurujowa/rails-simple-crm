@@ -1,6 +1,5 @@
 tr
-  td = f.input :payment_date,as: "date_picker", label: false
+  td = f.input :payment_date , as: "date_picker", label: false
   td = f.input :price, label: false
   td = f.input :memo, label: false
-  td
-    = f.link_to_remove "削除",  class: "btn btn-default"
+  td = f.link_to_remove "削除",  class: "btn btn-default"
