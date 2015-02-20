@@ -45,10 +45,10 @@
         td 担当者名
         td = @to.company.client_person
       tr
-        td コース合計時間
+        th 合計時間
         td colspan="2" = convert_min @to.total_time
       tr
-        td 登壇講師名
+        th 登壇講師名
         td colspan="2" = @to.teacher.short_name
       tr
         th 特記
