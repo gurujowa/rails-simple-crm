@@ -79,12 +79,34 @@ extend Enumerize
   end
 
   def total_time
+    if self.period_type == "auto"
+      total_time_auto
+    elsif self.period_type == "manual"
+      total_time_manual
+    else
+      ""
+    end
+  end
+
+  def total_time_auto
     time = 0
     course_where.each do |p|
       time += p.total_time
     end
     return time
   end
+
+  def total_time_manual
+    periods = self.teacher_order_periods
+    total = 0
+
+    periods.each do |p|
+      total += p.total_time
+    end
+
+    total
+  end
+  
 
   def total_price
     price = 0

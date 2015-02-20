@@ -46,7 +46,10 @@
         td = @to.company.client_person
       tr
         th 特記
-        td colspan="2" = @to.mention
+        td colspan="2" style="padding:10px;" = @to.mention
+      tr
+        td 合計時間
+        td colspan="2" = convert_min @to.total_time
     br
 
     h3 以下の日付で請求書を必ずお送りください
@@ -95,9 +98,6 @@
           tr
             td 受講者数
             td = c.students
-          tr
-            td 合計時間
-            td = convert_min c.total_time
         br
         h3 コマ情報
         table.table_main width="100%"
@@ -140,9 +140,6 @@
           tr
             td 受講者数
             td = c.students
-          tr
-            td 合計時間
-            td = convert_min c.total_time
 
         br
         h3 コマ情報
