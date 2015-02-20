@@ -44,6 +44,15 @@ class Teacher < ActiveRecord::Base
   def short_name
     kanji_name = last_kanji + " " + first_kanji
   end
+
+  def to_order_name
+    if self.director.present?
+      self.director.short_name
+    else
+      short_name
+    end
+
+  end
   
   def name
     kanji_name = last_kanji + " " + first_kanji

@@ -11,7 +11,7 @@
     .clearfix
       .alpha
         p.recipientName style="margin-bottom: 10px;"
-          = @teacher_order.teacher.short_name
+          = @teacher_order.teacher.director_name
           span 様
         p.titleName style="margin-bottom: 10px;"
           = @teacher_order.description
@@ -45,11 +45,14 @@
         td 担当者名
         td = @to.company.client_person
       tr
+        td コース合計時間
+        td colspan="2" = convert_min @to.total_time
+      tr
+        td 登壇講師名
+        td colspan="2" = @to.teacher.short_name
+      tr
         th 特記
         td colspan="2" style="padding:10px;" = @to.mention
-      tr
-        td 合計時間
-        td colspan="2" = convert_min @to.total_time
     br
 
     h3 以下の日付で請求書を必ずお送りください
