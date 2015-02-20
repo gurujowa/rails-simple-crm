@@ -11,6 +11,7 @@ table.default_datatables
       th 終了日
       th 合計時間
       th 合計金額
+      th 発行日
   tbody
     - @teacher_orders.each do |teacher_order|
       tr
@@ -23,3 +24,4 @@ table.default_datatables
         td = teacher_order.end_date
         td = convert_min(teacher_order.total_time)
         td = number_to_currency(teacher_order.total_price)
+        td = teacher_order.order_date
