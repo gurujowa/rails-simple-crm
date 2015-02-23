@@ -46,8 +46,8 @@ class Teacher < ActiveRecord::Base
   end
 
   def to_order_name
-    if self.director.present?
-      self.director.short_name
+    if self.director_name.present?
+      self.director_name
     else
       short_name
     end

@@ -11,7 +11,7 @@
     .clearfix
       .alpha
         p.recipientName style="margin-bottom: 10px;"
-          = @teacher_order.teacher.director_name
+          = @teacher_order.teacher.to_order_name
           span 様
         p.titleName style="margin-bottom: 10px;"
           = @teacher_order.description
