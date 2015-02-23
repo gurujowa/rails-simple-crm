@@ -45,6 +45,12 @@ ja:
         lead_histories_lead_history_status_id_eq: 対応ステータス（１つでも含む）
 
   activerecord:
+    errors:
+      models:
+        lead_history:
+          attributes:
+            attachment:
+              size_too_big: 添付ファイルのサイズが１０MB以上です。
     models:
       teacher: 講師
       teacher_order: 講師発注

@@ -1,4 +1,5 @@
 class LeadHistory < ActiveRecord::Base
+  
   has_paper_trail 
   acts_as_taggable 
 
@@ -14,6 +15,8 @@ class LeadHistory < ActiveRecord::Base
   scope  :status_zip, lambda{ where('lead_history_status_id = ?', 8).order("approach_day DESC")}
   scope  :sent_list, lambda{ where('lead_histories.shipped_at is not null').order("approach_day DESC")}
 
+  has_many :lead_history_attachments
+  accepts_nested_attributes_for :lead_history_attachments
 
 
   def is_last

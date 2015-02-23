@@ -1,5 +1,5 @@
 class LeadsController < ApplicationController
-  before_action :set_lead, only: [:show, :edit, :update, :destroy]
+  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_dm]
   after_action :store_location, only: [:index, :search, :mylist, :approach]
   before_action :authenticate_user!
 
@@ -192,6 +192,24 @@ class LeadsController < ApplicationController
     session[:last_request_time] = Time.now.utc.to_i
   end
 
+  def add_dm
+    dm_flg = @lead.dm_flg
+    if dm_flg == true
+      message = "DM不要リストから削除しました"
+      clas = %Q{$('#btn-lead-add-dm').removeClass("active")} 
+    else
+      message = "DM不要リストに追加しました"
+      clas = %Q{$('#btn-lead-add-dm').addClass("active")} 
+    end
+
+    if @lead.update_attributes({dm_flg: !dm_flg})
+      render_noty :success, message, clas
+    else
+      render_noty :error, @to.errors.full_messages
+    end
+  end
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lead
@@ -207,6 +225,7 @@ class LeadsController < ApplicationController
       end
       gon.sex_list = result.to_json
     end
+
 
     def set_between_dates(leads)
       leads = leads.between_last_approach(params[:last_approach_gt], params[:last_approach_lt])

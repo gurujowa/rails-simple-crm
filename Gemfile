@@ -89,17 +89,22 @@ gem 'moji'
 gem 'deep_cloneable'
 
 #------------------------------
+#form
+#------------------------------
+gem "nested_form"
+gem 'simple_form', github: 'plataformatec/simple_form'
+gem "carrierwave"
+
+#------------------------------
 #other library
 #------------------------------
-gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'business_time'
-gem "nested_form"
-
 gem 'rest-client'
-
 gem 'whenever'
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

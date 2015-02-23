@@ -18,6 +18,7 @@ Mycrm::Application.routes.draw do
     end
     member do
       get "add_mylist"
+      get "add_dm"
       get "find"
     end
   end
@@ -32,6 +33,7 @@ Mycrm::Application.routes.draw do
     end
     member do
       get "sent"
+      get "remove_attachment"
     end
   end
 

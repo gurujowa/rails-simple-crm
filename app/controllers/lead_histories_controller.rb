@@ -14,7 +14,7 @@ class LeadHistoriesController < ApplicationController
     @lead_history.user = current_user
 
     if @lead_history.save
-      redirect_to stored_path_for, notice: '顧客対応履歴を作成しました'
+      redirect_to lead_url @lead_history.lead, notice:'顧客対応履歴を作成しました'
     else
       @lead = @lead_history.lead
       @new_lead_history = @lead_history
@@ -73,9 +73,17 @@ class LeadHistoriesController < ApplicationController
     end
   end
 
-  def lead_show_url lead_id
-    return {controller: "leads", action: 'show', id: lead_id}
+  def remove_attachment
+    @at= LeadHistoryAttachment.find(params[:id])
+    @at.remove_attachment!
+    if @at.save
+      @at.destroy!
+      redirect_to lead_url(@at.lead_history.lead), notice: '添付ファイルの削除に成功しました。'
+    else
+      redirect_to lead_url(@at.lead_history.lead), error: '添付ファイルの削除が出来ませんでした'
+    end
   end
+
 
   # DELETE /leads/1
   def destroy
@@ -96,6 +104,10 @@ class LeadHistoriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lead_history_params
-      params.require(:lead_history).permit(:approach_day, :next_approach_day, :lead_history_status_id, :memo, :lead_id, :user_id)
+      params.require(:lead_history).permit(
+        :approach_day, :next_approach_day, :lead_history_status_id, :memo, :lead_id, :user_id,
+     lead_history_attachments_attributes: [:id, :attachment]
+        
+      )
     end
 end

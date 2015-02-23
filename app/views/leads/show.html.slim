@@ -21,6 +21,10 @@ p#notice = notice
           = f.text_field :tag_list,  id: "lead_tag_list_form"
           = submit_tag "タグ変更"
     .col-sm-2
+      - if @lead.dm_flg == true
+        = link_to "DM不要", {controller: "leads",action: "add_dm", id: @lead.id},remote: true, class: "btn btn-default btn-block active", id: "btn-lead-add-dm"
+      - else
+        = link_to "DM不要", {controller: "leads",action: "add_dm", id: @lead.id},remote: true, class: "btn btn-default btn-block", id: "btn-lead-add-dm"
       - if @lead.other_user?(current_user.id)
         button type="button" class="btn btn-default" disabled=true #{@lead.user.name}が追加済み
       - else
@@ -151,7 +155,7 @@ p#notice = notice
         | 再アプローチ日：
         = @lead.next_approach_day
     button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#btn-history" 対応履歴の追加
-    =simple_form_for(@new_lead_history) do |f|
+    = simple_nested_form_for(@new_lead_history, :html => {:multipart => true}) do |f|
       =f.error_notification
       #btn-history.collapse
         .panel.panel-info
@@ -191,6 +195,12 @@ p#notice = notice
                         = f.radio_button :lead_history_status_id, l.id
             = f.input :next_approach_day, as: :datetime_picker
             = f.input :memo
+            = f.simple_fields_for :lead_history_attachments do |l|
+              = l.input :attachment, as: :attachment
+            = f.link_to_add "添付ファイル追加", :lead_history_attachments,class: "btn btn-default"
+            
+            
+            
             = f.hidden_field :lead_id
           .panel-footer
             = f.button :submit
@@ -211,6 +221,16 @@ p#notice = notice
               tr
                 td colspan="3"
                   = h.memo
+              - h.lead_history_attachments.each  do |a|
+                tr
+                  td colspan="3"
+                    .pull-right
+                      span.glyphicon.glyphicon-paperclip 
+                      = link_to a.attachment.filename, a.attachment.url
+                      | &nbsp;/&nbsp;
+                      = link_to '削除', {controller: "lead_histories" , action: "remove_attachment", id: a.id}, data: { confirm: '本当に削除しますか' }
+              
+
               tr 
                 td colspan="3" 
                   - if h.shipped_at.present?

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218071723) do
+ActiveRecord::Schema.define(version: 20150223052236) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -126,8 +126,28 @@ ActiveRecord::Schema.define(version: 20150218071723) do
     t.integer  "con_type"
   end
 
-# Could not dump table "courses" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "courses", force: true do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.boolean  "order_flg",             default: false
+    t.boolean  "book_flg",              default: false
+    t.boolean  "resume_flg",            default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "diploma_flg",           default: false
+    t.string   "address"
+    t.string   "station"
+    t.string   "responsible"
+    t.string   "tel"
+    t.boolean  "observe_flg",           default: false
+    t.integer  "students"
+    t.boolean  "attendee_table_flg",    default: false
+    t.text     "memo"
+    t.integer  "user_id"
+    t.string   "status",                default: "draft"
+    t.integer  "total_time_minute"
+    t.boolean  "total_time_manual_flg"
+  end
 
   create_table "estimate_lines", force: true do |t|
     t.string   "name",                    null: false
@@ -194,6 +214,13 @@ ActiveRecord::Schema.define(version: 20150218071723) do
   add_index "lead_histories", ["lead_id"], name: "index_lead_histories_on_lead_id"
   add_index "lead_histories", ["user_id"], name: "index_lead_histories_on_user_id"
 
+  create_table "lead_history_attachments", force: true do |t|
+    t.integer  "lead_history_id"
+    t.string   "attachment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "lead_history_statuses", force: true do |t|
     t.string   "name"
     t.string   "progress"
@@ -215,8 +242,8 @@ ActiveRecord::Schema.define(version: 20150218071723) do
   add_index "lead_interviews", ["lead_id"], name: "index_lead_interviews_on_lead_id"
 
   create_table "leads", force: true do |t|
-    t.string   "name",             null: false
-    t.string   "tel",              null: false
+    t.string   "name",                             null: false
+    t.string   "tel",                              null: false
     t.string   "fax"
     t.string   "email"
     t.string   "person_name"
@@ -237,6 +264,7 @@ ActiveRecord::Schema.define(version: 20150218071723) do
     t.string   "campaign_detail"
     t.string   "corporation_name"
     t.string   "sex"
+    t.boolean  "dm_flg",           default: false
   end
 
   add_index "leads", ["tel"], name: "index_leads_on_tel", unique: true
