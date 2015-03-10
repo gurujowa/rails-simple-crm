@@ -198,9 +198,6 @@ p#notice = notice
             = f.simple_fields_for :lead_history_attachments do |l|
               = l.input :attachment, as: :attachment
             = f.link_to_add "添付ファイル追加", :lead_history_attachments,class: "btn btn-default"
-            
-            
-            
             = f.hidden_field :lead_id
           .panel-footer
             = f.button :submit

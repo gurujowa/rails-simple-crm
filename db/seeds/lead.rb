@@ -15,7 +15,7 @@ def tel_encode(input)
     i
 end
 
-table = CSV.table('db/kanagawa2.csv',encoding: "Windows-31J:UTF-8")
+table = CSV.table('db/matsudo.csv',encoding: "Windows-31J:UTF-8")
 table.each do |r|
   if r[:client_name].blank?
     next

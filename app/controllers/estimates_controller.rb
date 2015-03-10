@@ -10,7 +10,7 @@ class EstimatesController < ApplicationController
 
   # GET /estimates/1
   def show
-    @until = 5 - @estimate.estimate_lines.length
+    @until = 2 - @estimate.estimate_lines.length
     @until = 0 if @until < 0
     respond_to do |format|
       format.html { 
