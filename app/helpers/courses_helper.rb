@@ -3,7 +3,7 @@ module CoursesHelper
   def str_total_time(course)
     str = convert_min course.total_time
     if course.total_time_manual_flg.present?
-      return str + "(手動入力)"
+      return str.to_s + "(手動入力)"
     else
       return str
     end
