@@ -32,29 +32,74 @@
             info@yourbright.co.jp
     table.table_main width="100%"
       tr
-        th rowspan="4" width="15%" style="background-color:#CCC;" 委託企業
-        td width="20%" 所在地
-        td = @to.company.full_address
-      tr
-        td 企業名
-        td = @to.company.name
-      tr
-        td 電話番号
-        td = @to.company.tel
-      tr
-        td 担当者名
-        td = @to.company.client_person
+        th width= "15%" 委託企業
+        td
+          .row
+            | [ 所在地 ] 
+            = @to.company.full_address
+          .row
+            | [ 企業名 ] 
+            = @to.company.name
+          .row
+            | [ 電話番号 ] 
+            = @to.company.tel
+          .row
+            | [ 担当者名 ] 
+            = @to.company.client_person
       tr
         th 合計時間
-        td colspan="2" = convert_min @to.total_time
+        td = convert_min @to.total_time
       tr
         th 登壇講師名
-        td colspan="2" = @to.teacher.short_name
+        td = @to.teacher.short_name
       tr
         th 特記
-        td colspan="2" style="padding:10px;" = @to.mention
+        td  = @to.mention
+      - @to.courses.each_with_index do |c, i|
+        tr
+          th
+            | コース#{i+1} <br> コース情報
+          td 
+            .row 
+              | [ コース名 ]
+              = c.name
+            .row
+              | [ 会場住所 ]
+              = c.address
+            .row
+              | [ 最寄り駅 ]
+              = c.station
+            .row
+              | [ 先方研修担当者 ]
+              = c.responsible
+            .row
+              | [ 先方緊急連絡先 ]
+              = c.tel
+            .row
+              | [ 受講者数 ]
+              = c.students
+        - if @to.period_type.auto?
+          tr
+            th
+              | コース#{i+1} <br> 研修日
+            td 
+              - c.periods.each do |p|
+                - if p.teacher.id == @teacher_order.teacher.id
+                  .row 
+                    | #{p.day}  #{p.start_time.to_s(:time)} ～ #{p.end_time.to_s(:time)} 
+                    - if p.break_start.present?
+                      |  (休憩： #{p.break_start.to_s(:time)}　～  #{p.break_end.to_s(:time)} )
+        - if @to.period_type.manual?
+            tr
+              th 研修日
+              td 
+                - @to.teacher_order_periods.each do |p|
+                  .row 
+                    | #{p.day}  #{p.start_time.to_s(:time)} ～ #{p.end_time.to_s(:time)} 
+                    - if p.break_start.present?
+                      |  (休憩： #{p.break_start.to_s(:time)}　～  #{p.break_end.to_s(:time)} )
     br
-
+    br
     h3 以下の日付で請求書を必ずお送りください
     table width="100%" class="table_main"
       tr
@@ -75,92 +120,3 @@
         ※支払い方法は、指定銀行口座に振込となります。<br>
         ※企業側からのキャンセル（前日および当日を除く）および講師の自己都合により不実施となった研修については支払いの対象となりません。<br>
         ※契約金額には消費税8%が含まれています
-
-
-    - if @to.period_type.manual?
-      .page-break
-      - @to.courses.each do |c|
-        h3 = c.name
-        table.table_main width="100%"
-          tr
-            th rowspan="8" width="15%"style="background-color:#CCC;" コース情報
-            td width="20%" コース名
-            td = c.name
-          tr
-            td 会場住所
-            td = c.address
-          tr
-            td 最寄り駅
-            td = c.station
-          tr
-            td 先方研修担当者
-            td = c.responsible
-          tr
-            td 先方緊急連絡先
-            td = c.tel
-          tr
-            td 受講者数
-            td = c.students
-        br
-        h3 コマ情報
-        table.table_main width="100%"
-          tr
-            th.gray 実施日
-            th.gray 開始時刻
-            th.gray 終了時刻
-            th.gray 休憩開始
-            th.gray 休憩終了
-          - @to.teacher_order_periods.each do |p|
-            tr
-              td = p.day
-              td = p.start_time.to_s(:time)
-              td = p.end_time.to_s(:time)
-              td = p.break_start.to_s(:time) if p.break_start.present?
-              td = p.break_end.to_s(:time) if p.break_end.present?
-        p ※研修日・時間は変更・キャンセルになる場合があります。		
-
-    - if @to.period_type.auto?
-      .page-break
-      - @to.courses.each do |c|
-        h3 = c.name
-        table.table_main width="100%"
-          tr
-            th rowspan="8" width="15%"style="background-color:#CCC;" コース情報
-            td width="20%" コース名
-            td = c.name
-          tr
-            td 会場住所
-            td = c.address
-          tr
-            td 最寄り駅
-            td = c.station
-          tr
-            td 先方研修担当者
-            td = c.responsible
-          tr
-            td 先方緊急連絡先
-            td = c.tel
-          tr
-            td 受講者数
-            td = c.students
-
-        br
-        h3 コマ情報
-        table.table_main width="100%"
-          tr
-            th.gray 実施日
-            th.gray 開始時刻
-            th.gray 終了時刻
-            th.gray 休憩開始
-            th.gray 休憩終了
-            th.gray 講師名
-          - c.periods.each do |p|
-            - if p.teacher.id == @teacher_order.teacher.id
-              tr
-                td = p.day
-                td = p.start_time.to_s(:time)
-                td = p.end_time.to_s(:time)
-                td = p.break_start(:time) if p.break_start.present?
-                td = p.break_end(:time) if p.break_end.present?
-                td = p.teacher.short_name
-        p ※研修日・時間は変更・キャンセルになる場合があります。		

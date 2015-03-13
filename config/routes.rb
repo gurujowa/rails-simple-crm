@@ -15,6 +15,7 @@ Mycrm::Application.routes.draw do
       get "name"
       post "up_column"
       get "address"
+      get "reject_list"
     end
     member do
       get "add_mylist"

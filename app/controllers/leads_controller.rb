@@ -40,8 +40,6 @@ class LeadsController < ApplicationController
       @q = leads.search(pq)
       @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
 
-
-
       respond_to do |format|
         format.html
         format.csv { send_csv @q.result.includes(:lead_histories).paginate(page: 1,per_page: 3000).to_csv }
@@ -69,6 +67,27 @@ class LeadsController < ApplicationController
       @leads = set_between_dates(@leads)
   end
 
+  def reject_list
+    leads = Lead.where(dm_flg: true)
+    my_leads = Lead.where("user_id is not null")
+    companies = Company.all
+    csvs = CSV.generate do |csv|
+      csv << ["会社名","TEL", "FAX"]
+      leads.each do |l|
+        csv << [l.name, l.tel, l.fax]
+      end
+      companies.each do |l|
+        csv << [l.name, l.tel, l.fax]
+      end
+      my_leads.each do |l|
+        csv << [l.name, l.tel, l.fax]
+      end
+    end
+    respond_to do |format|
+      format.csv { send_csv csvs }
+    end
+
+  end
 
   def address
     leads = Lead.where(id: params[:leads].values)
