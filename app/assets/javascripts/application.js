@@ -24,6 +24,7 @@
 //= require jquery.timepicker.min
 //= require fullcalendar
 //= require moment.min
+//= require handsontable.full.min
 //= require pivot
 //= require select2
 //= require select2_locale_ja

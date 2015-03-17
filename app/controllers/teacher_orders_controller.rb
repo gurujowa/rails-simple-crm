@@ -61,7 +61,15 @@ class TeacherOrdersController < ApplicationController
 
   # GET /teacher_orders/new
   def new
-    @teacher_order = TeacherOrder.new
+
+    if params[:dup_id].present?
+      parent = TeacherOrder.find(params[:dup_id])
+      clone = parent.deep_clone({:include => [:teacher_order_lines, :teacher_order_courses]})
+      @teacher_order = clone
+    else
+      @teacher_order = TeacherOrder.new
+    end
+
     @teacher_order.mention = "テキスト、レジュメ等は研修日の１週間前までに下記にお送りください。
 また、レジュメとともに、必要な備品（ホワイトボード、プロジェクタなど）もお知らせください。
 送り先： kenshu@yourbright.co.jp　山下勇登　宛

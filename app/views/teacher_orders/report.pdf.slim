@@ -54,7 +54,7 @@
         td = @to.teacher.short_name
       tr
         th 特記
-        td  = @to.mention
+        td  = simple_format @to.mention
       - @to.courses.each_with_index do |c, i|
         tr
           th
