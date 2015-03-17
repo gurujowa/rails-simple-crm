@@ -3,9 +3,9 @@ ul.breadcrumb
   li.active = @teacher_order.teacher.name
 
 .well
+  = link_to '編集', edit_teacher_order_path(@teacher_order), class: "btn btn-default"
   =link_to '複製', new_teacher_order_path(dup_id: @teacher_order.id), :class => "btn btn-default"
   - if @teacher_order.status == "draft"
-    = link_to '編集', edit_teacher_order_path(@teacher_order), class: "btn btn-default"
     = link_to '発行する', {action: :active, id: @teacher_order.id}, class: "btn btn-success"
     = link_to '削除', teacher_order_path(@teacher_order),  method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
   - if @teacher_order.status == "active"
