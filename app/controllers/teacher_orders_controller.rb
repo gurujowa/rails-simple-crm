@@ -42,6 +42,7 @@ class TeacherOrdersController < ApplicationController
       format.pdf {
         render pdf: @teacher_order.teacher.name + " - " + @teacher_order.company.name + " - 業務依頼書",
                encoding: 'UTF-8',
+               zoom: "0.9",
                layout: 'pdf.html',
                show_as_html: params[:debug].present?
       }
@@ -59,7 +60,6 @@ class TeacherOrdersController < ApplicationController
     end
   end
 
-  # GET /teacher_orders/new
   def new
 
     if params[:dup_id].present?
@@ -76,22 +76,19 @@ class TeacherOrdersController < ApplicationController
 連絡先：　03-6908-6143（代）　090-8276-3312(山下携帯)"
   end
 
-  # GET /teacher_orders/1/edit
   def edit
   end
 
-  # POST /teacher_orders
   def create
     @teacher_order = TeacherOrder.new(teacher_order_params)
 
     if @teacher_order.save
-      redirect_to teacher_orders_url, notice: 'Teacher order was successfully created.'
+      redirect_to teacher_orders_url, notice: '発注情報が作成されました'
     else
       render action: 'new'
     end
   end
 
-  # PATCH/PUT /teacher_orders/1
   def update
     if @teacher_order.update(teacher_order_params)
       redirect_to @teacher_order, notice: '発注情報が更新されました'
@@ -100,7 +97,6 @@ class TeacherOrdersController < ApplicationController
     end
   end
 
-  # DELETE /teacher_orders/1
   def destroy
     @teacher_order.destroy
     redirect_to teacher_orders_url, notice: 'Teacher order was successfully destroyed.'
