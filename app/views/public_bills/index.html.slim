@@ -1,17 +1,15 @@
 h1 役所用請求書 一覧
 
 = link_to '新規追加', new_public_bill_path, :class => 'btn btn-default'
-table.default_datatables
+table.default_datatables.table-bordered.table-striped
   thead
     tr
       
       th 請求書名
       th 発行日
-      th 送信済
       th 会社名
       th 請求日時
       th 支払い日時
-      th メモ
       th チェック
   tbody
     - @public_bills.each do |public_bill|
@@ -19,11 +17,9 @@ table.default_datatables
         
         td = public_bill.name 
         td = public_bill.publish_date 
-        td = public_bill.send_flg 
         td = public_bill.company_name 
         td = public_bill.invoice_date 
         td = public_bill.payment_date 
-        td = public_bill.memo 
         td 
           = link_to '表示', public_bill_path(public_bill, format: :pdf), :class => "btn btn-success"
           = link_to '複製', new_public_bill_path(dup_id: public_bill.id), :class => "btn btn-default"

@@ -177,7 +177,7 @@ ja:
         name: 件名
         invoice_date: 請求書送付日
         payment_date: 支払い日
-        memo: メモ
+        memo: 注釈
       public_estimate:
         company: 会社
         display_name: 表示名

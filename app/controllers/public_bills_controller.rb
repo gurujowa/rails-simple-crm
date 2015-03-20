@@ -8,7 +8,7 @@ class PublicBillsController < ApplicationController
 
   # GET /estimates/1
   def show
-    @until = 9 - @public_bill.public_bill_lines.length
+    @until = 3 - @public_bill.public_bill_lines.length
     respond_to do |format|
       format.html { 
         redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :public_bills, action: :show
