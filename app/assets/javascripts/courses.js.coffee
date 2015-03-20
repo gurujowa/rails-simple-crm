@@ -1,7 +1,8 @@
 jQuery ->
-  #container1 = document.getElementById('course_handsontable')
-  #hot1 = new Handsontable(container1)
-  #hot1.render()
+  if ($(".handsontable") != null)
+    container1 = document.getElementById('course_handsontable')
+    hot1 = new Handsontable(container1)
+    hot1.render()
 
   $('#course_total_time_manual_flg').click ->
     $(".course_total_time_minute").slideToggle @checked

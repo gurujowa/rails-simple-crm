@@ -4,6 +4,8 @@ ul.breadcrumb
   li = link_to @course.name, course_path(@course)
   li.active Edit
 
+div.handsontable#course_handsontable
+
 
 = simple_form_for @course , html: {class: "form-horizontal"}, wrapper: :horizontal_form  do |f|
   = render partial: 'form', :locals => {:f=> f} 
