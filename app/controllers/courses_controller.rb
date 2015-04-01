@@ -91,6 +91,19 @@ class CoursesController < ApplicationController
     end
   end
 
+  def progress
+    @periods = Period.where(id: 0..10)
+  end
+
+  def progress_update
+    params[:q].each do |q|
+      pq = PeriodProgress.new( q[1] )
+      pq.update
+    end
+
+    render json: {success: "更新が完了しました"}
+  end
+
   def observe
     @courses = Course.all
   end

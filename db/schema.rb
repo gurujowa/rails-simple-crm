@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223052236) do
+ActiveRecord::Schema.define(version: 20150326044604) do
 
   create_table "billing_plan_lines", force: true do |t|
     t.date     "bill_date",       null: false
@@ -124,6 +124,17 @@ ActiveRecord::Schema.define(version: 20150223052236) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "con_type"
+  end
+
+  create_table "course_progress_headers", force: true do |t|
+    t.string "name"
+    t.string "type", null: false
+  end
+
+  create_table "course_progress_values", force: true do |t|
+    t.integer "period_id",                 null: false
+    t.integer "course_progress_header_id", null: false
+    t.string  "value"
   end
 
   create_table "courses", force: true do |t|

@@ -108,8 +108,9 @@ Mycrm::Application.routes.draw do
       get 'observe'
       put 'update/:id' => 'courses#up_name'  
       get 'update/:id/:type' => 'courses#up_bool'
-      get 'google'
-      get 'alert'
+      get 'progress' => 'courses#progress'
+      post 'progress' => 'courses#progress_update'
+      get 'progress_save' => 'courses#progress_update'
       get 'task'
     end
   end

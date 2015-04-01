@@ -31,8 +31,6 @@ html
             li.dropdown
               ul.dropdown-menu
                 li = link_to "コースタスク" , {controller: "courses", action: "task"}
-                - if current_user.admin?
-                  li = link_to "コースアラート" , {controller: "courses", action: "alert"}
             li.dropdown
               = link_to "対応履歴" , "lead_histories", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}
               ul.dropdown-menu
@@ -63,11 +61,9 @@ html
               = link_to "コース", "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}
               ul.dropdown-menu
                   li = link_to "コース検索" , {controller: "courses", action: "index"}
-                  li = link_to "コースタスク" , {controller: "courses", action: "task"}
+                  li = link_to "進捗表" , {controller: "courses", action: "progress"}
                   li = link_to "カレンダー", {controller: "courses", action: "calendar"}
                   li = link_to "立会カレンダー", {controller: "courses", action: "observe"}
-                  - if current_user.admin?
-                    li = link_to "コースアラート" , {controller: "courses", action: "alert"}
 
             li.dropdown
               = link_to "講師", "estimates", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}

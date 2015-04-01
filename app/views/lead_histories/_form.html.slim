@@ -6,7 +6,7 @@
     = f.association :user 
     = f.input :approach_day , as: :datetime_picker
     = f.input :next_approach_day , as: :datetime_picker
-    = f.input :memo 
+    = f.input :memo , input_html: {rows: 10}
     = f.simple_fields_for :lead_history_attachments do |l|
       = l.input :attachment, as: :attachment
     = f.link_to_add "添付ファイル追加", :lead_history_attachments,class: "btn btn-default"

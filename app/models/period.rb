@@ -22,6 +22,7 @@
 
 class Period < ActiveRecord::Base
   has_paper_trail 
+
   validates :day, presence: true  
   validates :start_time, presence: true  
   validates :end_time, presence: true  
@@ -67,9 +68,6 @@ class Period < ActiveRecord::Base
   end
   
 
-  def total_time
-     getTotal
-  end
 
   def total_time_format
     b_time = 0
@@ -115,4 +113,7 @@ class Period < ActiveRecord::Base
     end
   end
 
+
+
+  alias total_time getTotal
 end

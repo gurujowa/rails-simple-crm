@@ -18,7 +18,7 @@ jQuery ->
 
   pickerReady()
   periodCalendarRender()
-  if ($(".full_calendar") != null)
+  if ($(".full_calendar").length >= 1)
     courseCalendarRender()
 
   $(document).on 'click' , '.period_img',  ->

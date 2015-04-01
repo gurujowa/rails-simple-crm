@@ -30,6 +30,9 @@ class Teacher < ActiveRecord::Base
   has_paper_trail 
   validates :email, :format=>{:with=>/[a-z0-9_.-]+@([a-z0-9-]+\.)+[a-z]{2,4}/i, :message=>":メールアドレスの形式がおかしいです", :allow_blank=>true}
   validates :tel, :format=>{:with=>/[0-9-]/, :message=>"：電話番号は半角数値と「-」だけ", :allow_blank=>true}
+
+  default_scope -> {order(:last_kana)}
+  scope :is_active, lambda { where(work_possible: 0)}
   
   def self.work_possible_hash
     {:possible => 0, :subtle => 1, :impossible => 2}
@@ -63,6 +66,9 @@ class Teacher < ActiveRecord::Base
     end
   end
 
+  def id_and_name
+    return self.name + " (" + self.id.to_s
+  end
 
   def kana
     return last_kana + " " + first_kana
