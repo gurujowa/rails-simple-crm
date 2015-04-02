@@ -1,4 +1,4 @@
-tr class="periods_field_#{f.index}"
+tr.fields
   td style="width:120px;" = f.text_field :day , :class=>"datepicker input-small course_datepicker form-control input-sm", :required => true
   td style="width:85px;" = time_input(f, "start_time", true)
   td style="width:85px;"= time_input(f, "end_time", true)
@@ -6,14 +6,5 @@ tr class="periods_field_#{f.index}"
   td.visible-md.visible-lg style="width:85px;"= time_input(f, "break_end", false)
   td = f.select :teacher_id , options_teachers(f.object.teacher_id),{:include_blank => true}, :class => "select_teacher_id form-control input-sm"
   td style="width:120px;" = f.select :user_id , options_from_users(f.object.user_id),{:include_blank => true}, :class => "select_user_id form-control input-sm"
-  td = check_period_img(f, "resume_flg")
-  td = check_period_img(f, "equipment_flg")
-  td = check_period_img(f, "attend_flg")
-  td = check_period_img(f, "report_flg")
-tr class="periods_field_#{f.index}"
-  td メモ
-  td colspan="9"
-    = f.text_field :memo, class: "form-control"
-  td
-    - if delete_flg == true
-      = link_to_remove_periods "削除", f
+  td.col-xs-3 = f.text_field :memo, class: "form-control"
+  td.col-xs-1 = f.link_to_remove "削除", class: "btn btn-default"

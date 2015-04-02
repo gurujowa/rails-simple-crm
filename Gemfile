@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.2.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
@@ -33,12 +33,9 @@ gem 'unicorn'
 gem 'jbuilder', '~> 1.2'
 
 group :development do
-  # エラー画面をわかりやすく整形してくれる
-  gem 'better_errors'
-  # better_errorsの画面上にirb/pry(PERL)を表示する
   gem 'pry-rails'
   gem 'binding_of_caller'
-  gem "letter_opener_web"
+  gem 'web-console'
 
   #capistano
   gem 'capistrano', '~>3.0.0'
@@ -61,7 +58,6 @@ gem "select2-rails"
 gem 'icheck-rails'
 gem 'fullcalendar-rails'
 gem 'jquery-ui-rails'
-gem 'lazy_high_charts'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'underscore-rails'
 gem 'gon' 
@@ -70,12 +66,12 @@ gem 'pikaday-gem'
 #------------------------------
 #Format Convert Library
 #------------------------------
-gem 'icalendar'
 gem 'spreadsheet'
 gem 'slim-rails'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 gem "dropbox-api"
+gem 'momentjs-rails', :github => 'derekprior/momentjs-rails'
 
 #------------------------------
 #activerecord and model

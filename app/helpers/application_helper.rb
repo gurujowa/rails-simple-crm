@@ -17,26 +17,6 @@ module ApplicationHelper
      return 0
     end
   end
-
-  def link_to_remove_fields(name, f)
-    f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", :class => "btn btn-warning")
-  end
-  
-  def link_to_add_fields(name, f, association)
-    new_object = f.object.class.reflect_on_association(association).klass.new
-    fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
-      render(association.to_s.singularize + "_fields", :f => builder, :delete_flg => false)
-    end
-    link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", :class => "btn btn-default", :id => "add_field_button")
-  end
-
-  def link_to_add_simple_fields(name, f, association)
-    new_object = f.object.class.reflect_on_association(association).klass.new
-    fields = f.simple_fields_for(association, new_object, :child_index => "new_#{association}", wrapper: :table_form) do |builder|
-      render(association.to_s.singularize + "_fields", :l => builder, :delete_flg => false)
-    end
-    link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", :class => "btn btn-default", :id => "add_field_button")
-  end
   
   def check_img_src(bool)
     if bool == true

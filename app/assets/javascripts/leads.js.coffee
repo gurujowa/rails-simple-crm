@@ -34,6 +34,10 @@ jQuery ->
       title: "性別を選択してください"
       source: gon.sex_list
 
+  $('#leads_csv_button').click ->
+    console.log "test"
+    reloadWithFormat('csv')
+
   $('#leads_address_label').click ->
     sData = $('input.leads_index_checkbox').serialize()
     if sData == "" 

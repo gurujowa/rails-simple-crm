@@ -17,52 +17,8 @@ jQuery ->
         results: data.companies
 
   pickerReady()
-  periodCalendarRender()
   if ($(".full_calendar").length >= 1)
     courseCalendarRender()
-
-  $(document).on 'click' , '.period_img',  ->
-    hidden_value = $(this).parent().find('.period_hidden').val()
-    if (hidden_value == "t")
-      $(this).attr("src", "/img/cross.png")
-      $(this).parent().find('.period_hidden').val("f")
-    else if (hidden_value == "f" or hidden_value == "false")
-      $(this).attr("src", "/img/check.png")
-      $(this).parent().find('.period_hidden').val("t")
-    else
-      alert("チェックの状況が正しくありません。管理者を呼んでください")
-
-  $('#add_field_button').on 'click', ->
-     lastPickerReady()
-     $(".start_timepicker").eq(-1).val($(".start_timepicker").eq(-2).val())
-     $(".end_timepicker").eq(-1).val($(".end_timepicker").eq(-2).val())
-     $(".break_startpicker").eq(-1).val($(".break_startpicker").eq(-2).val())
-     $(".break_endpicker").eq(-1).val($(".break_endpicker").eq(-2).val())
-     $(".select_teacher_id").eq(-1).val($(".select_teacher_id").eq(-2).val())
-     $( ".course_datepicker" ).datepicker({format: 'yyyy/mm/dd', language: 'ja'})
-
-periodCalendarRender = (method) ->
-  calendar_settings = $.fn.fullcalendar
-  calendar_settings.eventSources = new Array
-  calendar_settings.eventSources[0] ={
-    color: 'black'
-    textColor: 'white'
-  }
-
-  i = 1
-  events = new Array
-  $('#periods_table tbody tr').each ->
-    events.push
-      title: "研修" + i
-      start: $(this).find(".datepicker").val() + " " + $(this).find(".start_timepicker").val()
-      end: $(this).find(".datepicker").val() + " " + $(this).find(".end_timepicker").val()
-      allDay: false
-    i++  
-  calendar_settings.eventSources[0].events = events
-  if (method == "render")
-    $('#period_calendar').fullCalendar('destroy')
-  $('#period_calendar').fullCalendar(calendar_settings)
-
 
 courseCalendarRender = (method) ->
   calendar_settings = $.fn.fullcalendar

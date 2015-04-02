@@ -6,6 +6,8 @@ Mycrm::Application.routes.draw do
 
   resources :lead_interviews, only: [:update]
 
+  resources :progresses
+
   resources :leads do
     collection do
       match 'search' => 'leads#search', via: [:get, :post], as: :search
@@ -108,9 +110,6 @@ Mycrm::Application.routes.draw do
       get 'observe'
       put 'update/:id' => 'courses#up_name'  
       get 'update/:id/:type' => 'courses#up_bool'
-      get 'progress' => 'courses#progress'
-      post 'progress' => 'courses#progress_update'
-      get 'progress_save' => 'courses#progress_update'
       get 'task'
     end
   end
@@ -129,9 +128,6 @@ Mycrm::Application.routes.draw do
       get 'contact_delete'
       get "find"
     end
-  end
-  if Rails.env.development?
-    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
 #  get 'current' => 'users#current'

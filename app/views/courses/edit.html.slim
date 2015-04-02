@@ -4,10 +4,10 @@ ul.breadcrumb
   li = link_to @course.name, course_path(@course)
   li.active Edit
 
-div.handsontable#course_handsontable
 
+= simple_nested_form_for @course  do |f|
 
-= simple_form_for @course , html: {class: "form-horizontal"}, wrapper: :horizontal_form  do |f|
+  = f.error_notification 
   = render partial: 'form', :locals => {:f=> f} 
 
   table.table.table-bordered.table-striped#periods_table
@@ -20,14 +20,11 @@ div.handsontable#course_handsontable
         th 休憩終了
         th 講師
         th 立会人
-        th レジュメ
-        th 備品確認
-        th 出欠表
-        th 実施報告書
+        th メモ
+        th 削除
     tbody.add_fields
-      = f.fields_for :periods do |c|
-        = render :partial => "period_fields", :locals => { :f => c, :delete_flg => true}
+      = f.simple_fields_for :periods, wrapper: false
   p
-    = link_to_add_fields "追加", f, :periods
+    = f.link_to_add "追加", :periods, data: {target: "#periods_table"}, class: "btn btn-default"
     = f.submit "保存する", :class => "btn btn-primary"
     = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"

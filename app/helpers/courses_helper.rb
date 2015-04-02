@@ -17,17 +17,6 @@ module CoursesHelper
     return tag.html_safe    
   end
   
-  def check_period_img(period,type)
-    src = check_img_src(period.object.read_attribute(type))
-    img_tag =  "<img src='" + src + "' id='icon_period_" + type + "_" + period.object.id.to_s + "' class='period_img' />"
-    
-    return img_tag.html_safe + period.hidden_field(type, :class => "period_hidden") 
-  end
-
-  def link_to_remove_periods(name, f)
-    f.hidden_field(:_destroy) + link_to_function(name, "remove_periods(this, " + f.index.to_s + ")", :class => "btn btn-warning")
-  end
-
   
   def time_input(builder, name, required)
     value = builder.object.read_attribute(name)

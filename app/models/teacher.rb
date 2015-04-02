@@ -24,7 +24,7 @@
 
 class Teacher < ActiveRecord::Base
 
-  has_many :periods, order: "day"
+  has_many :periods, ->{order("day")}
   belongs_to :director, :class_name => "Teacher", :foreign_key => "director_id"
 
   has_paper_trail 
