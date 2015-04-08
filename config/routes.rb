@@ -6,7 +6,12 @@ Mycrm::Application.routes.draw do
 
   resources :lead_interviews, only: [:update]
 
-  resources :progresses
+  resources :progresses do
+    collection do
+      get "main"
+      get "data"
+    end
+  end
 
   resources :leads do
     collection do
