@@ -2,7 +2,6 @@ require "moji"
 
 class Lead < ActiveRecord::Base
   extend Enumerize
-  has_paper_trail 
   acts_as_taggable 
   belongs_to :user
   has_many :lead_histories
