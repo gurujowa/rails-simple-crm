@@ -99,7 +99,6 @@ GEM
       execjs
     coffee-script-source (1.9.1)
     colorize (0.7.5)
-    daemon_controller (1.2.0)
     debug_inspector (0.0.2)
     deep_cloneable (2.1.1)
       activerecord (>= 3.1.0, < 5.0.0)
@@ -188,10 +187,6 @@ GEM
     paper_trail (3.0.7)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
-    passenger (4.0.20)
-      daemon_controller (>= 1.1.0)
-      rack
-      rake (>= 0.8.1)
     pikaday-gem (1.2.0)
       railties (>= 3.1)
     polyamorous (1.2.0)
@@ -350,7 +345,6 @@ DEPENDENCIES
   momentjs-rails!
   nested_form
   paper_trail
-  passenger (= 4.0.20)
   pikaday-gem
   pry-rails
   rails (= 4.2.1)
