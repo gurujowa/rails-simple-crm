@@ -1,8 +1,6 @@
-tr
-  td = l.input :bill_date,as: "date_picker"
-  td = l.input :accural_date,as: "date_picker"
-  td = l.input :price
-  td = l.input :memo
-  td
-    - if delete_flg == true
-      = link_to_remove_fields "削除", l
+tr.fields
+  td = f.input :bill_date,as: "date_picker", label: false
+  td = f.input :accural_date,as: "date_picker", label: false
+  td = f.input :price, label: false
+  td = f.input :memo, label: false
+  td = f.link_to_remove "行を削除", class: "btn btn-default"

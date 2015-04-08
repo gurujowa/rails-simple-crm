@@ -1,5 +1,5 @@
 h1 請求予定表　編集
 
-= link_to '出力', @billing_plan , :class => "btn btn-default"
-= link_to '削除', @billing_plan, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-default"
 = render 'form'
+= link_to 'PDF出力する', @billing_plan , :class => "btn btn-default"
+= link_to '請求予定表を削除', @billing_plan, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-default"
