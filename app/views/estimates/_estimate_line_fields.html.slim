@@ -4,9 +4,9 @@ tr.fields
   td.col-xs-4
     .col-xs-11 = f.input :detail, input_html: {rows: 7}, label: false
   td.col-xs-2
-    .col-xs-11 = f.input :unit_price, class: "estimate_lines_trigger estimate_line_unit_price", label: false
+    = f.input :unit_price, class: "estimate_lines_trigger estimate_line_unit_price", label: false
   td.col-xs-1
-    .col-xs-11 = f.input :quantity, class: "estimate_lines_trigger estimate_line_quantity", label: false
+    = f.input :quantity, class: "estimate_lines_trigger estimate_line_quantity", label: false
   td.col-xs-1
-    .col-xs-11 = f.input :tax_rate, class: "estimate_lines_trigger estimate_line_tax_rate", label: false
+    = f.input :tax_rate, class: "estimate_lines_trigger estimate_line_tax_rate", label: false
   td.col-xs-1 = f.link_to_remove "行を削除", class: "btn btn-default"

@@ -3,6 +3,7 @@ Mycrm::Application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
+  config.log_level = :info
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers
@@ -48,9 +49,6 @@ Mycrm::Application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
-
-  # Set to :debug to see everything in the log.
-  #config.log_level = :warn
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
