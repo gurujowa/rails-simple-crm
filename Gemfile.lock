@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 70def2bc2cc955e53c21d3102c375d3fc7da867a
+  revision: e01b7ffc26c483ee536fa45339bae96aff5e6284
   specs:
-    ransack (1.6.5)
+    ransack (1.6.6)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       i18n
-      polyamorous (~> 1.1)
+      polyamorous (~> 1.2)
 
 GIT
   remote: git://github.com/derekprior/momentjs-rails.git
@@ -18,7 +18,7 @@ GIT
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
-  revision: 7485f39dfa0ec648132f6656ef2896fb3549acfe
+  revision: a28012bf2f2aa6dabd2b1efd5a306279cb3c885e
   specs:
     simple_form (3.1.0)
       actionpack (~> 4.0)
@@ -94,7 +94,7 @@ GEM
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
     coffee-script-source (1.9.1)
@@ -118,7 +118,7 @@ GEM
     enumerize (0.11.0)
       activesupport (>= 3.2)
     erubis (2.7.0)
-    execjs (2.4.0)
+    execjs (2.5.0)
     fullcalendar-rails (2.3.1.0)
       jquery-rails (>= 3.1.1, < 5.0.0)
       momentjs-rails (~> 2.8, >= 2.8.4)
@@ -184,12 +184,12 @@ GEM
     ntlm-http (0.1.1)
     oauth (0.4.7)
     orm_adapter (0.5.0)
-    paper_trail (4.0.0.beta2)
-      activerecord (>= 3.0, < 6.0)
-      activesupport (>= 3.0, < 6.0)
+    paper_trail (3.0.7)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     pikaday-gem (1.2.0)
       railties (>= 3.1)
-    polyamorous (1.1.0)
+    polyamorous (1.2.0)
       activerecord (>= 3.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -279,7 +279,7 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     temple (0.7.5)
-    therubyracer (0.12.1)
+    therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.19.1)
@@ -344,7 +344,7 @@ DEPENDENCIES
   moji
   momentjs-rails!
   nested_form
-  paper_trail (>= 3.0.0.rc2)
+  paper_trail
   pikaday-gem
   pry-rails
   rails (= 4.2.1)

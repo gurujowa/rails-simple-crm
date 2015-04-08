@@ -77,7 +77,7 @@ gem 'momentjs-rails', :github => 'derekprior/momentjs-rails'
 #activerecord and model
 #------------------------------
 gem 'enumerize'
-gem 'paper_trail', '>= 3.0.0.rc2'
+gem 'paper_trail'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem "ransack", github: "activerecord-hackery/ransack" 
