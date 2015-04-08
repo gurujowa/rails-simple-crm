@@ -28,9 +28,6 @@ gem 'devise'
 #gem 'turbolinks'
 #gem 'passenger', '4.0.20'
 gem 'unicorn'
-group :development do
-  gem 'passenger', '4.0.20'
-end
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
