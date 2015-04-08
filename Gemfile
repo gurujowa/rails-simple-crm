@@ -91,6 +91,7 @@ gem 'deep_cloneable'
 gem "nested_form"
 gem 'simple_form', github: 'plataformatec/simple_form'
 gem "carrierwave"
+gem "fog"
 
 #------------------------------
 #other library
