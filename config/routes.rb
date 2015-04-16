@@ -8,8 +8,9 @@ Mycrm::Application.routes.draw do
 
   resources :progresses do
     collection do
-      get "main"
       get "data"
+      get "sub"
+      post "update"
     end
   end
 
