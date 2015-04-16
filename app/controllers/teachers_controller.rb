@@ -14,7 +14,7 @@ class TeachersController < ApplicationController
   # GET /teachers/1
   def show
     @periods = @teacher.periods
-    @future_periods = @periods.delete_if {|p| p.day <Time.now}
+    @future_periods = Period.where("day > ?", Time.now).where(teacher_id: @teacher.id)
   end
 
   # GET /teachers/new
