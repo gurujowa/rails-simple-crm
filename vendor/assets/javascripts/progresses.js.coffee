@@ -2,7 +2,7 @@ myApp = angular.module('progress', [ 'ui.grid', 'ui.grid.resizeColumns',
   'ui.grid.expandable'
   'ui.grid.edit'
 ])
-myApp.controller 'SpicyCtrl', [ '$scope','$http',($scope, $http, $log) ->
+myApp.controller 'SpicyCtrl', [ '$scope','$http','$filter',($scope, $http, $filter) ->
     $scope.gridOptions =
       enableSorting: true
       enableFiltering: true
@@ -25,7 +25,14 @@ myApp.controller 'SpicyCtrl', [ '$scope','$http',($scope, $http, $log) ->
       }, {
         name: 'responsible'
         enableCellEdit: true
-      }, { name: 'memo' }
+      }, { 
+        name: 'start_date'
+        field: 'getStartDate()'
+        enableCellEdit: false
+      }, { 
+        name: 'memo'
+        enableCellEdit: true
+      }
     ]
     $http.get('/progresses/data.json').success((data) ->
       i = 0
@@ -33,12 +40,16 @@ myApp.controller 'SpicyCtrl', [ '$scope','$http',($scope, $http, $log) ->
         data[i].subGridOptions =
           showGridFooter: false
           columnDefs: [
-            { name: 'day',field: 'day' }
-            { name: 'teacher',field: 'teacher' }
-            { name: 'start_time',field: 'start_time' }
-            { name: 'end_time',field: 'end_time' }
+            { name: 'day'}
+            { name: 'teacher', field: 'teacher'}
+            { name: 'start_time', field: 'start_time' }
+            { name: 'end_time', field: 'end_time' }
           ]
           data: data[i].periods
+        data[i].getStartDate = -> 
+          ar = []
+          angular.forEach this.periods, (value,key)-> ar.push(new Date(value.day))
+          return $filter('date')(new Date(Math.max.apply(null,ar)),"yyyy/MM/dd")
         i++
       $scope.gridOptions.data = data
     ).error (data) ->
@@ -50,7 +61,7 @@ myApp.controller 'SpicyCtrl', [ '$scope','$http',($scope, $http, $log) ->
         colDef.id = rowEntity.id
         colDef.new_value = newValue
         $http.post('/progresses/update',colDef).success((data,status,headers) ->
-          console.log data, status
+          console.log data
         ).error (data) ->
           alert data
         

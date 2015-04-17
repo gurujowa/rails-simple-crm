@@ -5,9 +5,9 @@ json.array! (@courses) do |c|
   json.responsible c.responsible
   json.memo c.memo
   json.periods c.periods do |p|
-    json.day p.day
+    json.day p.day.to_s(:date)
     json.teacher p.teacher.name
-    json.start_time p.start_time
-    json.end_time p.end_time
+    json.start_time p.start_time.to_s(:time)
+    json.end_time p.end_time.to_s(:time)
   end
 end
