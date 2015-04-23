@@ -1,14 +1,7 @@
-tr
-  td
-    = l.input :name
-  td
-    = l.input :detail, input_html: {rows: 7, cols: 50}
-  td
-    = l.input :unit_price, class: "public_bill_lines_trigger public_bill_line_unit_price input-small"
-  td
-    = l.input :quantity, class: "public_bill_lines_trigger public_bill_line_quantity input-small"
-  td
-    = l.input :tax_rate, class: "public_bill_lines_trigger public_bill_line_tax_rate input-mini"
-  td
-    - if delete_flg == true
-      = link_to_remove_fields "削除", l
+tr.fields
+  td = f.input :name, label: false
+  td = f.input :detail, input_html: {rows: 7, cols: 50}, label: false
+  td = f.input :unit_price, label: false
+  td = f.input :quantity, label: false
+  td = f.input :tax_rate, label: false
+  td = f.link_to_remove "削除", class: "btn btn-default"
