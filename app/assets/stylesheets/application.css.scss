@@ -24,6 +24,9 @@
 
 @import "bootstrap";
 
+.fc-day-grid-event .fc-content {
+  white-space: normal !important;
+}
 .inline_radio {
   float:left;
 }

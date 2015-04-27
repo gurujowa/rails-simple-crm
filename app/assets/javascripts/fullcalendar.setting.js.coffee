@@ -28,21 +28,6 @@ $.fn.fullcalendar =
       month: "ddd" # 月
       week: "d'('ddd')'" # 7(月)
       day: "d'('ddd')'" # 7(月)
-    # タイトルの書式
-    titleFormat:
-      month: "yyyy年M月" # 2013年9月
-      week: "yyyy年M月d日{ ～ }{[yyyy年]}{[M月]d日}" # 2013年9月7日 ～ 13日
-      day: "yyyy年M月d日'('ddd')'" # 2013年9月7日(火)
-    # ボタン文字列
-    buttonText:
-      prev: "&lsaquo;" # <
-      next: "&rsaquo;" # >
-      prevYear: "&laquo;" # <<
-      nextYear: "&raquo;" # >>
-      today: "今日"
-      month: "月"
-      week: "週"
-      day: "日"
     # 月名称
     monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]    
     # 月略称
