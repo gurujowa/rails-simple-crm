@@ -1,5 +1,9 @@
-div ng-controller="SpicyCtrl"
+div ng-controller="CourseCtrl"
   div ui-grid="gridOptions" class="grid" ui-grid-resize-columns="" ui-grid-auto-resize="" ui-grid-edit=""
-  script type="text/ng-template" id="myModalContent.html"
-    div class="modal-body" OKOK
-  button class="btn btn-default" ng-click="open()" OKOK
+
+
+script type="text/ng-template" id="periodModal.html"
+  .modal-header
+    h3.modal-title コマ情報編集
+  .modal-body
+    div ui-grid="periodGrid" class="periodGrid" ui-grid-edit=""

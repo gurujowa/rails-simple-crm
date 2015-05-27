@@ -9,8 +9,11 @@ Mycrm::Application.routes.draw do
   resources :progresses do
     collection do
       get "data"
-      get "sub"
       post "update"
+      post "update_period"
+    end
+    member do
+      get "period"
     end
   end
 
