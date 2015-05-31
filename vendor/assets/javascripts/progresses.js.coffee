@@ -16,7 +16,7 @@ myApp.factory 'teacherListService', ($http)->
 
 
 
-myApp.controller 'CourseCtrl', ($scope, $http, $modal , uiGridConstants) ->
+myApp.controller 'CourseCtrl',['$scope','$http','$modal','uiGridConstants',($scope, $http, $modal , uiGridConstants) ->
   $scope.period_open = (id) ->
     modal = $modal.open {
       templateUrl: 'periodModal.html',
@@ -91,11 +91,11 @@ myApp.controller 'CourseCtrl', ($scope, $http, $modal , uiGridConstants) ->
       ).error (data) ->
         alert data
       $scope.$apply()
+]
 
 
 
-
-myApp.controller 'PeriodCtrl',  ($scope, $http,teacherListService, id) ->
+myApp.controller 'PeriodCtrl',['$scope','$http','teacherListService','id' , ($scope, $http,teacherListService, id) ->
   $scope.periodGrid =
     enableSorting: true
     enableFiltering: true
@@ -148,8 +148,6 @@ myApp.controller 'PeriodCtrl',  ($scope, $http,teacherListService, id) ->
       angular.forEach $scope.teacher_list, (teacher,key) ->
         if String(teacher.id) == teacher_id
           angular.element(col).text(teacher.name)
-  
-
 
 
   teacherListService.search().then (res) ->
@@ -168,3 +166,4 @@ myApp.controller 'PeriodCtrl',  ($scope, $http,teacherListService, id) ->
       ).error (data) ->
         alert data
       $scope.$apply()
+]
