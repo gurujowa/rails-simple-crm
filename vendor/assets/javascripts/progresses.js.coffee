@@ -5,9 +5,6 @@ myApp = angular.module('progress', [
   'ui.grid.edit'
 ])
 
-myApp.filter 'mapTeacher', ->
-  return (input) ->
-    return  "OK"
 
 
 myApp.factory 'teacherListService', ($http)->
@@ -19,7 +16,7 @@ myApp.factory 'teacherListService', ($http)->
 
 
 
-myApp.controller 'CourseCtrl', ($scope, $http, $modal) ->
+myApp.controller 'CourseCtrl', ($scope, $http, $modal , uiGridConstants) ->
   $scope.period_open = (id) ->
     modal = $modal.open {
       templateUrl: 'periodModal.html',
@@ -30,6 +27,11 @@ myApp.controller 'CourseCtrl', ($scope, $http, $modal) ->
           return id
       }
     }
+
+  $scope.visible = ->
+    angular.forEach $scope.gridOptions.columnDefs, (value,key) ->
+      $scope.gridOptions.columnDefs[key].visible = true
+    $scope.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
 
   $scope.showId = (grid, row) ->
     console.log grid
@@ -90,6 +92,9 @@ myApp.controller 'CourseCtrl', ($scope, $http, $modal) ->
         alert data
       $scope.$apply()
 
+
+
+
 myApp.controller 'PeriodCtrl',  ($scope, $http,teacherListService, id) ->
   $scope.periodGrid =
     enableSorting: true
@@ -111,7 +116,7 @@ myApp.controller 'PeriodCtrl',  ($scope, $http,teacherListService, id) ->
       editableCellTemplate: 'ui-grid/dropdownEditor'
       editDropdownValueLabel: 'name'
       editDropdownIdLabel: 'id'
-      cellFilter: "mapTeacher"
+      cellTemplate: '<utag id="{{COL_FIELD}}" data-col="period_teacher_col">{{COL_FIELD}}</utag>'
     } , {
       name:  "start_time"
       displayName: '開始時刻'
@@ -135,8 +140,22 @@ myApp.controller 'PeriodCtrl',  ($scope, $http,teacherListService, id) ->
     alert 'エラーが発生しました。' + data
   )
 
+  changeTeacherList = ->
+    console.log document.getElementsByTagName('utag')
+    teacher_class = angular.element(document.getElementsByTagName('utag'))
+    angular.forEach teacher_class, (col,key) ->
+      teacher_id = angular.element(col).attr("id")
+      angular.forEach $scope.teacher_list, (teacher,key) ->
+        if String(teacher.id) == teacher_id
+          angular.element(col).text(teacher.name)
+  
+
+
+
   teacherListService.search().then (res) ->
     $scope.periodGrid.columnDefs[2].editDropdownOptionsArray = res.data
+    $scope.teacher_list = res.data
+    changeTeacherList()
 
   $scope.periodGrid.onRegisterApi = (gridApi) ->
     $scope.gridApi = gridApi
@@ -144,6 +163,7 @@ myApp.controller 'PeriodCtrl',  ($scope, $http,teacherListService, id) ->
       colDef.id = rowEntity.id
       colDef.new_value = newValue
       $http.post('/progresses/update_period',colDef).success((data,status,headers) ->
+        changeTeacherList()
         console.log data
       ).error (data) ->
         alert data
