@@ -28,6 +28,11 @@ class LeadsController < ApplicationController
         @tag_name = params[:tag_name]
       end
 
+      #rails4.2になって、orderを設定している場合にjoinしてくれない問題の対応
+      if params[:q].present? && params[:q][:s].present?
+        leads = leads.joins(:lead_histories)
+      end
+
 
       tl = Lead.tags_on(:tags)
       @tag_list = []

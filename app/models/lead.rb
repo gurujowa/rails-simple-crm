@@ -33,7 +33,7 @@ class Lead < ActiveRecord::Base
   }
 
   ransacker :max_approach_day do |parent|
-    ar = Arel.sql('max(lead_histories.approach_day)')
+    Arel.sql('max(lead_histories.approach_day)')
   end
 
   def last_sent_date
