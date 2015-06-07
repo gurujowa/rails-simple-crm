@@ -23,6 +23,7 @@ table.each do |r|
   lead = Lead.find_by(tel: tel_encode(r[:tel]))
 
   if lead.blank?
+    puts "new lead added"
     lead = Lead.new(:name => r[:client_name],:zipcode => r[:zip_code])
     lead.tel =  tel_encode(r[:tel])
     lead.fax = tel_encode(r[:fax])
