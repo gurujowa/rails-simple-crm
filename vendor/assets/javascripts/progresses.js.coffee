@@ -7,13 +7,13 @@ myApp = angular.module('progress', [
 
 
 
-myApp.factory 'teacherListService', ($http)->
+myApp.factory 'teacherListService',[ '$http', ($http)->
   return {
     search:  (params) ->
       return $http.get('/teachers.json',{cache: true}).success (response) ->
         return response.data
   }
-
+]
 
 
 myApp.controller 'CourseCtrl',['$scope','$http','$modal','uiGridConstants',($scope, $http, $modal , uiGridConstants) ->
