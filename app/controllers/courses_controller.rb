@@ -104,6 +104,23 @@ class CoursesController < ApplicationController
     render json: {success: "更新が完了しました"}
   end
 
+  def list
+    c = Course.all
+    csvs = CSV.generate do |csv|
+      csv << ["コマID","講師名","登壇日","開始時刻","終了時刻","コース名","企業名"]
+      c.each do |c|
+        c.periods.each do |period|
+          csv << [period.id,period.teacher.name,period.day,period.start_date,period.end_date,c.name,c.company.name]
+        end
+      end
+    end
+    respond_to do |format|
+      format.csv { send_csv csvs }
+    end
+
+  end
+
+
   def observe
     @courses = Course.all
   end

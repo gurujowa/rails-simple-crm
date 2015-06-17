@@ -95,9 +95,6 @@ Mycrm::Application.routes.draw do
   end
 
   resources :teacher_orders do
-    collection do
-      get 'list'
-    end
     member do
       get 'flag/:type' , :action => "flag"
       get 'active'
@@ -121,6 +118,7 @@ Mycrm::Application.routes.draw do
       put 'update/:id' => 'courses#up_name'  
       get 'update/:id/:type' => 'courses#up_bool'
       get 'task'
+      get 'list'
     end
   end
 

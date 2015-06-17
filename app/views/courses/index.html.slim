@@ -1,5 +1,6 @@
 h1 コース 一覧
 = link_to "新規追加" , {controller: "courses", action: "new"}, class: "btn btn-default"
+=link_to "リスト出力", {action: :list, format: :csv}, class: "btn btn-default"
 .row
   table.table.table-bordered.table-striped.default_datatables
     thead
