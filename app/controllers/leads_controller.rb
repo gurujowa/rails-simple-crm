@@ -1,5 +1,5 @@
 class LeadsController < ApplicationController
-  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_dm]
+  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_dm, :contract]
   after_action :store_location, only: [:index, :search, :mylist, :approach]
   before_action :authenticate_user!
 
@@ -233,6 +233,16 @@ class LeadsController < ApplicationController
     end
   end
   
+    def contract
+      contract_flg = @lead.contract_flg
+      if contract_flg == true
+        raise "既に契約されています"
+      end
+
+    @lead.update_attributes!({contract_flg: true})
+    redirect_to :action=> 'show', :id => params[:id], notice: '契約設定が完了しました'
+
+    end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -260,6 +270,7 @@ class LeadsController < ApplicationController
       @next_approach_lt = params[:next_approach_lt]
       leads
     end
+
 
     # Only allow a trusted parameter "white list" through.
     def lead_params

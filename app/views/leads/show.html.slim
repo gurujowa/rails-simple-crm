@@ -29,6 +29,10 @@ p#notice = notice
         button type="button" class="btn btn-default" disabled=true #{@lead.user.name}が追加済み
       - else
         = link_to "マイリスト追加", {controller: "leads",action: "add_mylist", id: @lead.id},remote: true, class: "btn btn-default btn-block #{if @lead.mylist?(current_user.id) then "active" end }",id: "btn-lead-add-mylist"
+      - if @lead.contract_flg == true
+        button class="btn btn-default active" 契約済み
+      - else
+        = link_to "契約完了", contract_lead_path(@lead),class: "btn btn-success btn-block", id: "btn-lead-contract"
 
 .row
   .col-sm-6

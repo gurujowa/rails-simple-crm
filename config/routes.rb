@@ -1,11 +1,8 @@
 Mycrm::Application.routes.draw do
 
   resources :public_bills
-
   resources :lead_history_statuses
-
   resources :lead_interviews, only: [:update]
-
   resources :progresses do
     collection do
       get "data"
@@ -31,6 +28,7 @@ Mycrm::Application.routes.draw do
     member do
       get "add_mylist"
       get "add_dm"
+      get "contract"
       get "find"
     end
   end

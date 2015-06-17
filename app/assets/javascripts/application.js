@@ -50,7 +50,8 @@ $(document).on('nested:fieldAdded', function(event){
 $(function(){
   $('.default_datatables').dataTable( {
         "lengthChange":     false,
-        "pageLength":     100
+        "pageLength":     100,
+        "bStateSave": true
     } );  
   init_date_picker()
   $( ".datetimepicker" ).datetimepicker({lang:'ja',scrollInput: false,
