@@ -107,10 +107,10 @@ class CoursesController < ApplicationController
   def list
     c = Course.all
     csvs = CSV.generate do |csv|
-      csv << ["コマID","講師名","登壇日","開始時刻","終了時刻","コース名","企業名"]
+      csv << ["コマID","講師名","登壇日","開始時刻","終了時刻","コース名","企業名","メモ"]
       c.each do |c|
         c.periods.each do |period|
-          csv << [period.id,period.teacher.name,period.day,period.start_date,period.end_date,c.name,c.company.name]
+          csv << [period.id,period.teacher.name,period.day,period.start_date,period.end_date,c.name,c.company.name, period.memo]
         end
       end
     end
