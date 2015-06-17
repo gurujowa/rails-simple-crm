@@ -95,6 +95,9 @@ Mycrm::Application.routes.draw do
   end
 
   resources :teacher_orders do
+    collection do
+      get 'list'
+    end
     member do
       get 'flag/:type' , :action => "flag"
       get 'active'

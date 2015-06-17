@@ -8,6 +8,24 @@ class TeacherOrdersController < ApplicationController
     @teacher_orders = TeacherOrder.all
   end
 
+  def list
+    t = TeacherOrder.all
+    csvs = CSV.generate do |csv|
+      csv << ["講師発注ID","講師名","登壇日","開始時刻","終了時刻","コース名","企業名"]
+      t.each do |teacher_order|
+        teacher_order.courses.each do |c|
+          c.periods.each do |period|
+            csv << [teacher_order.id,teacher_order.teacher.name,period.day,period.start_date,period.end_date,c.name,c.company.name]
+          end
+        end
+      end
+    end
+    respond_to do |format|
+      format.csv { send_csv csvs }
+    end
+
+  end
+
   def line
     @teacher_order_lines = TeacherOrderLine.all
   end
