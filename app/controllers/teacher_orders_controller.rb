@@ -72,8 +72,8 @@ class TeacherOrdersController < ApplicationController
 
     @teacher_order.mention = "テキスト、レジュメ等は研修日の１週間前までに下記にお送りください。
 また、レジュメとともに、必要な備品（ホワイトボード、プロジェクタなど）もお知らせください。
-送り先： kenshu@yourbright.co.jp　山下勇登　宛
-連絡先：　03-6908-6143（代）　090-8276-3312(山下携帯)"
+送り先： kenshu@yourbright.co.jp　研修部　宛
+連絡先：　03-6908-6143（代）　繋がらない場合：090-8276-3312(山下携帯)"
   end
 
   def edit
