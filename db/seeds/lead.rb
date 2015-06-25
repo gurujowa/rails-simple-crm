@@ -30,7 +30,26 @@ table.each do |r|
     lead.tag_list.add(r[:category])
     #郵便番号
     lead.zipcode.gsub! "〒",""
-    lead.memo = <<EOL
+
+
+
+    #住所
+    lead.url = r[:url]
+    st = r[:address].to_s.split(" ")
+    ad = nil
+    if st.length == 2
+      ad = st[0]
+      lead.building = st[1]
+    else
+      ad = r[:address]
+    end
+    lead.prefecture = r[:prefecture]
+    lead.city = r[:city]
+    lead.street = ad
+    lead.street.to_s.strip
+  end
+
+  lead.memo = <<EOL
   カテゴリ：#{r[:category]}
   管理者：#{r[:client_person]}
   管理者の役職：#{r[:client_post]}
@@ -44,24 +63,8 @@ table.each do |r|
   法人代表者の役職名：#{r[:company_post]}
 EOL
 
-  end
-
-    #住所
-    lead.url = r[:url]
-    st = r[:address].to_s.split(" ")
-    ad = nil
-    if st.length == 2
-      ad = st[0]
-      lead.building = st[1]
-    else
-      ad = r[:address]
-    end
-
-    lead.tag_list.add("ランクA")
-    lead.prefecture = r[:prefecture]
-    lead.city = r[:city]
-    lead.street = ad
-    lead.street.to_s.strip
+  lead.corporation_name =  r[:company_name]
+  lead.tag_list.add("ランクA")
 
 
 

@@ -90,12 +90,15 @@ p#notice = notice
               a#lead_sex_editable
                 = @lead.sex_text
           tr
-            th 役職
+            th役職
             td 
               a.lead_editable data-type="text" data-title="役職を入力してください" data-name="person_post"
                 = @lead.person_post
           tr
-            th URL
+            th
+              span URL
+              a.btn.btn-default href="#{ url_for @lead.url}" target="_blank"
+                span.glyphicon.glyphicon-new-window
             td 
               a.lead_editable data-type="url" data-title="URLを入力してください" data-name="url"
                 = @lead.url
