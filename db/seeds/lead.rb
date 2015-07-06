@@ -35,11 +35,14 @@ table.each do |r|
 
     #住所
     lead.url = r[:url]
+  end
+
     st = r[:address].to_s.split(" ")
     ad = nil
-    if st.length == 2
+    if st.length >= 2
       ad = st[0]
       lead.building = st[1]
+      lead.building << st[2] if st[2].present?
     else
       ad = r[:address]
     end
@@ -47,7 +50,6 @@ table.each do |r|
     lead.city = r[:city]
     lead.street = ad
     lead.street.to_s.strip
-  end
 
   lead.memo = <<EOL
   カテゴリ：#{r[:category]}
