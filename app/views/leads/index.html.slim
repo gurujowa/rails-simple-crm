@@ -23,6 +23,7 @@ h1 見込み客一覧
       = f.input :street_cont
       = f.input :building_cont
       = f.input :campaign_cont, collection: Lead.campaign.values
+      = f.input :memo_cont
       = f.input :lead_histories_memo_cont
       .form-group
         label.col-sm-3.control-label 荷電済み

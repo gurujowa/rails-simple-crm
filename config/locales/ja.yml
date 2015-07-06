@@ -40,6 +40,7 @@ ja:
         street_cont: 番地
         building_cont: 建物名
         lead_histories_memo_cont: 対応メモ
+        memo_cont: お客様メモ
         user_id_eq: マイリスト
         lead_histories_user_id_eq: 対応者（１つでも含む）
         lead_histories_lead_history_status_id_eq: 対応ステータス（１つでも含む）
