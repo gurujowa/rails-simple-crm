@@ -21,7 +21,7 @@ class Course < ActiveRecord::Base
 extend Enumerize
 
   has_paper_trail 
-  belongs_to :company
+  belongs_to :lead
   belongs_to :user
   has_many :teacher_order_courses
   has_many :teacher_order, through: :teacher_order_courses
@@ -33,25 +33,15 @@ extend Enumerize
   validates :station, presence: true
   validates :responsible, presence: true
   validates :tel, presence: true
-  validates :company_id, presence: true
+  validates :lead_id, presence: true
 
   enumerize :status, in: [:draft, :active , :cancel]
   @@color = ["MidnightBlue", "DarkViolet", "Crimson", "Navy", "Black", "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta"]
 
+
   def color
     key = self.id % 10
     return @@color[key]
-  end
-
-  def wrike_flg course_flg
-    flg = self.read_attribute(course_flg)
-    if flg == true
-      return "Completed"
-    elsif flg == false
-      return "Active"
-    else
-      raise course_flg + " is not flag"
-    end
   end
 
   def text_color
@@ -59,11 +49,7 @@ extend Enumerize
   end
 
   def total_time
-    if total_time_manual_flg == true
-      return total_time_minute
-    else
-      return total_time_cal
-    end
+    return total_time_cal
   end
 
   def total_time_cal
@@ -76,23 +62,6 @@ extend Enumerize
 
     total
   end
-
-  def start_date
-    getStartDate
-  end
-
-  def end_date
-    getEndDate
-  end
-
-  def observe_text
-    if self.observe_flg == true
-      return "必要"
-    else
-      return "不必要"
-    end
-  end
-
 
   def getStartDate
     periods = self.periods
@@ -116,7 +85,9 @@ extend Enumerize
   end
 
   def to_select_label
-     return %Q{#{self.company.client_name} - #{self.name}(#{self.getStartDate}/#{self.getEndDate})}
+    return %Q{#{self.lead.name} - #{self.name}(#{self.start_date}/#{self.end_date})}
   end
 
+  alias_method :start_date, :getStartDate
+  alias_method :end_date, :getEndDate
 end

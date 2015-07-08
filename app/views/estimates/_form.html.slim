@@ -1,14 +1,7 @@
 = simple_nested_form_for(@estimate , html: {:class => "form-horizontal"}, wrapper: :horizontal_form) do |f|
   = f.error_notification 
-  = f.input :client_type
-  = f.input :client_id ,as: :hidden
-  .form-group
-    label for="search_company" class="col-sm-3 control-label" 会社名
-    .col-sm-9
-      #company_search_area
-        = text_field_tag :company_search, @estimate.company_id, class: "search_company form-control"
-      #lead_search_area
-        = text_field_tag :lead_search, @estimate.lead_id, class: "search_lead form-control"
+  = f.input :client_type, as: :hidden , :input_html => { :value => "lead" }
+  = f.input :client_id, input_html: {class: "search_lead"}
   = f.input :display_name, hint: "見積書の送付先名を変えたい場合に入力してください。空白の場合は会社名がそのまま記載されます。"
   = f.input :publish_date, as: :date_picker
   = f.input :expired, as: :date_picker

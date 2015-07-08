@@ -1,6 +1,6 @@
 ul.breadcrumb
   li Home 
-  li = link_to @course.company.client_name, edit_company_path(@course.company) 
+  li = link_to @course.lead.name, edit_lead_path(@course.lead) 
   li.active = @course.name
 
 h1 コース詳細画面
@@ -10,13 +10,13 @@ h1 コース詳細画面
     table.table.table-striped
       tr
         th 会社名
-        td = @course.company.name
+        td = @course.lead.name
       tr
         th 郵便番号
-        td = @course.company.zipcode
+        td = @course.lead.zipcode
       tr
         th 住所
-        td = @course.company.full_address
+        td = @course.lead.full_address
   .col-sm-7
     h2 コース情報
     table.table.table-striped
@@ -39,14 +39,12 @@ h1 コース詳細画面
         th 先方緊急連絡先
         td = @course.tel
       tr
-        th 立会
-        td = @course.observe_text
-      tr
         th 受講者数
         td = @course.students
       tr
         th 合計時間
-        td = str_total_time @course
+        td = convert_min @course.total_time
+
       tr
         th メモ
         td = @course.memo
@@ -80,9 +78,6 @@ table.table.table-bordered.table-striped
 .edit_button
 = link_to '編集', edit_course_path, :class => "btn btn-info"
 = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
-.export_button
-= link_to 'Wrike用エクセル', {action: :show, format: :xls},  :class => "btn btn-default"
-span.caution ※一度、エクセルを編集しないと読み込み出来ません
 .row
   .col-sm-6
     h3 メール用　テキスト（コピペ用)

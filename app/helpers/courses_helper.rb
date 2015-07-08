@@ -1,14 +1,5 @@
 module CoursesHelper
 
-  def str_total_time(course)
-    str = convert_min course.total_time
-    if course.total_time_manual_flg.present?
-      return str.to_s + "(手動入力)"
-    else
-      return str
-    end
-  end
-
   def check_course_img(course,type)
     src = check_img_src(course.read_attribute(type))
 

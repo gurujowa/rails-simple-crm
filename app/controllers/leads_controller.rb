@@ -16,6 +16,13 @@ class LeadsController < ApplicationController
         @status_any_checked = false
       end
 
+      if params[:contract_flg_present].present?
+        pq.store(:contract_flg_true,"t")
+        @contract_flg_checked = true
+      else
+        @contract_flg_checked = false
+      end
+
       if params[:status_shipped].present?
         pq.store(:lead_histories_shipped_at_present,1)
         @status_shipped_checked = true

@@ -21,7 +21,7 @@ class BillingPlansController < ApplicationController
         redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :billing_plans, action: :show
       }
       format.pdf {
-        render pdf: @billing_plan.company.name + " - 請求予定表",
+        render pdf: @billing_plan.client_name + " - 請求予定表",
                encoding: 'UTF-8',
                layout: 'pdf.html',
                show_as_html: params[:debug].present?
@@ -34,8 +34,8 @@ class BillingPlansController < ApplicationController
   def new
     @billing_plan = BillingPlan.new
     @billing_plan.billing_plan_lines.new
-    if params[:company_id].present?
-      @billing_plan.company_id = params[:company_id]
+    if params[:lead_id].present?
+      @billing_plan.lead_id = params[:lead_id]
     end
   end
 
@@ -85,7 +85,7 @@ class BillingPlansController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def billing_plan_params
-      params.require(:billing_plan).permit(:name, :display_name, :send_flg, :company_id, :tax_rate, :status, :memo, :publish_date,
+      params.require(:billing_plan).permit(:name, :display_name, :send_flg, :lead_id, :tax_rate, :status, :memo, :publish_date,
         billing_plan_lines_attributes: [:id,  :bill_date, :accural_date, :price,  :memo, :_destroy]
                                           )
     end

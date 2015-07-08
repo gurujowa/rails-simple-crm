@@ -26,6 +26,10 @@ h1 見込み客一覧
       = f.input :memo_cont
       = f.input :lead_histories_memo_cont
       .form-group
+        label.col-sm-3.control-label 契約済み
+        .col-sm-9
+          = check_box_tag 'contract_flg_present', 'y', @contract_flg_checked
+      .form-group
         label.col-sm-3.control-label 荷電済み
         .col-sm-9
           = check_box_tag 'status_any', 'y', @status_any_checked

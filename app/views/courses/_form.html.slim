@@ -3,15 +3,11 @@ ul
     li = msg
 = f.input :name
 = f.input :user_id , as: :select, collection: User.all, hint: "ユアブライト社内における、本コースの担当者です"
-= f.input :company_id, input_html:{ class: "search_company"}
+= f.input :lead_id, input_html:{ class: "search_lead"}
 
 = f.input :address
 = f.input :station
 = f.input :responsible
 = f.input :tel
-= f.input :observe_flg, default: true
 = f.input :students
-= f.input :total_time_manual_flg, hint: "コースの合計時間数を手動で入力する場合は、オンにしてください"
-- @total_time_minute = {style: "display:none"} if @course.total_time_manual_flg.blank?
-= f.input :total_time_minute, hint: "コースの合計時間数を手動で入力する場合、こちらに分数を入力してください。（例：2時間10分 = 130)", wrapper_html: @total_time_minute
 = f.input :memo

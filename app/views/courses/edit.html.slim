@@ -1,6 +1,6 @@
 ul.breadcrumb
   li Home 
-  li = link_to @course.company.client_name, edit_company_path(@course.company) 
+  li = link_to @course.lead.name, edit_lead_path(@course.lead) 
   li = link_to @course.name, course_path(@course)
   li.active Edit
 

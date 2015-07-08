@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150615042856) do
+ActiveRecord::Schema.define(version: 20150707025426) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",       null: false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150615042856) do
     t.date     "publish_date"
     t.boolean  "send_flg",                 default: false, null: false
     t.string   "display_name", limit: 255
+    t.integer  "lead_id",                                  null: false
   end
 
   add_index "billing_plans", ["company_id"], name: "index_billing_plans_on_company_id"
@@ -126,38 +127,20 @@ ActiveRecord::Schema.define(version: 20150615042856) do
     t.integer  "con_type"
   end
 
-  create_table "course_progress_headers", force: :cascade do |t|
-    t.string "name", limit: 255
-    t.string "type", limit: 255, null: false
-  end
-
-  create_table "course_progress_values", force: :cascade do |t|
-    t.integer "period_id",                             null: false
-    t.integer "course_progress_header_id",             null: false
-    t.string  "value",                     limit: 255
-  end
-
   create_table "courses", force: :cascade do |t|
-    t.string   "name",                  limit: 255
+    t.string   "name",        limit: 255
     t.integer  "company_id"
-    t.boolean  "order_flg",                         default: false
-    t.boolean  "book_flg",                          default: false
-    t.boolean  "resume_flg",                        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "diploma_flg",                       default: false
-    t.string   "address",               limit: 255
-    t.string   "station",               limit: 255
-    t.string   "responsible",           limit: 255
-    t.string   "tel",                   limit: 255
-    t.boolean  "observe_flg",                       default: false
+    t.string   "address",     limit: 255
+    t.string   "station",     limit: 255
+    t.string   "responsible", limit: 255
+    t.string   "tel",         limit: 255
     t.integer  "students"
-    t.boolean  "attendee_table_flg",                default: false
     t.text     "memo"
     t.integer  "user_id"
-    t.string   "status",                limit: 255, default: "draft"
-    t.integer  "total_time_minute"
-    t.boolean  "total_time_manual_flg"
+    t.string   "status",      limit: 255, default: "draft"
+    t.integer  "lead_id",                                   null: false
   end
 
   create_table "estimate_lines", force: :cascade do |t|

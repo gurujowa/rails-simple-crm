@@ -14,24 +14,22 @@
 class BillingPlan < ActiveRecord::Base
 
   has_paper_trail 
-  belongs_to :company
+  belongs_to :lead
   has_many :billing_plan_lines, :dependent => :destroy
   accepts_nested_attributes_for :billing_plan_lines, :allow_destroy => true, reject_if: :all_blank
   
   validates :name, presence: true  
   validates :publish_date, presence: true  
-  validates :company_id, presence: true, numericality: true
+  validates :lead_id, presence: true, numericality: true
   validates :tax_rate, presence: true, numericality: true
 
   def client_name
     if self.display_name.present?
       return self.display_name
+    elsif self.lead.present?
+      return self.lead.name
     else
-      begin
-        return self.company.name
-      rescue
-        return self.company_id
-      end
+      return "no name"
     end
   end
 
