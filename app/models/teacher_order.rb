@@ -36,23 +36,12 @@ extend Enumerize
   enumerize :status, in: [:draft, :active , :cancel]
   enumerize :period_type, in: [:auto, :manual , :none]
 
-  validate :check_company_name
   validate :check_teacher_include
 
-  def company
-    self.courses.first.company
+  def lead
+    self.courses.first.lead
   end
 
-  def check_company_name
-    courses = self.courses
-    ar = []
-    courses.each do |c|
-       ar.push(c.company_id)
-    end
-    if (ar.uniq.size >= 2)
-      errors.add(:courses, 'すべて同じ会社のコースをいれる必要があります')
-    end
-  end
 
   def check_teacher_include
     self.courses.each do |c|
@@ -154,10 +143,10 @@ extend Enumerize
     self.courses.uniq {|c| c.tel}.map{|c| c.tel}.join(",")
   end
 
-  def company_name
+  def lead_name
     c = self.courses.first
     if c.present?
-      return c.company.client_name
+      return c.lead.name
     else
       return ""
     end

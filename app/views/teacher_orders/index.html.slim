@@ -15,7 +15,7 @@ table.default_datatables
   tbody
     - @teacher_orders.each do |teacher_order|
       tr
-        td = link_to teacher_order.company_name, teacher_order_path(teacher_order)
+        td = link_to teacher_order.lead_name, teacher_order_path(teacher_order)
         td = teacher_order_status_button teacher_order
         td 
           span style="display:none;" = teacher_order.teacher.kana
