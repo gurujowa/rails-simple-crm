@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707025426) do
+ActiveRecord::Schema.define(version: 20150709063213) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",       null: false
@@ -260,6 +260,8 @@ ActiveRecord::Schema.define(version: 20150707025426) do
     t.string   "sex",              limit: 255
     t.boolean  "dm_flg",                       default: false
     t.boolean  "contract_flg",                 default: false, null: false
+    t.boolean  "mark_flg"
+    t.boolean  "nego_flg"
   end
 
   add_index "leads", ["tel"], name: "index_leads_on_tel", unique: true

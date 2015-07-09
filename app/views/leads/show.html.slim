@@ -21,10 +21,12 @@ p#notice = notice
           = f.text_field :tag_list,  id: "lead_tag_list_form", value: @lead.tag_list_join
           = submit_tag "タグ変更"
     .col-sm-2
-      - if @lead.dm_flg == true
-        = link_to "DM不要", {controller: "leads",action: "add_dm", id: @lead.id},remote: true, class: "btn btn-default btn-block active", id: "btn-lead-add-dm"
-      - else
-        = link_to "DM不要", {controller: "leads",action: "add_dm", id: @lead.id},remote: true, class: "btn btn-default btn-block", id: "btn-lead-add-dm"
+      - dm_class_active = @lead.dm_flg == true ? " active" : ""
+      = link_to "DM不要", {controller: "leads",action: "add_flg", id: @lead.id, type: "dm_flg"},remote: true, class: "btn btn-default btn-block"+ dm_class_active, id: "btn-lead-add-dm_flg"
+      - mark_class_active = @lead.mark_flg == true ? " active" : ""
+      = link_to "マーク客", {controller: "leads",action: "add_flg", id: @lead.id, type: "mark_flg"},remote: true, class: "btn btn-default btn-block"+ mark_class_active, id: "btn-lead-add-mark_flg"
+      - nego_class_active = @lead.nego_flg == true ? " active" : ""
+      = link_to "商談進行中", {controller: "leads",action: "add_flg", id: @lead.id, type: "nego_flg"},remote: true, class: "btn btn-default btn-block"+ nego_class_active, id: "btn-lead-add-nego_flg"
       - if @lead.other_user?(current_user.id)
         button type="button" class="btn btn-default" disabled=true #{@lead.user.name}が追加済み
       - else

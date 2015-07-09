@@ -1,5 +1,5 @@
 class LeadsController < ApplicationController
-  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_dm, :contract]
+  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_flg, :contract]
   after_action :store_location, only: [:index, :search, :mylist, :approach]
   before_action :authenticate_user!
 
@@ -14,6 +14,20 @@ class LeadsController < ApplicationController
         @status_any_checked = true
       else
         @status_any_checked = false
+      end
+
+      if params[:mark_flg_present].present?
+        pq.store(:mark_flg_true,"t")
+        @mark_flg_checked = true
+      else
+        @mark_flg_checked = false
+      end
+
+      if params[:nego_flg_present].present?
+        pq.store(:nego_flg_true,"t")
+        @nego_flg_checked = true
+      else
+        @nego_flg_checked = false
       end
 
       if params[:contract_flg_present].present?
@@ -60,6 +74,7 @@ class LeadsController < ApplicationController
 
   def add_tag
   end
+
   def add_tag_finish
     tag_name = params[:tag_name]
     tag_list = params[:ids]
@@ -223,17 +238,18 @@ class LeadsController < ApplicationController
     session[:last_request_time] = Time.now.utc.to_i
   end
 
-  def add_dm
-    dm_flg = @lead.dm_flg
-    if dm_flg == true
-      message = "DM不要リストから削除しました"
-      clas = %Q{$('#btn-lead-add-dm').removeClass("active")} 
+  def add_flg
+    flg = @lead.read_attribute params[:type]
+    type = params[:type]
+    if flg == true
+      message = "リストから削除しました"
+      clas = %Q{$('#btn-lead-add-#{type}').removeClass("active")} 
     else
-      message = "DM不要リストに追加しました"
-      clas = %Q{$('#btn-lead-add-dm').addClass("active")} 
+      message = "リストに追加しました"
+      clas = %Q{$('#btn-lead-add-#{type}').addClass("active")} 
     end
 
-    if @lead.update_attributes({dm_flg: !dm_flg})
+    if @lead.update_attributes({type => !flg})
       render_noty :success, message, clas
     else
       render_noty :error, @to.errors.full_messages
