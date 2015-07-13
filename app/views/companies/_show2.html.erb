@@ -1,19 +1,2 @@
 <div class="row">
-  <%= link_to "コース追加", {controller: "courses", action: "new"}, class: "btn btn-info" %>
-<table class="table table-bordered table-striped">
-<tr>
-  <th>ID</Th>
-  <th>コース名</Th>
-  <th>コース時間</th>
-  <th>編集</th>
-</tr>
-<% @courses.each do |c|%>
-<tr>
-  <td><%= c.id %></td>
-  <td><%= link_to c.name, c%></td>
-  <td><%= str_total_time c %></td>
-  <td><%= link_to "コマ編集", :controller => "courses", :action => "edit", :id => c.id%></td>
-</tr>
-<% end %>
-</table>
 </div>
