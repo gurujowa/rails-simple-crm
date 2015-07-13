@@ -14,7 +14,7 @@ table.default_datatables
   tbody
     - @teacher_order_lines.each do |l|
       tr
-        td = link_to l.teacher_order.company_name, teacher_order_path(l.teacher_order)
+        td = link_to l.teacher_order.lead_name, teacher_order_path(l.teacher_order)
         td = link_to_switch_flg l, :invoice_flg
         td = link_to_switch_flg l, :payment_flg
         td 

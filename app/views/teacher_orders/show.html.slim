@@ -99,14 +99,11 @@ h1 講師発注詳細情報
                   th 先方緊急連絡先
                   td = c.tel
                 tr
-                  th 立会
-                  td = c.observe_text
-                tr
                   th 受講者数
                   td = c.students
                 tr
                   th 合計時間
-                  td = str_total_time c
+                  td = convert_min c.total_time
                 tr
                   th メモ
                   td = c.memo
