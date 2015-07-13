@@ -14,7 +14,7 @@ h1 コース 一覧
     tbody
       - @courses.each do |b|
         tr
-          td= link_to b.lead.name, {controller: "companies", action: "edit", id: b.lead_id}
+          td= link_to b.lead.name, {controller: "leads", action: "show", id: b.lead_id}
           td
             = link_to b.name,{action: "show", id: b.id}
             = link_to "(edit)", edit_course_path(b.id)
