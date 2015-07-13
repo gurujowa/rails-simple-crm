@@ -37,16 +37,16 @@
         td
           .row
             | [ 所在地 ] 
-            = @to.company.full_address
+            = @to.lead.full_address
           .row
             | [ 企業名 ] 
-            = @to.company.name
+            = @to.lead_name
           .row
             | [ 電話番号 ] 
-            = @to.company.tel
+            = @to.lead.tel
           .row
             | [ 担当者名 ] 
-            = @to.company.client_person
+            = @to.lead.person_name
       tr
         th 合計時間
         td = convert_min @to.total_time

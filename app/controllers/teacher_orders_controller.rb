@@ -40,7 +40,7 @@ class TeacherOrdersController < ApplicationController
         redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :teacher_orders, action: :report
       }
       format.pdf {
-        render pdf: @teacher_order.teacher.name + " - " + @teacher_order.company.name + " - 業務依頼書",
+        render pdf: @teacher_order.teacher.name + " - " + @teacher_order.lead_name + " - 業務依頼書",
                encoding: 'UTF-8',
                zoom: "0.9",
                layout: 'pdf.html',
@@ -110,7 +110,7 @@ class TeacherOrdersController < ApplicationController
   private
   def set_default_form
     @select_courses = Course.all
-    @select_companies = Company.joins(:course).group(:client_name)
+    @select_companies = Lead.joins(:course).group(:name)
     @teachers = Teacher.where.not(work_possible: Teacher.work_possible_hash[:impossible]).order("last_kana ASC")
   end
 
