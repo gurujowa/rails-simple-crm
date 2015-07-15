@@ -96,17 +96,21 @@ class LeadsController < ApplicationController
 
   def reject_list
     leads = Lead.where(dm_flg: true)
-    my_leads = Lead.where("user_id is not null")
-    companies = Company.all
+    mark_leads = Lead.where(mark_flg: true)
+    nego_leads = Lead.where(nego_flg: true)
+    contract_leads = Lead.where(contract_flg: true)
     csvs = CSV.generate do |csv|
       csv << ["会社名","TEL", "FAX"]
       leads.each do |l|
         csv << [l.name, l.tel, l.fax]
       end
-      companies.each do |l|
+      mark_leads.each do |l|
         csv << [l.name, l.tel, l.fax]
       end
-      my_leads.each do |l|
+      nego_leads.each do |l|
+        csv << [l.name, l.tel, l.fax]
+      end
+      contract_leads.each do |l|
         csv << [l.name, l.tel, l.fax]
       end
     end
