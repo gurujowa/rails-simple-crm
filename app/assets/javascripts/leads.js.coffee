@@ -35,7 +35,6 @@ jQuery ->
       source: gon.sex_list
 
   $('#leads_csv_button').click ->
-    console.log "test"
     reloadWithFormat('csv')
 
   $('#leads_address_label').click ->
@@ -48,5 +47,5 @@ jQuery ->
     return false 
 
 @reloadWithFormat = (format) ->
-  url = "#{location.protocol}//#{location.host}#{location.pathname}.#{format}#{location.search}"
+  url = "#{location.protocol}//#{location.host}/leads.#{format}#{location.search}"
   location.href = url
