@@ -23,6 +23,8 @@ ja:
   simple_form:
     labels:
       q:
+        approach_day_gteq: 対応日(最大)
+        approach_day_lteq: 対応日(最小)
         name_cont: 事業所名
         client_name_cont: 事業所名
         corporation_name_cont: 法人名
@@ -39,11 +41,13 @@ ja:
         city_cont: 市区町村
         street_cont: 番地
         building_cont: 建物名
+        lead_name_cont: 会社名
         lead_histories_memo_cont: 対応メモ
-        memo_cont: お客様メモ
-        user_id_eq: マイリスト
+        memo_cont: メモ
+        user_id_eq: ユーザーID
         lead_histories_user_id_eq: 対応者（１つでも含む）
         lead_histories_lead_history_status_id_eq: 対応ステータス（１つでも含む）
+        lead_history_status_id_eq: 対応ステータス
 
   activerecord:
     errors:

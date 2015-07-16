@@ -1,0 +1,32 @@
+h1 対応履歴一覧
+
+.well
+  button type="button" class="btn btn-info" data-toggle="collapse" data-target="#btn-lead-history-search" 検索ボックス
+  a#lead_histories_csv_button.btn.btn-default CSV出力
+  #btn-lead-history-search.collapse
+    = search_form_for @q, :builder => SimpleForm::FormBuilder, wrapper: :horizontal_form,url: lead_histories_path, html: {class: "form-horizontal",method: :get} do |f|
+      = f.input :lead_name_cont
+      = f.input :approach_day_gteq, input_html: {class: "datepicker"}
+      = f.input :approach_day_lteq, input_html: {class: "datepicker"}
+      = f.input :user_id_eq, collection: User.all
+      = f.input :lead_history_status_id_eq, collection: LeadHistoryStatus.all
+      = f.input :memo_cont
+      = f.submit "検索する", class: "btn btn-primary"
+  #total_entries 件数：#{@lead_histories.total_entries}件
+table.table.table-striped.table-bordered
+  thead
+    tr
+      th 会社名
+      th 対応者
+      th 対応日時
+      th ステータス
+  tbody
+    - @lead_histories.each do |his|
+      tr
+        td = link_to his.lead.name, lead_path(his.lead)
+        td = his.user.name
+        td = his.approach_day
+        td = his.lead_history_status.name
+
+= will_paginate @lead_histories, renderer: BootstrapPagination::Rails
+

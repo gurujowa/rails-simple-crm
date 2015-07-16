@@ -4,9 +4,9 @@ class Lead < ActiveRecord::Base
   extend Enumerize
   acts_as_taggable 
   belongs_to :user
-  has_many :lead_histories
+  has_many :lead_histories, dependent: :destroy
 
-  has_one :lead_interview
+  has_one :lead_interview, dependent: :destroy
   accepts_nested_attributes_for :lead_interview
 
   enumerize :campaign, in: [:fax,:homepage,:tel,:introduce,:other]

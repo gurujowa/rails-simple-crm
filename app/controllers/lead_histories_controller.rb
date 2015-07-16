@@ -2,6 +2,16 @@ class LeadHistoriesController < ApplicationController
   before_action :set_lead_history, only: [:show, :edit, :update, :destroy, :sent]
   before_action :authenticate_user!
 
+  def index
+    @q = LeadHistory.search(params[:q])
+    @lead_histories = @q.result.paginate(page: params[:page],per_page: 100)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_csv LeadHistory.all.to_csv }
+    end
+  end
+
   def approach
     @next_approach_gt = params[:next_approach_gt].present? ? DateTime.parse(params[:next_approach_gt]) : DateTime.now.prev_year
     @next_approach_lt = params[:next_approach_lt].present? ? DateTime.parse(params[:next_approach_lt]) : DateTime.now.next_year
