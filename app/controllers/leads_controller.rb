@@ -68,7 +68,7 @@ class LeadsController < ApplicationController
 
       respond_to do |format|
         format.html
-        format.csv { send_csv @q.result.includes(:lead_histories).paginate(page: 1,per_page: 3000).to_csv }
+        format.csv { send_csv @q.result.includes(:lead_histories).paginate(page: 1,per_page: 30000).to_csv }
       end
   end
 
