@@ -63,9 +63,3 @@ h1 見込み客一覧
 .well
   =link_to "不要リスト出力", {action: :reject_list, format: :csv}, class: "btn btn-default"
 
-.panel.panel-default
-  .panel-heading タグクラウド
-  .panel-body
-    - tag_cloud(@tags, %w(tag_cloud1 tag_cloud2 tag_cloud3 tag_cloud4) )do |tag, css_class|
-      span.tag_cloud_line = link_to tag.name,  { :action => :index, :tag_name => tag.name }, :class => css_class
-      | &nbsp;

@@ -1,6 +1,7 @@
 class LeadsController < ApplicationController
   before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_flg, :contract]
   after_action :store_location, only: [:index, :search, :mylist, :approach]
+  before_action :set_tag, only: [:index,:show, :edit, :update, :create, :new]
   before_action :authenticate_user!
 
   # GET /leads
@@ -53,15 +54,6 @@ class LeadsController < ApplicationController
       if params[:q].present? && params[:q][:s].present?
         leads = leads.joins(:lead_histories)
       end
-
-
-      tl = Lead.tags_on(:tags)
-      @tag_list = []
-      tl.each do |t|
-        @tag_list.push([t.name, t.name])
-      end
-      @tags = Lead.tag_counts_on(:tags)
-
 
       @q = leads.search(pq)
       @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
@@ -185,8 +177,14 @@ class LeadsController < ApplicationController
     @lead.lead_interview = LeadInterview.new
   end
 
+  def set_tag
+    gon.tag_list = Lead.tags_on(:tags).map {|i| i.name}
+    @tag_list = gon.tag_list
+  end
+
   # GET /leads/1/edit
   def edit
+    @tag_name = @lead.tags
     if @lead.lead_interview.blank?
       @lead.lead_interview = LeadInterview.new
     end
@@ -275,7 +273,6 @@ class LeadsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_lead
       @lead = Lead.find(params[:id])
-      gon.tag_list = Lead.tags_on(:tags).map {|i| i.name}
     end
 
     def sex_list
