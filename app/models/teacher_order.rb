@@ -20,8 +20,6 @@ class TeacherOrder < ActiveRecord::Base
 extend Enumerize
 
   has_paper_trail 
-  has_many :teacher_order_courses
-  has_many :courses, through: :teacher_order_courses
   belongs_to :teacher
   belongs_to :course
 
@@ -38,23 +36,7 @@ extend Enumerize
   enumerize :period_type, in: [:auto, :manual , :none]
 
   def lead
-    self.courses.first.lead
-  end
-
-
-  def check_teacher_include
-    self.courses.each do |c|
-       te_id = []
-       c.periods.each do |p|
-         if p.teacher_id == self.teacher_id
-            te_id.push self.teacher_id
-         end
-       end
-
-       if te_id.size == 0
-         errors.add(:courses, c.name + 'には' + self.teacher.name + "のコマがありません" )
-       end
-    end
+    self.course.lead
   end
 
   def total_period
@@ -123,32 +105,27 @@ extend Enumerize
   end
 
   def course_address
-    self.courses.uniq {|c| c.address}.map{|c| c.address}.join(",")
+    self.course.address
   end
 
   def course_students
-    self.courses.uniq {|c| c.students.to_s}.map{|c| c.students.to_s}.join(",")
+    self.course.students
   end
 
   def course_station
-    self.courses.uniq {|c| c.station}.map{|c| c.station}.join(",")
+    self.course.station
   end
 
   def course_responsible
-    self.courses.uniq {|c| c.responsible}.map{|c| c.responsible}.join(",")
+    self.course.responsible
   end
 
   def course_tel
-    self.courses.uniq {|c| c.tel}.map{|c| c.tel}.join(",")
+    self.course.tel
   end
 
   def lead_name
-    c = self.courses.first
-    if c.present?
-      return c.lead.name
-    else
-      return ""
-    end
+    return self.course.lead.name
   end
 
   def course_where
