@@ -129,7 +129,7 @@ extend Enumerize
   end
 
   def course_where
-    Period.where(:course_id => self.course_ids).where(:teacher_id => self.teacher_id).order(:day)
+    Period.where(:course_id => self.course_id).where(:teacher_id => self.teacher_id).order(:day)
   end
 
 end
