@@ -1,6 +1,21 @@
 namespace :lead do
   desc "about leads"
 
+  task "teacher_order" => :environment do
+    to = TeacherOrder.all
+
+    to.each do |t|
+      if t.courses.length > 1
+        p t.courses.inspect
+      elsif t.courses.length == 1
+        t.course_id = t.courses.first.id
+        t.save!
+      else
+        t.destroy
+      end
+    end
+  end
+
   task "depend" => :environment do
     his = LeadHistory.all
     his.each do |h|

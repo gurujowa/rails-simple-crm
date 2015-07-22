@@ -24,7 +24,7 @@ extend Enumerize
   belongs_to :lead
   belongs_to :user
   has_many :teacher_order_courses
-  has_many :teacher_order, through: :teacher_order_courses
+  has_many :teacher_orders
   has_many :periods, :dependent => :destroy
   accepts_nested_attributes_for :periods, :allow_destroy => true
 

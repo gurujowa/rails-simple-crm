@@ -56,49 +56,49 @@
       tr
         th 特記
         td  = simple_format @to.mention
-      - @to.courses.each_with_index do |c, i|
+      - c = @to.course
+      tr
+        th
+          | コース情報
+        td 
+          .row 
+            | [ コース名 ]
+            = c.name
+          .row
+            | [ 会場住所 ]
+            = c.address
+          .row
+            | [ 最寄り駅 ]
+            = c.station
+          .row
+            | [ 先方研修担当者 ]
+            = c.responsible
+          .row
+            | [ 先方緊急連絡先 ]
+            = c.tel
+          .row
+            | [ 受講者数 ]
+            = c.students
+      - if @to.period_type.auto?
         tr
           th
-            | コース#{i+1} <br> コース情報
+            | コース#{i+1} <br> 研修日
           td 
-            .row 
-              | [ コース名 ]
-              = c.name
-            .row
-              | [ 会場住所 ]
-              = c.address
-            .row
-              | [ 最寄り駅 ]
-              = c.station
-            .row
-              | [ 先方研修担当者 ]
-              = c.responsible
-            .row
-              | [ 先方緊急連絡先 ]
-              = c.tel
-            .row
-              | [ 受講者数 ]
-              = c.students
-        - if @to.period_type.auto?
+            - c.periods.each do |p|
+              - if p.teacher.id == @teacher_order.teacher.id
+                .row 
+                  | #{p.day}  #{p.start_time.to_s(:time)} ～ #{p.end_time.to_s(:time)} 
+                  - if p.break_start.present?
+                    |  (休憩： #{p.break_start.to_s(:time)}　～  #{p.break_end.to_s(:time)} )
+      - if @to.period_type.manual?
           tr
-            th
-              | コース#{i+1} <br> 研修日
+            th 研修日
             td 
-              - c.periods.each do |p|
-                - if p.teacher.id == @teacher_order.teacher.id
-                  .row 
-                    | #{p.day}  #{p.start_time.to_s(:time)} ～ #{p.end_time.to_s(:time)} 
-                    - if p.break_start.present?
-                      |  (休憩： #{p.break_start.to_s(:time)}　～  #{p.break_end.to_s(:time)} )
-        - if @to.period_type.manual?
-            tr
-              th 研修日
-              td 
-                - @to.teacher_order_periods.each do |p|
-                  .row 
-                    | #{p.day}  #{p.start_time.to_s(:time)} ～ #{p.end_time.to_s(:time)} 
-                    - if p.break_start.present?
-                      |  (休憩： #{p.break_start.to_s(:time)}　～  #{p.break_end.to_s(:time)} )
+              - @to.teacher_order_periods.each do |p|
+                .row 
+                  | #{p.day}  #{p.start_time.to_s(:time)} ～ #{p.end_time.to_s(:time)} 
+                  - if p.break_start.present?
+                    |  (休憩： #{p.break_start.to_s(:time)}　～  #{p.break_end.to_s(:time)} )
     br
     h3 以下の日付で請求書を必ずお送りください。
     table width="100%" class="table_main"

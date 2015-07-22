@@ -1,8 +1,8 @@
 = simple_nested_form_for @teacher_order, :html => {:class => 'form-horizontal'}, wrapper: :horizontal_form do |f| 
   = f.error_notification 
   = f.input :teacher_id, collection: @teachers
-  = f.association :courses,
-      selected: @teacher_order.courses.map{|i| i.id},
+  = f.association :course,
+      selected: @teacher_order.course,
       label_method: :to_select_label,
       input_html: { class: 'with-select2' } 
   = f.input :period_type, hint: "業務依頼書の、コマ情報の表示の仕方です"

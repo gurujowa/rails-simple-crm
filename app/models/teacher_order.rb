@@ -23,6 +23,7 @@ extend Enumerize
   has_many :teacher_order_courses
   has_many :courses, through: :teacher_order_courses
   belongs_to :teacher
+  belongs_to :course
 
   has_many :teacher_order_lines, :dependent => :destroy
   has_many :teacher_order_periods, :dependent => :destroy
@@ -35,8 +36,6 @@ extend Enumerize
 
   enumerize :status, in: [:draft, :active , :cancel]
   enumerize :period_type, in: [:auto, :manual , :none]
-
-  validate :check_teacher_include
 
   def lead
     self.courses.first.lead

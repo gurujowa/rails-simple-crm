@@ -10,7 +10,7 @@ table.default_datatables
       th 講師
       th 価格
       th 支払日
-      th メモ
+      th 実施日
   tbody
     - @teacher_order_lines.each do |l|
       tr
@@ -22,4 +22,7 @@ table.default_datatables
           span = l.teacher_order.teacher.name
         td = number_to_currency l.price
         td = l.payment_date
-        td = l.memo
+        td
+          - l.teacher_order.course.periods.each do |p|
+            - if p.teacher.id == l.teacher_order.teacher.id
+              = p.day

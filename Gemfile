@@ -5,6 +5,7 @@ gem 'rails', '4.2.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+gem 'mysql2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -33,6 +34,7 @@ gem 'unicorn'
 gem 'jbuilder', '~> 1.2'
 
 group :development do
+  gem 'yaml_db'
   gem 'pry-rails'
   gem 'binding_of_caller'
   gem 'web-console'
