@@ -30,7 +30,7 @@ extend Enumerize
 
   validates :teacher_id, presence: true
   validates :description, presence: true
-  validates :courses, presence: true
+  validates :course, presence: true
 
   enumerize :status, in: [:draft, :active , :cancel]
   enumerize :period_type, in: [:auto, :manual , :none]

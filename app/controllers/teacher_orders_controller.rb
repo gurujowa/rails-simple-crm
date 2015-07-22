@@ -64,7 +64,7 @@ class TeacherOrdersController < ApplicationController
 
     if params[:dup_id].present?
       parent = TeacherOrder.find(params[:dup_id])
-      clone = parent.deep_clone({:include => [:teacher_order_lines, :teacher_order_courses]})
+      clone = parent.deep_clone({:include => [:teacher_order_lines]})
       @teacher_order = clone
     else
       @teacher_order = TeacherOrder.new
@@ -118,7 +118,7 @@ class TeacherOrdersController < ApplicationController
   def teacher_order_params
     params.require(:teacher_order).permit(
     :teacher_id,:price, :price_detail, :order_date, :memo, :invoice_flg,:students, :description, :period_type,
-    :payment_flg, :display_period_flg,:mention,  :payment_term, :memo, :order_date, :payment_date, course_ids: [],
+    :payment_flg, :display_period_flg,:mention,  :payment_term, :memo, :order_date, :payment_date, :course_id,
     teacher_order_lines_attributes: [:id, :_destroy, :payment_date, :price, :memo],
     teacher_order_periods_attributes: [:id, :_destroy, :day,:start_time, :end_time, :break_start, :break_end, :memo])
   end

@@ -2,7 +2,7 @@
   = f.error_notification 
   = f.input :teacher_id, collection: @teachers
   = f.association :course,
-      selected: @teacher_order.course,
+      selected: @teacher_order.course.id,
       label_method: :to_select_label,
       input_html: { class: 'with-select2' } 
   = f.input :period_type, hint: "業務依頼書の、コマ情報の表示の仕方です"
