@@ -25,4 +25,4 @@ table.default_datatables
         td
           - l.teacher_order.course.periods.each do |p|
             - if p.teacher.id == l.teacher_order.teacher.id
-              = p.day
+              = "#{p.day} ,"
