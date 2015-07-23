@@ -9,6 +9,7 @@ table.default_datatables
       th 支払
       th 講師
       th 価格
+      th 請求日
       th 支払日
       th 実施日
   tbody
@@ -21,6 +22,7 @@ table.default_datatables
           span style="display:none;" = l.teacher_order.teacher.kana
           span = l.teacher_order.teacher.name
         td = number_to_currency l.price
+        td = l.invoice_date
         td = l.payment_date
         td
           - l.teacher_order.course.periods.each do |p|
