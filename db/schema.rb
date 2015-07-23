@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722015042) do
+ActiveRecord::Schema.define(version: 20150723023421) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -374,6 +374,7 @@ ActiveRecord::Schema.define(version: 20150722015042) do
     t.boolean "invoice_flg",      limit: 1,   default: false, null: false
     t.boolean "payment_flg",      limit: 1,   default: false, null: false
     t.string  "memo",             limit: 255
+    t.date    "invoice_date"
   end
 
   create_table "teacher_order_periods", force: :cascade do |t|

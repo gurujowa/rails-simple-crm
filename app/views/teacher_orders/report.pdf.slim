@@ -81,8 +81,7 @@
             = c.students
       - if @to.period_type.auto?
         tr
-          th
-            | コース#{i+1} <br> 研修日
+          th 研修日
           td 
             - c.periods.each do |p|
               - if p.teacher.id == @teacher_order.teacher.id

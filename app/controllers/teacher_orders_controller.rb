@@ -13,6 +13,13 @@ class TeacherOrdersController < ApplicationController
   end
 
   def show
+    if @teacher_order.period_type.manual?
+      @periods = @teacher_order.teacher_order_periods
+    elsif @teacher_order.period_type.auto?
+      @periods = @teacher_order.course.periods
+    else
+      raise "periods type is invalid"
+    end
   end
 
   def cancel
@@ -21,11 +28,11 @@ class TeacherOrdersController < ApplicationController
     else
       redirect_to teacher_order_url(@teacher_order), error: '講師発注のキャンセルに失敗しました。'
     end
-
   end
 
   def active
     if @teacher_order.update({status:  "active"})
+      @teacher_order.update! order_date: Date.today
       redirect_to teacher_order_url(@teacher_order), notice: '講師発注を発行しました。'
     else
       redirect_to teacher_order_url(@teacher_order), error: '講師発注の発行に失敗しました。'
@@ -61,7 +68,6 @@ class TeacherOrdersController < ApplicationController
   end
 
   def new
-
     if params[:dup_id].present?
       parent = TeacherOrder.find(params[:dup_id])
       clone = parent.deep_clone({:include => [:teacher_order_lines]})
@@ -119,7 +125,7 @@ class TeacherOrdersController < ApplicationController
     params.require(:teacher_order).permit(
     :teacher_id,:price, :price_detail, :order_date, :memo, :invoice_flg,:students, :description, :period_type,
     :payment_flg, :display_period_flg,:mention,  :payment_term, :memo, :order_date, :payment_date, :course_id,
-    teacher_order_lines_attributes: [:id, :_destroy, :payment_date, :price, :memo],
+    teacher_order_lines_attributes: [:id, :_destroy, :payment_date,:invoice_date, :price, :memo],
     teacher_order_periods_attributes: [:id, :_destroy, :day,:start_time, :end_time, :break_start, :break_end, :memo])
   end
 

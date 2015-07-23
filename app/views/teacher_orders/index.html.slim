@@ -4,6 +4,7 @@ h1 講師発注管理  一覧
 table.default_datatables
   thead
     tr
+      th タイトル
       th 会社名
       th ステータス
       th 講師
@@ -15,6 +16,7 @@ table.default_datatables
   tbody
     - @teacher_orders.each do |teacher_order|
       tr
+        td.col-md-2 = link_to teacher_order.description, teacher_order_path(teacher_order)
         td = link_to teacher_order.lead_name, teacher_order_path(teacher_order)
         td = teacher_order_status_button teacher_order
         td 
