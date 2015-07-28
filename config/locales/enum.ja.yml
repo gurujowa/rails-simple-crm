@@ -21,6 +21,11 @@
 
 ja:
   enumerize:
+    order_sheet:
+      status:
+        draft: 下書き
+        active: 発行済
+        cancel: キャンセル
     teacher_order:
       status:
         draft: 下書き

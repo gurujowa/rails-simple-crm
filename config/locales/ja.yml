@@ -141,6 +141,18 @@ ja:
         total_time_minute: 合計時間（分）
         memo: メモ
         observe_flg: 立ち会い必要かどうか
+      order_sheet: 
+        course_list: コース名（入力用）
+        course_info: コース内容
+        send_to: 発注先
+        title: タイトル
+        mention: 特記
+        price: 価格
+        memo: メモ
+        invoice_date: 請求日
+        payment_date: 支払日
+        description: 研修内容概要
+        order_date: 発注日
       teacher_order:  #モデル毎に階層化しておく。
         teacher_id: 講師
         mention: 特記

@@ -1,0 +1,15 @@
+h1 発注書  一覧
+
+= link_to '新規追加', new_order_sheet_path, :class => 'btn btn-info'
+table.default_datatables
+  thead
+    tr
+      th タイトル
+      th 会社名
+  tbody
+    - @order_sheets.each do |o|
+      tr
+        td.col-md-2 
+          span = link_to o.title, order_sheet_path(o)
+          span = link_to "(edit)", edit_order_sheet_path(o)
+        td = o.send_to

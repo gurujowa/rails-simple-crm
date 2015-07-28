@@ -1,0 +1,49 @@
+ul.breadcrumb
+  li Home 
+  li.active = @order_sheet.title
+
+.well
+  = link_to '複製', new_order_sheet_path(dup_id: @order_sheet.id), :class => "btn btn-default"
+  = link_to '編集', edit_order_sheet_path(@order_sheet), class: "btn btn-default"
+  = link_to '削除', order_sheet_path(@order_sheet),  method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
+  = link_to '業務依頼書表示', {action: :report, id: @order_sheet}, class: "btn btn-default"
+  = link_to '業務依頼書出力', {action: :report, id: @order_sheet, format: "pdf"}, class: "btn btn-success"
+
+
+h1 発注書詳細
+.row
+  .panel.panel-default
+    .panel-heading 発注情報
+    table.table.table-striped
+      tr
+        th ステータス
+        td = @order_sheet.status_text
+      - if @order_sheet.status == "active"
+        tr
+          th 発行日
+          td = @order_sheet.order_date
+      tr
+        th 金額
+        td = number_to_currency @order_sheet.total_price
+      tr
+        th 研修内容概要
+        td = @order_sheet.description
+      tr
+        th 特記事項
+        td = @order_sheet.mention
+      tr
+        th メモ
+        td = @order_sheet.memo
+
+  .panel.panel-default
+    .panel-heading 請求情報
+    table.table.table-striped.table-bordered
+      tr
+        th.col-sm-2 支払日
+        th.col-sm-2  金額
+        th.col-sm-8  メモ
+      - @order_sheet.order_sheet_lines.each do |l|
+        tr
+          td = l.payment_date
+          td = number_to_currency l.price
+          td = l.memo

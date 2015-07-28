@@ -1,0 +1,62 @@
+.wrapper
+  .content
+    div 
+      span 発注番号&nbsp;
+      = @order_sheet.id
+    div 
+      span 発注日&nbsp;
+      = @order_sheet.order_date
+
+    h1 発注書
+    .clearfix
+      .alpha
+        p.recipientName style="margin-bottom: 10px;"
+          = @order_sheet.send_to
+          span 様
+        p.titleName style="margin-bottom: 10px;"
+          = @order_sheet.title
+        p  下記のとおり、業務の委託を依頼（発注）いたします。
+        dl class="totalAmountPrice clearfix"
+          dt 発注金額
+          dd
+            = number_to_currency @order_sheet.total_price
+      .gamma
+        =  params[:debug].present? ? image_tag('logo.gif') : wicked_pdf_image_tag('logo.gif')
+      .beta
+        .senderName ユアブライト株式会社
+        p 
+          div 〒169-0075東京都新宿区高田馬場3-3-9
+          div style="text-align:right;margin-right: 10px" 山下ビル5F
+          div 
+            | TEL:03-6908-6143<br>
+              FAX:03-6908-6145<br>
+              info@yourbright.co.jp
+    h3 style="margin-top:50px;" 以下の日付で請求書を必ずお送りください。
+    table  class="table_main"
+      tr
+        th.gray 請求予定日
+        th.gray 請求金額
+        th.gray メモ
+      - @order_sheet.order_sheet_lines.each do |e|
+        tr
+          td = e.payment_date 
+          td = number_to_currency e.price
+          td = e.memo
+      tr
+        td style="border-bottom:0;border-left:0"
+        td.gray 合計金額
+        td class="alnright" = number_to_currency @order_sheet.total_price 
+
+    table.table_main
+      tr
+        th 研修情報
+        td  = simple_format @order_sheet.course_info
+      tr
+        th 備考
+        td  = simple_format @order_sheet.mention
+    p
+      | ※月末締め翌々月５日払いとなります。<br>
+        ※請求書が必要です。<br>
+        ※支払方法は、指定銀行口座に振込となります。<br>
+        ※企業側からのキャンセル（前日および当日を除く）および講師の自己都合により実施できなかった研修については支払いの対象となりません。<br>
+        ※契約金額には消費税8%が含まれています。

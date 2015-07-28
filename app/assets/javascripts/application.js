@@ -24,6 +24,7 @@
 //= require noty/themes/default
 //= require jquery.balloon.min
 //= require jquery.timepicker.min
+//= require selectize.min
 //= require fullcalendar
 //= require handsontable.full.min
 //= require pivot

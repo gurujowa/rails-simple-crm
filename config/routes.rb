@@ -107,7 +107,11 @@ Mycrm::Application.routes.draw do
   get 'teachers/update/:id/:type' => 'teachers#up_bool'
   get 'teachers_flag' => 'teachers#flag'
 
-  resources :industries, :task_types, :statuses
+  resources :order_sheets do
+    member do
+      get "report"
+    end
+  end
   resources :contacts, :only => [:destroy]    
 
   #コース
