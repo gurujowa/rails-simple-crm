@@ -1,5 +1,5 @@
 class OrderSheetsController < ApplicationController
-  before_action :set_order_sheet, only: [:show, :edit, :update, :report, :destroy]
+  before_action :set_order_sheet, only: [:show, :edit, :update, :report, :destroy, :check]
   before_action :set_form_val, only: [:edit,:update,:new,:create]
   before_action :authenticate_user!
 
@@ -63,6 +63,14 @@ class OrderSheetsController < ApplicationController
     end
   end
   
+  def check
+    if @order_sheet.update({status:  params[:status]})
+      @order_sheet.update! order_date: Date.today
+      redirect_to order_sheet_url(@order_sheet), notice: '発注書を発行しました。'
+    else
+      redirect_to order_sheet_url(@order_sheet), error: '発注書の発行に失敗しました。'
+    end
+  end
 
   def destroy
     @order_sheet.destroy

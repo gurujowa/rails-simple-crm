@@ -6,7 +6,10 @@ ul.breadcrumb
   = link_to '複製', new_order_sheet_path(dup_id: @order_sheet.id), :class => "btn btn-default"
   = link_to '編集', edit_order_sheet_path(@order_sheet), class: "btn btn-default"
   = link_to '削除', order_sheet_path(@order_sheet),  method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
-  = link_to '発注書表示', {action: :report, id: @order_sheet}, class: "btn btn-default"
+  - if @order_sheet.status == "draft"
+    = link_to '発行する', {action: :check, id: @order_sheet.id, status: :active }, class: "btn btn-info"
+  - if @order_sheet.status == "active"
+    = link_to 'キャンセルする', {action: :check, id: @order_sheet, status: :cancel }, class: "btn btn-danger"
   = link_to '発注書出力', {action: :report, id: @order_sheet, format: "pdf"}, class: "btn btn-success"
 
 
