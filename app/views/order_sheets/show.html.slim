@@ -6,8 +6,8 @@ ul.breadcrumb
   = link_to '複製', new_order_sheet_path(dup_id: @order_sheet.id), :class => "btn btn-default"
   = link_to '編集', edit_order_sheet_path(@order_sheet), class: "btn btn-default"
   = link_to '削除', order_sheet_path(@order_sheet),  method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
-  = link_to '業務依頼書表示', {action: :report, id: @order_sheet}, class: "btn btn-default"
-  = link_to '業務依頼書出力', {action: :report, id: @order_sheet, format: "pdf"}, class: "btn btn-success"
+  = link_to '発注書表示', {action: :report, id: @order_sheet}, class: "btn btn-default"
+  = link_to '発注書出力', {action: :report, id: @order_sheet, format: "pdf"}, class: "btn btn-success"
 
 
 h1 発注書詳細
@@ -26,8 +26,8 @@ h1 発注書詳細
         th 金額
         td = number_to_currency @order_sheet.total_price
       tr
-        th 研修内容概要
-        td = @order_sheet.description
+        th 委託元企業
+        td = @order_sheet.company_info
       tr
         th 特記事項
         td = @order_sheet.mention

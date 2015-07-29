@@ -6,7 +6,7 @@
     div class="col-sm-12"
       = f.hint "講師名や送付先会社名を記入します。リストから選択することも、新しく入力することも出来ます。" 
   = f.input :order_date, as: :date_picker, hint: "発注書の発行日を記入します。通常は当日で構いません"
-  = f.input :description, hint: "発注書の概要です"
+  = f.input :company_info, hint: "発注書の委託元企業です"
   = f.input :course_list do
     = select :order, :course, @courses.map{|c| [c.lead.name + "-" +c.name, c.id]}, class: "col-sm-12"
     div class="col-sm-12"
@@ -23,7 +23,7 @@
         th 請求予定日
         th 支払予定日
         th 価格
-        th メモ
+        th 備考
         th 削除
     tbody.add_fields
       = f.simple_fields_for :order_sheet_lines , wrapper: false

@@ -13,6 +13,7 @@ getCourseText = (val) ->
       if teacher_name == this.teacher
         period_txt = period_txt + this.day + "\n"
     txt = """
+[ 登壇講師 ] #{teacher_name}
 [ コース名 ] #{json.name}
 [ 会場住所 ] #{json.address}
 [ 最寄り駅 ] #{json.station}

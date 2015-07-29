@@ -5,7 +5,8 @@ table.default_datatables
   thead
     tr
       th タイトル
-      th 会社名
+      th 発注先
+      th 委託元企業
   tbody
     - @order_sheets.each do |o|
       tr
@@ -13,3 +14,4 @@ table.default_datatables
           span = link_to o.title, order_sheet_path(o)
           span = link_to "(edit)", edit_order_sheet_path(o)
         td = o.send_to
+        td = o.company_info

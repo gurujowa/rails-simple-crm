@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724054613) do
+ActiveRecord::Schema.define(version: 20150729072225) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -286,16 +286,16 @@ ActiveRecord::Schema.define(version: 20150724054613) do
   end
 
   create_table "order_sheets", force: :cascade do |t|
-    t.string   "title",       limit: 255,                     null: false
-    t.string   "send_to",     limit: 255,                     null: false
+    t.string   "title",        limit: 255,                     null: false
+    t.string   "send_to",      limit: 255,                     null: false
     t.date     "order_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description", limit: 255
-    t.string   "status",      limit: 255,   default: "draft", null: false
-    t.text     "mention",     limit: 65535
-    t.text     "course_info", limit: 65535
-    t.text     "memo",        limit: 65535
+    t.string   "status",       limit: 255,   default: "draft", null: false
+    t.text     "mention",      limit: 65535
+    t.text     "course_info",  limit: 65535
+    t.text     "memo",         limit: 65535
+    t.text     "company_info", limit: 65535
   end
 
   create_table "periods", force: :cascade do |t|
