@@ -37,8 +37,8 @@ class CoursesController < ApplicationController
             @cal.event do |e|
               e.dtstart     = Icalendar::Values::DateTime.new(p.start_date)
               e.dtend       = Icalendar::Values::DateTime.new(p.end_date)
-              e.summary     = c.company.client_name + "(" + p.teacher.name + ")"
-              e.description = %Q{会社名:#{c.company.client_name}\n講師名:#{p.teacher.name}}
+              e.summary     = c.lead.name + "(" + p.teacher.name + ")"
+              e.description = %Q{会社名:#{c.lead.name}\n講師名:#{p.teacher.name}}
             end
           end
         end
@@ -65,7 +65,7 @@ class CoursesController < ApplicationController
       csv << ["コマID","講師名","登壇日","開始時刻","終了時刻","コース名","企業名","メモ"]
       c.each do |c|
         c.periods.each do |period|
-          csv << [period.id,period.teacher.name,period.day,period.start_date,period.end_date,c.name,c.company.name, period.memo]
+          csv << [period.id,period.teacher.name,period.day,period.start_date.to_s(:time),period.end_date.to_s(:time),c.name,c.lead.name, period.memo]
         end
       end
     end
