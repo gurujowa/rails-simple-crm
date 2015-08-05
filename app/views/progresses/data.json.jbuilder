@@ -1,7 +1,7 @@
 json.array! (@courses) do |c|
   json.id c.id
   json.name(c.name)
-  json.company c.company.name
+  json.company c.lead.name
   json.responsible c.responsible
   json.memo c.memo
   json.periods c.periods do |p|
