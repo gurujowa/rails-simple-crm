@@ -25,7 +25,7 @@ table.table.table-striped.table-bordered
           - if lead.other_user?(current_user.id)
             span.glyphicon.glyphicon-user data-toggle="tooltip" title="#{lead.user.name}のマイリスト"
         - if lead.last_approach_day.present?
-          td style="background-color:#{lead.last_approach.lead_history_status.color}"
+          td style="background-color:##{lead.last_approach.lead_history_status.color};"
             a href="#{lead_path(lead)}" data-toggle="tooltip" title="#{lead.last_approach.memo}"
               = lead.last_approach.lead_history_status.name
         - else
