@@ -8,6 +8,8 @@ table.default_datatables
       th ステータス
       th 発注先
       th 委託元企業
+      th 発注日
+      th メモ
   tbody
     - @order_sheets.each do |o|
       tr
@@ -17,3 +19,5 @@ table.default_datatables
         td = order_sheet_status_button o
         td = o.send_to
         td = o.company_info
+        td = o.order_date
+        td = o.memo
