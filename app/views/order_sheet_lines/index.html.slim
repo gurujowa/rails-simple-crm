@@ -1,0 +1,27 @@
+h1 月ごと発注管理
+
+= link_to '新規追加', new_order_sheet_path, :class => 'btn btn-info'
+table.default_datatables
+  thead
+    tr
+      th 番号
+      th 発注先
+      th 依頼元
+      th 金額
+      th 発注日
+      th 支払日
+      th 発注済み
+      th 支払済み
+      th メモ
+  tbody
+    - @order_sheet_lines.each do |o|
+      tr
+        td = o.id
+        td = o.order_sheet.send_to
+        td = o.order_sheet.company_info
+        td = number_to_currency o.price
+        td = o.invoice_date
+        td = o.payment_date
+        td = link_to_switch_flg o, :invoice_flg
+        td = link_to_switch_flg o, :payment_flg
+        td = o.memo

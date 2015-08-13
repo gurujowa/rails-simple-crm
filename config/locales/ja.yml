@@ -71,6 +71,13 @@ ja:
         payment_flg:
           flag_on: 支払済
           flag_off: 未支払
+      order_sheet_line:
+        invoice_flg:
+          flag_on: 請求済
+          flag_off: 未請求
+        payment_flg:
+          flag_on: 支払済
+          flag_off: 未支払
       lead_estimate:
         send_flg:
           flag_on: 発行済
@@ -149,10 +156,11 @@ ja:
         mention: 特記
         price: 価格
         memo: メモ
-        invoice_date: 請求日
-        payment_date: 支払日
         description: 研修内容概要
         order_date: 発注日
+      order_sheet_line: 
+        invoice_date: 請求日
+        payment_date: 支払日
       teacher_order:  #モデル毎に階層化しておく。
         teacher_id: 講師
         mention: 特記

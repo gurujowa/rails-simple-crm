@@ -115,6 +115,12 @@ Mycrm::Application.routes.draw do
       get "report"
     end
   end
+  resources :order_sheet_lines, only: [:index] do
+    member do
+      get 'flag/:type' , :action => "flag"
+    end
+  end
+
 
   resources :contacts, :only => [:destroy]    
 

@@ -77,6 +77,10 @@ class OrderSheetsController < ApplicationController
     redirect_to order_sheets_url, notice: '削除しました'
   end
 
+  def line
+    @order_sheet_lines = OrderSheetLine.all
+  end
+
   private
   def set_order_sheet
     @order_sheet = OrderSheet.find(params[:id])
