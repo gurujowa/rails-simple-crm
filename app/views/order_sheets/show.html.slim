@@ -42,11 +42,13 @@ h1 発注書詳細
     .panel-heading 請求情報
     table.table.table-striped.table-bordered
       tr
+        th.col-sm-2 請求日
         th.col-sm-2 支払日
         th.col-sm-2  金額
         th.col-sm-8  メモ
       - @order_sheet.order_sheet_lines.each do |l|
         tr
+          td = l.invoice_date
           td = l.payment_date
           td = number_to_currency l.price
           td = l.memo

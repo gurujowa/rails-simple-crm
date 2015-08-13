@@ -12,10 +12,10 @@ namespace :convert do
       ors.memo = "業務依頼書よりコンバート"
       ors.company_info = t.course.lead.name
       ors.course_info = t.course.name
-      t.teacher_order_lines.each do |tl|
-        ors.order_sheet_lines.create(price: tl.price, invoice_date: tl.payment_date, invoice_flg: tl.invoice_flg, payment_flg: tl.payment_flg, memo: tl.memo)
-      end
       ors.save!
+      t.teacher_order_lines.each do |tl|
+        ors.order_sheet_lines.create!(price: tl.price, invoice_date: tl.payment_date, invoice_flg: tl.invoice_flg, payment_flg: tl.payment_flg, memo: tl.memo)
+      end
 
     end
   end
