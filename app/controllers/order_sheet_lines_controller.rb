@@ -7,7 +7,7 @@ class OrderSheetLinesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { render text: @teacher_order_lines.to_csv.tosjis }
+      format.csv { render text: @order_sheet_lines.to_csv }
     end
   end
 

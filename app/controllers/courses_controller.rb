@@ -13,13 +13,18 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
   end
 
-  def alert
-    @alerts = Alert.check
+
+  def google
+    gcal = Gcalendar.new
+    result = gcal.api
+
+    if result.success?
+      render json: result.data
+    else
+      render json: {error: result}
+    end
   end
 
-  def task
-    @alerts = Alert.task
-  end
   
   def calendar
     @courses = Course.all
