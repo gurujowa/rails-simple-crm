@@ -32,6 +32,9 @@ h1 発注書詳細
         th 委託元企業
         td = @order_sheet.company_info
       tr
+        th コース内容
+        td = simple_format @order_sheet.course_info
+      tr
         th 特記事項
         td = @order_sheet.mention
       tr

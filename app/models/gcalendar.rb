@@ -18,8 +18,6 @@ class Gcalendar
     api_method: @client.discovered_api(:plus).activities.list,
     parameters: { collection: "public", userId: 101748015513264110691 }
   )
-
-
   return result
   end
 end

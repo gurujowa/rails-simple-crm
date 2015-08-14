@@ -21,7 +21,7 @@ class CoursesController < ApplicationController
     if result.success?
       render json: result.data
     else
-      render json: {error: result}
+      render json: {error: result.error_message}
     end
   end
 

@@ -9,7 +9,7 @@ table.default_datatables
       th 発注先
       th 依頼元
       th 金額
-      th 発注日
+      th 請求日
       th 支払日
       th 発注済み
       th 支払済み
@@ -19,7 +19,9 @@ table.default_datatables
       tr
         td = o.id
         td = o.order_sheet.send_to
-        td = o.order_sheet.company_info
+        td
+          div = o.order_sheet.company_info
+          div = link_to "（発注書確認）", o.order_sheet, style: "color: blue;"
         td = number_to_currency o.price
         td = o.invoice_date
         td = o.payment_date
