@@ -14,9 +14,15 @@ namespace :convert do
       ors.company_info = t.course.lead.name
       ors.course_info = t.course.name
       ors.course_info << "\n[実施日]\n"
-      t.course.periods.each do |p|
+      if t.period_type.manual?
+        periods = t.teacher_order_periods
+      elsif t.period_type.auto?
+        periods = t.course.periods
+      end
+      periods.each do |p|
         ors.course_info << p.day.to_s(:date) + "\n"
       end
+
       ors.save!
       t.teacher_order_lines.each do |tl|
         ors.order_sheet_lines.create!(price: tl.price, invoice_date: tl.payment_date, invoice_flg: tl.invoice_flg, payment_flg: tl.payment_flg, memo: tl.memo)
