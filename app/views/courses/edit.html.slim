@@ -6,10 +6,8 @@ ul.breadcrumb
 
 
 = simple_nested_form_for @course  do |f|
-
   = f.error_notification 
   = render partial: 'form', :locals => {:f=> f} 
-
   table.table.table-bordered.table-striped#periods_table
     thead
       tr
