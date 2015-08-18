@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729072225) do
+ActiveRecord::Schema.define(version: 20150814100758) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -385,6 +385,17 @@ ActiveRecord::Schema.define(version: 20150729072225) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "day"
+    t.text     "memo",       limit: 65535
+    t.integer  "course_id",  limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "tasks", ["course_id"], name: "index_tasks_on_course_id", using: :btree
+
   create_table "teacher_order_courses", force: :cascade do |t|
     t.integer "teacher_order_id", limit: 4
     t.integer "course_id",        limit: 4
@@ -479,4 +490,5 @@ ActiveRecord::Schema.define(version: 20150729072225) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "tasks", "courses"
 end

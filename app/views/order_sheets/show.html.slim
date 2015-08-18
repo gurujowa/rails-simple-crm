@@ -26,6 +26,9 @@ h1 発注書詳細
           th 発行日
           td = @order_sheet.order_date
       tr
+        th 発注先
+        td = @order_sheet.send_to
+      tr
         th 金額
         td = number_to_currency @order_sheet.total_price
       tr

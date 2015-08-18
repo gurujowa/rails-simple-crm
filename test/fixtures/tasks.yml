@@ -1,34 +1,13 @@
-# == Schema Information
-#
-# Table name: tasks
-#
-#  id          :integer          not null, primary key
-#  type_id     :integer
-#  duedate     :date
-#  name        :string(255)
-#  assignee    :integer
-#  created_by  :integer
-#  note        :string(255)
-#  progress_id :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#  company_id  :integer
-#
-
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  type: 1
-  duedate: 2013-08-16
   name: MyString
-  assignee: 1
-  created_by: 1
-  note: MyString
+  day: 2015-08-14 19:07:58
+  memo: MyText
+  course_id: 
 
 two:
-  type: 1
-  duedate: 2013-08-16
   name: MyString
-  assignee: 1
-  created_by: 1
-  note: MyString
+  day: 2015-08-14 19:07:58
+  memo: MyText
+  course_id: 
