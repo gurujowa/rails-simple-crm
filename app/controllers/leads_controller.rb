@@ -259,12 +259,8 @@ class LeadsController < ApplicationController
   end
   
     def contract
-      contract_flg = @lead.contract_flg
-      if contract_flg == true
-        raise "既に契約されています"
-      end
-
-    @lead.update_attributes!({contract_flg: true})
+    contract_flg = params[:flg]
+    @lead.update_attributes!({contract_flg: contract_flg})
     redirect_to :action=> 'show', :id => params[:id], notice: '契約設定が完了しました'
 
     end

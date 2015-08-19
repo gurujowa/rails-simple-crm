@@ -32,9 +32,9 @@ p#notice = notice
       - else
         = link_to "マイリスト追加", {controller: "leads",action: "add_mylist", id: @lead.id},remote: true, class: "btn btn-default btn-block #{if @lead.mylist?(current_user.id) then "active" end }",id: "btn-lead-add-mylist"
       - if @lead.contract_flg == true
-        button class="btn btn-default active" 契約済み
+        = link_to "契約キャンセル", contract_lead_path(@lead, flg: false),class: "btn btn-danger btn-block", id: "btn-lead-contract"
       - else
-        = link_to "契約完了", contract_lead_path(@lead),class: "btn btn-success btn-block", id: "btn-lead-contract"
+        = link_to "契約完了", contract_lead_path(@lead, flg: true),class: "btn btn-success btn-block", id: "btn-lead-contract"
 
 .row
   .col-sm-6
