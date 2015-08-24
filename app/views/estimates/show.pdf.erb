@@ -252,8 +252,8 @@
   <% @estimate.estimate_subsities.each do |e| %>
   <tr>
     <td><%= e.name %></td>
-    <td><%= e.people %>人</td>
-    <td><%=  number_to_currency e.price %></td>
+    <td class="alnright"><%= e.people %>人</td>
+    <td class="alnright"><%=  number_to_currency e.price %></td>
   </tr>
   <% end %>
   <tr>
