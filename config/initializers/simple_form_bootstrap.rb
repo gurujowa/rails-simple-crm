@@ -34,6 +34,20 @@ SimpleForm.setup do |config|
     end
   end
 
+  config.wrappers :horizontal_boolean, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+    b.use :html5
+    b.use :placeholder
+
+    b.wrapper tag: 'div', class: 'col-sm-offset-3 col-sm-9' do |wr|
+      wr.wrapper tag: 'div', class: 'checkbox' do |ba|
+        ba.use :label_input, class: 'col-sm-9'
+      end
+
+      wr.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      wr.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    end
+  end
+
   config.wrappers :table_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
