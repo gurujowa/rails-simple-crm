@@ -33,7 +33,6 @@ gem 'unicorn'
 gem 'jbuilder', '~> 1.2'
 
 group :development do
-  gem 'mysql2'
   gem 'yaml_db'
   gem 'pry-rails'
   gem 'binding_of_caller'

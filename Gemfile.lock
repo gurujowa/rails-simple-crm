@@ -291,7 +291,6 @@ GEM
     moji (1.6)
     multi_json (1.7.9)
     multipart-post (2.0.0)
-    mysql2 (0.3.18)
     nested_form (0.3.2)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9.4)
@@ -470,7 +469,6 @@ DEPENDENCIES
   jquery-ui-rails
   moji
   momentjs-rails!
-  mysql2
   nested_form
   paper_trail
   pikaday-gem
@@ -498,3 +496,6 @@ DEPENDENCIES
   will_paginate-bootstrap
   wkhtmltopdf-binary
   yaml_db
+
+BUNDLED WITH
+   1.10.6
