@@ -3,8 +3,8 @@ a name="company"
   .panel-heading 会社情報
   .panel-body
     = form.input :client_name
-    = form.input :industry_id,  collection: @industries, hint: link_to("(業種の追加)", {controller: "industries"})
-    = form.input :campaign_id , collection:  Campaign.all, hint: link_to("(新規追加)", campaigns_path)
+    = form.input :industry_id,  collection: @industries
+    = form.input :campaign_id , collection:  Campaign.all
     = form.input :active_st
 a name="client"
 .panel.panel-default
