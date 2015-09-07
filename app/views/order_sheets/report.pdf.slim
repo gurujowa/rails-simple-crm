@@ -32,8 +32,8 @@
               FAX:03-6908-6145<br>
               info@yourbright.co.jp
 
-    h3 style="margin-top:50px;" 以下の日付で請求書を必ずお送りください。
-    table  class="table_main"
+    h3 style="margin-top:30px;" 以下の日付で請求書を必ずお送りください。
+    table.table_slim
       tr
         th 請求予定日
         th 支払予定日
@@ -51,7 +51,7 @@
         td.gray 合計金額
         td class="alnright" = number_to_currency @order_sheet.total_price 
 
-    table.table_main
+    table.table_slim
       tr
         th 委託元企業
         td  = simple_format @order_sheet.company_info
