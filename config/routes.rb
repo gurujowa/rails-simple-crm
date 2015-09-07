@@ -128,7 +128,6 @@ Mycrm::Application.routes.draw do
   resources :courses  do
     collection do
       get 'calendar'
-      get 'observe'
       put 'update/:id' => 'courses#up_name'  
       get 'update/:id/:type' => 'courses#up_bool'
       get 'google'

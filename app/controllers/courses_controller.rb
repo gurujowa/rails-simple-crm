@@ -82,10 +82,6 @@ class CoursesController < ApplicationController
   end
 
 
-  def observe
-    @courses = Course.all
-  end
-  
   def update
     @course = Course.find(params[:id])
     @course.assign_attributes(course_params)

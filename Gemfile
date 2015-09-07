@@ -57,7 +57,6 @@ end
 #------------------------------
 gem "select2-rails"
 gem 'icheck-rails'
-gem 'fullcalendar-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'underscore-rails'

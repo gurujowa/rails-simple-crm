@@ -54,7 +54,7 @@ class OrderSheetsController < ApplicationController
         redirect_to :id => params[:id],:debug => true, :format => :pdf, action: :report
       }
       format.pdf {
-        render pdf: @order_sheet.title + " - 業務依頼書",
+        render pdf: @order_sheet.title + " - 発注書",
                encoding: 'UTF-8',
                zoom: "0.9",
                layout: 'pdf.html',
@@ -91,71 +91,7 @@ class OrderSheetsController < ApplicationController
     @teachers = Teacher.all
 
   end
-=begin
-  def line
-    @teacher_order_lines = TeacherOrderLine.all
-  end
 
-
-  def cancel
-    if @teacher_order.update({status:  "cancel"})
-      redirect_to teacher_order_url(@teacher_order), notice: '講師発注をキャンセルしました。'
-    else
-      redirect_to teacher_order_url(@teacher_order), error: '講師発注のキャンセルに失敗しました。'
-    end
-  end
-
-  def active
-    if @teacher_order.update({status:  "active"})
-      @teacher_order.update! order_date: Date.today
-      redirect_to teacher_order_url(@teacher_order), notice: '講師発注を発行しました。'
-    else
-      redirect_to teacher_order_url(@teacher_order), error: '講師発注の発行に失敗しました。'
-    end
-  end
-
-  def report
-    @to = @teacher_order
-    @until = 10 - @teacher_order.teacher_order_lines.length
-    respond_to do |format|
-      format.html { 
-        redirect_to :id => params[:id],:debug => true, :format => :pdf, controller: :teacher_orders, action: :report
-      }
-      format.pdf {
-        render pdf: @teacher_order.teacher.name + " - " + @teacher_order.lead_name + " - 業務依頼書",
-               encoding: 'UTF-8',
-               zoom: "0.9",
-               layout: 'pdf.html',
-               show_as_html: params[:debug].present?
-      }
-    end
-  end
-
-
-  def flag
-    @to = TeacherOrder.find(params[:id])
-
-    if (@to.update_attributes({params[:type] => Date.today}))
-      render_noty :success, "フラグの変更が完了しました。", %Q{$('#td_teacher_order_#{params[:type]}_#{params[:id]}').html("#{Date.today.strftime("%Y-%m-%d")}")}
-    else
-      render_noty :error, @to.errors.full_messages
-    end
-  end
-
-
-
-
-
-    
-  private
-  def set_default_form
-    @select_courses = Course.all
-    @select_companies = Lead.joins(:course).group(:name)
-    @teachers = Teacher.where.not(work_possible: Teacher.work_possible_hash[:impossible]).order("last_kana ASC")
-  end
-
-=end
-    # Only allow a trusted parameter "white list" through.
   def order_sheet_params
     params.require(:order_sheet).permit(
     :title,:order_date, :company_info, :mention, :memo, :send_to, :course_info,

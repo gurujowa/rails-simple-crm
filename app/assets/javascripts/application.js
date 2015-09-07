@@ -19,13 +19,13 @@
 //= require bootstrap
 //= require bootstrap-switch.min
 //= require jquery.cookie
+//= require fullcalendar.min
 //= require noty/jquery.noty
 //= require noty/layouts/top
 //= require noty/themes/default
 //= require jquery.balloon.min
 //= require jquery.timepicker.min
 //= require selectize.min
-//= require fullcalendar
 //= require handsontable.full.min
 //= require pivot
 //= require select2
