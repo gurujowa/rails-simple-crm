@@ -19,6 +19,7 @@ class CoursesController < ApplicationController
     @courses = Course.all
     @periods = Period.all
     @new_task = CourseTask.new
+    gon.google_api_key = Rails.application.secrets.google_api_key
 
     respond_to do |format|
       format.html {

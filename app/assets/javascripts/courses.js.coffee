@@ -59,7 +59,7 @@ courseCalendarRender = (method) ->
   eventSources = getCalendarSources()
 
   $('#course_calendar').fullCalendar
-    googleCalendarApiKey: "AIzaSyAG51YWOtXzmlBEMu_TxdEMRmwUldBbyuE"
+    googleCalendarApiKey: gon.google_api_key
     eventSources: eventSources
     firstDay: 1
     dayClick: (date,jsEvent,view) ->
