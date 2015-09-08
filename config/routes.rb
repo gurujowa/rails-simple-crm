@@ -135,6 +135,12 @@ Mycrm::Application.routes.draw do
     end
   end
 
+  resources :course_tasks, only: [:destroy,:index] do
+    collection do
+      post 'change'
+    end
+  end
+
   #会社名
   resources :companies do
     collection do

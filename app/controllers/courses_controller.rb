@@ -7,29 +7,18 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @tasks = Task.where(course_id: @course.id)
+    @tasks = CourseTask.where(course_id: @course.id)
   end
 
   def edit
     @course = Course.find(params[:id])
   end
 
-
-  def google
-    gcal = Gcalendar.new
-    result = gcal.api
-
-    if result.success?
-      render json: result.data
-    else
-      render json: {error: result.error_message}
-    end
-  end
-
   
   def calendar
     @courses = Course.all
     @periods = Period.all
+    @new_task = CourseTask.new
 
     respond_to do |format|
       format.html {
@@ -144,7 +133,7 @@ class CoursesController < ApplicationController
   def course_params
     params.require(:course).permit(:name, :students,:user_id, :address, :tel, :station, :responsible,  :memo,  :lead_id,
         periods_attributes: [:id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id,:user_id, :memo, :_destroy],
-        tasks_attributes: [:id, :day, :name,:memo, :_destroy]
+        course_tasks_attributes: [:id, :start,:end, :title,:memo, :_destroy]
         )
   end
 

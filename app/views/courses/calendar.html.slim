@@ -1,0 +1,40 @@
+h1 コース  カレンダー
+
+
+#loading 読み込み中
+
+.well#calendar_checkbox_group
+  .checkbox
+    label
+      input#course_check type="checkbox" value="course" checked="" コース
+  .checkbox
+    label
+      input#task_check type="checkbox" value="task" checked="" タスク
+  .checkbox
+    label
+      input#holiday_check type="checkbox" value="holiday" checked="" 祝日
+
+
+#course_calendar.full_calendar
+
+
+.modal.fade#event_change_modal
+  .modal-dialog
+    .modal-content
+      = simple_form_for @new_task, url: url_for(controller: :course_tasks, action: :change), method: "post", wrapper: :vertical_form do |f|
+        .modal-header
+          h4.modal-title 新しいコースタスクの追加
+        .modal-body
+            = hidden_field_tag :id
+            = hidden_field_tag :event_id
+            = f.input :title
+            = f.input :all_day, :wrapper => :inline_checkbox
+            = f.input :start, as: :datetime_picker, hint: "全日にチェックが入っている場合、時刻指定は無視されます"
+            = f.input :end, as: :datetime_picker, hint: "全日にチェックが入っている場合、時刻指定は無視されます"
+            = f.input :memo
+            .form-group
+              label.control-label for="course" コース
+              = f.select :course_id, options_for_select(@courses.map{|c| [c.lead.name + "-" +c.name, c.id]}),  include_blank: true, required: true
+        .modal-footer
+          button type="button" class="btn btn-default" data-dismiss="modal" 閉じる
+          = submit_tag '保存する', :class => 'btn btn-primary'

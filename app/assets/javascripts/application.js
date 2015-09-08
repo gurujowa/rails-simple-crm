@@ -11,7 +11,7 @@
 // about supported directives.
 //
 
-//= require moment
+//= require moment.min
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
@@ -19,7 +19,9 @@
 //= require bootstrap
 //= require bootstrap-switch.min
 //= require jquery.cookie
-//= require fullcalendar.min
+//= require fullcalendar/fullcalendar.min
+//= require fullcalendar/ja
+//= require fullcalendar/gcal
 //= require noty/jquery.noty
 //= require noty/layouts/top
 //= require noty/themes/default

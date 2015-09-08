@@ -28,8 +28,8 @@ extend Enumerize
   has_many :periods, :dependent => :destroy
   accepts_nested_attributes_for :periods, :allow_destroy => true
 
-  has_many :tasks, :dependent => :destroy
-  accepts_nested_attributes_for :tasks, :allow_destroy => true
+  has_many :course_tasks, :dependent => :destroy
+  accepts_nested_attributes_for :course_tasks, :allow_destroy => true
 
   validates :name, presence: true
   validates :address, presence: true

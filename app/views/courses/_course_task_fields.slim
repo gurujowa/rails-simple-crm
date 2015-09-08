@@ -1,0 +1,6 @@
+tr
+  td = f.input :title,  wrapper: :table_form
+  td = f.input :start,as: :datetime_picker, wrapper: :table_form
+  td = f.input :end,as: :datetime_picker, wrapper: :table_form
+  td = f.input :memo, wrapper: :table_form
+  td = f.link_to_remove "削除",  class: "btn btn-default"

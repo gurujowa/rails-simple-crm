@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150814100758) do
+ActiveRecord::Schema.define(version: 20150908011017) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",       null: false
@@ -123,6 +123,19 @@ ActiveRecord::Schema.define(version: 20150814100758) do
     t.datetime "updated_at"
     t.integer  "con_type"
   end
+
+  create_table "course_tasks", force: :cascade do |t|
+    t.string   "title",      null: false
+    t.datetime "start",      null: false
+    t.datetime "end"
+    t.boolean  "all_day"
+    t.text     "memo"
+    t.integer  "course_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "course_tasks", ["course_id"], name: "index_course_tasks_on_course_id"
 
   create_table "courses", force: :cascade do |t|
     t.string   "name",        limit: 255

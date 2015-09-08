@@ -17,12 +17,110 @@ jQuery ->
   if ($(".full_calendar").length >= 1)
     courseCalendarRender()
 
-courseCalendarRender = (method) ->
-  calendar_settings = $.fn.fullcalendar
-  $.getJSON "/courses/calendar.json", (json)->
-    calendar_settings.eventSources = json.eventSources
-    $('#course_calendar').fullCalendar(calendar_settings)
+getCalendarSources = ->
+  eventSources = []
+  if $("#course_check").prop("checked")
+    eventSources.push({
+      url:"/courses/calendar.json"
+      color: "Maroon"
+      textColor: "white"
+      borderColor: "white"
+      cache: true
+    })
+  if $("#task_check").prop("checked")
+    eventSources.push({
+      name: "course_task"
+      url:"/course_tasks.json"
+      color: "black"
+      textColor: "white"
+      borderColor: "white"
+      cache: true
+    })
+  if $("#holiday_check").prop("checked")
+    eventSources.push({
+      googleCalendarId: "ja.japanese#holiday@group.v.calendar.google.com"
+      classname: "holiday-google"
+      color: "blue"
+    })
+  return eventSources
 
+courseTaskUpdateFormValueInput = (event)->
+  $("#event_change_modal").modal('show')
+  $("#course_task_all_day").prop("checked", event.allDay)
+  $("#id").val(event.course_task_id)
+  $("#event_id").val(event._id)
+  $("#course_task_title").val(event.title_text)
+  $("#course_task_start").val(event.start)
+  $("#course_task_end").val(event.end)
+  $("#course_task_memo").val(event.memo)
+  $("#course_task_course_id").val(event.course_id).trigger("change")
+
+courseCalendarRender = (method) ->
+  eventSources = getCalendarSources()
+
+  $('#course_calendar').fullCalendar
+    googleCalendarApiKey: "AIzaSyAG51YWOtXzmlBEMu_TxdEMRmwUldBbyuE"
+    eventSources: eventSources
+    firstDay: 1
+    dayClick: (date,jsEvent,view) ->
+      $("#event_change_modal").modal('show')
+      $("#new_course_task").find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
+      $("#id").val("")
+      $("#event_id").val("")
+      $("#course_task_start").val(date.format("YYYY-M-D HH:mm:ss"))
+      $("#course_task_end").val(date.add(1,"hour").format("YYYY-M-D HH:mm:ss"))
+      $("#course_task_course_id").val("")
+    eventClick: (event) ->
+      if (event.url)
+        window.open(event.url)
+        return false
+      if (event.source.name == "course_task")
+        courseTaskUpdateFormValueInput(event)
+    businessHours:
+      start: "09:00"
+      end: "20:00"
+    timeFormat:"H:mm"
+    header:
+      left: 'prev,next today'
+      center: 'title'
+      right: "month,agendaWeek,agendaDay"
+    loading: (bool)->
+      if bool
+        $('#loading').show()
+      else
+        $('#loading').hide()
+
+  $("#course_task_course_id").select2(width: "100%", placeholder: "コースを選択してください")
+
+  $("#new_course_task").submit (e) ->
+    e.preventDefault()
+    form = $(this)
+    button = form.find('button');
+    $.ajax({
+        dataType: "json"
+        url: form.attr('action')
+        type: form.attr('method')
+        data: form.serialize()
+        cache: false
+        timeout: 10000
+        beforeSend: -> button.attr("disabled", true)
+        complete: -> button.attr("disabled", false)
+        success: (result)->
+          console.log result
+          if result.event_id
+            $('#course_calendar').fullCalendar("removeEvents",result.event_id)
+          $('#course_calendar').fullCalendar("renderEvent", {title:result.title, start:result.start,end: result.end, allDay: result.allDay }, true)
+          noty({text: result.text , type: "success", timeout: 5000})
+          $("#event_change_modal").modal('hide')
+        error: (xhr, textStatus, error) ->
+          console.log xhr
+          noty({text: "エラーが発生しました" , type: "error", timeout: 5000})
+    })
+
+  $("#calendar_checkbox_group :checkbox").click ->
+    sources = getCalendarSources()
+    $('#course_calendar').fullCalendar("removeEvents")
+    for s in sources then $('#course_calendar').fullCalendar("addEventSource", s)
 
 pickerReady = ->
   $('.start_timepicker').each ->

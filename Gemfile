@@ -71,7 +71,6 @@ gem 'slim-rails'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 gem "dropbox-api"
-gem 'momentjs-rails', :github => 'derekprior/momentjs-rails'
 
 #------------------------------
 #activerecord and model
@@ -100,7 +99,6 @@ gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'business_time'
 gem 'whenever'
-gem 'google-api-client'
 
 
 

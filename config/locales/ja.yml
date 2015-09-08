@@ -2,22 +2,22 @@
 # and are automatically loaded by Rails. If you want to use locales other
 # than English, add the necessary files in this directory.
 #
-# To use the locales, use `I18n.t`:
+# To use the locales, use `I2n.t`:
 #
-#     I18n.t 'hello'
+#     I2n.t 'hello'
 #
 # In views, this is aliased to just `t`:
 #
 #     <%= t('hello') %>
 #
-# To use a different locale, set it with `I18n.locale`:
+# To use a different locale, set it with `I2n.locale`:
 #
-#     I18n.locale = :es
+#     I2n.locale = :es
 #
 # This would use the information in config/locales/es.yml.
 #
 # To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
+# available at http://guides.rubyonrails.org/i2n.html.
 
 ja:
   simple_form:
@@ -127,6 +127,13 @@ ja:
         tel: 電話番号
         memo: メモ
         created_at: 作成日
+      course_task:
+        title: 概要
+        start: 開始日時
+        end: 終了日時
+        all_day: 全日
+        memo: メモ
+        memo: メモ
       campaign:
         name: キャンペーン名
         bill: 費用
