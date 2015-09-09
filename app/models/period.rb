@@ -56,17 +56,14 @@ class Period < ActiveRecord::Base
     c_min
   end
 
-  def wrike_flg period_flg
-    flg = self.read_attribute(period_flg)
-    if flg == true
-      return "Completed"
-    elsif flg == false
-      return "Active"
-    else
-      raise period_flg + " is not flag"
-    end
+  def number
+    periods = self.course.periods.sort_by{|p| p.start_date}
+    return periods.index(self) + 1
   end
-  
+
+  def total_number
+    return self.course.periods.length
+  end
 
 
   def total_time_format
