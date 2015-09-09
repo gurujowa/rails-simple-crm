@@ -5,6 +5,20 @@ class CourseTasksController < ApplicationController
     @tasks = CourseTask.all
   end
 
+  def destroy
+    @task = CourseTask.find(params[:id])
+    if @task.destroy
+      render json: {
+        text: "削除が完了しました", 
+        event_id: params[:event_id],
+        status: 200,
+      }
+    else
+      render json: @task.errors.full_messages.join(',')
+    end
+
+  end
+
   def change
     if params[:id].present?
       @task = CourseTask.find(params[:id])
@@ -27,12 +41,6 @@ class CourseTasksController < ApplicationController
     end
   end
 
-
-  # DELETE /clients/1
-  def destroy
-    @client.destroy
-    redirect_to clients_url, notice: 'Client was successfully destroyed.'
-  end
 
   private
     # Only allow a trusted parameter "white list" through.

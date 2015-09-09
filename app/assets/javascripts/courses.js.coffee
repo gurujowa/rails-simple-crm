@@ -47,6 +47,7 @@ getCalendarSources = ->
 courseTaskUpdateFormValueInput = (event)->
   $("#event_change_modal").modal('show')
   $("#course_task_all_day").prop("checked", event.allDay)
+  $("#course_delete").show()
   $("#id").val(event.course_task_id)
   $("#event_id").val(event._id)
   $("#course_task_title").val(event.title_text)
@@ -67,6 +68,7 @@ courseCalendarRender = (method) ->
       $("#new_course_task").find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
       $("#id").val("")
       $("#event_id").val("")
+      $("#course_delete").hide()
       $("#course_task_start").val(date.format("YYYY-M-D HH:mm:ss"))
       $("#course_task_end").val(date.add(1,"hour").format("YYYY-M-D HH:mm:ss"))
       $("#course_task_course_id").val("")
@@ -91,6 +93,27 @@ courseCalendarRender = (method) ->
         $('#loading').hide()
 
   $("#course_task_course_id").select2(width: "100%", placeholder: "コースを選択してください")
+
+
+  $("#course_delete").click (e) ->
+    e.preventDefault()
+    form = $("#new_course_task")
+    $.ajax({
+        dataType: "json"
+        url: "/course_tasks/"+ $("#id").val()
+        type: "delete"
+        data: {event_id: $("#event_id").val()}
+        cache: false
+        timeout: 10000
+        success: (result)->
+          console.log result
+          $('#course_calendar').fullCalendar("removeEvents",result.event_id)
+          noty({text: result.text , type: "success", timeout: 5000})
+          $("#event_change_modal").modal('hide')
+        error: (xhr, textStatus, error) ->
+          console.log xhr
+          noty({text: "エラーが発生しました" , type: "error", timeout: 5000})
+    })
 
   $("#new_course_task").submit (e) ->
     e.preventDefault()
