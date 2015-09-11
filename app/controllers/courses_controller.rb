@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
   
   def calendar
     @courses = Course.includes(:lead)
-    @periods = Period.includes(:course, :teacher)
+    @periods = Period.includes(:course, :teacher).day_between(params[:start],params[:end])
     @new_task = CourseTask.new
     gon.google_api_key = Rails.application.secrets.google_api_key
 

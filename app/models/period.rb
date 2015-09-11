@@ -37,6 +37,21 @@ class Period < ActiveRecord::Base
 
   @@color = ["MidnightBlue", "DarkViolet", "DarkSlateBlue", "Navy",  "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta","LightPink"]
 
+  scope :day_between, -> from, to {
+
+    if from.present? && to.present?
+      from = DateTime.parse(from)
+      to = DateTime.parse(to)
+      where(day: from..to)
+    elsif from.present?
+      from = DateTime.parse(from)
+      where('day >= ?', from)
+    elsif to.present?
+      to = DateTime.parse(to)
+      where('day <= ?', to)
+    end
+  }
+
   def observe_color
     if self.user.present?
       key = self.user.id % 10
