@@ -16,8 +16,8 @@ class CoursesController < ApplicationController
 
   
   def calendar
-    @courses = Course.all
-    @periods = Period.all
+    @courses = Course.joins(:lead)
+    @periods = Period.joins(:course,:lead, :teacher)
     @new_task = CourseTask.new
     gon.google_api_key = Rails.application.secrets.google_api_key
 
