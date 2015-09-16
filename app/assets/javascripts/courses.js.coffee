@@ -177,13 +177,13 @@ setStartTimePicker = (st) ->
     $(st).parents("tr").find(".end_timepicker").timepicker("remove")
     $(st).parents("tr").find(".end_timepicker").timepicker
       minTime: min_time,
-      maxTime: '20:00',
+      maxTime: '21:00',
       timeFormat: "H:i",
       showDuration: true
     $(st).parents("tr").find(".break_startpicker").timepicker("remove")
     $(st).parents("tr").find(".break_startpicker").timepicker
       minTime: min_time,
-      maxTime: '20:00',
+      maxTime: '21:00',
       step : 15,
       timeFormat: "H:i",
       showDuration: true
