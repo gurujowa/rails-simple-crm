@@ -5,6 +5,7 @@ class Lead < ActiveRecord::Base
   acts_as_taggable 
   belongs_to :user
   has_many :lead_histories, dependent: :destroy
+  has_many :estimates, dependent: :destroy
 
   has_one :lead_interview, dependent: :destroy
   accepts_nested_attributes_for :lead_interview
@@ -142,10 +143,6 @@ class Lead < ActiveRecord::Base
       address.concat(" ").concat(self.building)
     end
     return address
-  end
-
-  def estimates
-    Estimate.where(client_type: "lead").where(client_id: self.id)
   end
 
 end
