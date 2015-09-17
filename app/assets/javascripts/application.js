@@ -30,9 +30,7 @@
 //= require selectize.min
 //= require handsontable.full.min
 //= require pivot
-//= require select2
 //= require pikaday
-//= require select2_locale_ja
 //= require_tree .
 //= require jquery_nested_form
 //

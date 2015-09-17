@@ -3,7 +3,7 @@
   - @billing_plan.errors.full_messages.each do |msg|
     = msg
   = f.input :name 
-  = f.input :lead_id, input_html: {class: "search_lead"}, hint: "請求予定表を発行する会社を選んでください。"
+  = f.input :lead_id, as: :leadselect, hint: "請求予定表を発行する会社を選んでください。"
   = f.input :send_flg
   = f.input :display_name, hint: "請求予定表の送付先名を変えたい場合に入力してください。空白の場合は会社名がそのまま記載されます。" 
   = f.input :publish_date ,as: "date_picker"

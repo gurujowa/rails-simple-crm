@@ -35,7 +35,7 @@ class EstimatesController < ApplicationController
       @estimate = Estimate.new
     end
     if params[:client_id].present?
-      @estimate.client_id = params[:client_id]
+      @estimate.lead_id = params[:client_id]
     end
   end
 
@@ -81,7 +81,7 @@ class EstimatesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def estimate_params
-      params.require(:estimate).permit(:title, :display_name, :client_type, :client_id, :expired,  :send_flg, :memo, :publish_date,
+      params.require(:estimate).permit(:title, :display_name, :lead_id, :expired,  :send_flg, :memo, :publish_date,
            estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy, :tax_rate, :detail],
            estimate_subsities_attributes: [:id, :name, :price, :people, :_destroy])
     end

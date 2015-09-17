@@ -3,7 +3,7 @@ ul
     li = msg
 = f.input :name
 = f.input :user_id , as: :select, collection: User.all, hint: "ユアブライト社内における、本コースの担当者です"
-= f.input :lead_id, input_html:{ class: "search_lead"}
+= f.association :lead,collection: Lead.where(contract_flg: true), input_html:{ class: "search_lead"}
 
 = f.input :address
 = f.input :station

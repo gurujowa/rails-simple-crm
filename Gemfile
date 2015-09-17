@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.1'
+gem 'rails', github: "rails/rails", :branch => "4-2-stable"
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'mysql2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -33,18 +33,10 @@ gem 'unicorn'
 gem 'jbuilder', '~> 1.2'
 
 group :development do
-  gem 'rack-mini-profiler'
-  gem 'yaml_db'
-  gem 'pry-rails'
-  gem 'binding_of_caller'
-  gem 'web-console'
-
   #capistano
   gem 'capistrano', '~>3.0.0'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
-  gem 'i18n_generators'
-  gem 'rb-readline'
 end
 
 
@@ -56,8 +48,6 @@ end
 #------------------------------
 #JavaScript
 #------------------------------
-gem "select2-rails"
-gem 'icheck-rails'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'underscore-rails'
@@ -67,7 +57,6 @@ gem 'pikaday-gem'
 #------------------------------
 #Format Convert Library
 #------------------------------
-gem 'spreadsheet'
 gem 'slim-rails'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
@@ -100,12 +89,3 @@ gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'business_time'
 gem 'whenever'
-
-
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use debugger
-#gem 'debugger', group: [:development, :test]
-

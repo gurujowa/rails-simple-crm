@@ -1,7 +1,10 @@
 jQuery ->
   if ($("#order_course").length >= 1 )
     $("#order_sheet_send_to").selectize({create: true, sortField: "text"})
-    $("#order_course").select2().on("change", (e) -> getCourseText(e.val))
+    $("#order_course").select2().on("select2:select", (e) ->
+      console.log e.params.data.id
+      getCourseText(e.params.data.id)
+    )
 
 getCourseText = (val) ->
   url = "/courses/" + val + ".json"

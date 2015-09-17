@@ -19,19 +19,17 @@ class Estimate < ActiveRecord::Base
   accepts_nested_attributes_for :estimate_lines, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }
   accepts_nested_attributes_for :estimate_subsities, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }
 
-  validates :client_id, presence: true
+  belongs_to :lead
+  validates :lead_id, presence: true
 
   def client_name
     if display_name.present?
       return self.display_name
     else
-      return Lead.find(self.client_id).name
+      return self.lead.name
     end
   end
 
-  def lead_id
-      return client_id
-  end
 
   def total_subsities_price
      price = 0

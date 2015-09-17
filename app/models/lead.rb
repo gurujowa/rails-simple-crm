@@ -90,10 +90,6 @@ class Lead < ActiveRecord::Base
     end
   end
 
-  def tag_list_join
-    return self.tag_list.join(',')
-  end
-
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names + ["タグ", "対応日時", "対応ステータス", "対応メモ"] +  LeadInterview.column_names
