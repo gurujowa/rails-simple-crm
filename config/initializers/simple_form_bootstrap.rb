@@ -48,7 +48,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :table_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :table_form, tag: 'div', class: 'form-group table-form', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -98,7 +98,6 @@ SimpleForm.setup do |config|
   # Check the Bootstrap docs (http://getbootstrap.com)
   # to learn about the different styles for forms and inputs,
   # buttons and other elements.
-  config.default_wrapper = :horizontal_form
   config.wrapper_mappings = {
     check_boxes: :horizontal_radio_and_checkboxes,
     radio_buttons: :horizontal_radio_and_checkboxes,

@@ -19,7 +19,7 @@ jQuery ->
           dataType: "json"
         ).done (data) ->
           callback data
-  $(".search_lead").width("400px")
+  $(".search_lead").width("100%")
   $(".search_lead").select2
     placeholder: "検索してください"
     minimumInputLength: 1

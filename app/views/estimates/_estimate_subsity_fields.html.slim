@@ -1,9 +1,5 @@
 tr.fields
-  td
-    .col-xs-11 = f.input :name, label: false
-  td
-    .col-xs-11 = f.input :people, label: false
-  td
-    .col-xs-11 = f.input :price, label: false
-  td
-    = f.link_to_remove "行を削除", class: "btn btn-default"
+  td = f.input :name, label: false
+  td = f.input :people, label: false
+  td = f.input :price, label: false
+  td = f.link_to_remove "行を削除", class: "btn btn-default"
