@@ -5,7 +5,7 @@ ul.breadcrumb
   li.active Edit
 
 
-= simple_nested_form_for @course  do |f|
+= simple_nested_form_for @course , wrapper: :vertical_form, html: {class: "form-vertical"} do |f|
   = f.error_notification 
   = render partial: 'form', :locals => {:f=> f} 
   table.table.table-bordered.table-striped#periods_table
@@ -22,7 +22,20 @@ ul.breadcrumb
         th 削除
     tbody.add_fields
       = f.simple_fields_for :periods, wrapper: false
-  p
-    = f.link_to_add "追加", :periods, data: {target: "#periods_table"}, class: "btn btn-default"
+  p = f.link_to_add "追加", :periods, data: {target: "#periods_table"}, class: "btn btn-default"
+
+  h3 コース用タスク
+  table.table.table-bordered.table-striped#tasks_table
+    thead
+      tr
+        th 名前＊
+        th 開始＊
+        th 終了
+        th メモ
+        th 削除
+    tbody.add_fields
+      = f.simple_fields_for :course_tasks, wrapper: false
+  p = f.link_to_add "行を追加", :course_tasks, data: {target: "#tasks_table"}, class: "btn btn-default"
+  p.well
     = f.submit "保存する", :class => "btn btn-primary"
     = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"

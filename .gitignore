@@ -22,4 +22,4 @@ config/secrets.yml
 config/shared/*
 public/assets/*
 public/uploads/*
-Backup/*.yml
+Backup/*

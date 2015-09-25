@@ -84,19 +84,3 @@ table.table.table-bordered.table-striped
       - @course.periods.each do |p|
         = p.day.to_s(:jp) + " " + p.start_date.to_s(:time) + "～" + p.end_date.to_s(:time)
         br
-  .col-sm-12
-    h3 コース用タスク
-    = simple_nested_form_for @course , wrapper: :inline_form do |f|
-      = f.error_notification 
-      table.table.table-bordered.table-striped#tasks_table
-        thead
-          tr
-            th 名前＊
-            th 開始＊
-            th 終了
-            th メモ
-            th 削除
-        tbody.add_fields
-          = f.simple_fields_for :course_tasks, wrapper: false
-      = f.link_to_add "行を追加", :course_tasks, data: {target: "#tasks_table"}, class: "btn btn-default"
-      = f.button :submit, class: "btn btn-primary"

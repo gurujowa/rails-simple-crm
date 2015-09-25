@@ -146,14 +146,13 @@ p#notice = notice
           table.table.table-bordered.table-striped
             thead
               tr
-                th 期限
-                th 金額
                 th メモ
+                th 金額
             tbody
               - @lead.estimates.each do |e|
-                th = link_to e.expired, edit_estimate_path(e)
-                th = number_to_currency e.total_price
-                th = e.memo
+                tr
+                  th = link_to e.memo, edit_estimate_path(e)
+                  th = number_to_currency e.total_price
       .panel-footer
         = link_to "新規追加" , { controller: "estimates" ,action: "new"}, class: "btn btn-default"
         
