@@ -5,7 +5,8 @@ class Lead < ActiveRecord::Base
   acts_as_taggable 
   belongs_to :user
   has_many :lead_histories, dependent: :destroy
-  has_many :estimates, dependent: :destroy
+  has_many :estimates, dependent: :restrict_with_error
+  has_many :course, dependent: :restrict_with_error
 
   has_one :lead_interview, dependent: :destroy
   accepts_nested_attributes_for :lead_interview
