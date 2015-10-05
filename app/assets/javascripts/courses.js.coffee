@@ -62,7 +62,8 @@ courseCalendarRender = (method) ->
   $('#course_calendar').fullCalendar
     googleCalendarApiKey: gon.google_api_key
     eventSources: eventSources
-    firstDay: 1
+    firstDay: 0
+    weekNumber: true
     dayClick: (date,jsEvent,view) ->
       $("#event_change_modal").modal('show')
       $("#new_course_task").find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
