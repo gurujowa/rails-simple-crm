@@ -5,6 +5,7 @@ h1 コース 一覧
   table.table.table-bordered.table-striped.default_datatables
     thead
       tr
+        th 事業所名
         th 会社名
         th コース名
         th 担当者
@@ -14,7 +15,8 @@ h1 コース 一覧
     tbody
       - @courses.each do |b|
         tr
-          td= link_to b.lead.name, {controller: "leads", action: "show", id: b.lead_id}
+          td = link_to b.lead.name, {controller: "leads", action: "show", id: b.lead_id}
+          td = b.lead.corporation_name
           td
             = link_to b.name,{action: "show", id: b.id}
             = link_to "(edit)", edit_course_path(b.id)
