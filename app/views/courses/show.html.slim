@@ -48,6 +48,7 @@ h1 コース詳細画面
         th メモ
         td = @course.memo
 
+
 h2 コマ情報
 table.table.table-bordered.table-striped
   thead
@@ -79,6 +80,23 @@ table.table.table-bordered.table-striped
 = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
 .row
   .col-sm-12
+
+    h3 コース用タスク
+    table.table.table-bordered.table-striped#tasks_table
+      thead
+        tr
+          th 名前＊
+          th 開始＊
+          th 終了
+          th メモ
+      tbody
+        - @course.course_tasks.each do |t|
+          tr
+            td = t.title
+            td = t.start
+            td = t.end
+            td = t.memo
+
     h3 メール用　テキスト（コピペ用)
     .well
       - @course.periods.each do |p|
