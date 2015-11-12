@@ -15,7 +15,10 @@ h1 コース 一覧
     tbody
       - @courses.each do |b|
         tr
-          td = link_to b.lead.name, {controller: "leads", action: "show", id: b.lead_id}
+          td 
+            = link_to b.lead.name, {controller: "leads", action: "show", id: b.lead_id}
+            - if b.lead.contract_flg.blank?
+              span style="color:red;" 【未契約】
           td = b.lead.corporation_name
           td
             = link_to b.name,{action: "show", id: b.id}
