@@ -1,0 +1,7 @@
+.row
+  table
+    - (@lead.lead_tasks || []).each do |task|
+      tr
+        td = task.name
+
+  button.btn.btn-primary type="button" 

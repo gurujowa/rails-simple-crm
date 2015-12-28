@@ -27,8 +27,8 @@
         th 削除
     tbody.add_fields
       = f.simple_fields_for :order_sheet_lines , wrapper: false
-  = f.link_to_add "行を追加する", :order_sheet_lines, data: {target: "#to_lines"}, class: "btn btn-default"
 
   .form-actions
     = f.button :submit, class: "btn btn-primary"
+    = f.link_to_add "行を追加する", :order_sheet_lines, data: {target: "#to_lines"}, class: "btn btn-default"
     = link_to '削除', @order_sheet, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-default"

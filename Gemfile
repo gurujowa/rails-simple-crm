@@ -48,11 +48,11 @@ end
 #------------------------------
 #JavaScript
 #------------------------------
-gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'underscore-rails'
 gem 'gon' 
 gem 'pikaday-gem' 
+gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 
 #------------------------------
 #Format Convert Library

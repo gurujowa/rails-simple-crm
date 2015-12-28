@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917052420) do
+ActiveRecord::Schema.define(version: 20151224090225) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -246,6 +246,16 @@ ActiveRecord::Schema.define(version: 20150917052420) do
 
   add_index "lead_interviews", ["lead_id"], name: "index_lead_interviews_on_lead_id", using: :btree
 
+  create_table "lead_tasks", force: :cascade do |t|
+    t.string   "name",          limit: 255
+    t.datetime "due_date"
+    t.text     "memo",          limit: 65535
+    t.datetime "complete_date"
+    t.integer  "lead_id",       limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
   create_table "leads", force: :cascade do |t|
     t.string   "name",             limit: 255,                   null: false
     t.string   "tel",              limit: 255,                   null: false
@@ -297,12 +307,12 @@ ActiveRecord::Schema.define(version: 20150917052420) do
   end
 
   create_table "order_sheets", force: :cascade do |t|
-    t.string   "title",        limit: 255,   null: false
-    t.string   "send_to",      limit: 255,   null: false
+    t.string   "title",        limit: 255,                     null: false
+    t.string   "send_to",      limit: 255,                     null: false
     t.date     "order_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",       limit: 255,   null: false
+    t.string   "status",       limit: 255,   default: "draft", null: false
     t.text     "mention",      limit: 65535
     t.text     "course_info",  limit: 65535
     t.text     "memo",         limit: 65535
@@ -393,6 +403,8 @@ ActiveRecord::Schema.define(version: 20150917052420) do
     t.string  "name",           limit: 255
     t.integer "taggings_count", limit: 4,   default: 0
   end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name",       limit: 255

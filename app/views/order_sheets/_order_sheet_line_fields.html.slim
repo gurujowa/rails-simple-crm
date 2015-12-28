@@ -1,6 +1,8 @@
-tr
-  td = f.input :invoice_date , as: "date_picker", label: false
-  td = f.input :payment_date , as: "date_picker", label: false
+tr.fields
+  td
+    .col-xs-12 = f.input :invoice_date , as: "date_picker", label: false
+  td 
+    .col-xs-12 = f.input :payment_date , as: "date_picker", label: false
   td = f.input :price, label: false
   td = f.input :memo, label: false
   td = f.link_to_remove "削除",  class: "btn btn-default"

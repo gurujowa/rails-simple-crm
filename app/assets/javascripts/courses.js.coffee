@@ -1,4 +1,5 @@
 jQuery ->
+  $( ".timepicker ").timepicker()
   $("#course_company_id").select2
     placeholder: "検索してください"
     minimumInputLength: 1
@@ -51,8 +52,8 @@ courseTaskUpdateFormValueInput = (event)->
   $("#id").val(event.course_task_id)
   $("#event_id").val(event._id)
   $("#course_task_title").val(event.title_text)
-  $("#course_task_start").val(event.start)
-  $("#course_task_end").val(event.end)
+  $("#course_task_start").val(event.start.format("YYYY-MM-DD HH:mm:ss"))
+  $("#course_task_end").val(event.end.format("YYYY-MM-DD HH:mm:ss"))
   $("#course_task_memo").val(event.memo)
   $("#course_task_course_id").val(event.course_id).trigger("change")
 
@@ -199,3 +200,8 @@ setBreakTimePicker = (st) ->
       step : 15,
       timeFormat: "H:i",
       showDuration: true
+
+
+$(document).on 'nested:fieldAdded', ->
+  $( ".timepicker ").timepicker()
+

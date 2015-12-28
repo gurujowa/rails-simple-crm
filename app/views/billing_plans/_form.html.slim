@@ -1,23 +1,24 @@
-= simple_nested_form_for @billing_plan, html: {class: "form-horizontal"}, wrapper: :horizontal_form do |f|
-  = f.error_notification
-  - @billing_plan.errors.full_messages.each do |msg|
-    = msg
-  = f.input :name 
-  = f.input :lead_id, as: :leadselect, hint: "請求予定表を発行する会社を選んでください。"
-  = f.input :send_flg
-  = f.input :display_name, hint: "請求予定表の送付先名を変えたい場合に入力してください。空白の場合は会社名がそのまま記載されます。" 
-  = f.input :publish_date ,as: "date_picker"
+.row
+  = simple_nested_form_for @billing_plan, html: {class: "form-horizontal"}, wrapper: :horizontal_form do |f|
+    = f.error_notification
+    - @billing_plan.errors.full_messages.each do |msg|
+      = msg
+    = f.input :name 
+    = f.input :lead_id, as: :leadselect, hint: "請求予定表を発行する会社を選んでください。"
+    = f.input :send_flg
+    = f.input :display_name, hint: "請求予定表の送付先名を変えたい場合に入力してください。空白の場合は会社名がそのまま記載されます。" 
+    = f.input :publish_date ,as: "date_picker"
 
-  table.table.table-borderd.table-striped#table_billing_plan_line
-    thead
-      tr
-        th 請求日
-        th 支払期限
-        th 価格
-        th 適用
-        th 削除
-    tbody.add_fields
-      = f.simple_fields_for :billing_plan_lines, wrapper: false
-  .form-actions
-    = f.button :submit, class: "btn btn-primary"
-    = f.link_to_add "行を追加する", :billing_plan_lines, data: {target: "#table_billing_plan_line" }, class: "btn btn-default"
+    table.table.table-borderd.table-striped#table_billing_plan_line
+      thead
+        tr
+          th 請求日
+          th 支払期限
+          th 価格
+          th 適用
+          th 削除
+      tbody.add_fields
+        = f.simple_fields_for :billing_plan_lines, wrapper: false
+    .form-actions
+      = f.button :submit, class: "btn btn-primary"
+      = f.link_to_add "行を追加する", :billing_plan_lines, data: {target: "#table_billing_plan_line" }, class: "btn btn-default"

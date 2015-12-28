@@ -1,0 +1,35 @@
+.panel-group#accordion role="tablist" aria-multiselectable="true"
+  - @lead.course.each_with_index do |course,i|
+    .panel.panel-default
+      .panel-heading id="head_#{i}" role="tab" 
+        h4.panel-title
+          a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse_#{i}" aria-expanded="true" aria-controls="collapse_#{i}" = course.name
+      .panel-collapse.collapse id="collapse_#{i}"
+        table.table.table-bordered.table-striped
+          thead
+            tr
+              th 日付
+              th 開始時刻
+              th 終了時刻
+              th 休憩開始
+              th 休憩終了
+              th 講師
+              th 立会人
+              th 合計時間
+              th メモ
+          tbody
+            - course.periods.each do |p|
+              tr
+                td = p.day.to_s(:jp)
+                td = p.start_date.to_s(:time)
+                td = p.end_date.to_s(:time)
+                td = p.break_start(:time)
+                td = p.break_end(:time)
+                td = p.teacher.name
+                td = p.user_name
+                td = convert_min p.total_time
+                td style="width:40%" = p.memo
+
+        .edit_button
+        = link_to '編集', edit_course_path(course), :class => "btn btn-info"
+        = link_to '削除', course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"

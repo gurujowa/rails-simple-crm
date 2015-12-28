@@ -28,6 +28,7 @@ Mycrm::Application.routes.draw do
     member do
       get "add_mylist"
       get "add_flg"
+      get "add_task"
       get "contract"
       get "find"
     end

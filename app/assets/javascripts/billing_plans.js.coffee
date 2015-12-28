@@ -2,9 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+jQuery ->
+  init_month_picker()
 $(document).on "nested:fieldAdded", (event) ->
-  # this field was just inserted into your form
-  field = event.field
-  # it's a jQuery object already! Now you can find date input
-  dateField = field.find(".datepicker")
-  dateField.datepicker({format: 'yyyy/mm/dd', language: 'ja'})
+  init_month_picker()
+
+init_month_picker = ()->
+  bl = $( ".billing_plan_month_picker" ).datetimepicker({viewMode: "months", format: "YYYY-MM"})
+  bl.on "dp.update", (e)->
+    bill_date = e.viewDate.endOf("month")
+    $("#billing_plan_billing_plan_lines_attributes_#{$(this).data("id")}_bill_date").val(bill_date.format("YYYY-MM-DD"))
+    accural_date = e.viewDate.add("months",1).endOf("month")
+    $("#billing_plan_billing_plan_lines_attributes_#{$(this).data("id")}_accural_date").val(bill_date.format("YYYY-MM-DD"))
