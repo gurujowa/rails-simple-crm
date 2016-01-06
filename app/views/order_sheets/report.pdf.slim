@@ -21,16 +21,18 @@
           dd
             = number_to_currency @order_sheet.total_price
       .gamma
-        =  params[:debug].present? ? image_tag('logo.gif') : wicked_pdf_image_tag('logo.gif')
+        =  params[:debug].present? ? image_tag('logo.png') : wicked_pdf_image_tag('logo.png')
       .beta
-        .senderName ユアブライト株式会社
-        p 
-          div 〒169-0075東京都新宿区高田馬場3-3-9
-          div style="text-align:right;margin-right: 10px" 山下ビル5F
-          div 
-            | TEL:03-6908-6143<br>
-              FAX:03-6908-6145<br>
-              info@yourbright.co.jp
+        .logo_field
+        .absolute_address
+          .senderName ユアブライト株式会社
+          p 
+            div 〒169-0075東京都新宿区高田馬場3-3-9
+            div style="text-align:right;margin-right: 10px" 山下ビル5F
+            div 
+              | TEL:03-6908-6143<br>
+                FAX:03-6908-6145<br>
+                info@yourbright.co.jp
 
     h3 style="margin-top:30px;" 以下の日付で請求書を必ずお送りください。
     table.table_slim
