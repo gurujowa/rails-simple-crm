@@ -295,6 +295,8 @@ class LeadsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def lead_params
       params.require(:lead).permit(:corporation_name,{:tag_list => []}, :tag_list, :sex, :campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star,
-                                   lead_interview_attributes: [:id, :regular_staff, :nonregular_staff, :solvency, :time])
+                                   lead_interview_attributes: [:id, :regular_staff, :nonregular_staff, :solvency, :time],
+      tasks_attributes: [:name,:due_date,:complete_date,:memo, :_destroy,:id]
+                                  )
     end
 end

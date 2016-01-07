@@ -48,7 +48,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.wrappers :table_form, tag: 'div', class: 'form-group table-form', error_class: 'has-error' do |b|
+  config.wrappers :table_form, tag: 'div', class: 'form-group table-form col-sm-12', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength

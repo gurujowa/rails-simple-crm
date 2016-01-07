@@ -28,11 +28,20 @@ getCalendarSources = ->
       borderColor: "white"
       cache: true
     })
-  if $("#task_check").prop("checked")
+  if $("#course_task_check").prop("checked")
     eventSources.push({
       name: "course_task"
       url:"/course_tasks.json"
       color: "black"
+      textColor: "white"
+      borderColor: "white"
+      cache: true
+    })
+  if $("#task_check").prop("checked")
+    eventSources.push({
+      name: "task"
+      url:"/tasks.json"
+      color: "brown"
       textColor: "white"
       borderColor: "white"
       cache: true
@@ -44,19 +53,6 @@ getCalendarSources = ->
       color: "blue"
     })
   return eventSources
-
-courseTaskUpdateFormValueInput = (event)->
-  $("#event_change_modal").modal('show')
-  $("#course_task_all_day").prop("checked", event.allDay)
-  $("#course_delete").show()
-  $("#id").val(event.course_task_id)
-  $("#event_id").val(event._id)
-  $("#course_task_title").val(event.title_text)
-  $("#course_task_start").val(event.start.format("YYYY-MM-DD HH:mm:ss"))
-  $("#course_task_end").val(event.end.format("YYYY-MM-DD HH:mm:ss"))
-  $("#course_task_memo").val(event.memo)
-  $("#course_task_course_id").val(event.course_id).trigger("change")
-
 courseCalendarRender = (method) ->
   eventSources = getCalendarSources()
 
@@ -65,21 +61,10 @@ courseCalendarRender = (method) ->
     eventSources: eventSources
     firstDay: 0
     weekNumber: true
-    dayClick: (date,jsEvent,view) ->
-      $("#event_change_modal").modal('show')
-      $("#new_course_task").find("textarea, :text, select").val("").end().find(":checked").prop("checked", false);
-      $("#id").val("")
-      $("#event_id").val("")
-      $("#course_delete").hide()
-      $("#course_task_start").val(date.format("YYYY-M-D HH:mm:ss"))
-      $("#course_task_end").val(date.add(1,"hour").format("YYYY-M-D HH:mm:ss"))
-      $("#course_task_course_id").val("")
     eventClick: (event) ->
       if (event.url)
         window.open(event.url)
         return false
-      if (event.source.name == "course_task")
-        courseTaskUpdateFormValueInput(event)
     businessHours:
       start: "09:00"
       end: "20:00"
@@ -110,31 +95,6 @@ courseCalendarRender = (method) ->
         success: (result)->
           console.log result
           $('#course_calendar').fullCalendar("removeEvents",result.event_id)
-          noty({text: result.text , type: "success", timeout: 5000})
-          $("#event_change_modal").modal('hide')
-        error: (xhr, textStatus, error) ->
-          console.log xhr
-          noty({text: "エラーが発生しました" , type: "error", timeout: 5000})
-    })
-
-  $("#new_course_task").submit (e) ->
-    e.preventDefault()
-    form = $(this)
-    button = form.find('button');
-    $.ajax({
-        dataType: "json"
-        url: form.attr('action')
-        type: form.attr('method')
-        data: form.serialize()
-        cache: false
-        timeout: 10000
-        beforeSend: -> button.attr("disabled", true)
-        complete: -> button.attr("disabled", false)
-        success: (result)->
-          console.log result
-          if result.event_id
-            $('#course_calendar').fullCalendar("removeEvents",result.event_id)
-          $('#course_calendar').fullCalendar("renderEvent", {title:result.title, start:result.start,end: result.end, allDay: result.allDay }, true)
           noty({text: result.text , type: "success", timeout: 5000})
           $("#event_change_modal").modal('hide')
         error: (xhr, textStatus, error) ->

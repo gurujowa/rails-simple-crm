@@ -9,6 +9,9 @@ h1 コース  カレンダー
       input#course_check type="checkbox" value="course" checked="" コース
   .checkbox
     label
+      input#course_task_check type="checkbox" value="course_task" checked="" タスク(旧コースタスク)
+  .checkbox
+    label
       input#task_check type="checkbox" value="task" checked="" タスク
   .checkbox
     label
@@ -16,26 +19,3 @@ h1 コース  カレンダー
 
 
 #course_calendar.full_calendar
-
-
-.modal.fade#event_change_modal
-  .modal-dialog
-    .modal-content
-      = simple_form_for @new_task, url: url_for(controller: :course_tasks, action: :change), method: "post", wrapper: :vertical_form do |f|
-        .modal-header
-          h4.modal-title 新しいコースタスクの追加
-        .modal-body
-            = hidden_field_tag :id
-            = hidden_field_tag :event_id
-            = f.input :title
-            .form-group
-              label.control-label for="course" コース
-              = f.select :course_id, options_for_select(@courses.map{|c| [c.lead.name + "-" +c.name, c.id]}),  include_blank: true, required: true
-            = f.input :all_day, :wrapper => :inline_checkbox
-            = f.input :start, as: :datetime_picker, hint: "全日にチェックが入っている場合、時刻指定は無視されます"
-            = f.input :end, as: :datetime_picker, hint: "全日にチェックが入っている場合、時刻指定は無視されます"
-            = f.input :memo
-        .modal-footer
-          button type="button" class="btn btn-default" data-dismiss="modal" 閉じる
-          button.btn.btn-default#course_delete type="button" data-dismiss="modal" 削除する
-          = submit_tag '保存する', :class => 'btn btn-primary'

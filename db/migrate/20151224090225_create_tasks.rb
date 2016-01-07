@@ -1,7 +1,7 @@
-class CreateLeadTasks < ActiveRecord::Migration
+class CreateTasks < ActiveRecord::Migration
   def change
-    create_table :lead_tasks do |t|
-      t.string :name
+    create_table :tasks do |t|
+      t.string :name,null: false
       t.datetime :due_date
       t.text :memo
       t.datetime :complete_date

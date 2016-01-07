@@ -142,6 +142,8 @@ Mycrm::Application.routes.draw do
     end
   end
 
+  resources :tasks, only: [:destroy,:index]
+
   #会社名
   resources :companies do
     collection do
