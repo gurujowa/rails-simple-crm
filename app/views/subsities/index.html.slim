@@ -1,0 +1,17 @@
+h1 subsities 一覧
+
+= link_to '新規追加', new_subsity_path, :class => 'btn btn-default'
+table.default_datatables
+  thead
+    tr
+      
+      th Name
+      th CH
+  tbody
+    - @subsities.each do |subsity|
+      tr
+        
+        td = subsity.name 
+        td 
+          = link_to '編集', edit_subsity_path(subsity), :class => "btn btn-default"
+          = link_to '削除', subsity, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"

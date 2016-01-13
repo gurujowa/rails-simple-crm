@@ -37,10 +37,10 @@ getCalendarSources = ->
       borderColor: "white"
       cache: true
     })
-  if $("#task_check").prop("checked")
+  if $("#subsity_task_check").prop("checked")
     eventSources.push({
-      name: "task"
-      url:"/tasks.json"
+      name: "subsity_task"
+      url:"/leads/tasks.json"
       color: "brown"
       textColor: "white"
       borderColor: "white"

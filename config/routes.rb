@@ -1,5 +1,6 @@
 Mycrm::Application.routes.draw do
 
+  resources :subsities
   resources :public_bills
   resources :lead_history_statuses
   resources :lead_interviews, only: [:update]
@@ -18,6 +19,7 @@ Mycrm::Application.routes.draw do
     collection do
       match 'search' => 'leads#search', via: [:get, :post], as: :search
       get "mylist"
+      get "tasks"
       get "add_tag"
       post "add_tag_finish"
       get "name"
@@ -142,7 +144,7 @@ Mycrm::Application.routes.draw do
     end
   end
 
-  resources :tasks, only: [:destroy,:index]
+  resources :subsity_tasks, only: [:destroy,:index]
 
   #会社名
   resources :companies do

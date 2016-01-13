@@ -258,12 +258,19 @@ class LeadsController < ApplicationController
     end
   end
   
-    def contract
+  def tasks
+    lead_subsities = LeadSubsity.all
+    @tasks = []
+    lead_subsities.each do |s|
+      @tasks += s.tasks
+    end
+  end
+
+  def contract
     contract_flg = params[:flg]
     @lead.update_attributes!({contract_flg: contract_flg})
     redirect_to :action=> 'show', :id => params[:id], notice: '契約設定が完了しました'
-
-    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -295,8 +302,8 @@ class LeadsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def lead_params
       params.require(:lead).permit(:corporation_name,{:tag_list => []}, :tag_list, :sex, :campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star,
-                                   lead_interview_attributes: [:id, :regular_staff, :nonregular_staff, :solvency, :time],
-      tasks_attributes: [:name,:due_date,:complete_date,:memo, :_destroy,:id]
+      lead_interview_attributes: [:id, :regular_staff, :nonregular_staff, :solvency, :time],
+      lead_subsities_attributes:[:id, :name, :subsity_id, :start, :end,:memo,:_destroy],
                                   )
     end
 end

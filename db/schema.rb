@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224090227) do
+ActiveRecord::Schema.define(version: 20160113104943) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -246,6 +246,20 @@ ActiveRecord::Schema.define(version: 20151224090227) do
 
   add_index "lead_interviews", ["lead_id"], name: "index_lead_interviews_on_lead_id", using: :btree
 
+  create_table "lead_subsities", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.date     "start"
+    t.date     "end"
+    t.text     "memo",       limit: 65535
+    t.integer  "lead_id",    limit: 4
+    t.integer  "subsity_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "lead_subsities", ["lead_id"], name: "index_lead_subsities_on_lead_id", using: :btree
+  add_index "lead_subsities", ["subsity_id"], name: "index_lead_subsities_on_subsity_id", using: :btree
+
   create_table "leads", force: :cascade do |t|
     t.string   "name",             limit: 255,                   null: false
     t.string   "tel",              limit: 255,                   null: false
@@ -376,6 +390,22 @@ ActiveRecord::Schema.define(version: 20151224090227) do
     t.date     "publish_date"
   end
 
+  create_table "subsities", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "subsity_tasks", force: :cascade do |t|
+    t.string   "name",       limit: 255,             null: false
+    t.integer  "month",      limit: 4,   default: 0, null: false
+    t.integer  "day",        limit: 4,   default: 0, null: false
+    t.string   "depend",     limit: 255,             null: false
+    t.integer  "subsity_id", limit: 4,               null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",        limit: 4
     t.integer  "taggable_id",   limit: 4
@@ -501,4 +531,6 @@ ActiveRecord::Schema.define(version: 20151224090227) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   add_foreign_key "estimates", "leads"
+  add_foreign_key "lead_subsities", "leads"
+  add_foreign_key "lead_subsities", "subsities"
 end

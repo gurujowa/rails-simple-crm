@@ -1,0 +1,18 @@
+= simple_nested_form_for @subsity , wrapper: :vertical_form, html: {class: "form-vertical"} do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :name
+  h3 タスク
+  table.table.table-bordered.table-striped#tasks_table
+    thead
+      tr
+        th 名前
+        th 起算日
+        th 月
+        th 日
+        th 削除
+    tbody.add_fields
+      = f.simple_fields_for :subsity_tasks,wrapper: false
+  p = f.link_to_add "行を追加", :subsity_tasks, data: {target: "#tasks_table"}, class: "btn btn-default"
+  .form-actions
+    = f.button :submit, class:"btn btn-primary"

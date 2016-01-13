@@ -1,16 +1,34 @@
+
+h3 利用助成金
+
 = simple_nested_form_for @lead , wrapper: :vertical_form, html: {class: "form-vertical"} do |f|
+  h3 助成金
+  table.table.table-bordered.table-striped#subsities_table
+    thead
+      tr
+        th 概要
+        th 利用助成金
+        th 開始日
+        th 最終日
+        th メモ
+        th 削除
+    tbody.add_fields
+      = f.simple_fields_for :lead_subsities, wrapper: false
+  p = f.link_to_add "行を追加", :lead_subsities, data: {target: "#subsities_table"}, class: "btn btn-default"
+
+  h3 助成金タスク一覧
+
   h3 タスク
   table.table.table-bordered.table-striped#tasks_table
     thead
       tr
         th 名前＊
         th 締切
-        th 完了日
-        th メモ
-        th 削除
-    tbody.add_fields
-      = f.simple_fields_for :tasks, wrapper: false
-  p = f.link_to_add "行を追加", :tasks, data: {target: "#tasks_table"}, class: "btn btn-default"
+    tbody
+      - @lead.tasks.each do |t|
+        tr
+          td = t.name
+          td = t.due_date.to_s(:date)
   p.well
     = f.submit "保存する", :class => "btn btn-primary"
     = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"

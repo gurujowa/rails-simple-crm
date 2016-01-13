@@ -5,8 +5,8 @@ class Lead < ActiveRecord::Base
   acts_as_taggable 
   belongs_to :user
   has_many :lead_histories, dependent: :destroy
-  has_many :tasks, dependent: :destroy
-  accepts_nested_attributes_for :tasks, :allow_destroy => true
+  has_many :lead_subsities, dependent: :destroy
+  accepts_nested_attributes_for :lead_subsities, :allow_destroy => true
   has_many :estimates, dependent: :restrict_with_error
   has_many :course, dependent: :restrict_with_error
 
@@ -124,7 +124,6 @@ class Lead < ActiveRecord::Base
     end
   end
 
-
   def last_approach
     if self.lead_histories.present?
       self.lead_histories.last
@@ -146,6 +145,16 @@ class Lead < ActiveRecord::Base
       address.concat(" ").concat(self.building)
     end
     return address
+  end
+
+  def tasks
+    tasks = []
+    subsities = self.lead_subsities
+    subsities.each do |s|
+      tasks += s.tasks 
+
+    end
+    return tasks
   end
 
 end
