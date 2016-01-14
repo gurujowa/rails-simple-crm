@@ -58,6 +58,7 @@ class OrderSheetsController < ApplicationController
                encoding: 'UTF-8',
                zoom: "0.9",
                layout: 'pdf.html',
+               no_background: false,
                show_as_html: params[:debug].present?
       }
     end

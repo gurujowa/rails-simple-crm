@@ -7,8 +7,7 @@ every 1.day, :at => '7:30 pm' do
 end
 
 every 1.day, :at => '5:00 pm' do
-  command %Q{backup perform --trigger crm_backup}
-  command %Q{backup perform --trigger crm_dropbox}
+  command %Q{backup perform --trigger crm_s3}
 end
 
 every 1.day, :at => '12:10 pm' do
