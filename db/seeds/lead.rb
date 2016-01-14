@@ -28,6 +28,7 @@ table.each do |r|
     lead.tel =  tel_encode(r[:tel])
     lead.fax = tel_encode(r[:fax])
     lead.tag_list.add(r[:category])
+    lead.tag_list.add("テレアポ用リスト")
     #郵便番号
     lead.zipcode.gsub! "〒",""
 
@@ -66,7 +67,6 @@ table.each do |r|
 EOL
 
   lead.corporation_name =  r[:company_name]
-  lead.tag_list.add("ランクA")
 
 
 
