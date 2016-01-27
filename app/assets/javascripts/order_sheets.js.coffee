@@ -22,8 +22,8 @@ getCourseText = (val) ->
 [ 最寄り駅 ] #{json.station}
 [ 先方研修担当者 ] #{json.responsible}
 [ 先方緊急連絡先 ] #{json.tel}
-[ 受講者数 ] #{json.students}
-[ 研修日 ]
+[ 参加人数 ] #{json.students}
+[ 日程 ]
 #{period_txt}
 """
     console.log txt
