@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113104943) do
+ActiveRecord::Schema.define(version: 20160202084047) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -259,6 +259,17 @@ ActiveRecord::Schema.define(version: 20160113104943) do
 
   add_index "lead_subsities", ["lead_id"], name: "index_lead_subsities_on_lead_id", using: :btree
   add_index "lead_subsities", ["subsity_id"], name: "index_lead_subsities_on_subsity_id", using: :btree
+
+  create_table "lead_tasks", force: :cascade do |t|
+    t.string   "name",            limit: 255,   null: false
+    t.date     "due_date",                      null: false
+    t.date     "complete_date"
+    t.text     "memo",            limit: 65535
+    t.integer  "lead_id",         limit: 4
+    t.integer  "lead_subsity_id", limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
 
   create_table "leads", force: :cascade do |t|
     t.string   "name",             limit: 255,                   null: false

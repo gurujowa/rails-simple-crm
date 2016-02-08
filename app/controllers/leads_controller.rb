@@ -217,12 +217,23 @@ class LeadsController < ApplicationController
   # PATCH/PUT /leads/1
   def update
     if @lead.update(lead_params)
-        redirect_to lead_url(@lead), notice: '正しく編集されました'
+      update_tasks(@lead) if params[:update_tasks].present?
+      redirect_to lead_url(@lead), notice: '正しく編集されました'
     else
       if params[:after_show].present?
         @lead.update!(lead_params)
       else
         render action: 'edit'
+      end
+    end
+  end
+
+  def update_tasks(lead)
+    lead.lead_subsities.each do |ls|
+      unless LeadTask.exists?(lead_subsity_id: ls.id)
+        ls.task_list.each do |tasks|
+          tasks.save!
+        end
       end
     end
   end
@@ -304,6 +315,7 @@ class LeadsController < ApplicationController
       params.require(:lead).permit(:corporation_name,{:tag_list => []}, :tag_list, :sex, :campaign, :campaign_detail,:city,:name, :tel, :fax, :email, :person_name, :person_kana, :person_post, :url, :zipcode, :prefecture, :street, :building, :memo, :user_id, :star,
       lead_interview_attributes: [:id, :regular_staff, :nonregular_staff, :solvency, :time],
       lead_subsities_attributes:[:id, :name, :subsity_id, :start, :end,:memo,:_destroy],
+      lead_tasks_attributes:[:id, :name, :lead_id, :lead_subsity_id, :due_date, :complete_date, :memo, :_destroy],
                                   )
     end
 end
