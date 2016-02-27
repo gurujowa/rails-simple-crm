@@ -2,6 +2,12 @@ class LeadSubsity < ActiveRecord::Base
   belongs_to :lead
   belongs_to :subsity
 
+  validates :name, presence: true
+  validates :subsity_id, presence: true
+  validates :start, presence: true
+  validates :end, presence: true
+
+
   def task_list
     tasks = []
     tl = self.subsity.subsity_tasks

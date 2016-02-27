@@ -1,0 +1,8 @@
+var n = noty({
+  type: "<%= @noty_type %>",
+  text: "<%= @noty_text %>",
+  closeWith: ['click','backdrop','hover']
+});
+<% if @reflesh == true %>
+  setTimeout(function() {window.location.href = window.location.href}, 3000);
+<% end %>

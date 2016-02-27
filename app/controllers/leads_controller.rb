@@ -1,5 +1,5 @@
 class LeadsController < ApplicationController
-  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_flg, :contract]
+  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_flg, :contract, :update_tasks]
   after_action :store_location, only: [:index, :search, :mylist, :approach]
   before_action :set_tag, only: [:index,:show, :edit, :update, :create, :new]
   before_action :authenticate_user!
@@ -217,7 +217,6 @@ class LeadsController < ApplicationController
   # PATCH/PUT /leads/1
   def update
     if @lead.update(lead_params)
-      update_tasks(@lead) if params[:update_tasks].present?
       redirect_to lead_url(@lead), notice: '正しく編集されました'
     else
       if params[:after_show].present?
@@ -228,13 +227,23 @@ class LeadsController < ApplicationController
     end
   end
 
-  def update_tasks(lead)
-    lead.lead_subsities.each do |ls|
-      unless LeadTask.exists?(lead_subsity_id: ls.id)
-        ls.task_list.each do |tasks|
-          tasks.save!
+  def update_tasks
+    if @lead.update(lead_params)
+      @noty_type = "success"
+      @noty_text = "助成金・タスクの登録更新が完了しました。"
+      @lead.lead_subsities.each do |ls|
+        unless LeadTask.exists?(lead_subsity_id: ls.id)
+          @reflesh = true
+          @noty_type = "information"
+          @noty_text += "  新しい自動タスクが入力されました。３秒後に再更新します。"
+          ls.task_list.each do |tasks|
+            tasks.save!
+          end
         end
       end
+    else
+      @noty_type = "warning"
+      @noty_text = @lead.errors.full_messages
     end
   end
 

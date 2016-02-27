@@ -7,8 +7,8 @@ class Lead < ActiveRecord::Base
   has_many :lead_histories, dependent: :destroy
   has_many :lead_subsities, dependent: :destroy
   has_many :lead_tasks, dependent: :destroy
-  accepts_nested_attributes_for :lead_subsities, :allow_destroy => true
-  accepts_nested_attributes_for :lead_tasks, :allow_destroy => true
+  accepts_nested_attributes_for :lead_subsities, :allow_destroy => true, reject_if: :all_blank
+  accepts_nested_attributes_for :lead_tasks, :allow_destroy => true, reject_if: :all_blank
   has_many :estimates, dependent: :restrict_with_error
   has_many :course, dependent: :restrict_with_error
 

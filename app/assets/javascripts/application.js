@@ -48,6 +48,3 @@ function submit_format(form, format) {
    .appendTo(form);
   });
 }
-
-
-

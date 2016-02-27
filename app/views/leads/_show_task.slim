@@ -1,6 +1,6 @@
 h3 利用助成金
 
-= simple_nested_form_for @lead ,url: url_for(action: :update, after_show: true, update_tasks: true), wrapper: :vertical_form, html: {class: "form-vertical"} do |f|
+= simple_nested_form_for @lead ,url: url_for(action: :update_tasks), remote: true, wrapper: :vertical_form, html: {class: "form-vertical"} do |f|
   h3 助成金
   table.table.table-bordered.table-striped#subsities_table
     thead
