@@ -18,4 +18,23 @@ extend Enumerize
   end
 
 
+  def self.to_csv
+    CSV.generate do |csv|
+      csv << column_names + ["total_price"]
+
+      all.each do |l|
+
+        values = l.attributes.values_at(*column_names)
+
+        if l.order_sheet_lines.present?
+          osl = l.order_sheet_lines
+          values = values + [osl.sum(:price)]
+        else
+          values = values + [0]
+        end
+        csv << values
+      end
+    end
+  end
+
 end

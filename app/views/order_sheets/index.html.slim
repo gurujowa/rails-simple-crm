@@ -1,6 +1,7 @@
 h1 発注書  一覧
 
 = link_to '新規追加', new_order_sheet_path, :class => 'btn btn-info'
+= link_to 'CSV出力', {action: :index, format: :csv}, :class => 'btn btn-default'
 table.default_datatables
   thead
     tr

@@ -6,6 +6,11 @@ class OrderSheetsController < ApplicationController
   # GET /teacher_orders
   def index
     @order_sheets = OrderSheet.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_csv @order_sheets.to_csv }
+    end
   end
 
   def new
