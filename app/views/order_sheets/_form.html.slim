@@ -2,7 +2,7 @@
   = f.error_notification 
   = f.input :title,  hint: "発注書の題名を記入します"
   = f.input :send_to do
-    = f.select :send_to, @teachers.map{|t| t.name}, class: "col-sm-12"
+    = f.select :send_to, order_sheet_send_to_selectize_option(@teachers,@order_sheet.send_to), class: "col-sm-12", include_blank: true
     div class="col-sm-12"
       = f.hint "講師名や送付先会社名を記入します。リストから選択することも、新しく入力することも出来ます。" 
   = f.input :order_date, as: :date_picker, hint: "発注書の発行日を記入します。通常は当日で構いません"

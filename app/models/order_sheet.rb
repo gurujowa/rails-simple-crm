@@ -8,6 +8,11 @@ extend Enumerize
 
   enumerize :status, in: [:draft, :active , :cancel]
 
+  validates :title, presence: true
+  validates :send_to, presence: true
+  validates :order_date, presence: true
+  validates :company_info, presence: true
+
 
   def total_price
     price = 0
