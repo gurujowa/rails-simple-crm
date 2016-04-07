@@ -2,24 +2,24 @@
 = simple_nested_form_for @course , wrapper: :vertical_form, html: {class: "form-vertical"} do |f|
   = f.error_notification 
   = render partial: 'form', :locals => {:f=> f} 
-  table.table.table-bordered.table-striped#periods_table
+  table.tablesaw#periods_table  data-tablesaw-mode="columntoggle" data-tablesaw-minimap=""
     thead
       tr
-        th 日付
-        th 開始時刻
-        th 終了時刻
-        th.visible-md.visible-lg 休憩開始
-        th.visible-md.visible-lg 休憩終了
-        th 講師
-        th.visible-lg 立会人
-        th メモ
-        th 削除
+        th data-tablesaw-priority="1" 日付
+        th data-tablesaw-priority="1" 開始時刻
+        th data-tablesaw-priority="1" 終了時刻
+        th data-tablesaw-priority="1" 休憩開始
+        th data-tablesaw-priority="1" 休憩終了
+        th.col-xs-2 data-tablesaw-priority="6" 講師
+        th data-tablesaw-priority="1" 立会人
+        th data-tablesaw-priority="1" メモ
+        th data-tablesaw-priority="1" 削除
     tbody.add_fields
       = f.simple_fields_for :periods, wrapper: false
   p = f.link_to_add "追加", :periods, data: {target: "#periods_table"}, class: "btn btn-default"
 
   h3 コース用タスク
-  table.table.table-bordered.table-striped#tasks_table
+  table.tablesaw.tablesaw-stack#tasks_table  data-tablesaw-mode="stack"
     thead
       tr
         th 名前＊

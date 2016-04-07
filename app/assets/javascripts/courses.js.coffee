@@ -1,4 +1,5 @@
 jQuery ->
+  $(".select_teacher_id").selectize({sortField: "text"})
   $( ".timepicker ").timepicker(
       minTime: "09:00",
       maxTime: "21:00",
