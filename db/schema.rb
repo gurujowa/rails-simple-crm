@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202084047) do
+ActiveRecord::Schema.define(version: 20160418013230) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -124,6 +124,20 @@ ActiveRecord::Schema.define(version: 20160202084047) do
     t.integer  "con_type",   limit: 4
   end
 
+  create_table "course_addresses", force: :cascade do |t|
+    t.string  "name",             limit: 255
+    t.string  "address",          limit: 255
+    t.string  "station",          limit: 255
+    t.string  "responsible",      limit: 255
+    t.string  "tel",              limit: 255
+    t.boolean "projector"
+    t.string  "projector_detail", limit: 255
+    t.boolean "board"
+    t.string  "board_detail",     limit: 255
+    t.integer "course_id",        limit: 4
+    t.text    "memo",             limit: 65535
+  end
+
   create_table "course_tasks", force: :cascade do |t|
     t.string   "title",      limit: 255,   null: false
     t.datetime "start",                    null: false
@@ -191,6 +205,20 @@ ActiveRecord::Schema.define(version: 20160202084047) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "lead_contracts", force: :cascade do |t|
+    t.date     "contract_date",                  null: false
+    t.string   "name",             limit: 255,   null: false
+    t.string   "company_category", limit: 255,   null: false
+    t.string   "subsity_info",     limit: 255
+    t.text     "memo",             limit: 65535
+    t.integer  "price",            limit: 4,     null: false
+    t.integer  "lead_id",          limit: 4,     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "lead_contracts", ["lead_id"], name: "index_lead_contracts_on_lead_id", using: :btree
 
   create_table "lead_estimate_lines", force: :cascade do |t|
     t.string   "name",             limit: 255,               null: false
@@ -542,6 +570,7 @@ ActiveRecord::Schema.define(version: 20160202084047) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   add_foreign_key "estimates", "leads"
+  add_foreign_key "lead_contracts", "leads"
   add_foreign_key "lead_subsities", "leads"
   add_foreign_key "lead_subsities", "subsities"
 end

@@ -140,6 +140,12 @@ ja:
         sent: 送信件数
         start_date: 開始日
         memo: メモ
+      course_address:
+        name: 会場名
+        address: 住所
+        station: 最寄り駅
+        tel: 電話番号
+        memo: メモ
       course:
         lead: 会社名
         user_id: 責任者

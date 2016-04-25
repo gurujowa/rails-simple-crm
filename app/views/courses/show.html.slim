@@ -27,18 +27,6 @@ h1 コース詳細画面
         th 担当者名
         td = @course.user.name if @course.user.present?
       tr
-        th 会場住所
-        td = @course.address
-      tr
-        th 最寄り駅と駅からの時間
-        td = @course.station
-      tr
-        th 先方研修担当者
-        td = @course.responsible
-      tr
-        th 先方緊急連絡先
-        td = @course.tel
-      tr
         th 受講者数
         td = @course.students
       tr
@@ -48,6 +36,34 @@ h1 コース詳細画面
         th メモ
         td = @course.memo
 
+- @course.course_addresses.each do |a|
+  h2 会場情報
+  .well
+    table.table.table-bordered
+      tr
+        th 会場名
+        td = a.name
+      tr
+        th 住所
+        td = a.address
+      tr
+        th 最寄り駅
+        td = a.station
+      tr
+        th 担当者
+        td = a.responsible
+      tr
+        th 電話番号
+        td = a.tel
+      tr
+        th プロジェクター
+        td #{a.projector}（#{a.projector_detail}）
+      tr
+        th ホワイトボード
+        td #{a.board} （#{a.board_detail}）
+      tr
+        th メモ
+        td = a.memo
 
 h2 コマ情報
 table.table.table-bordered.table-striped

@@ -5,9 +5,10 @@ ul
 = f.input :user_id , as: :select, collection: User.all, hint: "ユアブライト社内における、本コースの担当者です"
 = f.association :lead,collection: Lead.where(contract_flg: true), input_html:{ class: "search_lead"}
 
-= f.input :address
-= f.input :station
-= f.input :responsible
-= f.input :tel
 = f.input :students
 = f.input :memo
+
+#addresses_field
+  .add_fields
+    = f.simple_fields_for :course_addresses, wrapper: :horizontal_form
+p = f.link_to_add "会場の追加", :course_addresses, data: {target: "#addresses_field"}, class: "btn btn-default"

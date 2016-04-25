@@ -1,0 +1,19 @@
+.fields.well
+  h4 会場情報
+  = f.input :name
+  = f.input :address
+  = f.input :station
+  = f.input :responsible
+  = f.input :tel
+  .form-group
+    label.control-label.col-sm-3 プロジェクター
+    .col-sm-9
+      = f.check_box :projector
+      = f.text_field :projector_detail
+  .form-group
+    label.control-label.col-sm-3 ホワイトボード
+    .col-sm-9
+      = f.check_box :board
+      = f.text_field :board_detail
+  = f.input :memo
+  = f.link_to_remove "削除", class: "btn btn-default"

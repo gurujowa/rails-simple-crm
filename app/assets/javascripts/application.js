@@ -14,8 +14,6 @@
 //= require jquery.balloon.min
 //= require jquery.timepicker.min
 //= require selectize.min
-//= require tablesaw
-//= require tablesaw-init
 //= require pivot
 //= require pikaday
 //= require_tree .

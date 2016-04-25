@@ -25,17 +25,16 @@ extend Enumerize
   belongs_to :user
   has_many :teacher_order_courses
   has_many :teacher_orders
+
+  has_many :course_addresses, :dependent => :destroy
+  accepts_nested_attributes_for :course_addresses, :allow_destroy => true
+
   has_many :periods, :dependent => :destroy
   accepts_nested_attributes_for :periods, :allow_destroy => true
 
   has_many :course_tasks, :dependent => :destroy
   accepts_nested_attributes_for :course_tasks, :allow_destroy => true
 
-  validates :name, presence: true
-  validates :address, presence: true
-  validates :station, presence: true
-  validates :responsible, presence: true
-  validates :tel, presence: true
   validates :lead_id, presence: true
 
   enumerize :status, in: [:draft, :active , :cancel]
