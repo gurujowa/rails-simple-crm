@@ -33,6 +33,7 @@ class Period < ActiveRecord::Base
   validates :report_flg,  :inclusion => {:in => [true, false]}
   belongs_to :teacher
   belongs_to :course
+  belongs_to :course_address
   belongs_to :user
 
   @@color = ["MidnightBlue", "DarkViolet", "DarkSlateBlue", "Navy",  "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta","LightPink"]

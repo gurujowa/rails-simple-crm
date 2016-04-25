@@ -76,6 +76,7 @@ table.table.table-bordered.table-striped
       th 休憩終了
       th 講師
       th 立会人
+      th 会場
       th 合計時間
       th メモ
   tbody
@@ -88,6 +89,7 @@ table.table.table-bordered.table-striped
         td = p.break_end(:time)
         td = p.teacher.name
         td = p.user_name
+        td = p.course_address.name if p.course_address.present?
         td = convert_min p.total_time
         td style="width:40%" = p.memo
 
