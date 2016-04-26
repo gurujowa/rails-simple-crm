@@ -9,7 +9,6 @@ tr.fields
   td = f.select :teacher_id , options_teachers(f.object.teacher_id),{:include_blank => true}, :class => "select_teacher_id form-control input-sm"
   td = f.select :user_id , options_from_users(f.object.user_id),{:include_blank => true}, :class => "select_user_id form-control input-sm"
   td
-    - if f.object.course.present?
-      = f.select :course_address_id , options_from_collection_for_select(f.object.course.course_addresses, :id, :name),{:include_blank => true}, :class => "select_course_id form-control input-sm"
+    = f.select :course_address_id , options_from_collection_for_select(@course.course_addresses, :id, :name, f.object.course_address_id),{:include_blank => true}, :class => "select_course_id form-control input-sm"
   td = f.text_field :memo, class: "form-control"
   td = f.link_to_remove "削除", class: "btn btn-default"

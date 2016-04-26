@@ -1,4 +1,3 @@
-
 = simple_nested_form_for @course , wrapper: :vertical_form, html: {class: "form-vertical"} do |f|
   = f.error_notification 
   = render partial: 'form', :locals => {:f=> f} 
@@ -6,10 +5,10 @@
     thead
       tr
         th 日付
-        th  開始時刻
-        th  終了時刻
-        th  休憩開始
-        th  休憩終了
+        th.col-xs-1  開始時刻
+        th.col-xs-1  終了時刻
+        th.col-xs-1  休憩開始
+        th.col-xs-1  休憩終了
         th.col-xs-2  講師
         th  立会人
         th  会場
