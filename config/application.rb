@@ -27,5 +27,16 @@ module Mycrm
     config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :ja
     I18n.enforce_available_locales = true
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:               Rails.application.secrets.smtp_address,
+      port:                  587,
+      domain:                'mob.yourbright.co.jp',
+      user_name:             Rails.application.secrets.smtp_user,
+      password:              Rails.application.secrets.smtp_pass,
+      authentication:        'plain',
+      enable_starttls_auto:  true
+    }
   end
 end

@@ -1,5 +1,0 @@
-今月の入金一覧を送付します
-
-<% @line.each do |c|%>
-  <%= c.company_name %> <%= number_to_currency c.price %>(入金期限：<%= c.accural_date %>)
-<% end %>

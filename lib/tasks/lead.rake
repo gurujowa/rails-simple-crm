@@ -1,6 +1,10 @@
 namespace :lead do
   desc "about leads"
 
+  task "welcome_email" => :environment do
+    AttendMailer.welcome_email().deliver_now
+  end
+
   task "teacher_order" => :environment do
     to = TeacherOrder.all
 
