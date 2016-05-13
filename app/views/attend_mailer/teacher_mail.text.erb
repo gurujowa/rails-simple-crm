@@ -1,0 +1,11 @@
+本日、下記のコマの出席日となります。
+-------------------------------------------
+日付： <%= @period.day %>
+開始時刻：<%= @period.start_time.to_s(:time) %>
+終了時刻：<%= @period.end_time.to_s(:time) %>
+事業所名：<%= @period.course.lead.name %>
+
+------------------------------------------
+
+本日の１２時までに、必ず下記URLをクリックしてください。
+<%= url_for(controller: :courses, action: :attend, id: @period.id) %>

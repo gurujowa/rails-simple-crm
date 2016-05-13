@@ -1,5 +1,7 @@
 class SubsitiesController < ApplicationController
   before_action :set_subsity, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  
 
   # GET /subsities
   def index

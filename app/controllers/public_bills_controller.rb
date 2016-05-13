@@ -1,5 +1,7 @@
 class PublicBillsController < ApplicationController
   before_action :set_public_bill, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  
 
   # GET /public_bills
   def index

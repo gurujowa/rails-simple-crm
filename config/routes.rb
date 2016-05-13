@@ -137,6 +137,9 @@ Mycrm::Application.routes.draw do
       get 'google'
       get 'list'
     end
+    member do
+      get "attend"
+    end
   end
 
   resources :course_tasks, only: [:destroy,:index] do

@@ -1,5 +1,7 @@
 class LeadHistoryStatusesController < ApplicationController
   before_action :set_lead_history_status, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  
 
   # GET /lead_history_statuses
   def index

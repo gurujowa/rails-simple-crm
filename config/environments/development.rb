@@ -33,7 +33,7 @@ Mycrm::Application.configure do
 #config.action_mailer.delivery_method = :file
 #config.action_mailer.file_settings = { :location => Rails.root.join('tmp/mail') }
 
-#config.action_mailer.default_url_options = { :host => "192.168.30.15", :port => 3350 }
+config.action_mailer.default_url_options = { :host => "192.168.142.128", :port => 3000 }
 #config.action_mailer.delivery_method = :letter_opener_web
 
 end

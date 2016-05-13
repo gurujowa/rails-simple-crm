@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController  
-  before_action :authenticate_user!
+  before_action :authenticate_user! , except: [:attend]
   
   def index
     @courses = Course.all    
@@ -14,7 +14,6 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
   end
 
-  
   def calendar
     @courses = Course.includes(:lead)
     @periods = Period.includes(:course, :teacher).day_between(params[:start],params[:end])
@@ -40,6 +39,12 @@ class CoursesController < ApplicationController
         end
       }
     end
+  end
+
+  def attend
+    period = Period.find(params[:id])
+    period.update_attributes!(attend_date: DateTime.now)
+    render :attend, :layout => "attend"
   end
 
   def progress
@@ -68,7 +73,6 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.csv { send_csv csvs }
     end
-
   end
 
 

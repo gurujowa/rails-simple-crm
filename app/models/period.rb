@@ -38,6 +38,10 @@ class Period < ActiveRecord::Base
 
   @@color = ["MidnightBlue", "DarkViolet", "DarkSlateBlue", "Navy",  "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta","LightPink"]
 
+  scope :today, -> {
+    where(day: Time.zone.now.all_day)
+  }
+
   scope :day_between, -> from, to {
 
     if from.present? && to.present?

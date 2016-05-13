@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425063518) do
+ActiveRecord::Schema.define(version: 20160513072258) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -380,6 +380,7 @@ ActiveRecord::Schema.define(version: 20160425063518) do
     t.boolean  "attend_flg",                      default: false, null: false
     t.integer  "user_id",           limit: 4
     t.integer  "course_address_id", limit: 4
+    t.datetime "attend_date"
   end
 
   add_index "periods", ["course_address_id"], name: "index_periods_on_course_address_id", using: :btree
