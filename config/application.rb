@@ -38,6 +38,5 @@ module Mycrm
       enable_starttls_auto:  true
     }
 
-    config.default_mailaddress = 'yamashita.hayato@yourbright.co.jp'
   end
 end

@@ -1,21 +1,10 @@
 namespace :attend do
   desc "check teacher attend"
 
-  task "teacher",["mode"] => :environment do | task,args|
-
-    if args.mode == "development"
-      Rails.env = "development"
-    elsif args.mode == "production"
-      Rails.env = "production"
-    elsif args.mode.blank?
-      #nothing process
-    else
-      raise "invalid mode #{args.mode}"
-    end
-
+  task "teacher",["go"] => :environment do | task,args|
     periods = Period.today
     periods.each do |p|
-      AttendMailer.teacher_mail(p).deliver_now
+      AttendMailer.teacher_mail(p, args.go).deliver_now
     end
   end
 
