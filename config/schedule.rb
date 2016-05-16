@@ -2,7 +2,7 @@ env :PATH, "/var/www/rails-crm/current/:/usr/local/sbin:/usr/local/bin:/usr/sbin
 set :output, "/home/yamashita/whenever.log"
 
 every 1.day, :at => '8:00 am' do
-  rake "attend:teacher['development']"
+  rake "attend:teacher"
 end
 
 
