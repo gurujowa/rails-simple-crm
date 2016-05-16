@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :not_admin, except: [:non_auth]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :lock]
 
   def index
     @users = User.all
@@ -39,9 +39,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    @user.destroy
-    redirect_to users_url, notice: 'User was successfully destroyed.'
+  def lock
+    if @user.locked_at.blank?
+      @user.update_attributes!({locked_at: DateTime.now})
+    else
+      @user.update_attributes!({locked_at: nil})
+    end
+    redirect_to users_url, notice: 'lock is finished'
   end
 
   private

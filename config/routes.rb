@@ -57,6 +57,9 @@ Mycrm::Application.routes.draw do
       collection do
         get "non_auth"
       end
+      member do
+        get "lock"
+      end
     end
   end
   resources :bills do

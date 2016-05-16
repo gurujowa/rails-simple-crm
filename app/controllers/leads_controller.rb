@@ -282,7 +282,7 @@ class LeadsController < ApplicationController
     lead_subsities = LeadSubsity.all
     @tasks = []
     lead_subsities.each do |s|
-      @tasks += s.tasks
+      @tasks += s.task_list
     end
   end
 
