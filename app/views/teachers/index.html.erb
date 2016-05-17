@@ -6,6 +6,7 @@
     <tr>
       <th>名前</th>
       <th>rank</th>
+      <th>メール送信可否</th>
       <th>ジャンル</th>
       <th>Director</th>
       <th>電話</th>
@@ -20,6 +21,7 @@
       <tr>
         <td><%= link_to teacher.short_name, teacher_path(teacher) %></td>
         <td><%= get_work_possible(teacher.work_possible) %></td>
+        <td><%= check_m_img teacher.attend_mail_flg %></td>
         <td><%= teacher.genre %></td>
         <td><%= teacher.director_name %></td>
         <td><%= teacher.tel %></td>

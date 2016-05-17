@@ -42,6 +42,25 @@ class Lead < ActiveRecord::Base
     Arel.sql('max(lead_histories.approach_day)')
   end
 
+  def corp_double_name
+    if self.corporation_name.present?
+      co_name = self.corporation_name
+    else
+      co_name = self.name
+    end
+
+    return co_name == self.name ? self.name : "#{self.name}～#{co_name}"
+  end
+
+  def corp_name
+    if self.corporation_name.present?
+      co_name = self.corporation_name
+    else
+      co_name = self.name
+    end
+    co_name
+  end
+
   def last_sent_date
     sent_date = []
     self.lead_histories.each do |lh|

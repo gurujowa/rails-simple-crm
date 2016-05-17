@@ -9,8 +9,11 @@ h1 コース詳細画面
     h2 会社情報
     table.table.table-striped
       tr
-        th 会社名
+        th 事業所名
         td = @course.lead.name
+      tr
+        th 法人名
+        td = @course.lead.corporation_name
       tr
         th 郵便番号
         td = @course.lead.zipcode

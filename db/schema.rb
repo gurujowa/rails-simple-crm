@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516031613) do
+ActiveRecord::Schema.define(version: 20160517073929) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -521,11 +521,11 @@ ActiveRecord::Schema.define(version: 20160516031613) do
   end
 
   create_table "teachers", force: :cascade do |t|
-    t.string   "first_kanji",     limit: 255,               null: false
-    t.string   "last_kanji",      limit: 255,               null: false
-    t.string   "first_kana",      limit: 255,               null: false
-    t.string   "last_kana",       limit: 255,               null: false
-    t.integer  "work_possible",   limit: 4,     default: 0, null: false
+    t.string   "first_kanji",     limit: 255,                  null: false
+    t.string   "last_kanji",      limit: 255,                  null: false
+    t.string   "first_kana",      limit: 255,                  null: false
+    t.string   "last_kana",       limit: 255,                  null: false
+    t.integer  "work_possible",   limit: 4,     default: 0,    null: false
     t.string   "genre",           limit: 255
     t.text     "memo",            limit: 65535
     t.datetime "created_at"
@@ -539,6 +539,7 @@ ActiveRecord::Schema.define(version: 20160516031613) do
     t.string   "tel",             limit: 255
     t.string   "email",           limit: 255
     t.integer  "director_id",     limit: 4
+    t.boolean  "attend_mail_flg",               default: true, null: false
   end
 
   create_table "users", force: :cascade do |t|

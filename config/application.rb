@@ -28,7 +28,7 @@ module Mycrm
     I18n.enforce_available_locales = true
 
     config.action_mailer.delivery_method = :smtp
-    config.action_mailer.default_options = {:reply_to => "kenshu@yourbright.co.p"}
+    config.action_mailer.default_options = {:reply_to => "staff@yourbright.co.jp"}
     config.action_mailer.smtp_settings = {
       address:               Rails.application.secrets.smtp_address,
       port:                  587,

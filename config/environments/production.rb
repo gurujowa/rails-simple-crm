@@ -77,7 +77,7 @@ Mycrm::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
   config.action_mailer.default_url_options = { :host => "deppu.yourbright.co.jp", :port => 11223 }
-  config.default_mailaddress = 'kenshu@yourbright.co.jp'
+  config.default_mailaddress = 'staff@yourbright.co.jp'
 end
 
 #PDFKit.configure do |config|

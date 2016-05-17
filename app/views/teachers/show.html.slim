@@ -15,6 +15,9 @@ table.table.table-bordered
     th ディレクター
     td  = @teacher.director_name
   tr
+    th 参加メール送信可否
+    td  = check_m_img @teacher.attend_mail_flg
+  tr
     th ジャンル
     td  =@teacher.genre
   tr
@@ -38,11 +41,11 @@ h3 コマ情報(全部）
           td = p.day.to_s(:jp)
           td = p.start_time.to_s(:time)
           td = p.end_time.to_s(:time)
-          td = p.course.lead.name
+          td = p.course.lead.corp_name
   .col-sm-6
     h3 メール用　テキスト（未来のコマのみ)
     .well
       - @future_periods.each do |p|
-        = p.day.to_s(:jp) + " " + p.start_time.to_s(:time) + "～" + p.end_time.to_s(:time) + "(" + p.course.lead.name + ")"
+        = p.day.to_s(:jp) + " " + p.start_time.to_s(:time) + "～" + p.end_time.to_s(:time) + "(" + p.course.lead.corp_name + ")"
         br
 

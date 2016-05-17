@@ -122,6 +122,7 @@ ja:
         first_kana: 名（かな）
         last_kana: 姓（かな）
         work_possible: 仕事可能
+        attend_mail_flg: メール送信可否
         genre: ジャンル
         bill: 単価（時間）
         tel: 電話番号

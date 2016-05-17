@@ -19,13 +19,13 @@ h1 コース 一覧
             = link_to b.lead.name, {controller: "leads", action: "show", id: b.lead_id}
             - if b.lead.contract_flg.blank?
               span style="color:red;" 【未契約】
-          td = b.lead.corporation_name
+          td = b.lead.corp_name
           td
             = link_to b.name,{action: "show", id: b.id}
             = link_to "(edit)", edit_course_path(b.id)
           td = b.user.name if b.user.present?
-          td = b.getStartDate
-          td = b.getEndDate
+          td = b.start_date
+          td = b.start_date
           td
             - if b.memo.present?
               span.glyphicon.glyphicon-paperclip data-toggle="tooltip" title="#{b.memo}" 
