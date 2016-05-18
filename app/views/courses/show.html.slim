@@ -60,10 +60,14 @@ h1 コース詳細画面
         td = a.tel
       tr
         th プロジェクター
-        td #{a.projector}（#{a.projector_detail}）
+        td 
+          span = check_m_img a.projector
+          span （#{a.projector_detail}）
       tr
         th ホワイトボード
-        td #{a.board} （#{a.board_detail}）
+        td 
+          span = check_m_img a.board 
+          span （#{a.board_detail}）
       tr
         th メモ
         td = a.memo

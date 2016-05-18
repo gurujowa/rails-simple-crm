@@ -25,7 +25,7 @@ h1 コース 一覧
             = link_to "(edit)", edit_course_path(b.id)
           td = b.user.name if b.user.present?
           td = b.start_date
-          td = b.start_date
+          td = b.end_date
           td
             - if b.memo.present?
               span.glyphicon.glyphicon-paperclip data-toggle="tooltip" title="#{b.memo}" 
