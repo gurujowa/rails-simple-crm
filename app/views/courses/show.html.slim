@@ -61,12 +61,12 @@ h1 コース詳細画面
       tr
         th プロジェクター
         td 
-          span = check_m_img a.projector
+          span = check_m_img a.projector unless a.projector.nil?
           span （#{a.projector_detail}）
       tr
         th ホワイトボード
         td 
-          span = check_m_img a.board 
+          span = check_m_img a.board  unless a.board.nil?
           span （#{a.board_detail}）
       tr
         th メモ
