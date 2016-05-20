@@ -2,9 +2,11 @@ namespace :attend do
   desc "check teacher attend"
 
   task "today",["go"] => :environment do | task,args|
-    periods = Period.today
-    periods.each do |p|
-      AttendMailer.today_mail(p, args.go).deliver_now
+    if Time.current.workday?
+      periods = Period.today
+      periods.each do |p|
+        AttendMailer.today_mail(p, args.go).deliver_now
+      end
     end
   end
 
