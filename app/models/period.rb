@@ -39,7 +39,13 @@ class Period < ActiveRecord::Base
   @@color = ["MidnightBlue", "DarkViolet", "DarkSlateBlue", "Navy",  "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta","LightPink"]
 
   scope :today, -> {
-    where(day: Time.zone.now.all_day)
+    start_time = Time.current.beginning_of_day.since(13.hour).to_s(:time)
+    end_time = Time.current.end_of_day.to_s(:time)
+    where(day: Time.current.all_day).where("start_time >= ?",start_time).where("start_time <= ?",end_time)
+  }
+
+  scope :tomorrow_morning, -> {
+    where(day: 1.day.since.all_day).where("start_time >= ?",Time.current.beginning_of_day.to_s(:time)).where("start_time < ?",Time.current.beginning_of_day.since(13.hour).to_s(:time))
   }
 
   scope :day_between, -> from, to {

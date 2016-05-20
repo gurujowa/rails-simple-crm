@@ -1,0 +1,30 @@
+<%= @period.teacher.short_name %>様
+
+いつもお世話になっております。
+ユアブライト株式会社です。
+
+次の土日祝日において、下記のコマのご登壇となります。
+-------------------------------------------
+日付： <%= @period.day %>
+開始時刻：<%= @period.start_time.to_s(:time) %>
+終了時刻：<%= @period.end_time.to_s(:time) %>
+事業所名：<%= @period.course.lead.corp_double_name %>
+
+------------------------------------------
+
+お手数ではございますが、本日の18時までに
+必ず下記URLにてスケジュールをご確認願います。
+<%= url_for(controller: :courses, action: :attend, id: @period.id) %>
+
+※このメールは配信専用となっております。
+　ご不明な点は「staff@yourbright.co.jp」までお問い合わせください。
+
+◆Your Bright━━━━━━━━━━━━━━━━━━━━━━━◆
+企業研修・人材育成・各種奨励金申請サポート
+ユアブライト株式会社
+〒169-0075 東京都新宿区高田馬場３－３－９ 山下ビル５Ｆ
+TEL : ０３－６９０８－６１４３
+FAX : ０３－６９０８－６１４５
+E-mail : staff@yourbright.co.jp
+URL : http://www.yourbright.co.jp
+◆━━━━━━━━━━━━━━━━━━━━━━━━━━━━◆

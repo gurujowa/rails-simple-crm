@@ -88,4 +88,5 @@ gem "fog"
 gem 'rails-i18n', '~> 4.0.0.pre'
 gem 'validates_email_format_of'
 gem 'business_time'
+gem 'holiday_jp'
 gem 'whenever'
