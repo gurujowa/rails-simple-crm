@@ -9,9 +9,11 @@ namespace :attend do
   end
 
   task "tomorrow",["go"] => :environment do | task,args|
-    periods = Period.tomorrow_morning
-    periods.each do |p|
-      AttendMailer.tomorrow_mail(p, args.go).deliver_now
+    if 1.day.since.workday?
+      periods = Period.tomorrow_morning
+      periods.each do |p|
+        AttendMailer.tomorrow_mail(p, args.go).deliver_now
+      end
     end
   end
 
