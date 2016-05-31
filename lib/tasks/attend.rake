@@ -25,7 +25,7 @@ namespace :attend do
     tomorrow = 1.day.since.beginning_of_day
     next_business_day = 1.business_day.from_now.beginning_of_day
 
-    periods = Period.where(day: tomorrow..next_business_day)
+    periods = Period.where(day: tomorrow..next_business_day).where(attend_date: nil)
     periods.each do |p|
       AttendMailer.holiday_mail(p, args.go).deliver_now
     end

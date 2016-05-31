@@ -1,11 +1,9 @@
-- if @course.lead.contract_flg.blank?
-  p.bg-danger 「契約済み」ではないお客様のコースを作成しています。契約している場合、契約済みにしてください
 ul
   - @course.errors.full_messages.each do |msg|
     li = msg
 = f.input :name
 = f.input :user_id , as: :select, collection: User.all, hint: "ユアブライト社内における、本コースの担当者です"
-= f.association :lead,collection: Lead.where(id:@course.lead.id), input_html:{ class: "search_lead"}, label_method: :corp_double_name, selected: @course.lead.id, include_blank: true
+= f.association :lead,collection: Lead.where(id:@course.lead&.id), input_html:{ class: "search_lead"}, label_method: :corp_double_name, selected: @course.lead&.id, include_blank: true
 
 = f.input :students
 = f.input :memo
