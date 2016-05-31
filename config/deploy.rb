@@ -10,7 +10,7 @@ set :username, 'yamashita'
 
 #rbenv ‚Ìİ’è
 set :rbenv_type, :user
-set :rbenv_ruby, '2.0.0-p353'
+set :rbenv_ruby, '2.3.1'
 set :rbenv_path, "/home/#{fetch(:username)}/.rbenv"
 set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
