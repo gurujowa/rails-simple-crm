@@ -11,8 +11,7 @@ table.default_datatables
       th 金額
       th 請求日
       th 支払日
-      th 発注済み
-      th 支払済み
+      th ST
       th メモ
   tbody
     - @order_sheet_lines.each do |o|
@@ -25,6 +24,5 @@ table.default_datatables
         td = number_to_currency o.price
         td = o.invoice_date
         td = o.payment_date
-        td = link_to_switch_flg o, :invoice_flg
-        td = link_to_switch_flg o, :payment_flg
+        td = o.order_sheet.status_text
         td = o.memo
