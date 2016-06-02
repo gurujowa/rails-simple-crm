@@ -11,6 +11,7 @@
     = select :order, :course, @courses.map{|c| [c.lead.name + "-" +c.name, c.id]}, class: "col-sm-12"
     div class="col-sm-12"
       = f.hint "ここからコース名を選ぶと、「コース内容」欄が追加されます。研修日は、「発注先」とコースに入力されている講師が同一のもののみ表示されます" 
+  #order_sheet_course_address_list
   = f.input :course_info, hint: "発注書のコース内容です", input_html: {rows: 10}
   = f.input :mention, hint: "発注書の「特記事項」欄です。通常は、テキスト・レジュメなどの注意や、連絡先が書いています", input_html: {rows: 10}
   = f.input :memo, hint: "こちらに書かれた内容は、発注書には表示されません"
