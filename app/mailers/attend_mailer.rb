@@ -1,5 +1,15 @@
 class AttendMailer < ApplicationMailer
-  after_action :check_attend_mail_flg , only: [:today_mail,:tomorrow_mail, :holiday_mail]
+  after_action :check_attend_mail_flg , only: [:today_mail,:tomorrow_mail, :holiday_mail, :monthly_mail]
+
+  def monthly_mail(teacher_id, periods, go)
+    @teacher = Teacher.find(teacher_id)
+    @periods = periods.sort_by {|p| p.day }
+    @target_month = Time.current.next_month.strftime("%-m")
+    address = get_address_options(go, @teacher.email)
+    address.merge!(subject: "#{@target_month}月分研修日程確認依頼")
+    mail(address)
+
+  end
 
   def today_mail(period, go)
     @period = period
@@ -39,6 +49,10 @@ class AttendMailer < ApplicationMailer
   private
   def check_attend_mail_flg
     if @teacher.attend_mail_flg == false
+      mail.perform_deliveries = false
+    end
+
+    if @teacher.email.blank?
       mail.perform_deliveries = false
     end
   end

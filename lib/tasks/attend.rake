@@ -1,6 +1,14 @@
 namespace :attend do
   desc "check teacher attend"
 
+  task "monthly",["go"] => :environment do | task,args|
+    periods = Period.where(day: Time.current.next_month.beginning_of_month...Time.current.next_month.end_of_month)
+    t_p = periods.group_by { |p| p.teacher.id }
+    t_p.each do |t|
+      AttendMailer.monthly_mail(t[0], t[1], args.go).deliver_now
+    end
+  end
+
   task "today",["go"] => :environment do | task,args|
     if Time.current.workday?
       periods = Period.today
