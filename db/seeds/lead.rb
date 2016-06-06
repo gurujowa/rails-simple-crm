@@ -23,6 +23,7 @@ def create_lead(r)
   lead.tag_list.add("テレアポ用リスト")
   lead.tag_list.add("wamnet #{Time.current.to_s(:dash_date)}追加")
   lead.zipcode.gsub! "〒",""
+  lead.corporation_name =  r[:company_name]
   lead.url = r[:url]
   puts "new lead added"
   return lead
@@ -60,10 +61,9 @@ table.each do |r|
   法人代表者の役職名：#{r[:company_post]}
   ----------------------------------------------------------- 
 EOL
-  lead.memo = lead.memo.present? ? lead.memo << memo : memo
+#  lead.memo = lead.memo.present? ? lead.memo << memo : memo
 
-  lead.corporation_name =  r[:company_name]
-  lead.tag_list.add("wamnet #{Time.current.to_s(:dash_date)}更新")
+#  lead.tag_list.add("wamnet #{Time.current.to_s(:dash_date)}更新")
 
   unless lead.save
     p lead.tel
