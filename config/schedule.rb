@@ -6,12 +6,12 @@ every :month do
 end
 
 every :weekday, :at => '8:00 am' do
-  rake "attend:today"
+  rake "attend:today[go]"
 end
 
 every :weekday, :at => '13:00 pm' do
-  rake "attend:tomorrow"
-  rake "attend:holiday"
+  rake "attend:tomorrow[go]"
+  rake "attend:holiday[go]"
 end
 
 every :weekday, :at => '11:59 am' do
