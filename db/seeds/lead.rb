@@ -61,9 +61,9 @@ table.each do |r|
   法人代表者の役職名：#{r[:company_post]}
   ----------------------------------------------------------- 
 EOL
-#  lead.memo = lead.memo.present? ? lead.memo << memo : memo
+  lead.memo = lead.memo.present? ? lead.memo << memo : memo
 
-#  lead.tag_list.add("wamnet #{Time.current.to_s(:dash_date)}更新")
+  lead.tag_list.add("wamnet #{Time.current.to_s(:dash_date)}更新")
 
   unless lead.save
     p lead.tel
