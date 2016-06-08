@@ -5,7 +5,7 @@ every :month do
   rake "attend:monthly"
 end
 
-every :weekday, :at => '8:00 am' do
+every :weekday, :at => '9:00 am' do
   rake "attend:today[go]"
 end
 
