@@ -51,7 +51,6 @@ table.each do |r|
   カテゴリ：#{r[:category]}
   管理者：#{r[:client_person]}
   管理者の役職：#{r[:client_post]}
-  スタッフ数：#{r[:staff]}
   法人の種類：#{r[:company]}
   法人名：#{r[:company_name]}
   法人の住所：#{r[:company_address]}
