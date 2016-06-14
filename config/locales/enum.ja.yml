@@ -69,6 +69,8 @@ ja:
         ing: 継続
         appoint: 訪問
         done: 完了
+        conversion: コンバージョン
+        history: 履歴
         forbidden: 禁止
     lead_history:
       status:

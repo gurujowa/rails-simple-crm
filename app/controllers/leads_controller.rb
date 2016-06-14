@@ -163,9 +163,8 @@ class LeadsController < ApplicationController
     @new_lead_history.lead_id = @lead.id
     @new_lead_history.approach_day = DateTime.now()
 
-    @status_ing = LeadHistoryStatus.where(progress: "ing")
-    @status_done = LeadHistoryStatus.where(progress: "done")
-    @status_forbidden = LeadHistoryStatus.where(progress: "forbidden")
+    @lead_history_status_progress = LeadHistoryStatus.progress.values
+
     sex_list
     gon.pk = @lead.id
 

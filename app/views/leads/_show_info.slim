@@ -133,36 +133,17 @@
           .panel-body
             = f.input :approach_day, as: :datetime_picker
             table.table.table-bordered.table-lead-history-status
-              tr
-                th  継続
-                td 
-                  .row
-                    - @status_ing.each do |l|
-                      .col-sm-6
-                        = f.label :lead_history_status_id, value: l.id do
-                          .color-box style="background-color:##{l.color}"
-                          = l.name
-                        = f.radio_button :lead_history_status_id, l.id
-              tr
-                th  完了
-                td 
-                  .row
-                    - @status_done.each do |l|
-                      .col-sm-6
-                        = f.label :lead_history_status_id, value: l.id do
-                          .color-box style="background-color:##{l.color}"
-                          = l.name
-                        = f.radio_button :lead_history_status_id, l.id
-              tr
-                th  接触禁止
-                td 
-                  .row
-                    - @status_forbidden.each do |l|
-                      .col-sm-6
-                        = f.label :lead_history_status_id, value: l.id do
-                          .color-box style="background-color:##{l.color}"
-                          = l.name
-                        = f.radio_button :lead_history_status_id, l.id
+              - @lead_history_status_progress.each do |status|
+                tr
+                  th  = status.text
+                  td 
+                    .row
+                      - LeadHistoryStatus.with_progress(status).each do |l|
+                        .col-sm-6
+                          = f.label :lead_history_status_id, value: l.id do
+                            .color-box style="background-color:##{l.color}"
+                            = l.name
+                          = f.radio_button :lead_history_status_id, l.id
             = f.input :next_approach_day, as: :datetime_picker
             = f.input :memo
             = f.simple_fields_for :lead_history_attachments do |l|
