@@ -1,5 +1,5 @@
 class LeadsController < ApplicationController
-  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_flg, :contract, :update_tasks]
+  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_flg, :comment, :contract, :update_tasks]
   after_action :store_location, only: [:index, :search, :mylist, :approach]
   before_action :set_tag, only: [:index,:show, :edit, :update, :create, :new]
   before_action :authenticate_user!
@@ -190,6 +190,28 @@ class LeadsController < ApplicationController
     end
   end
 
+  def delete_comment
+    lead_comment = LeadComment.find(params[:id])
+    lead = lead_comment.lead
+    if lead_comment.destroy
+      redirect_to lead_url(lead), notice: 'コメントが正しく削除されました。'
+    else
+      redirect_to lead_url(lead), notice: 'コメント削除に失敗しました'
+    end
+
+  end
+
+  def comment
+    lead_comment = LeadComment.new(lead_comment_params)
+    lead_comment.user = current_user
+    @lead.lead_comments << lead_comment
+    if @lead.save
+      redirect_to lead_url(@lead), notice: 'コメントが正しく追加されました。'
+    else
+      redirect_to lead_url(@lead), notice: 'コメント追加に失敗しました'
+    end
+  end
+
   # POST /leads
   def create
     @lead = Lead.new(lead_params)
@@ -318,6 +340,9 @@ class LeadsController < ApplicationController
       leads
     end
 
+    def lead_comment_params
+      params.require(:lead_comment).permit(:id,:memo, :user)
+    end
 
     # Only allow a trusted parameter "white list" through.
     def lead_params

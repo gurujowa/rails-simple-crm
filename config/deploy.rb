@@ -49,9 +49,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      execute :mkdir, '-p', release_path.join('tmp') # <= ‚±‚ê‚ð’Ç‰Á‚·‚é
-      execute :touch, release_path.join('tmp/restart.txt')
+      execute "apachectl restart"
     end
   end
 

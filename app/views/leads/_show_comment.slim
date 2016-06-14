@@ -1,0 +1,22 @@
+- @lead.lead_comments.each do |c|
+  .panel.panel-default
+    .panel-body
+      = c.memo
+    .panel-footer 
+      .pull-left
+        span 追加日：
+        span = c.created_at.to_s(:jp)
+        span style="margin-left:10px;margin-right:10px;" ｜
+        span ユーザー：
+        span = c.user.name
+      .pull-right
+        = link_to "削除", { action: "delete_comment", id: c.id}, class: "btn btn-default"
+      .clearfix
+      
+
+.panel.panel-info
+  .panel-heading コメント追加
+  .panel-body
+    = form_tag url_for(controller: :leads, action: :comment), method: :post
+      = text_area :lead_comment, :memo, class: "form-control col-xs-12"
+      = submit_tag "追加", class: "btn btn-default"

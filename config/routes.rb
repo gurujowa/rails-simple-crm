@@ -30,6 +30,8 @@ Mycrm::Application.routes.draw do
     member do
       get "add_mylist"
       get "add_flg"
+      post "comment"
+      get "delete_comment"
       patch "update_tasks"
       get "add_task"
       get "contract"

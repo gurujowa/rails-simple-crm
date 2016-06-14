@@ -4,8 +4,10 @@ class Lead < ActiveRecord::Base
   extend Enumerize
   acts_as_taggable 
   belongs_to :user
+
   has_many :lead_histories, dependent: :destroy
   has_many :lead_subsities, dependent: :destroy
+  has_many :lead_comments, dependent: :destroy
   has_many :lead_tasks, dependent: :destroy
   accepts_nested_attributes_for :lead_subsities, :allow_destroy => true, reject_if: :all_blank
   accepts_nested_attributes_for :lead_tasks, :allow_destroy => true, reject_if: :all_blank

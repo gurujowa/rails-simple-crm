@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531011961) do
+ActiveRecord::Schema.define(version: 20160613095611) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -205,6 +205,17 @@ ActiveRecord::Schema.define(version: 20160531011961) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "lead_comments", force: :cascade do |t|
+    t.integer  "lead_id",    limit: 4,     null: false
+    t.integer  "user_id",    limit: 4,     null: false
+    t.text     "memo",       limit: 65535, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "lead_comments", ["lead_id"], name: "index_lead_comments_on_lead_id", using: :btree
+  add_index "lead_comments", ["user_id"], name: "index_lead_comments_on_user_id", using: :btree
 
   create_table "lead_contracts", force: :cascade do |t|
     t.date     "contract_date",                  null: false
@@ -573,6 +584,8 @@ ActiveRecord::Schema.define(version: 20160531011961) do
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   add_foreign_key "estimates", "leads"
+  add_foreign_key "lead_comments", "leads"
+  add_foreign_key "lead_comments", "users"
   add_foreign_key "lead_contracts", "leads"
   add_foreign_key "lead_subsities", "leads"
   add_foreign_key "lead_subsities", "subsities"
