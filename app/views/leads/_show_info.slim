@@ -139,11 +139,12 @@
                   td 
                     .row
                       - LeadHistoryStatus.with_progress(status).each do |l|
-                        .col-sm-6
-                          = f.label :lead_history_status_id, value: l.id do
-                            .color-box style="background-color:##{l.color}"
-                            = l.name
-                          = f.radio_button :lead_history_status_id, l.id
+                        - if l.display_flg == true
+                          .col-sm-6
+                            = f.label :lead_history_status_id, value: l.id do
+                              .color-box style="background-color:##{l.color}"
+                              = l.name
+                            = f.radio_button :lead_history_status_id, l.id
             = f.input :next_approach_day, as: :datetime_picker
             = f.input :memo
             = f.simple_fields_for :lead_history_attachments do |l|

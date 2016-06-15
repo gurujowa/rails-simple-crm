@@ -31,6 +31,7 @@ $(function(){
   $( ".datepicker" ).datetimepicker({enabledHours: false, format: "YYYY-MM-DD"});
   $('.dropdown-toggle').dropdown();
   $("[data-toggle=tooltip]").tooltip()
+
 });
 
 $(document).on("nested:fieldAdded", function (event) {

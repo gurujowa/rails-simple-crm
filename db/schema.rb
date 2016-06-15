@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613095611) do
+ActiveRecord::Schema.define(version: 20160615002809) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -266,11 +266,12 @@ ActiveRecord::Schema.define(version: 20160613095611) do
   end
 
   create_table "lead_history_statuses", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "progress",   limit: 255
-    t.string   "color",      limit: 255
+    t.string   "name",        limit: 255
+    t.string   "progress",    limit: 255
+    t.string   "color",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "display_flg",             default: true, null: false
   end
 
   create_table "lead_interviews", force: :cascade do |t|

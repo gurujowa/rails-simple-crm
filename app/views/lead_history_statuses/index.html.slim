@@ -5,15 +5,17 @@ table.default_datatables
   thead
     tr
       th Id
-      th Name
-      th Progress
-      th Color
+      th 名前
+      th 種類
+      th 表示
+      th 色
       th CH
   tbody
     - @lead_history_statuses.each do |lead_history_status|
       tr
         td = lead_history_status.id
         td = lead_history_status.name 
+        td = lead_history_status.display_flg 
         td = lead_history_status.progress 
         td = lead_history_status.color 
         td 

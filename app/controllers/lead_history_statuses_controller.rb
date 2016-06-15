@@ -55,6 +55,6 @@ class LeadHistoryStatusesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lead_history_status_params
-      params.require(:lead_history_status).permit(:name, :progress, :color)
+      params.require(:lead_history_status).permit(:name, :progress, :color, :display_flg)
     end
 end

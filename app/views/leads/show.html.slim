@@ -35,8 +35,8 @@ p#notice = notice
         = link_to "既存客", contract_lead_path(@lead, flg: false),class: "btn btn-danger btn-block", id: "btn-lead-contract"
       - else
         = link_to "未契約", contract_lead_path(@lead, flg: true),class: "btn btn-success btn-block", id: "btn-lead-contract"
-ul.nav.nav-tabs
-  li.active
+ul.nav.nav-tabs#lead-show-tab
+  li
     a href="#info" data-toggle="tab" aria-controls="info" お客様情報
   li
     a href="#task" data-toggle="tab" aria-controls="task" タスク
@@ -46,11 +46,11 @@ ul.nav.nav-tabs
     a href="#comment" data-toggle="tab" aria-controls="comment" コメント
 br
 .tab-content
-  .tab-pane.active.fade.in#info
+  .tab-pane#info
     = render 'show_info'
-  .tab-pane.active.fade#task
+  .tab-pane#task
     = render 'show_task'
-  .tab-pane.active.fade#course
+  .tab-pane#course
     = render 'show_course'
-  .tab-pane.active.fade#comment
+  .tab-pane#comment
     = render 'show_comment'

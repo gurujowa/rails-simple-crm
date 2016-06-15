@@ -46,6 +46,13 @@ jQuery ->
     w.location.href = "/leads/address.csv?" + sData
     return false 
 
+
+  $('#lead-show-tab a[data-toggle="tab"]').on 'show.bs.tab', (e) ->
+    localStorage.setItem('lastTab', $(this).attr('href'))
+  lastTab = localStorage.getItem('lastTab')
+  if (lastTab) 
+    $('#lead-show-tab a[href="' + lastTab + '"]').tab('show')
+
 @reloadWithFormat = (format) ->
   url = "#{location.protocol}//#{location.host}/leads.#{format}#{location.search}"
   location.href = url
