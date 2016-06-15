@@ -178,8 +178,6 @@
                       = link_to a.attachment.filename, a.attachment.url
                       | &nbsp;/&nbsp;
                       = link_to '削除', {controller: "lead_histories" , action: "remove_attachment", id: a.id}, data: { confirm: '本当に削除しますか' }
-              
-
               tr 
                 td colspan="3" 
                   - if h.shipped_at.present?

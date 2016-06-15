@@ -1,22 +1,25 @@
 - @lead.lead_comments.each do |c|
   .panel.panel-default
-    .panel-body
-      = c.memo
-    .panel-footer 
+    .panel-heading style="padding-bottom: 10px;"
       .pull-left
         span 追加日：
         span = c.created_at.to_s(:jp)
         span style="margin-left:10px;margin-right:10px;" ｜
         span ユーザー：
         span = c.user.name
+        span style="margin-left:10px;margin-right:10px;" ｜
+        span グループ：
+        span = c.category_text
       .pull-right
-        = link_to "削除", { action: "delete_comment", id: c.id}, class: "btn btn-default"
+        = link_to "削除", { action: "delete_comment", id: c.id}, class: "btn btn-default btn-sm"
       .clearfix
-      
+    .panel-body
+      = c.memo
 
 .panel.panel-info
   .panel-heading コメント追加
   .panel-body
     = form_tag url_for(controller: :leads, action: :comment), method: :post
       = text_area :lead_comment, :memo, class: "form-control col-xs-12"
-      = submit_tag "追加", class: "btn btn-default"
+      = submit_tag "追加（事務連絡）", class: "btn btn-default", name: "jimu"
+      = submit_tag "追加（助成金）", class: "btn btn-default", name: "joseikin"

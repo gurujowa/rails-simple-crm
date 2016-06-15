@@ -202,6 +202,12 @@ class LeadsController < ApplicationController
 
   def comment
     lead_comment = LeadComment.new(lead_comment_params)
+    if params[:joseikin].present?
+      lead_comment.category = :joseikin
+    elsif params[:jimu].present?
+      lead_comment.category = :jimu
+    end
+
     lead_comment.user = current_user
     @lead.lead_comments << lead_comment
     if @lead.save

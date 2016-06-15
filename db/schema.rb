@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615002809) do
+ActiveRecord::Schema.define(version: 20160615055102) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -207,11 +207,12 @@ ActiveRecord::Schema.define(version: 20160615002809) do
   end
 
   create_table "lead_comments", force: :cascade do |t|
-    t.integer  "lead_id",    limit: 4,     null: false
-    t.integer  "user_id",    limit: 4,     null: false
-    t.text     "memo",       limit: 65535, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "lead_id",    limit: 4,                      null: false
+    t.integer  "user_id",    limit: 4,                      null: false
+    t.text     "memo",       limit: 65535,                  null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.string   "category",   limit: 255,   default: "jimu", null: false
   end
 
   add_index "lead_comments", ["lead_id"], name: "index_lead_comments_on_lead_id", using: :btree
