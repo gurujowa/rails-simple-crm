@@ -47,11 +47,13 @@ jQuery ->
     return false 
 
 
-  $('#lead-show-tab a[data-toggle="tab"]').on 'show.bs.tab', (e) ->
-    localStorage.setItem('lastTab', $(this).attr('href'))
-  lastTab = localStorage.getItem('lastTab')
-  if (lastTab) 
-    $('#lead-show-tab a[href="' + lastTab + '"]').tab('show')
+  if(0 < $("#lead-show-tab").size())
+    pk = $("#lead-show-tab").data("pk")
+    $('#lead-show-tab a[data-toggle="tab"]').on 'show.bs.tab', (e) ->
+      localStorage.setItem('lead-tab-'+ pk, $(this).attr('href'))
+    lastTab = localStorage.getItem('lead-tab-' + pk)
+    if (lastTab) 
+      $('#lead-show-tab a[href="' + lastTab + '"]').tab('show')
 
 @reloadWithFormat = (format) ->
   url = "#{location.protocol}//#{location.host}/leads.#{format}#{location.search}"
