@@ -43,6 +43,10 @@ class LeadHistoriesController < ApplicationController
   
   def zip
     @lead_histories = LeadHistory.status_zip
+    respond_to do |format|
+      format.html
+      format.csv { send_csv @lead_histories.to_csv }
+    end
   end
 
   def sent

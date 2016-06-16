@@ -12,7 +12,7 @@ class LeadHistory < ActiveRecord::Base
   validates :lead_history_status_id, presence: true  
 
   scope  :exclude_initial, lambda{ where('created_at > ?', DateTime.new(2014,06,27))}
-  scope  :status_zip, lambda{ where('lead_history_status_id = ?', 8).order("approach_day DESC")}
+  scope  :status_zip, lambda{ where('lead_history_status_id = ?', 8).where('created_at > ?', Time.current.ago(3.month)).order("approach_day DESC")}
   scope  :sent_list, lambda{ where('lead_histories.shipped_at is not null').order("approach_day DESC")}
 
   has_many :lead_history_attachments
@@ -58,10 +58,10 @@ class LeadHistory < ActiveRecord::Base
 
   def self.to_csv
     CSV.generate do |csv|
-      csv << column_names
+      csv << column_names + ["lead_zip", "lead_address", "lead_persion"]
       all.each do |l|
         values = l.attributes.values_at(*column_names)
-        csv << values
+        csv << values + [l.lead.zipcode, l.lead.full_address, l.lead.person_name]
       end
     end
   end
