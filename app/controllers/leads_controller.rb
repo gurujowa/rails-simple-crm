@@ -7,7 +7,7 @@ class LeadsController < ApplicationController
   # GET /leads
   def index
       pq = params[:q]
-      leads = Lead.group(:name)
+      leads = Lead.group(:name).joins(:lead_histories)
       leads = set_between_dates(leads)
 
       if params[:status_any].present?
@@ -48,11 +48,6 @@ class LeadsController < ApplicationController
       if params[:tag_name].present?
         leads = leads.tagged_with(params[:tag_name])
         @tag_name = params[:tag_name]
-      end
-
-      #rails4.2になって、orderを設定している場合にjoinしてくれない問題の対応
-      if params[:q].present? && params[:q][:s].present?
-        leads = leads.joins(:lead_histories)
       end
 
       @q = leads.search(pq)
