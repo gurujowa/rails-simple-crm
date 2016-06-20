@@ -7,7 +7,7 @@ class LeadsController < ApplicationController
   # GET /leads
   def index
       pq = params[:q]
-      leads = Lead.group(:name).joins(:lead_histories)
+      leads = Lead.group(:name)
       leads = set_between_dates(leads)
 
       if params[:status_any].present?
@@ -51,11 +51,11 @@ class LeadsController < ApplicationController
       end
 
       @q = leads.search(pq)
-      @leads = @q.result.includes(:lead_histories).paginate(page: params[:page],per_page: 100)
+      @leads = @q.result.eager_load(:lead_histories).paginate(page: params[:page],per_page: 100)
 
       respond_to do |format|
         format.html
-        format.csv { send_csv @q.result.includes(:lead_histories).paginate(page: 1,per_page: 30000).to_csv }
+        format.csv { send_csv @q.result.eager_load(:lead_histories).paginate(page: 1,per_page: 30000).to_csv }
       end
   end
 
