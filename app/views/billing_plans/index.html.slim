@@ -11,6 +11,7 @@ table.default_datatables
       th 金額
       th 請求開始
       th 請求終了
+      th 複製
       th PDF
   tbody
     - @billing_plans.each do |billing_plan|
@@ -21,4 +22,6 @@ table.default_datatables
         td = number_to_currency billing_plan.tax_include_price 
         td = billing_plan.bill_start
         td = billing_plan.bill_end
+        td = link_to '複製', new_billing_plan_path(dup_id: billing_plan.id), :class => "btn btn-default"
         td = link_to "PDF", billing_plan_path(billing_plan, format: :pdf), :class => "btn btn-default"
+

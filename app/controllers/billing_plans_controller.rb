@@ -32,8 +32,14 @@ class BillingPlansController < ApplicationController
 
   # GET /billing_plans/new
   def new
-    @billing_plan = BillingPlan.new
-    @billing_plan.billing_plan_lines.new
+    if params[:dup_id].present?
+      parent = BillingPlan.find(params[:dup_id])
+      clone = parent.deep_clone :include => :billing_plan_lines
+      @billing_plan = clone
+    else
+      @billing_plan = BillingPlan.new
+      @billing_plan.billing_plan_lines.new
+      end
     if params[:lead_id].present?
       @billing_plan.lead_id = params[:lead_id]
     end
