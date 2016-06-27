@@ -58,6 +58,7 @@ html
                   li = link_to "コース検索" , {controller: "courses", action: "index"}
                   li = link_to "カレンダー", {controller: "courses", action: "calendar"}
                   li = link_to "助成金一覧", {controller: "subsities", action: "index"}
+                  li = link_to "助成金タスクCSV出力", {controller: "subsities", action: "index", format: :csv}
 
             li.dropdown
               = link_to "講師", "estimates", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}

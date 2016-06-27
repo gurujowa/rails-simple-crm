@@ -6,6 +6,10 @@ class SubsitiesController < ApplicationController
   # GET /subsities
   def index
     @subsities = Subsity.all
+      respond_to do |format|
+        format.html
+        format.csv { send_csv LeadTask.to_csv }
+      end
   end
 
   # GET /subsities/1
