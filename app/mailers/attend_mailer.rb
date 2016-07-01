@@ -4,7 +4,7 @@ class AttendMailer < ApplicationMailer
   def monthly_mail(teacher_id, periods, go)
     @teacher = Teacher.find(teacher_id)
     @periods = periods.sort_by {|p| p.day }
-    @target_month = Time.current.next_month.strftime("%-m")
+    @target_month = Time.current.strftime("%-m")
     address = get_address_options(go, @teacher.email)
     address.merge!(subject: "#{@target_month}月分研修日程確認依頼")
     mail(address)
