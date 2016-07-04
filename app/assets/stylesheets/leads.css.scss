@@ -5,3 +5,23 @@
 .tag_cloud2 { font-size: 1.2em; }
 .tag_cloud3 { font-size: 1.4em; }
 .tag_cloud4 { font-size: 1.6em; }
+.color-box {
+  float: left;
+  width: 11px;
+  height: 11px;
+  margin-right: 3px;
+  border: 1px solid #ccc;
+  moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.table-lead-history-status th {
+  font-weight: normal;
+  white-space:nowrap;
+}
+
+.table-lead-history-status td {
+  font-weight: normal;
+}
