@@ -1,7 +1,6 @@
 h3 利用助成金
 
 = simple_nested_form_for @lead ,url: url_for(action: :update_tasks), remote: true, wrapper: :vertical_form, html: {class: "form-vertical"} do |f|
-  h3 助成金
   table.table.table-bordered.table-striped#subsities_table
     thead
       tr
@@ -14,19 +13,42 @@ h3 利用助成金
     tbody.add_fields
       = f.simple_fields_for :lead_subsities, wrapper: false
   p = f.link_to_add "行を追加", :lead_subsities, data: {target: "#subsities_table"}, class: "btn btn-default"
-
-  h3 助成金タスク一覧
-  h3 タスク
-  table.table.table-bordered.table-striped#tasks_table
-    thead
-      tr
-        th 名前＊
-        th 助成金
-        th 締切
-        th 完了日
-        th メモ
-    tbody.add_fields
-      = f.simple_fields_for :lead_tasks, wrapper: false
-  p = f.link_to_add "行を追加", :lead_tasks, data: {target: "#tasks_table"}, class: "btn btn-default"
   p.well
     = f.submit "保存する", :class => "btn btn-primary"
+
+#handson-trello-modal
+  button#trello_task_add_button.btn.btn-default  Trello送信
+
+
+h3 Trello タスク
+button#trello_task_add.btn.btn-default data-toggle="modal" data-target="#trello_add_modal" タスク追加
+button#trello_authorize.btn.btn-default Trello認証
+table#trello_task_list.table.table-bordered data-lead="#{@lead.name}"
+  thead
+    tr
+      th ボード
+      th リスト
+      th 名前
+      th 期日
+  tbody
+
+.modal.fade#trello_add_modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title Trelloタスク追加
+      .modal-body
+        .well
+          .subsity
+            span 助成金
+            = select_tag :trello_subsity , options_from_collection_for_select(@subsities, :id, :name), include_blank: true
+          .date
+            span 開始日
+            input type="text" name="start"
+            span 終了日
+            input type="text" name="end"
+          button#trello_load_task_button type="button" class="btn btn-primary" タスク表示
+      .modal-footer
+        button type="button" class="btn btn-default" data-dismiss="modal" 閉じる

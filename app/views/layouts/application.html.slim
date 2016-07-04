@@ -9,6 +9,7 @@ html
     = stylesheet_link_tag  "//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css"
     = javascript_include_tag "//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"
+    = javascript_include_tag "//api.trello.com/1/client.js?key=aaf940bacbec3ab7719130cff7ea08f5"
     = stylesheet_link_tag  "//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"
     = stylesheet_link_tag  "//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"
@@ -59,7 +60,6 @@ html
                   li = link_to "カレンダー", {controller: "courses", action: "calendar"}
                   li = link_to "助成金一覧", {controller: "subsities", action: "index"}
                   li = link_to "助成金タスクCSV出力", {controller: "subsities", action: "index", format: :csv}
-
             li.dropdown
               = link_to "講師", "estimates", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}
               ul.dropdown-menu

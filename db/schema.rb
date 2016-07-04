@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615055102) do
+ActiveRecord::Schema.define(version: 20160627120358) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -446,9 +446,11 @@ ActiveRecord::Schema.define(version: 20160615055102) do
   end
 
   create_table "subsities", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",         limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "trello_board", limit: 255
+    t.string   "trello_list",  limit: 255
   end
 
   create_table "subsity_tasks", force: :cascade do |t|

@@ -46,7 +46,6 @@ jQuery ->
     w.location.href = "/leads/address.csv?" + sData
     return false 
 
-
   if(0 < $("#lead-show-tab").size())
     pk = $("#lead-show-tab").data("pk")
     $('#lead-show-tab a[data-toggle="tab"]').on 'show.bs.tab', (e) ->

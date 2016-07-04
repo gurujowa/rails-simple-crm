@@ -1,5 +1,5 @@
 //= require moment.min
-//= require jquery
+//= require jquery2
 //= require jquery_ujs
 //= require bootstrap
 //= require bootstrap-switch.min
@@ -16,17 +16,17 @@
 //= require selectize.min
 //= require pivot
 //= require pikaday
+//= require handsontable.full.min
 //= require_tree .
 //= require jquery_nested_form
 //
-
 
 $(function(){
   $('.default_datatables').dataTable( {
         "lengthChange":     false,
         "pageLength":     100,
         "bStateSave": true
-    } );  
+    } );
   $( ".datetimepicker" ).datetimepicker({format: "YYYY-MM-DD HH:mm:ss", sideBySide: true});
   $( ".datepicker" ).datetimepicker({enabledHours: false, format: "YYYY-MM-DD"});
   $('.dropdown-toggle').dropdown();

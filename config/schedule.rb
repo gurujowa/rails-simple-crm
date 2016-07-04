@@ -1,7 +1,7 @@
 env :PATH, "/var/www/rails-crm/current/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 set :output, "/home/yamashita/whenever.log"
 
-every :month, :at => '28th 9:00 am'  do
+every "0 9 28 * *"  do
   rake "attend:monthly"
 end
 

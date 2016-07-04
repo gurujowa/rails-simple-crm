@@ -1,17 +1,21 @@
-h1 subsities 一覧
+h1 助成金一覧
 
 = link_to '新規追加', new_subsity_path, :class => 'btn btn-default'
 table.default_datatables
   thead
     tr
       
-      th Name
+      th 助成金名
+      th trello Board
+      th trello List
       th CH
   tbody
     - @subsities.each do |subsity|
       tr
         
         td = subsity.name 
+        td = subsity.trello_board 
+        td = subsity.trello_list 
         td 
           = link_to '編集', edit_subsity_path(subsity), :class => "btn btn-default"
           = link_to '削除', subsity, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn"

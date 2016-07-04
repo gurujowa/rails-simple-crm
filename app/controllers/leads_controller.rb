@@ -157,12 +157,12 @@ class LeadsController < ApplicationController
     @new_lead_history = LeadHistory.new
     @new_lead_history.lead_id = @lead.id
     @new_lead_history.approach_day = DateTime.now()
-
     @lead_history_status_progress = LeadHistoryStatus.progress.values
 
     sex_list
     gon.pk = @lead.id
-
+    @subsities = Subsity.where("trello_board is not null")
+    gon.subsities = @subsities
   end
 
   # GET /leads/new
@@ -257,7 +257,7 @@ class LeadsController < ApplicationController
         unless LeadTask.exists?(lead_subsity_id: ls.id)
           @reflesh = true
           @noty_type = "information"
-          @noty_text += "  新しい自動タスクが入力されました。３秒後に再更新します。"
+          @noty_text += "      trelloタスクが入力されました。ページを更新してください"
           ls.task_list.each do |tasks|
             tasks.save!
           end

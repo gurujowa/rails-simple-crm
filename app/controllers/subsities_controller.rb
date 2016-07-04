@@ -59,6 +59,6 @@ class SubsitiesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def subsity_params
-      params.require(:subsity).permit(:name,subsity_tasks_attributes: [:name, :depend,:month,:day,:_destroy,:id])
+      params.require(:subsity).permit(:name, :trello_board, :trello_list,subsity_tasks_attributes: [:name, :depend,:month,:day,:_destroy,:id])
     end
 end
