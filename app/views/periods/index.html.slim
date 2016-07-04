@@ -1,0 +1,19 @@
+.row
+  table.table.table-bordered.table-striped.default_datatables
+    thead
+      tr
+        th 事業所名
+        th コース名
+        th 実施日
+        th style="white-space:nowrap" レジュメ
+        th メモ
+    tbody
+      - @periods.each do |p|
+        tr
+          td = link_to p.course.lead.name, {controller: "leads", action: "show", id: p.course.lead_id}
+          td = link_to p.course.name, course_path(p.course)
+          td = p.day
+          td
+            a.period_resume_editable data-type="select" data-name="resume_status" data-pk="#{p.id}" data-value="#{p.resume_status}" = p.resume_status_text
+          td
+            a.period_editable data-type="textarea" data-name="memo" data-pk="#{p.id}" = p.memo

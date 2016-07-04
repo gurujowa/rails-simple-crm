@@ -21,6 +21,7 @@
 #
 
 class Period < ActiveRecord::Base
+  extend Enumerize
   has_paper_trail 
 
   validates :day, presence: true  
@@ -35,6 +36,8 @@ class Period < ActiveRecord::Base
   belongs_to :course
   belongs_to :course_address
   belongs_to :user
+
+  enumerize :resume_status, in: [:notstart, :complete]
 
   @@color = ["MidnightBlue", "DarkViolet", "DarkSlateBlue", "Navy",  "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta","LightPink"]
 

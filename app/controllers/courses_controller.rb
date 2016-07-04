@@ -47,18 +47,6 @@ class CoursesController < ApplicationController
     render :attend, :layout => "attend"
   end
 
-  def progress
-    @periods = Period.where(id: 0..10)
-  end
-
-  def progress_update
-    params[:q].each do |q|
-      pq = PeriodProgress.new( q[1] )
-      pq.update
-    end
-
-    render json: {success: "更新が完了しました"}
-  end
 
   def list
     c = Course.all
@@ -99,7 +87,6 @@ class CoursesController < ApplicationController
        render "new"
      end
   end
-
   def new
     @course = Course.new
   end

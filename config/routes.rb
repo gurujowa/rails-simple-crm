@@ -4,16 +4,6 @@ Mycrm::Application.routes.draw do
   resources :public_bills
   resources :lead_history_statuses
   resources :lead_interviews, only: [:update]
-  resources :progresses do
-    collection do
-      get "data"
-      post "update"
-      post "update_period"
-    end
-    member do
-      get "period"
-    end
-  end
 
   resources :leads do
     collection do
@@ -132,6 +122,11 @@ Mycrm::Application.routes.draw do
 
 
   resources :contacts, :only => [:destroy]    
+  resources :periods, :only => [:index] do
+    collection do
+      post 'update' 
+    end
+  end
 
   #コース
   resources :courses  do

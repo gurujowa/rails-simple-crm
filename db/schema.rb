@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627120358) do
+ActiveRecord::Schema.define(version: 20160704081806) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -376,9 +376,9 @@ ActiveRecord::Schema.define(version: 20160627120358) do
   end
 
   create_table "periods", force: :cascade do |t|
-    t.date     "day",                                             null: false
-    t.time     "start_time",                                      null: false
-    t.time     "end_time",                                        null: false
+    t.date     "day",                                                  null: false
+    t.time     "start_time",                                           null: false
+    t.time     "end_time",                                             null: false
     t.time     "break_start"
     t.time     "break_end"
     t.integer  "teacher_id",        limit: 4
@@ -386,14 +386,15 @@ ActiveRecord::Schema.define(version: 20160627120358) do
     t.text     "memo",              limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "resume_flg",                      default: false, null: false
-    t.boolean  "report_flg",                      default: false, null: false
+    t.boolean  "resume_flg",                      default: false,      null: false
+    t.boolean  "report_flg",                      default: false,      null: false
     t.string   "google_id",         limit: 255
-    t.boolean  "equipment_flg",                   default: false, null: false
-    t.boolean  "attend_flg",                      default: false, null: false
+    t.boolean  "equipment_flg",                   default: false,      null: false
+    t.boolean  "attend_flg",                      default: false,      null: false
     t.integer  "user_id",           limit: 4
     t.integer  "course_address_id", limit: 4
     t.datetime "attend_date"
+    t.string   "resume_status",     limit: 255,   default: "notstart", null: false
   end
 
   add_index "periods", ["course_address_id"], name: "index_periods_on_course_address_id", using: :btree

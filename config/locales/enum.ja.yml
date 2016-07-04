@@ -44,6 +44,10 @@ ja:
       client_type:
         company: 既存客
         lead: 新規客
+    period:
+      resume_status:
+        notstart: 未着手
+        complete: 完了
     estimate:
       client_type:
         company: 既存客
