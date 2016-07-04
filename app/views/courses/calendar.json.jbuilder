@@ -5,4 +5,5 @@ json.array! @periods do |j2, p|
   j2.url "/courses/" + p.course.id.to_s + "/edit"
   j2.number p.number
   j2.total_number p.total_number
+  j2.className "course-calendar-#{p.resume_status}"
 end

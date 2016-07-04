@@ -31,7 +31,6 @@ getCalendarSources = ->
       url:"/courses/calendar.json"
       color: "Maroon"
       textColor: "white"
-      borderColor: "white"
       cache: true
     })
   if $("#course_task_check").prop("checked")
