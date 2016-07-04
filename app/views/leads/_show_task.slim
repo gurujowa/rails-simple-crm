@@ -16,12 +16,12 @@ h3 利用助成金
   p.well
     = f.submit "保存する", :class => "btn btn-primary"
 
-#handson-trello-modal
+/#handson-trello-modal
   button#trello_task_add_button.btn.btn-default  Trello送信
 
 
 h3 Trello タスク
-button#trello_task_add.btn.btn-default data-toggle="modal" data-target="#trello_add_modal" タスク追加
+/button#trello_task_add.btn.btn-default data-toggle="modal" data-target="#trello_add_modal" タスク追加
 button#trello_authorize.btn.btn-default Trello認証
 table#trello_task_list.table.table-bordered data-lead="#{@lead.name}"
   thead
@@ -32,7 +32,7 @@ table#trello_task_list.table.table-bordered data-lead="#{@lead.name}"
       th 期日
   tbody
 
-.modal.fade#trello_add_modal
+/.modal.fade#trello_add_modal
   .modal-dialog
     .modal-content
       .modal-header
