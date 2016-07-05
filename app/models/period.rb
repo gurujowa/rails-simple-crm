@@ -37,7 +37,7 @@ class Period < ActiveRecord::Base
   belongs_to :course_address
   belongs_to :user
 
-  enumerize :resume_status, in: [:notstart, :complete]
+  enumerize :resume_status, in: [:notstart, :unnecessary, :complete]
 
   @@color = ["MidnightBlue", "DarkViolet", "DarkSlateBlue", "Navy",  "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta","LightPink"]
 

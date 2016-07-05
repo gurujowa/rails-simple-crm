@@ -2,7 +2,7 @@ class PeriodsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @periods = Period.where("day >= ?",Time.current.prev_year).order("day desc")
+    @periods = Period.where("day >= ?",Time.current.prev_month).order("day desc")
   end
 
   def update
