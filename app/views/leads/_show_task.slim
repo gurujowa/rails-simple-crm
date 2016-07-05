@@ -13,6 +13,18 @@ h3 利用助成金
     tbody.add_fields
       = f.simple_fields_for :lead_subsities, wrapper: false
   p = f.link_to_add "行を追加", :lead_subsities, data: {target: "#subsities_table"}, class: "btn btn-default"
+  h3 助成金タスク一覧
+  table.table.table-bordered.table-striped#tasks_table
+    thead
+      tr
+        th 名前＊
+        th 助成金
+        th 締切
+        th 完了日
+        th メモ
+    tbody.add_fields
+      = f.simple_fields_for :lead_tasks, wrapper: false
+  p = f.link_to_add "行を追加", :lead_tasks, data: {target: "#tasks_table"}, class: "btn btn-default"
   p.well
     = f.submit "保存する", :class => "btn btn-primary"
 
