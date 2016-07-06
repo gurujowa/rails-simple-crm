@@ -73,7 +73,7 @@ class PublicBillsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def public_bill_params
-      params.require(:public_bill).permit(:name, :publish_date, :send_flg,
+      params.require(:public_bill).permit(:name,:bill_number, :publish_date, :send_flg,
       :company_name, :invoice_date, :payment_date, :memo, :public_bill_lines_attributes => [:id, :name, :detail, :unit_price, :quantity, :tax_rate, :_destroy])
     end
 end

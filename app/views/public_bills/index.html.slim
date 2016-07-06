@@ -4,6 +4,7 @@ h1 役所用請求書 一覧
 table.default_datatables.table-bordered.table-striped
   thead
     tr
+      th 請求番号
       th 請求書名
       th 発行日
       th 会社名
@@ -13,6 +14,7 @@ table.default_datatables.table-bordered.table-striped
   tbody
     - @public_bills.each do |public_bill|
       tr
+        td = public_bill.bill_number_format
         td = public_bill.name 
         td = public_bill.publish_date 
         td = public_bill.company_name 

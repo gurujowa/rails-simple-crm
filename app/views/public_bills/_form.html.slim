@@ -5,6 +5,7 @@
   = f.input :company_name
   = f.input :invoice_date, as: :date_picker
   = f.input :payment_date, as: :date_picker
+  = f.input :bill_number, hint: "請求書の請求番号になります。空欄の場合は、もともとのIDが入ります。"
   = f.input :memo, hint: "書類下の注釈を追加することが出来ます。"
 
   table.table.table-striped.table-bordered#pbl
