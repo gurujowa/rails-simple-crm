@@ -47,7 +47,9 @@ namespace :attend do
     else
       raise "args type only today or tomorrow"
     end
-    AttendMailer.alert_mail(periods).deliver_now
+    if periods.present?
+      AttendMailer.alert_mail(periods).deliver_now
+    end
   end
 
 end

@@ -89,3 +89,5 @@ gem 'validates_email_format_of'
 gem 'business_time'
 gem 'holiday_jp'
 gem 'whenever'
+gem 'newrelic_rpm'
+
