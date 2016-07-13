@@ -1,7 +1,7 @@
 module OrderSheetsHelper
 
   def order_sheet_send_to_selectize_option(teachers,send_to = nil)
-    list = teachers.map{|t| t.name}
+    list = teachers.map{|t| t.short_name}
     if send_to.present?
       return list.push(@order_sheet.send_to).uniq
     else

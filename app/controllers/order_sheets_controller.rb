@@ -61,7 +61,7 @@ class OrderSheetsController < ApplicationController
         redirect_to :id => params[:id],:debug => true, :format => :pdf, action: :report
       }
       format.pdf {
-        render pdf: @order_sheet.title + " - 発注書",
+        render pdf: "#{@order_sheet.title} (#{@order_sheet.send_to})  - 発注書",
                encoding: 'UTF-8',
                zoom: "0.9",
                layout: 'pdf.html',
