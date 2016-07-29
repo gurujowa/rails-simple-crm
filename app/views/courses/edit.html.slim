@@ -1,37 +1,9 @@
 - unless @course.lead.contract_flg
   p.bg-danger 「契約済み」ではないお客様のコースを作成しています。契約している場合、契約済みにしてください
-= simple_nested_form_for @course , wrapper: :vertical_form, html: {class: "form-vertical"} do |f|
+= simple_nested_form_for @course , wrapper: :vertical_form,html: {class: "form-vertical"} do |f|
   = f.error_notification 
+  h1.page-header コース情報
   = render partial: 'form', :locals => {:f=> f} 
-  table.table#periods_table
-    thead
-      tr
-        th 日付
-        th.col-xs-1  開始時刻
-        th.col-xs-1  終了時刻
-        th.col-xs-1  休憩開始
-        th.col-xs-1  休憩終了
-        th.col-xs-2  講師
-        th  立会人
-        th  会場
-        th  メモ
-        th  削除
-    tbody.add_fields
-      = f.simple_fields_for :periods, wrapper: false
-  p = f.link_to_add "追加", :periods, data: {target: "#periods_table"}, class: "btn btn-default"
-
-  h3 コース用タスク
-  table.table#tasks_table
-    thead
-      tr
-        th 名前＊
-        th 開始＊
-        th 終了
-        th メモ
-        th 削除
-    tbody.add_fields
-      = f.simple_fields_for :course_tasks, wrapper: false
-  p = f.link_to_add "行を追加", :course_tasks, data: {target: "#tasks_table"}, class: "btn btn-default"
   p.well
     = f.submit "保存する", :class => "btn btn-primary"
     = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"

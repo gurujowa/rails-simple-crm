@@ -22,7 +22,13 @@ class TeachersController < ApplicationController
     @teacher = Teacher.new
   end
 
-  # GET /teachers/1/edit
+  def booking
+    if params[:id].present?
+      @teacher_periods = Period.where(teacher: params[:id])
+    end
+    @active_teachers = Teacher.is_active.includes(:periods)
+  end
+
   def edit
   end
 

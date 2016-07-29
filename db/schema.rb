@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706020821) do
+ActiveRecord::Schema.define(version: 20160725070337) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -395,6 +395,8 @@ ActiveRecord::Schema.define(version: 20160706020821) do
     t.integer  "course_address_id", limit: 4
     t.datetime "attend_date"
     t.string   "resume_status",     limit: 255,   default: "notstart", null: false
+    t.integer  "price",             limit: 4
+    t.integer  "train_cost",        limit: 4
   end
 
   add_index "periods", ["course_address_id"], name: "index_periods_on_course_address_id", using: :btree
@@ -494,6 +496,15 @@ ActiveRecord::Schema.define(version: 20160706020821) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
+
+  create_table "teacher_bookings", force: :cascade do |t|
+    t.date     "booking_date"
+    t.integer  "teacher_id",   limit: 4
+    t.datetime "expired_at"
+    t.string   "name",         limit: 255
+  end
+
+  add_index "teacher_bookings", ["teacher_id"], name: "index_teacher_bookings_on_teacher_id", using: :btree
 
   create_table "teacher_order_courses", force: :cascade do |t|
     t.integer "teacher_order_id", limit: 4
@@ -596,4 +607,5 @@ ActiveRecord::Schema.define(version: 20160706020821) do
   add_foreign_key "lead_subsities", "leads"
   add_foreign_key "lead_subsities", "subsities"
   add_foreign_key "periods", "course_addresses"
+  add_foreign_key "teacher_bookings", "teachers"
 end

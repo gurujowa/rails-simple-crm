@@ -1,0 +1,9 @@
+#loading.hide loading
+.col-sm-2
+  div.list-group
+    - @active_teachers.each do |t|
+      a.teacher-booking-trigger.list-group-item href="#" data-url="#{url_for(action: :booking, format: :json, id: t.id)}" 
+        = t.short_name
+        span.badge = t.periods.length
+.col-sm-10
+  #teacher-booking-calendar

@@ -102,7 +102,11 @@ Mycrm::Application.routes.draw do
     end
   end
 
-  resources :teachers
+  resources :teachers do
+    collection do
+      get 'booking'
+    end
+  end
   get 'teachers/update/:id/:type' => 'teachers#up_bool'
   get 'teachers_flag' => 'teachers#flag'
 

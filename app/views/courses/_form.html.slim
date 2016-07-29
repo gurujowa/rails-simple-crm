@@ -7,7 +7,15 @@ ul
 
 = f.input :students
 = f.input :memo
-#addresses_field
-  .add_fields
-    = f.simple_fields_for :course_addresses, wrapper: :horizontal_form
-p = f.link_to_add "会場の追加", :course_addresses, data: {target: "#addresses_field"}, class: "btn btn-default"
+
+h1.page-header コマ情報
+.row
+  = f.simple_fields_for :periods, wrapper: :vertical_form
+  #periods_field
+= f.link_to_add "コマを追加", :periods, data: {target: "#periods_field"}, class: "btn btn-default"
+
+h1.page-header 会場情報
+.row
+  = f.simple_fields_for :course_addresses, wrapper: :vertical_form
+  #addresses_field
+= f.link_to_add "会場の追加", :course_addresses, data: {target: "#addresses_field"}, class: "btn btn-default"

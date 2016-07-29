@@ -135,11 +135,17 @@ ja:
         all_day: 全日
         memo: メモ
         memo: メモ
-      campaign:
-        name: キャンペーン名
-        bill: 費用
-        sent: 送信件数
-        start_date: 開始日
+      period:
+        day: 日
+        start_time: 開始時間
+        end_time: 終了時間
+        break_start: 休憩開始
+        break_end: 休憩終了
+        teacher: 講師
+        price: 謝金
+        train_cost: 交通費
+        user: 担当者
+        course_address: 会場
         memo: メモ
       course_address:
         name: 会場名

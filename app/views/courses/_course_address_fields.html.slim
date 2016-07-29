@@ -1,25 +1,27 @@
-.fields.well
-  h4 会場情報
-  = f.input :name
-  = f.input :address
-  = f.input :station
-  = f.input :responsible
-  = f.input :tel
-  .form-group
-    label.control-label.col-sm-3 プロジェクター
-    .col-sm-9
-      label あり
-      = f.radio_button :projector, "true"
-      label なし
-      = f.radio_button :projector, "false"
-      = f.text_field :projector_detail
-  .form-group
-    label.control-label.col-sm-3 ホワイトボード
-    .col-sm-9
-      label あり
-      = f.radio_button :board, "true"
-      label なし
-      = f.radio_button :board, "false"
-      = f.text_field :board_detail
-  = f.input :memo
-  = f.link_to_remove "削除", class: "btn btn-default"
+.fields.col-xs-12.col-sm-6
+  .panel.panel-default
+    .panel-body
+      = f.input :name
+      = f.input :address
+      = f.input :station
+      = f.input :responsible
+      = f.input :tel
+      .form-group
+        label.control-label.col-sm-3 プロジェクター
+        .col-sm-9
+          label あり
+          = f.radio_button :projector, "true"
+          label なし
+          = f.radio_button :projector, "false"
+          = f.text_field :projector_detail
+      .form-group
+        label.control-label.col-sm-3 ホワイトボード
+        .col-sm-9
+          label あり
+          = f.radio_button :board, "true"
+          label なし
+          = f.radio_button :board, "false"
+          = f.text_field :board_detail
+      = f.input :memo
+    .panel-footer
+      = f.link_to_remove "削除", class: "btn btn-default"

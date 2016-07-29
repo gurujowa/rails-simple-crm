@@ -73,34 +73,54 @@ h1 コース詳細画面
         td = a.memo
 
 h2 コマ情報
+
+.panel-group#accordion role="tablist" aria-multiselectable="true"
+  - @course.periods.each do |p|
+    .panel.panel-default
+      .panel-heading role="tab" id="heading#{p.id}"
+        .panel-title
+          a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse#{p.id}" aria-expanded="true" aria-controls="collapse#{p.id}"
+            = "#{p.day.to_s(:jp)} #{p.start_date.to_s(:time)}～#{p.end_date.to_s(:time)}(#{p.teacher.name})"
+      div.panel-collapse.collapse id="collapse#{p.id}" role="tabpanel" aria-labelledby="heading#{p.id}"
+        .panel-body
+          table.table
+            tr
+              th 休憩開始
+              td = p.break_start(:time)
+            tr
+              th 休憩終了
+              td = p.break_end(:time)
+            tr
+              th 講師
+              td = p.teacher.name
+            tr
+              th 立会人
+              td = p.user_name
+            tr
+              th 出欠
+              td = p.attend_date.to_s(:time) if p.attend_date.present?
+            tr
+              th 会場
+              td = p.course_address.name if p.course_address.present?
+            tr
+              th 謝金
+              td = p.price
+            tr
+              th 交通費
+              td = p.train_cost
+            tr
+              th 合計時間
+              td = convert_min p.total_time
+            tr
+              th メモ
+              td = p.memo
+
+
 table.table.table-bordered.table-striped
   thead
     tr
-      th 日付
-      th 開始時刻
-      th 終了時刻
-      th 休憩開始
-      th 休憩終了
-      th 講師
-      th 立会人
-      th 出欠
-      th 会場
-      th 合計時間
-      th メモ
   tbody
-    - @course.periods.each do |p|
       tr
-        td = p.day.to_s(:jp)
-        td = p.start_date.to_s(:time)
-        td = p.end_date.to_s(:time)
-        td = p.break_start(:time)
-        td = p.break_end(:time)
-        td = p.teacher.name
-        td = p.user_name
-        td = p.attend_date.to_s(:time) if p.attend_date.present?
-        td = p.course_address.name if p.course_address.present?
-        td = convert_min p.total_time
-        td style="width:40%" = p.memo
 
 .edit_button
 = link_to '編集', edit_course_path, :class => "btn btn-info"
