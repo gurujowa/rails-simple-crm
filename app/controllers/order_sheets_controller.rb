@@ -103,7 +103,8 @@ class OrderSheetsController < ApplicationController
   def order_sheet_params
     params.require(:order_sheet).permit(
     :title,:order_date, :company_info, :mention, :memo, :send_to, :course_info,
-    order_sheet_lines_attributes: [:invoice_date, :payment_date,:id,:price, :memo, :_destroy]
+    order_sheet_lines_attributes: [:invoice_date, :payment_date,:id,:price, :memo, :_destroy],
+    period_ids: []
     )
   end
 

@@ -3,6 +3,8 @@ jQuery ->
     $("#order_sheet_send_to").selectize({create: true, sortField: "text"})
     $("#order_course").select2().on "select2:select", (e) ->
       getCourseText(e.params.data.id)
+  $("#order_sheet_period_ids").select2
+    placeholder: "発注済みにするコマを選択してください"
 
 getCourseText = (val) ->
   url = "/courses/" + val + ".json"

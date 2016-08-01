@@ -112,6 +112,9 @@ h2 コマ情報
               th 合計時間
               td = convert_min p.total_time
             tr
+              th 発注書
+              td = "#{p.order_sheet&.title} - 発注日:#{p.order_sheet&.order_date}"
+            tr
               th メモ
               td = p.memo
 

@@ -32,6 +32,8 @@ class Period < ActiveRecord::Base
   validates :break_end, :presence => {if:  Proc.new {self.break_start.present?} , message: "休憩開始が入力されている場合、空には出来ません"}
   validates :resume_flg,  :inclusion => {:in => [true, false]}
   validates :report_flg,  :inclusion => {:in => [true, false]}
+
+  belongs_to :order_sheet
   belongs_to :teacher
   belongs_to :course
   belongs_to :course_address
@@ -73,6 +75,10 @@ class Period < ActiveRecord::Base
     else
       return "Black"
     end
+  end
+
+  def title
+    return "#{self.course.name} - #{self.teacher.short_name} - #{self.day}"
   end
 
   def getTotal

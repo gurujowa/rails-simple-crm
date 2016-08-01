@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725070337) do
+ActiveRecord::Schema.define(version: 20160801050542) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -397,9 +397,11 @@ ActiveRecord::Schema.define(version: 20160725070337) do
     t.string   "resume_status",     limit: 255,   default: "notstart", null: false
     t.integer  "price",             limit: 4
     t.integer  "train_cost",        limit: 4
+    t.integer  "order_sheet_id",    limit: 4
   end
 
   add_index "periods", ["course_address_id"], name: "index_periods_on_course_address_id", using: :btree
+  add_index "periods", ["order_sheet_id"], name: "index_periods_on_order_sheet_id", using: :btree
   add_index "periods", ["user_id"], name: "index_periods_on_user_id", using: :btree
 
   create_table "public_bill_lines", force: :cascade do |t|
@@ -607,5 +609,6 @@ ActiveRecord::Schema.define(version: 20160725070337) do
   add_foreign_key "lead_subsities", "leads"
   add_foreign_key "lead_subsities", "subsities"
   add_foreign_key "periods", "course_addresses"
+  add_foreign_key "periods", "order_sheets"
   add_foreign_key "teacher_bookings", "teachers"
 end

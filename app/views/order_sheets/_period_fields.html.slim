@@ -1,0 +1,3 @@
+tr.fields
+  td = f.select :id, Period.all.map {|p| ["#{p.day} - #{p.course.name} - #{p.teacher.short_name}", p.id]}
+  td = f.link_to_remove "削除",  class: "btn btn-default"
