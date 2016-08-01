@@ -78,7 +78,7 @@ class Period < ActiveRecord::Base
   end
 
   def title
-    return "#{self.course.name} - #{self.teacher.short_name} - #{self.day}"
+    return "#{self.course.lead.corp_name} - #{self.course.name} - #{self.teacher.short_name} - #{self.day}"
   end
 
   def getTotal

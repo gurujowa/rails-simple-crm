@@ -5,6 +5,7 @@ jQuery ->
       getCourseText(e.params.data.id)
   $("#order_sheet_period_ids").select2
     placeholder: "発注済みにするコマを選択してください"
+    closeOnSelect: false
 
 getCourseText = (val) ->
   url = "/courses/" + val + ".json"
