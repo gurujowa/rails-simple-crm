@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802000613) do
+ActiveRecord::Schema.define(version: 20160802061345) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -375,6 +375,16 @@ ActiveRecord::Schema.define(version: 20160802000613) do
     t.text     "company_info", limit: 65535
   end
 
+  create_table "period_tasks", force: :cascade do |t|
+    t.integer  "period_id",  limit: 4,                 null: false
+    t.integer  "task_type",  limit: 4,                 null: false
+    t.boolean  "checked",              default: false, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "period_tasks", ["period_id"], name: "index_period_tasks_on_period_id", using: :btree
+
   create_table "periods", force: :cascade do |t|
     t.date     "day",                                                  null: false
     t.time     "start_time",                                           null: false
@@ -608,6 +618,7 @@ ActiveRecord::Schema.define(version: 20160802000613) do
   add_foreign_key "lead_contracts", "leads"
   add_foreign_key "lead_subsities", "leads"
   add_foreign_key "lead_subsities", "subsities"
+  add_foreign_key "period_tasks", "periods"
   add_foreign_key "periods", "course_addresses"
   add_foreign_key "periods", "order_sheets"
   add_foreign_key "teacher_bookings", "teachers"

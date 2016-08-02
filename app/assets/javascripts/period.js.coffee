@@ -20,13 +20,15 @@ jQuery ->
       method: "POST"
       url: "/periods/update"
 
-  if(0 < $(".period_resume_editable").size())
-    $(".period_resume_editable").editable
+
+  if(0 < $(".period-check-editable").size())
+    $(".period-check-editable").editable
       url: "/periods/update"
-      type: "select"
+      type: "checklist"
       method: "POST"
       source: [
-        {value: "notstart", text: "未着手"}
-        {value: "unnecessary", text: "不要"}
-        {value: "complete", text: "完了"}
+        {value: 0, text: "講師連絡"}
+        {value: 1, text: "レジュメ到着"}
+        {value: 2, text: "正誤チェック"}
+        {value: 3, text: "不要"}
       ]

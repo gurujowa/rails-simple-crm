@@ -127,6 +127,7 @@ Mycrm::Application.routes.draw do
   resources :contacts, :only => [:destroy]    
   resources :periods, :only => [:index] do
     collection do
+      post 'checklist' 
       post 'update' 
     end
   end

@@ -80,7 +80,7 @@ h2 コマ情報
       .panel-heading role="tab" id="heading#{p.id}"
         .panel-title
           a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse#{p.id}" aria-expanded="true" aria-controls="collapse#{p.id}"
-            = "#{p.day.to_s(:jp)} #{p.start_date.to_s(:time)}～#{p.end_date.to_s(:time)}(#{p.teacher.name})  #{"(発注済)" if p.order_sheet.present?}"
+            = "#{p.day.to_s(:jp)} #{p.start_date.to_s(:time)}～#{p.end_date.to_s(:time)}(#{p.teacher.name})  #{"(発注済)" if p.order_sheet.present?} #{"(発送済)" if p.resume_complete_flag}"
       div.panel-collapse.collapse id="collapse#{p.id}" role="tabpanel" aria-labelledby="heading#{p.id}"
         .panel-body
           table.table
@@ -115,19 +115,17 @@ h2 コマ情報
               th 発注書
               td = "#{p.order_sheet&.title} - 発注日:#{p.order_sheet&.order_date}"
             tr
+              th タスク
+              td
+                a.period-check-editable data-pk="#{p.id}" data-value="#{p.checked_task}" data-url="#{url_for(controller: :periods,action: :checklist)}"
+            tr
               th メモ
               td = p.memo
 
 
-table.table.table-bordered.table-striped
-  thead
-    tr
-  tbody
-      tr
-
 .edit_button
-= link_to '編集', edit_course_path, :class => "btn btn-info"
-= link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
+  = link_to '編集', edit_course_path, :class => "btn btn-info"
+  = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
 .row
   .col-sm-12
 

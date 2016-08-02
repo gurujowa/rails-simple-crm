@@ -24,6 +24,8 @@ class Period < ActiveRecord::Base
   extend Enumerize
   has_paper_trail 
 
+  has_many :period_tasks
+
   validates :day, presence: true  
   validates :start_time, presence: true  
   validates :end_time, presence: true  
@@ -146,6 +148,23 @@ class Period < ActiveRecord::Base
   end
 
 
+  def checked_task
+    list = []
+    self.period_tasks.each do |t|
+      list << t["task_type"] if t.checked == true
+    end
+    return list
+  end
+
+  def resume_complete_flag
+    if self.checked_task.include?(PeriodTask.task_types[:unnecessary])
+      return true
+    elsif ([0,1,2] -  self.checked_task).empty?
+      return true
+    else
+      return false
+    end
+  end
 
   alias total_time getTotal
 end
