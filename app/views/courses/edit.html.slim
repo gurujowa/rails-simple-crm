@@ -1,3 +1,10 @@
+ul.breadcrumb
+  li Home 
+  li = link_to @course.lead.name, edit_lead_path(@course.lead) 
+  li = link_to @course.name, @course
+  li Edit
+
+
 - unless @course.lead.contract_flg
   p.bg-danger 「契約済み」ではないお客様のコースを作成しています。契約している場合、契約済みにしてください
 = simple_nested_form_for @course , wrapper: :vertical_form,html: {class: "form-vertical"} do |f|

@@ -1,7 +1,10 @@
 .fields.col-xs-12.col-sm-6.col-md-4
   .panel.panel-primary
     .panel-heading
-      .panel-title #{(f.index.to_i+1).to_s} 回目
+      - if f.object.persisted?
+        .panel-title #{(f.index.to_i+1).to_s} 回目 #{"(発注済)" if f.object.order_sheet.present?}
+      - else
+        .panel-title 新規レコード
     .panel-body
       = f.input :day , as: :date_picker
       = f.input :start_time, as: :time_picker

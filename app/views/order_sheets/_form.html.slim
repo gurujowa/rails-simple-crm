@@ -20,7 +20,7 @@
     .panel-heading
       .panel-title 発注済みフラグ
     .panel-body
-      = f.collection_select :period_ids, Period.order(:day), :id, :title,{  include_blank: true}, {multiple: true}
+      = f.collection_select :period_ids, @ordered_period, :id, :title, {  include_blank: true}, {multiple: true}
 
   h1.page-header 請求情報
   table.table.table-borderd.table-striped#to_lines
