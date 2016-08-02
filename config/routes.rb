@@ -4,6 +4,7 @@ Mycrm::Application.routes.draw do
   resources :public_bills
   resources :lead_history_statuses
   resources :lead_interviews, only: [:update]
+  resources :lead_comments
 
   resources :leads do
     collection do
@@ -20,8 +21,6 @@ Mycrm::Application.routes.draw do
     member do
       get "add_mylist"
       get "add_flg"
-      post "comment"
-      get "delete_comment"
       patch "update_tasks"
       get "add_task"
       get "contract"

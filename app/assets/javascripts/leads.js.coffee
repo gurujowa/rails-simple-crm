@@ -24,6 +24,13 @@ jQuery ->
         type: "PUT"
       pk: gon.pk
 
+  if(0 < $(".lead_comment_editable").size())
+    $(".lead_comment_editable").editable
+      url: $(this).data("url")
+      ajaxOptions:
+        type: "put"
+      pk: $(this).data("pk")
+
   if(0 < $("#lead_sex_editable").size())
     $("#lead_sex_editable").editable
       url: "/leads/up_column"

@@ -176,42 +176,6 @@ class LeadsController < ApplicationController
     @tag_list = gon.tag_list
   end
 
-  # GET /leads/1/edit
-  def edit
-    @tag_name = @lead.tags
-    if @lead.lead_interview.blank?
-      @lead.lead_interview = LeadInterview.new
-    end
-  end
-
-  def delete_comment
-    lead_comment = LeadComment.find(params[:id])
-    lead = lead_comment.lead
-    if lead_comment.destroy
-      redirect_to lead_url(lead), notice: 'コメントが正しく削除されました。'
-    else
-      redirect_to lead_url(lead), notice: 'コメント削除に失敗しました'
-    end
-
-  end
-
-  def comment
-    lead_comment = LeadComment.new(lead_comment_params)
-    if params[:joseikin].present?
-      lead_comment.category = :joseikin
-    elsif params[:jimu].present?
-      lead_comment.category = :jimu
-    end
-
-    lead_comment.user = current_user
-    @lead.lead_comments << lead_comment
-    if @lead.save
-      redirect_to lead_url(@lead), notice: 'コメントが正しく追加されました。'
-    else
-      redirect_to lead_url(@lead), notice: 'コメント追加に失敗しました'
-    end
-  end
-
   # POST /leads
   def create
     @lead = Lead.new(lead_params)
@@ -338,10 +302,6 @@ class LeadsController < ApplicationController
       @next_approach_gt = params[:next_approach_gt]
       @next_approach_lt = params[:next_approach_lt]
       leads
-    end
-
-    def lead_comment_params
-      params.require(:lead_comment).permit(:id,:memo, :user)
     end
 
     # Only allow a trusted parameter "white list" through.
