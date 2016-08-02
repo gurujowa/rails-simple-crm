@@ -10,7 +10,7 @@ class PeriodsController < ApplicationController
       @period = Period.find(params[:pk])
       PeriodTask.task_types.each do |key,val|
         check_record = @period.period_tasks.find_by(task_type: val)
-        flag = params[:value].include?(val.to_s)
+        flag = params[:value].present? ? params[:value].include?(val.to_s) : false
         if check_record.present?
           check_record.update_attributes!(checked: flag)
         else
