@@ -6,11 +6,11 @@ jQuery ->
   $('#period-datatables').on 'draw.dt', ->
     period_editable_draw()
   $('#period-notstart-search-button').click table, ->
-    table.search("未着手").draw()
+    table.search("resume_notcomplete_flag").draw()
   $('#period-unnecessary-search-button').click table, ->
-    table.search("不要").draw()
+    table.search("unnecessary").draw()
   $('#period-complete-search-button').click table, ->
-    table.search("完了").draw()
+    table.search("resume_complete_flag").draw()
   period_editable_draw()
 
 

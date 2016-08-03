@@ -1,5 +1,6 @@
 h2 先月分からのコマが表示されます
 a#period-notstart-search-button.btn.btn-default 未着手
+a#period-unnecessary-search-button.btn.btn-default 不要
 a#period-complete-search-button.btn.btn-default 完了
 .row
   table.table.table-bordered.table-striped#period-datatables
@@ -19,6 +20,11 @@ a#period-complete-search-button.btn.btn-default 完了
           td = p.teacher.short_name
           td = p.day
           td style="white-space:nowrap"
+            .hidden = p.period_tasks.map {|t| t.task_type}
+            - if p.resume_complete_flag
+              .hidden resume_complete_flag
+            - else
+              .hidden resume_notcomplete_flag
             a.period-check-editable data-pk="#{p.id}" data-value="#{p.checked_task}" data-url="#{url_for(action: :checklist)}"
           td
             a.period_editable data-type="textarea" data-name="memo" data-pk="#{p.id}" = p.memo
