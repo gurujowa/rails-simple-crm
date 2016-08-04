@@ -142,7 +142,7 @@ ja:
         break_start: 休憩開始
         break_end: 休憩終了
         teacher: 講師
-        price: 謝金
+        price: 謝金(税込)
         train_cost: 交通費
         user: 担当者
         course_address: 会場

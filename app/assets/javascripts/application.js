@@ -30,8 +30,8 @@ $(function(){
   $( ".datetimepicker" ).datetimepicker({format: "YYYY-MM-DD HH:mm:ss", sideBySide: true});
   $( ".datepicker" ).datetimepicker({enabledHours: false, format: "YYYY-MM-DD"});
   $('.dropdown-toggle').dropdown();
-  $("[data-toggle=tooltip]").tooltip()
-
+  $("[data-toggle=tooltip]").tooltip();
+  $(".simple-form-select2").select2();
 });
 
 $(document).on("nested:fieldAdded", function (event) {
