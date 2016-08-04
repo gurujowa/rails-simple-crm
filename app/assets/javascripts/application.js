@@ -37,6 +37,7 @@ $(function(){
 $(document).on("nested:fieldAdded", function (event) {
   $( ".datetimepicker" ).datetimepicker({format: "YYYY-MM-DD HH:mm:ss", sideBySide: true});
   $( ".datepicker" ).datetimepicker({enabledHours: false, format: "YYYY-MM-DD"});
+  $(".simple-form-select2").select2();
 });
 
 

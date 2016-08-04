@@ -29,7 +29,7 @@ extend Enumerize
   has_many :course_addresses, :dependent => :destroy
   accepts_nested_attributes_for :course_addresses, :allow_destroy => true
 
-  has_many :periods, :dependent => :destroy
+  has_many :periods, -> {order "day ASC"} , dependent: :destroy
   accepts_nested_attributes_for :periods, :allow_destroy => true
 
   has_many :course_tasks, :dependent => :destroy
