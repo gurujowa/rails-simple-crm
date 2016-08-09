@@ -43,6 +43,19 @@ h1 発注書詳細
       tr
         th メモ
         td = @order_sheet.memo
+  .panel.panel-default
+    .panel-heading コマ情報
+    table.table.table-striped.table-borderded
+      tr
+        th 会社名
+        th コース名
+        th 日付
+      - @order_sheet.periods.each do |p|
+        tr
+          td = p.course.lead.name
+          td = p.course.name
+          td = p.day
+
 
   .panel.panel-default
     .panel-heading 請求情報

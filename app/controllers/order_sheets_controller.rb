@@ -97,8 +97,6 @@ class OrderSheetsController < ApplicationController
   def set_form_val
     @courses = Course.all
     @teachers = Teacher.all
-    @ordered_period = Period.where("order_sheet_id is null").order(:day)
-
   end
 
   def order_sheet_params
