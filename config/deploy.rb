@@ -17,14 +17,6 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 
 set :ssh_options, :port => "10234"
 
-#bunlde ‚Ìİ’è
-set :bundle_gemfile, -> { release_path.join('Gemfile') }
-set :bundle_dir, -> { shared_path.join('bundle') }
-set :bundle_flags, '--deployment --quiet'
-set :bundle_without, %w{development test}.join(' ')
-set :bundle_binstubs, -> { shared_path.join('bin') }
-set :bundle_roles, :all
-set :bundle_bins, %w(gem rake rails)
 
 #wheneber‚Ìİ’è
 #set :whenever_command, "bundle exec whenever"
