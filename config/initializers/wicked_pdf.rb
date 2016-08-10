@@ -1,7 +1,7 @@
 require 'rbconfig'
 
 if RbConfig::CONFIG['host_os'] =~ /linux/
-  arch = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'wkhtmltopdf_linux_x64' : 'wkhtmltopdf_linux_386'
+  arch = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'wkhtmltopdf_linux_x86' : 'wkhtmltopdf_linux_386'
 elsif RbConfig::CONFIG['host_os'] =~ /darwin/
   arch = 'wkhtmltopdf_darwin_386'
 else
