@@ -157,7 +157,7 @@
     .panel.panel-info
       .panel-heading 対応履歴
       .panel-body
-        - @lead.lead_histories.each do |h|
+        - @lead.lead_histories.includes(:user,:lead_history_status).each do |h|
           table.table
             thead
               tr
