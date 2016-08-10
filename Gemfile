@@ -69,7 +69,7 @@ gem 'paper_trail'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem "ransack", github: "activerecord-hackery/ransack" 
-gem 'acts-as-taggable-on'
+gem 'acts-as-taggable-on', '~> 4.0'
 gem 'moji'
 gem 'deep_cloneable'
 
