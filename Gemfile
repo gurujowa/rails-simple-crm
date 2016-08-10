@@ -22,7 +22,7 @@ gem 'therubyracer', :platform => :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-gem 'devise'
+gem 'devise', '~> 3.5'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 1.2'
 
 group :development do
   #capistano
-  gem 'capistrano', '~>3.0.0'
+  gem 'capistrano', '~>3.6'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
 end
