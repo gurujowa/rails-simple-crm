@@ -51,7 +51,7 @@ class LeadsController < ApplicationController
       end
 
       @q = leads.search(pq)
-      @leads = @q.result.eager_load(:lead_histories).paginate(page: params[:page],per_page: 100)
+      @leads = @q.result.includes([{lead_histories: [:user, :lead_history_status]} , :user]).paginate(page: params[:page],per_page: 100)
 
       respond_to do |format|
         format.html

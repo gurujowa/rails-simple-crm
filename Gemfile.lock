@@ -84,6 +84,9 @@ GEM
     bootstrap3-datetimepicker-rails (4.14.30)
       momentjs-rails (>= 2.8.1)
     builder (3.2.2)
+    bullet (5.2.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     business_time (0.7.6)
       activesupport (>= 3.1.0)
       tzinfo
@@ -387,6 +390,7 @@ GEM
     unicorn (5.1.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    uniform_notifier (1.10.0)
     validates_email_format_of (1.6.3)
       i18n
     warden (1.2.6)
@@ -407,6 +411,7 @@ DEPENDENCIES
   acts-as-taggable-on (~> 4.0)
   bootstrap-sass (~> 3.1.1)
   bootstrap3-datetimepicker-rails (~> 4.14.30)
+  bullet
   business_time
   capistrano (~> 3.6)
   capistrano-bundler
