@@ -5,7 +5,7 @@ jQuery ->
   if(0 < $("#lead_tag_list").size())
     $("#lead_tag_list").select2
       width: "400px"
-      tags: gon.tag_list
+      tags: true
   $("#lead_tag_list_search").select2
     width: "400px"
 

@@ -59,7 +59,6 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 gem 'slim-rails'
 gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
-gem "dropbox-api"
 
 #------------------------------
 #activerecord and model

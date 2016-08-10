@@ -18,7 +18,7 @@ p#notice = notice
       .edit_tag_field style="display:none;"
         = form_for @lead do |f|
           = hidden_field_tag "after_show", "y"
-          = f.select :tag_list, @lead.tag_list,{},{ multiple: true}
+          = f.select :tag_list, @tag_list,{}, {multiple: true}
           = submit_tag "タグ変更"
     .col-sm-2
       - dm_class_active = @lead.dm_flg == true ? " active" : ""

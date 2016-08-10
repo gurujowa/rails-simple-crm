@@ -172,8 +172,7 @@ class LeadsController < ApplicationController
   end
 
   def set_tag
-    gon.tag_list = Lead.tags_on(:tags).map {|i| i.name}
-    @tag_list = gon.tag_list
+    @tag_list = Lead.tags_on(:tags).map {|i| i.name}
   end
 
   # POST /leads
