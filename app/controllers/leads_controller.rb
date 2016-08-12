@@ -4,6 +4,10 @@ class LeadsController < ApplicationController
   before_action :set_tag, only: [:index,:show, :edit, :update, :create, :new]
   before_action :authenticate_user!
 
+  def get_all_csv
+    send_csv Lead.to_simple_csv 
+  end
+
   # GET /leads
   def index
       pq = params[:q]
@@ -55,7 +59,13 @@ class LeadsController < ApplicationController
 
       respond_to do |format|
         format.html
-        format.csv { send_csv @q.result.includes([{lead_histories: [:user, :lead_history_status]} , :user]).paginate(page: 1,per_page: 30000).to_csv }
+        format.csv { 
+          if @leads.total_entries > 1000
+            redirect_to leads_url, notice: '合計件数が1000件を超えています'
+          else
+            send_csv @q.result.includes([{lead_histories: [:user, :lead_history_status]} , :user], :lead_interview, :tags).paginate(page: 1,per_page: 1000).to_csv 
+          end
+        }
       end
   end
 

@@ -2,13 +2,14 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_filter :set_paper_trail_whodunnit
 
 
   def render_noty type, text, add_javascript = nil
     noty_type = [:alert,:success,:error,:warning,:infomation,:confirm]
     raise  "notyのタイプに" + type.to_s + "は含まれていません" unless noty_type.include? type
 
-    str = %Q{var n = noty({text: '#{text}', type: '#{type.to_s}', timeout: 1000});}
+    str = %Q{var n = noty({text: '#{text}', type: '#{type.to_s}', timeout: 1000});console.log('#{text}');}
     if add_javascript.blank?
       render :text =>  str
     else

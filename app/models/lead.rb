@@ -117,11 +117,29 @@ class Lead < ActiveRecord::Base
     end
   end
 
+  def self.to_simple_csv
+    CSV.generate do |csv|
+      csv << column_names + ["対応日時", "対応ステータス", "対応メモ"]
+      all.includes(lead_histories: :lead_history_status).find_each do |l|
+
+        values = l.attributes.values_at(*column_names)
+
+        if l.lead_histories.present?
+          lh = l.lead_histories.last
+          values = values + [lh.approach_day, lh.lead_history_status.name , lh.memo]
+        else
+          values = values + ["","",""]
+        end
+        csv << values
+      end
+    end
+  end
+
   def self.to_csv
     CSV.generate do |csv|
       csv << column_names + ["タグ", "対応日時", "対応ステータス", "対応メモ"] +  LeadInterview.column_names
 
-      all.each do |l|
+      all.find_each do |l|
 
         values = l.attributes.values_at(*column_names)
 

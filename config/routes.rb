@@ -11,6 +11,7 @@ Mycrm::Application.routes.draw do
       match 'search' => 'leads#search', via: [:get, :post], as: :search
       get "mylist"
       get "tasks"
+      get "get_all_csv"
       get "add_tag"
       post "add_tag_finish"
       get "name"

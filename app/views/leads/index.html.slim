@@ -1,9 +1,11 @@
 h1 見込み客一覧
 
 .well
-  button type="button" class="btn btn-info" data-toggle="collapse" data-target="#btn-lead-search" 検索ボックス
-  a#leads_csv_button.btn.btn-default CSV出力
-  span.dropdown
+  .search-button-list
+    button type="button" class="btn btn-info" data-toggle="collapse" data-target="#btn-lead-search" 検索ボックス
+  .export-button-list
+    a#leads_csv_button.btn.btn-default 検索結果をCSV出力(1000件まで)
+    span.dropdown
     button.btn.btn-success data-toggle="dropdown" チェックしたものを
     ul.dropdown-menu role="menu"
       li
@@ -61,5 +63,6 @@ h1 見込み客一覧
 
 
 .well
-  =link_to "不要リスト出力", {action: :reject_list, format: :csv}, class: "btn btn-default"
+  = link_to "不要リスト出力", {action: :reject_list, format: :csv}, class: "btn btn-default"
+  = link_to "全てのCSV出力(非常に遅いです)", {action: :get_all_csv, format: :csv}, class: "btn btn-default"
 
