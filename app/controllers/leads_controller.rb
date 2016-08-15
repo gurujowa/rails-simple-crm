@@ -11,7 +11,7 @@ class LeadsController < ApplicationController
   # GET /leads
   def index
       pq = params[:q]
-      leads = Lead.group(:name)
+      leads = Lead.group(:name).joins(:lead_histories)
       leads = set_between_dates(leads)
 
       if params[:status_any].present?
