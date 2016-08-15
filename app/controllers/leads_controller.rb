@@ -11,8 +11,13 @@ class LeadsController < ApplicationController
   # GET /leads
   def index
       pq = params[:q]
-      leads = Lead.group(:name).joins(:lead_histories)
+      leads = Lead.group(:name)
       leads = set_between_dates(leads)
+
+      if pq.present? && pq[:s].present?
+        leads = leads.joins(:lead_histories)
+      end
+      
 
       if params[:status_any].present?
         pq.store(:lead_histories_lead_history_status_id_in,[9,10,11,1,2,3,4,5,6,7,8,16])
