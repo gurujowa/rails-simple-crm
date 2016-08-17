@@ -32,11 +32,18 @@ namespace :attend do
 
     tomorrow = 1.day.since.beginning_of_day
     next_business_day = 1.business_day.from_now.beginning_of_day
+    p tomorrow
+    p next_business_day
 
+    if tomorrow == next_business_day
+      p "today is not holiday"
+      next
+    end
     periods = Period.where(day: tomorrow..next_business_day).where(attend_date: nil)
     periods.each do |p|
       AttendMailer.holiday_mail(p, args.go).deliver_now
     end
+
   end
 
   task "alert", ["type"] => :environment do | task,args |
