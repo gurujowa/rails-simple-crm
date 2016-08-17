@@ -111,7 +111,7 @@
                 th メモ
                 th 金額
             tbody
-              - @lead.estimates.each do |e|
+              - @lead.estimates_includes_node.each do |e|
                 tr
                   th = link_to e.memo, edit_estimate_path(e)
                   th = number_to_currency e.total_price

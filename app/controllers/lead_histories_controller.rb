@@ -24,15 +24,9 @@ class LeadHistoriesController < ApplicationController
     @lead_history.user = current_user
 
     if @lead_history.save
-      redirect_to lead_url @lead_history.lead, notice:'顧客対応履歴を作成しました'
+      redirect_to lead_url(@lead_history.lead), notice:'顧客対応履歴を作成しました'
     else
-      @lead = @lead_history.lead
-      @new_lead_history = @lead_history
-
-      @status_ing = LeadHistoryStatus.where(progress: "ing")
-      @status_done = LeadHistoryStatus.where(progress: "done")
-      @status_forbidden = LeadHistoryStatus.where(progress: "forbidden")
-      render template: "leads/show"
+      redirect_to lead_url(@lead_history.lead), notice: "顧客対応履歴の作成に失敗しました。#{@lead_history.errors.full_messages}"
     end
   end
 

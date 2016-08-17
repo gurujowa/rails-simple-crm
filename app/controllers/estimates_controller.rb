@@ -5,7 +5,7 @@ class EstimatesController < ApplicationController
 
   # GET /estimates
   def index
-    @estimates = Estimate.all
+    @estimates = Estimate.all.includes(:estimate_lines, :lead)
   end
 
   # GET /estimates/1
@@ -29,7 +29,7 @@ class EstimatesController < ApplicationController
   def new
     if params[:dup_id].present?
       parent = Estimate.find(params[:dup_id])
-      clone = parent.deep_clone :include => :estimate_lines
+      clone = parent.deep_clone :include => [:estimate_lines, :estimate_subsities]
       @estimate = clone
     else
       @estimate = Estimate.new

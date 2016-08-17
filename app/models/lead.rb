@@ -12,7 +12,8 @@ class Lead < ActiveRecord::Base
   accepts_nested_attributes_for :lead_subsities, :allow_destroy => true, reject_if: :all_blank
   accepts_nested_attributes_for :lead_tasks, :allow_destroy => true, reject_if: :all_blank
   has_many :estimates, dependent: :restrict_with_error
-  has_many :course, dependent: :restrict_with_error
+  has_many :courses, dependent: :restrict_with_error
+  alias_method :course, :courses
 
   has_one :lead_interview, dependent: :destroy
   accepts_nested_attributes_for :lead_interview
@@ -163,6 +164,14 @@ class Lead < ActiveRecord::Base
         csv << values
       end
     end
+  end
+
+  def estimates_includes_node
+    self.estimates.includes(:estimate_lines)
+  end
+
+  def courses_includes_node
+    self.courses.includes([{periods: [:user, {teacher: :director}]}])
   end
 
   def last_approach
