@@ -1,5 +1,5 @@
 .panel-group#accordion role="tablist" aria-multiselectable="true"
-  - @lead.courses_includes_node.each_with_index do |course,i|
+  - @lead.courses.each_with_index do |course,i|
     .panel.panel-default
       .panel-heading id="head_#{i}" role="tab" 
         h4.panel-title

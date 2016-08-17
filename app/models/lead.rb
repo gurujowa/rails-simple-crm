@@ -166,14 +166,6 @@ class Lead < ActiveRecord::Base
     end
   end
 
-  def estimates_includes_node
-    self.estimates.includes(:estimate_lines)
-  end
-
-  def courses_includes_node
-    self.courses.includes([{periods: [:user, {teacher: :director}]}])
-  end
-
   def last_approach
     if self.lead_histories.present?
       self.lead_histories.last

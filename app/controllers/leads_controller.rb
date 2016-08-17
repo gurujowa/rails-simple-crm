@@ -1,5 +1,5 @@
 class LeadsController < ApplicationController
-  before_action :set_lead, only: [:show, :edit, :update, :destroy, :add_flg, :comment, :contract, :update_tasks]
+  before_action :set_lead, only: [:edit, :update, :destroy, :add_flg, :comment, :contract, :update_tasks]
   after_action :store_location, only: [:index, :search, :mylist, :approach]
   before_action :set_tag, only: [:index,:show, :edit, :update, :create, :new]
   before_action :authenticate_user!
@@ -167,8 +167,10 @@ class LeadsController < ApplicationController
     render :index
   end
 
+
   # GET /leads/1
   def show
+    @lead = Lead.includes([{courses: {periods: [:user, {teacher: :director}]}}, {estimates: :estimate_lines}]).find(params[:id])
     @new_lead_history = LeadHistory.new
     @new_lead_history.lead_id = @lead.id
     @new_lead_history.approach_day = DateTime.now()

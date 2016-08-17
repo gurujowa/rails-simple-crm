@@ -6,12 +6,12 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find(params[:id])
+    @course = Course.includes({periods: [:order_sheet,{teacher: :director},:period_tasks,:user,:course_address]}).find(params[:id])
     @tasks = CourseTask.where(course_id: @course.id)
   end
 
   def edit
-    @course = Course.find(params[:id])
+    @course = Course.includes({periods: :order_sheet}).find(params[:id])
   end
 
   def calendar

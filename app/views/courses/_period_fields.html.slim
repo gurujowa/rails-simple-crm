@@ -11,7 +11,7 @@
       = f.input :end_time, as: :time_picker
       = f.input :break_start, as: :time_picker
       = f.input :break_end, as: :time_picker
-      = f.association :teacher ,as: :select2
+      = f.association :teacher , collection: Teacher.includes(:director).all,as: :select2
       = f.input :price
       = f.input :train_cost
       = f.association :user 
