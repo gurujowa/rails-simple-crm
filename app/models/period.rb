@@ -148,18 +148,11 @@ class Period < ActiveRecord::Base
   end
 
 
-  def checked_task
-    list = []
-    self.period_tasks.each do |t|
-      list << t["task_type"] if t.checked == true
-    end
-    return list
-  end
 
   def resume_complete_flag
     if self.checked_task.include?(PeriodTask.task_types[:unnecessary])
       return true
-    elsif ([0,1,2] -  self.checked_task).empty?
+    elsif self.checked_task.include?(PeriodTask.task_types[:sent])
       return true
     else
       return false
@@ -167,4 +160,12 @@ class Period < ActiveRecord::Base
   end
 
   alias total_time getTotal
+
+  def checked_task
+    list = []
+    self.period_tasks.each do |t|
+      list << t["task_type"] if t.checked == true
+    end
+    return list
+  end
 end

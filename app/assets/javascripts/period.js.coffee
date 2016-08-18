@@ -2,7 +2,8 @@ jQuery ->
   table = $('#period-datatables').DataTable
         "lengthChange": false
         "pageLength": 100
-        "order": [[2,"asc"]]
+        "order": [[3,"asc"]]
+  table.search("resume_notcomplete_flag").draw()
   $('#period-datatables').on 'draw.dt', ->
     period_editable_draw()
   $('#period-notstart-search-button').click table, ->
@@ -30,5 +31,6 @@ jQuery ->
         {value: 0, text: "講師連絡"}
         {value: 1, text: "レジュメ到着"}
         {value: 2, text: "正誤チェック"}
+        {value: 4, text: "発送済み"}
         {value: 3, text: "不要"}
       ]

@@ -2,7 +2,7 @@ class PeriodsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @periods = Period.where("day >= ?",Time.current.prev_month).order("day desc")
+    @periods = Period.where("day >= ?",Time.current.prev_month).includes([{course: :lead}, :teacher, :period_tasks])
   end
 
   def checklist
