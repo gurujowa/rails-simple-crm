@@ -150,7 +150,7 @@ class Period < ActiveRecord::Base
   def resume_sent_text
     if self.checked_task.include?(PeriodTask.task_types[:unnecessary])
       return "(発送不要)"
-    elsif p.resume_complete_flag
+    elsif self.resume_complete_flag
       return "(発送済)"
     end
   end

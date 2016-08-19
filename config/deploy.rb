@@ -22,7 +22,7 @@ set :ssh_options, :port => "10234"
 #set :whenever_command, "bundle exec whenever"
 #require "whenever/capistrano"
 
-#after 'deploy', 'deploy:symlink_shared'
+after 'deploy', 'deploy:restart'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 
