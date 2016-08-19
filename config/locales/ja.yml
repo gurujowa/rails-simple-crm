@@ -123,6 +123,7 @@ ja:
         last_kana: 姓（かな）
         work_possible: 仕事可能
         attend_mail_flg: メール送信可否
+        send_alert_flg: 前日メールを送信した後、送信がなかった場合にアラートにするか
         genre: ジャンル
         bill: 単価（時間）
         tel: 電話番号

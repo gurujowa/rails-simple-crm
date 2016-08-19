@@ -1,5 +1,6 @@
 class AttendMailer < ApplicationMailer
   after_action :check_attend_mail_flg , only: [:today_mail,:tomorrow_mail, :holiday_mail, :monthly_mail]
+  after_action :unnecessary_click_mail , only: [:today_mail,:tomorrow_mail, :holiday_mail]
 
   def monthly_mail(teacher_id, periods, go)
     @teacher = Teacher.find(teacher_id)
@@ -54,6 +55,12 @@ class AttendMailer < ApplicationMailer
 
     if @teacher.email.blank?
       mail.perform_deliveries = false
+    end
+  end
+
+  def unnecessary_click_mail 
+    if @teacher.send_alert_flg == false
+      @period.update_attributes!(attend_date: Time.current)
     end
   end
 

@@ -4,7 +4,7 @@ class TeachersController < ApplicationController
 
   # GET /teachers
   def index
-    @teachers = Teacher.order("last_kana ASC, first_kana ASC")
+    @teachers = Teacher.includes(:director).order("last_kana ASC, first_kana ASC")
   end
 
   def flag
@@ -82,6 +82,6 @@ class TeachersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def teacher_params
-      params.require(:teacher).permit(:first_kanji, :last_kanji, :first_kana, :last_kana, :work_possible, :genre, :memo, :tel, :bill, :email, :director_id, :attend_mail_flg)
+      params.require(:teacher).permit(:first_kanji, :last_kanji, :first_kana, :last_kana, :work_possible, :genre, :memo, :tel, :bill, :email, :director_id, :attend_mail_flg, :send_alert_flg)
     end
 end

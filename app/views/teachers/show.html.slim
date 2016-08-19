@@ -18,6 +18,9 @@ table.table.table-bordered
     th 参加メール送信可否
     td  = check_m_img @teacher.attend_mail_flg
   tr
+    th 前日メールにクリックしない場合、アラートを送るかどうか
+    td  = check_m_img @teacher.send_alert_flg
+  tr
     th ジャンル
     td  =@teacher.genre
   tr

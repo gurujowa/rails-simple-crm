@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818073308) do
+ActiveRecord::Schema.define(version: 20160819012720) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -580,6 +580,7 @@ ActiveRecord::Schema.define(version: 20160818073308) do
     t.string   "email",           limit: 255
     t.integer  "director_id",     limit: 4
     t.boolean  "attend_mail_flg",               default: true, null: false
+    t.boolean  "send_alert_flg",                default: true, null: false
   end
 
   create_table "users", force: :cascade do |t|
