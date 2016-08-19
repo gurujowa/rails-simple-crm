@@ -80,7 +80,7 @@ h2 コマ情報
       .panel-heading role="tab" id="heading#{p.id}"
         .panel-title
           a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse#{p.id}" aria-expanded="true" aria-controls="collapse#{p.id}"
-            = "#{p.day.to_s(:jp)} #{p.start_date.to_s(:time)}～#{p.end_date.to_s(:time)}(#{p.teacher.name})  #{"(発注済)" if p.order_sheet.present?} #{p.resume_sent_text}
+            = "#{p.day.to_s(:jp)} #{p.start_date.to_s(:time)}～#{p.end_date.to_s(:time)}(#{p.teacher.name})  #{"(発注済)" if p.order_sheet.present?} #{p.resume_sent_text}"
       div.panel-collapse.collapse id="collapse#{p.id}" role="tabpanel" aria-labelledby="heading#{p.id}"
         .panel-body
           table.table
