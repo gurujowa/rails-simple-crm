@@ -95,7 +95,7 @@ class OrderSheetsController < ApplicationController
   end
 
   def set_form_val
-    @courses = Course.all
+    @courses = Course.includes(:lead).all
     @teachers = Teacher.all
   end
 
