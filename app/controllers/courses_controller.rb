@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   before_action :authenticate_user! , except: [:attend]
   
   def index
-    @courses = Course.all    
+    @courses = Course.includes([:lead,:user,:periods]).all
   end
 
   def show

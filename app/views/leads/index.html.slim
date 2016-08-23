@@ -5,11 +5,7 @@ h1 見込み客一覧
     button type="button" class="btn btn-info" data-toggle="collapse" data-target="#btn-lead-search" 検索ボックス
   .export-button-list
     a#leads_csv_button.btn.btn-default 検索結果をCSV出力(1000件まで)
-    span.dropdown
-    button.btn.btn-success data-toggle="dropdown" チェックしたものを
-    ul.dropdown-menu role="menu"
-      li
-        a#leads_address_label href="#"  data-source="#{url_for action: "address"}"  ラベルCSV出力
+    a#leads_address_label.btn.btn-default href="#"  data-source="#{url_for action: "address"}"  チェック対象をラベルCSV出力
   #btn-lead-search.collapse
     = search_form_for @q, :builder => SimpleForm::FormBuilder, wrapper: :horizontal_form,url: leads_path, html: {class: "form-horizontal",method: :get} do |f|
       = f.input :name_cont
