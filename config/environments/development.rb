@@ -35,7 +35,7 @@ Mycrm::Application.configure do
 
 
 config.default_mailaddress = 'yamashita.hayato@yourbright.co.jp'
-config.action_mailer.default_url_options = { :host => "192.168.142.128", :port => 3000 }
+config.action_mailer.default_url_options = { :host => "192.168.142.129", :port => 3000 }
 #config.action_mailer.delivery_method = :letter_opener_web
 config.after_initialize do
   Bullet.enable = true

@@ -41,7 +41,7 @@ class AttendMailer < ApplicationMailer
   end
 
   def alert_mail(periods)
-    @not_attend_periods = periods.where(attend_date: nil)
+    @not_attend_periods = periods.joins(:teacher).where("periods.attend_date is null").where("teachers.attend_mail_flg = ?", true)
     if @not_attend_periods.present?
       mail(to: Rails.application.config.default_mailaddress, subject: "出席アラート")
     end
