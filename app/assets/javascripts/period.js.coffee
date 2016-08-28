@@ -12,7 +12,14 @@ jQuery ->
     table.search("unnecessary").draw()
   $('#period-complete-search-button').click table, ->
     table.search("resume_complete_flag").draw()
+  $('#period-notorder-search-button').click table, ->
+    table.search("未発行").draw()
   period_editable_draw()
+  $('.toggle-periods').on 'click', (e)->
+    e.preventDefault()
+    $(this).toggleClass("active")
+    column = table.column($(this).attr('data-column'))
+    column.visible( ! column.visible() )
 
 
 @period_editable_draw = () ->

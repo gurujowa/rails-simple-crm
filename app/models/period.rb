@@ -147,6 +147,14 @@ class Period < ActiveRecord::Base
     end
   end
 
+  def order_status
+    if self.order_sheet.blank?
+      return :no_sheet
+    else
+      return self.order_sheet.status
+    end
+  end
+
   def resume_sent_text
     if self.checked_task.include?(PeriodTask.task_types[:unnecessary])
       return "(発送不要)"

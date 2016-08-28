@@ -23,6 +23,19 @@ extend Enumerize
     return price
   end
 
+  def toggle_status
+    case self.status
+    when "draft" then
+      self.update_attributes(status: :active)
+    when "active" then
+      self.update_attributes(status: :cancel)
+    when "cancel" then
+      self.update_attributes(status: :draft)
+    else
+      raise "invalid status #{self.status}"
+    end
+  end
+
 
   def self.to_csv
     CSV.generate do |csv|

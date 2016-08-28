@@ -20,6 +20,9 @@ class OrderSheetsController < ApplicationController
       @order_sheet = clone
     else
       @order_sheet = OrderSheet.new
+      if params[:period_id]
+        @order_sheet.periods << Period.find(params[:period_id])
+      end
     end
 
     @order_sheet.mention = "テキスト、レジュメ等は研修日の１週間前までに下記にお送りください。
@@ -41,6 +44,17 @@ class OrderSheetsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html { }
+      format.js   {
+        if (@order_sheet.toggle_status)
+          render :template => "order_sheets/status"
+        else
+          render_noty :error, @order_sheet.errors.full_messages.to_s
+        end
+      
+      }
+    end
   end
 
   def edit

@@ -1,0 +1,2 @@
+var n = noty({text: 'ステータスの更新が完了しました', type: 'success', timeout: 1000});
+$("a#order_sheet_<%= @order_sheet.id %>").removeClass("btn-danger").removeClass("btn-success").addClass("btn-default").text("<%= @order_sheet.status_text %>")
