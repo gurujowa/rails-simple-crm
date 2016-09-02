@@ -111,6 +111,7 @@ class OrderSheetsController < ApplicationController
   def set_form_val
     @courses = Course.includes(:lead).all
     @teachers = Teacher.all
+    @order_sheet_periods = Period.includes([{course: :lead},:teacher]).order(:day).where(order_sheet_id: [nil, @order_sheet.id])
   end
 
   def order_sheet_params
