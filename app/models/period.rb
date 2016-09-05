@@ -24,7 +24,7 @@ class Period < ActiveRecord::Base
   extend Enumerize
   has_paper_trail 
 
-  has_many :period_tasks
+  has_many :period_tasks, dependent: :destroy
 
   validates :day, presence: true  
   validates :start_time, presence: true  
