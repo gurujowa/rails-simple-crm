@@ -1,5 +1,9 @@
 module OrderSheetsHelper
 
+  def select_order_sheet_periods(id)
+    return Period.includes([{course: :lead},:teacher]).order(:day).where(order_sheet_id: [nil, id])
+  end
+
   def order_sheet_send_to_selectize_option(teachers,send_to = nil)
     list = teachers.map{|t| t.short_name}
     if send_to.present?

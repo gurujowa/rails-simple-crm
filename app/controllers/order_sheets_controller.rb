@@ -1,6 +1,6 @@
 class OrderSheetsController < ApplicationController
   before_action :set_order_sheet, only: [:show, :edit, :update, :report, :destroy, :check]
-  before_action :set_form_val, only: [:edit,:update,:new,:create]
+  before_action :set_form_val, only: [:edit,:update,:create, :new]
   before_action :authenticate_user!
 
   # GET /teacher_orders
@@ -14,6 +14,7 @@ class OrderSheetsController < ApplicationController
   end
 
   def new
+
     if params[:dup_id].present?
       parent = OrderSheet.find(params[:dup_id])
       clone = parent.deep_clone({:include => [:order_sheet_lines]})
@@ -61,6 +62,7 @@ class OrderSheetsController < ApplicationController
   end
 
   def update
+
     if @order_sheet.update(order_sheet_params)
       redirect_to @order_sheet, notice: '発注書が更新されました'
     else
@@ -111,7 +113,6 @@ class OrderSheetsController < ApplicationController
   def set_form_val
     @courses = Course.includes(:lead).all
     @teachers = Teacher.all
-    @order_sheet_periods = Period.includes([{course: :lead},:teacher]).order(:day).where(order_sheet_id: [nil, @order_sheet.id])
   end
 
   def order_sheet_params
