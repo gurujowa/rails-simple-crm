@@ -13,9 +13,10 @@ a#period-notorder-search-button.btn.btn-default 未発行
   a.btn.btn-default.active.toggle-periods data-column="4" 登壇時間
   a.btn.btn-default.active.toggle-periods data-column="5" 謝金額
   a.btn.btn-default.active.toggle-periods data-column="6" 営業
-  a.btn.btn-default.active.toggle-periods data-column="7" 発注状況
-  a.btn.btn-default.active.toggle-periods data-column="8" タスク
-  a.btn.btn-default.active.toggle-periods data-column="9" メモ
+  a.btn.btn-default.active.toggle-periods data-column="7" 発注可能
+  a.btn.btn-default.active.toggle-periods data-column="8" 発注状況
+  a.btn.btn-default.active.toggle-periods data-column="9" タスク
+  a.btn.btn-default.active.toggle-periods data-column="10" メモ
 
 .row
   table.table.table-bordered.table-striped#period-datatables
@@ -28,6 +29,7 @@ a#period-notorder-search-button.btn.btn-default 未発行
         th 登壇時間
         th 謝金額
         th 営業
+        th 発注可能
         th 発注状況
         th style="white-space:nowrap" タスク
         th メモ
@@ -41,6 +43,7 @@ a#period-notorder-search-button.btn.btn-default 未発行
           td = "#{p.start_time.to_s(:time)} ～ #{p.end_time.to_s(:time)}"
           td = number_to_currency p.order_sheet&.total_price
           td = p.course.user.name
+          td = link_to_switch_flg p, :order_available
           td = period_order_status_button(p, click: :toggle)
           td style="white-space:nowrap"
             .hidden = p.period_tasks.map {|t| t.task_type}

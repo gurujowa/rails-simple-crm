@@ -27,6 +27,7 @@ class Period < ActiveRecord::Base
   has_many :period_tasks, dependent: :destroy
 
   validates :day, presence: true  
+  validates :order_available, presence: true  
   validates :start_time, presence: true  
   validates :end_time, presence: true  
   validates :teacher_id, presence: true

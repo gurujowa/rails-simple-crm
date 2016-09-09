@@ -78,6 +78,10 @@ ja:
         payment_flg:
           flag_on: 支払済
           flag_off: 未支払
+      period:
+        order_available:
+          flag_on: 発注可能
+          flag_off: 発注不可能
       lead_estimate:
         send_flg:
           flag_on: 発行済
@@ -145,6 +149,7 @@ ja:
         teacher: 講師
         price: 謝金(税込)
         train_cost: 交通費
+        order_available: 発注可能
         user: 担当者
         course_address: 会場
         memo: メモ

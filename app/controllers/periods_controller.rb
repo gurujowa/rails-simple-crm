@@ -41,4 +41,7 @@ class PeriodsController < ApplicationController
     end
   end
 
+  def flag
+    remote_flag Period
+  end
 end

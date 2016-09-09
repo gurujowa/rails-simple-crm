@@ -131,6 +131,9 @@ Mycrm::Application.routes.draw do
       post 'checklist' 
       post 'update' 
     end
+    member do
+      get 'flag/:type' , :action => "flag"
+    end
   end
 
   #コース

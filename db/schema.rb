@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819012720) do
+ActiveRecord::Schema.define(version: 20160909090200) do
 
   create_table "billing_plan_lines", force: :cascade do |t|
     t.date     "bill_date",                     null: false
@@ -408,6 +408,7 @@ ActiveRecord::Schema.define(version: 20160819012720) do
     t.integer  "price",             limit: 4
     t.integer  "train_cost",        limit: 4
     t.integer  "order_sheet_id",    limit: 4
+    t.boolean  "order_available",                 default: false,      null: false
   end
 
   add_index "periods", ["course_address_id"], name: "index_periods_on_course_address_id", using: :btree

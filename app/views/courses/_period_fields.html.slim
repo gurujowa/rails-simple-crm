@@ -14,6 +14,7 @@
       = f.association :teacher , collection: Teacher.includes(:director).all,as: :select2
       = f.input :price
       = f.input :train_cost
+      = f.input :order_available, as: :select, include_blank: false
       = f.association :user 
       = f.association :course_address, collection: @course.course_addresses
       = f.input :memo, class: "form-control"
