@@ -66,6 +66,7 @@ gem 'wicked_pdf'
 #activerecord and model
 #------------------------------
 gem 'enumerize'
+gem 'enum_help'
 gem 'paper_trail'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'

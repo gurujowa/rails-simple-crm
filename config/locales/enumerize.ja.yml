@@ -1,0 +1,78 @@
+ja:
+  enumerize:
+    order_sheet:
+      status:
+        draft: 下書き
+        active: 発行済
+        cancel: キャンセル
+    teacher_order:
+      status:
+        draft: 下書き
+        active: 発行済
+        cancel: キャンセル
+      period_type:
+        auto: 自動（コマ情報より取得）
+        manual: 手動
+        none: 表示なし
+    billing_plan:
+      status:
+        draft: 下書き
+        completed: 発送済み
+        canceled: キャンセル
+    public_estimate:
+      client_type:
+        company: 既存客
+        lead: 新規客
+    period:
+      resume_status:
+        notstart: 未着手
+        unnecessary: 不要
+        complete: 完了
+    estimate:
+      client_type:
+        company: 既存客
+        lead: 新規客
+    company:
+      active_st:
+        draft: 契約前
+        pending: 延期・休止中
+        contract: 有効
+        impossible: 接触禁止
+    lead:
+      sex:
+        male: 男性
+        female: 女性
+      campaign:
+        homepage: ホームページ
+        tel: テレアポ
+        fax: FAX
+        introduce: 紹介
+        other: その他
+    lead_comment:
+      category:
+        joseikin: 助成金
+        jimu: 事務連絡
+    lead_history_status:
+      progress:
+        ing: 継続
+        appoint: 訪問
+        done: 完了
+        conversion: コンバージョン
+        history: 履歴
+        forbidden: 禁止
+    lead_history:
+      status:
+        ing_tel: 電話対応
+        ing_mail: メール対応
+        ing_leave: 不在・離籍
+        ing_next: 時期改め
+        ing_re: 再アプローチ
+        ing_defer: 保留・検討
+        done_appoint: アポイント
+        done_send: 資料請求
+        done_ng_up: 担当NG
+        done_ng_down: 受付NG
+        done_block: ガチャ切り
+        done_claim: クレーム
+        forbidden_gone: 不通・移転
+        forbidden_ng: 荷電禁止

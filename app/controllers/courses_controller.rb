@@ -124,7 +124,7 @@ class CoursesController < ApplicationController
   private
   def course_params
     params.require(:course).permit(:name, :students,:user_id, :address, :tel, :station, :responsible,  :memo,  :lead_id,
-        periods_attributes: [:id, :order_available, :course_address_id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id,:user_id, :memo,:price, :train_cost, :_destroy],
+        periods_attributes: [:id, :order_avail, :course_address_id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id,:user_id, :memo,:price, :train_cost, :_destroy],
         course_addresses_attributes: [:id, :name, :address, :station, :responsible, :tel, :projector,:projector_detail, :board, :board_detail, :memo, :_destroy],
         course_tasks_attributes: [:id, :start,:end, :title,:memo, :_destroy]
         )

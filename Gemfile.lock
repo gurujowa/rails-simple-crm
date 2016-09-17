@@ -128,6 +128,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    enum_help (0.0.15)
     enumerize (1.1.1)
       activesupport (>= 3.2)
     erubis (2.7.0)
@@ -433,6 +434,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   deep_cloneable
   devise (~> 3.5)
+  enum_help
   enumerize
   fog
   gon

@@ -3,6 +3,8 @@ class PeriodsController < ApplicationController
 
   def index
     @periods = Period.where("day >= ?",Time.current.prev_month).includes([{course: :lead}, :teacher, :period_tasks]).includes([{order_sheet: :order_sheet_lines},{course: :user}])
+
+    gon.order_avail_list =  Period.order_avails_i18n
   end
 
   def checklist

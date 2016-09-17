@@ -28,6 +28,13 @@ jQuery ->
       method: "POST"
       url: "/periods/update"
 
+  if(0 < $(".order-avail-editable").size())
+    $(".order-avail-editable").editable
+      url: "/periods/update"
+      method: "POST"
+      type: "select"
+      source: gon.order_avail_list
+
 
   if(0 < $(".period-check-editable").size())
     $(".period-check-editable").editable

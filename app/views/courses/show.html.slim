@@ -117,7 +117,7 @@ h2 コマ情報
                 - if p.order_sheet.present?
                   = "#{p.order_sheet&.title} - 発注日:#{p.order_sheet&.order_date}"
                 - else
-                  = p.order_available ? "発注可能" : "発注不可"
+                  = p.order_avail_i18n
             tr
               th タスク
               td

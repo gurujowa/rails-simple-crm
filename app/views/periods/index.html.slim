@@ -43,7 +43,7 @@ a#period-notorder-search-button.btn.btn-default 未発行
           td = "#{p.start_time.to_s(:time)} ～ #{p.end_time.to_s(:time)}"
           td = number_to_currency p.order_sheet&.total_price
           td = p.course.user.name
-          td = link_to_switch_flg p, :order_available
+          td = avail_button p
           td = period_order_status_button(p, click: :toggle)
           td style="white-space:nowrap"
             .hidden = p.period_tasks.map {|t| t.task_type}

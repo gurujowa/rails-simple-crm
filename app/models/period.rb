@@ -41,6 +41,7 @@ class Period < ActiveRecord::Base
   belongs_to :course_address
   belongs_to :user
 
+  enum order_avail: {ng: 0, unnecessary: 1, ok: 2}
   enumerize :resume_status, in: [:notstart, :unnecessary, :complete]
 
   @@color = ["MidnightBlue", "DarkViolet", "DarkSlateBlue", "Navy",  "Green", "DarkRed", "Gray", "Sienna", "DarkMagenta","LightPink"]
