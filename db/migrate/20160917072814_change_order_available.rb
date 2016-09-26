@@ -1,6 +1,6 @@
 class ChangeOrderAvailable < ActiveRecord::Migration
   def up
-    add_column :periods, :order_avail, :integer, null: false, default: false
+    add_column :periods, :order_avail, :integer, null: false, default: 0
     periods = Period.all
     periods.each do |p|
       if p.order_available == true
