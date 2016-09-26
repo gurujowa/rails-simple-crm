@@ -4,7 +4,7 @@ class ChangeOrderAvailable < ActiveRecord::Migration
     periods = Period.all
     periods.each do |p|
       if p.order_available == true
-        p.update(order_avail: Period.order_avail[:ok])
+        p.update(order_avail: 2)
       end
     end
     remove_column :periods, :order_available, :boolean, null: false, default: false
