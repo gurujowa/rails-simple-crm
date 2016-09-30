@@ -10,6 +10,14 @@ module CoursesHelper
     end
   end
 
+  def ordered_period_clip(period)
+    if period.order_avail == "ng" or period.order_sheet.present?
+      return ""
+    else
+     return 0x1F4CE.chr("UTF-8")
+    end
+  end
+
   def check_course_img(course,type)
     src = check_img_src(course.read_attribute(type))
 
