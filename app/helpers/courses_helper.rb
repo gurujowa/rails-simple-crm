@@ -11,7 +11,7 @@ module CoursesHelper
   end
 
   def ordered_period_clip(period)
-    if period.order_avail == "ng" or period.order_sheet&.status == "active"
+    if period.order_avail == "ng" or period.order_sheet_active?
       return ""
     else
      return 0x1F4CE.chr("UTF-8")

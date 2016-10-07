@@ -148,6 +148,14 @@ class Period < ActiveRecord::Base
     end
   end
 
+  def order_sheet_active?
+    if order_sheet&.status == "active"
+      true
+    else
+      false
+    end
+  end
+
   def order_status
     if self.order_sheet.blank?
       return :no_sheet
