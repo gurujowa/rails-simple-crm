@@ -411,6 +411,7 @@ GEM
       rack (>= 1.0)
     whenever (0.9.7)
       chronic (>= 0.6.3)
+    where-or (0.1.2)
     wicked_pdf (1.0.6)
     will_paginate (3.1.0)
     will_paginate-bootstrap (1.0.1)
@@ -461,6 +462,7 @@ DEPENDENCIES
   unicorn
   validates_email_format_of
   whenever
+  where-or
   wicked_pdf
   will_paginate
   will_paginate-bootstrap

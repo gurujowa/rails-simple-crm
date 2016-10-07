@@ -73,6 +73,7 @@ gem 'will_paginate-bootstrap'
 gem "ransack", github: "activerecord-hackery/ransack" 
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'moji'
+gem 'where-or'
 gem 'deep_cloneable'
 
 #------------------------------
