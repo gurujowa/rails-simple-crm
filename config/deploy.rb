@@ -7,6 +7,7 @@ set :keep_releases, 10
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system config/shared}
 set :username, 'yamashita'
+set :default_env, { path: "~/.rbenv/shims:~/.rbenv/bin:$PATH" }
 
 #rbenv ‚Ìİ’è
 set :rbenv_type, :user

@@ -33,24 +33,6 @@ getCalendarSources = ->
       textColor: "white"
       cache: true
     })
-  if $("#course_task_check").prop("checked")
-    eventSources.push({
-      name: "course_task"
-      url:"/course_tasks.json"
-      color: "black"
-      textColor: "white"
-      borderColor: "white"
-      cache: true
-    })
-  if $("#subsity_task_check").prop("checked")
-    eventSources.push({
-      name: "subsity_task"
-      url:"/leads/tasks.json"
-      color: "brown"
-      textColor: "white"
-      borderColor: "white"
-      cache: true
-    })
   if $("#holiday_check").prop("checked")
     eventSources.push({
       googleCalendarId: "ja.japanese#holiday@group.v.calendar.google.com"
@@ -83,34 +65,6 @@ courseCalendarRender = (method) ->
         $('#loading').show()
       else
         $('#loading').hide()
-
-  $("#course_task_course_id").select2(width: "100%", placeholder: "コースを選択してください")
-
-
-  $("#course_delete").click (e) ->
-    e.preventDefault()
-    form = $("#new_course_task")
-    $.ajax({
-        dataType: "json"
-        url: "/course_tasks/"+ $("#id").val()
-        type: "delete"
-        data: {event_id: $("#event_id").val()}
-        cache: false
-        timeout: 10000
-        success: (result)->
-          console.log result
-          $('#course_calendar').fullCalendar("removeEvents",result.event_id)
-          noty({text: result.text , type: "success", timeout: 5000})
-          $("#event_change_modal").modal('hide')
-        error: (xhr, textStatus, error) ->
-          console.log xhr
-          noty({text: "エラーが発生しました" , type: "error", timeout: 5000})
-    })
-
-  $("#calendar_checkbox_group :checkbox").click ->
-    sources = getCalendarSources()
-    $('#course_calendar').fullCalendar("removeEvents")
-    for s in sources then $('#course_calendar').fullCalendar("addEventSource", s)
 
 
 $(document).on 'nested:fieldAdded', ->
