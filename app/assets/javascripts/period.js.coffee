@@ -42,9 +42,9 @@ jQuery ->
       type: "checklist"
       method: "POST"
       source: [
-        {value: 0, text: "講師連絡"}
-        {value: 1, text: "レジュメ到着"}
-        {value: 2, text: "正誤チェック"}
-        {value: 4, text: "発送済み"}
-        {value: 3, text: "不要"}
+        {value: "teacher_announce", text: "講師連絡"}
+        {value: "receive_resume", text: "レジュメ到着"}
+        {value: "check_resume", text: "正誤チェック"}
+        {value: "unnecessary", text: "発送済み"}
+        {value: "sent", text: "不要"}
       ]

@@ -3,7 +3,7 @@ module CoursesHelper
   def course_calendar_color(period)
     if period.resume_complete_flag == true
       return "course-calendar-complete"
-    elsif period.checked_task.include?(PeriodTask.task_types[:check_resume])
+    elsif period.checked_task.include?("check_resume")
       return "course-calendar-checked"
     else
       return "course-calendar-initial"

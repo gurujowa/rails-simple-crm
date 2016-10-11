@@ -10,9 +10,10 @@ class PeriodsController < ApplicationController
   def checklist
     begin
       @period = Period.find(params[:pk])
-      PeriodTask.task_types.each do |key,val|
+      PeriodTask.task_types.each do |key|
+        val = key[0]
         check_record = @period.period_tasks.find_by(task_type: val)
-        flag = params[:value].present? ? params[:value].include?(val.to_s) : false
+        flag = params[:value].present? ? params[:value].include?(val) : false
         if check_record.present?
           check_record.update_attributes!(checked: flag)
         else
