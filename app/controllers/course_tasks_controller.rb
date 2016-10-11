@@ -2,7 +2,7 @@ class CourseTasksController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @tasks = CourseTask.all
+    @tasks = CourseTask.includes(:lead)
   end
 
   def destroy

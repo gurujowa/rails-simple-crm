@@ -15,9 +15,25 @@ def tel_encode(input)
     return i
 end
 
+def split_address(address)
+  rex = /(...??[都道府県])((?:旭川|伊達|石狩|盛岡|奥州|田村|南相馬|那須塩原|東村山|武蔵村山|羽村|十日町|上越|富山|野々市|大町|蒲郡|四日市|姫路|大和郡山|廿日市|下松|岩国|田川|大村)市|.+?郡(?:玉村|大町|.+?)[町村]|.+?市.+?区|.+?[市区町村])(.+)/
+
+  adp =  address.match(rex)
+  if adp.present?
+    return adp.captures
+  end
+
+  rex2 = /((?:旭川|伊達|石狩|盛岡|奥州|田村|南相馬|那須塩原|東村山|武蔵村山|羽村|十日町|上越|富山|野々市|大町|蒲郡|四日市|姫路|大和郡山|廿日市|下松|岩国|田川|大村)市|.+?郡(?:玉村|大町|.+?)[町村]|.+?市.+?区|.+?[市区町村])(.+)/
+
+  ad =  address.match(rex2)
+  if ad.present?
+    return ad.captures.unshift("千葉県")
+  end
+end
+
 def create_lead(r)
   lead = Lead.new(:name => r[:client_name],:zipcode => r[:zip_code])
-  lead.tel =  tel_encode(r[:tel])
+  lead.tel = tel_encode(r[:tel])
   lead.fax = tel_encode(r[:fax])
   lead.tag_list.add(r[:category])
   lead.tag_list.add("テレアポ用リスト")
@@ -25,7 +41,6 @@ def create_lead(r)
   lead.zipcode.gsub! "〒",""
   lead.corporation_name =  r[:company_name]
   lead.url = r[:url]
-  puts "new lead added"
   return lead
 end
 
@@ -40,11 +55,16 @@ table.each do |r|
   lead = Lead.find_by(tel: tel_encode(r[:tel]))
   lead = create_lead(r) if lead.blank?
 
+  address = split_address(r[:address])
+  if address.blank?
+    p "no address #{r[:address]}"
+    next
+  end
+  
   #住所情報の更新
-  lead.prefecture = r[:prefecture]
-  lead.city = r[:city]
-  lead.street = r[:street]
-  lead.building = r[:building]
+  lead.prefecture = address[0]
+  lead.city = address[1]
+  lead.street = address[2]
 
   memo = <<EOL
   ------- wamnet #{Time.current.to_s(:jp_date)}更新---------------------
@@ -65,9 +85,6 @@ EOL
   lead.tag_list.add("wamnet #{Time.current.to_s(:dash_date)}更新")
 
   unless lead.save
-    p lead.tel
-    p lead.prefecture
-    p lead.city
     p lead.errors.full_messages.inspect
   end
 end

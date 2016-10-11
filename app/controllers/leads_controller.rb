@@ -281,7 +281,7 @@ class LeadsController < ApplicationController
   end
   
   def tasks
-    lead_subsities = LeadSubsity.all
+    lead_subsities = LeadSubsity.includes({lead_subsity: {subsity: :subsity_tasks}}).all
     @tasks = []
     lead_subsities.each do |s|
       @tasks += s.task_list
