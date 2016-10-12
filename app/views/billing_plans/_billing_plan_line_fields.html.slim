@@ -10,9 +10,13 @@ tr.fields
   td.col-sm-5
     = f.input :memo, label: false, input_html: {class: "col-sm-12"}
   td.col-sm-2
-    .col-sm-12
-      .input-group.date.billing_plan_month_picker data-id="#{f.index}"
-        input.form-control type="hidden"
-        span.input-group-addon
-          span.glyphicon.glyphicon-calendar
-        = f.link_to_remove "", class: "btn btn-default glyphicon glyphicon-trash"
+    table
+      tbody
+        tr
+          td
+            span.input-group.date.billing_plan_month_picker data-id="#{f.index}"
+              input.form-control type="hidden"
+              span.input-group-addon
+                span.glyphicon.glyphicon-calendar
+          td
+            = f.link_to_remove "", class: "btn btn-default glyphicon glyphicon-trash"

@@ -4,7 +4,7 @@ class BillingPlansController < ApplicationController
 
   # GET /billing_plans
   def index
-    @billing_plans = BillingPlan.all
+    @billing_plans = BillingPlan.includes([:billing_plan_lines, :lead]).all
 
     respond_to do |format|
       format.html
@@ -86,7 +86,7 @@ class BillingPlansController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_billing_plan
-      @billing_plan = BillingPlan.find(params[:id])
+      @billing_plan = BillingPlan.includes([:billing_plan_lines,:lead]).find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

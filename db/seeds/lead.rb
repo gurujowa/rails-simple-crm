@@ -15,7 +15,7 @@ def tel_encode(input)
     return i
 end
 
-def split_address(address)
+def split_address(address, prefecture)
   rex = /(...??[都道府県])((?:旭川|伊達|石狩|盛岡|奥州|田村|南相馬|那須塩原|東村山|武蔵村山|羽村|十日町|上越|富山|野々市|大町|蒲郡|四日市|姫路|大和郡山|廿日市|下松|岩国|田川|大村)市|.+?郡(?:玉村|大町|.+?)[町村]|.+?市.+?区|.+?[市区町村])(.+)/
 
   adp =  address.match(rex)
@@ -27,7 +27,7 @@ def split_address(address)
 
   ad =  address.match(rex2)
   if ad.present?
-    return ad.captures.unshift("千葉県")
+    return ad.captures.unshift(prefecture)
   end
 end
 
@@ -44,6 +44,12 @@ def create_lead(r)
   return lead
 end
 
+unless ENV["prefecture"]
+  p "it need prefecture"
+  exit
+end
+
+
 table = CSV.table('db/lead_list.csv',encoding: "Windows-31J:UTF-8")
 table.each do |r|
   #事業所名が空白の場合、スキップ
@@ -55,7 +61,7 @@ table.each do |r|
   lead = Lead.find_by(tel: tel_encode(r[:tel]))
   lead = create_lead(r) if lead.blank?
 
-  address = split_address(r[:address])
+  address = split_address(r[:address],ENV["prefecture"])
   if address.blank?
     p "no address #{r[:address]}"
     next
