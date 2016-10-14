@@ -45,6 +45,6 @@ jQuery ->
         {value: "teacher_announce", text: "講師連絡"}
         {value: "receive_resume", text: "レジュメ到着"}
         {value: "check_resume", text: "正誤チェック"}
-        {value: "unnecessary", text: "発送済み"}
-        {value: "sent", text: "不要"}
+        {value: "unnecessary", text: "不要"}
+        {value: "sent", text: "発送済み"}
       ]
