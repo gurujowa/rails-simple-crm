@@ -1,8 +1,8 @@
 module OrderSheetsHelper
 
   def select_order_sheet_periods(id)
-    periods = Period.includes([{course: :lead},:teacher]).joins(:order_sheet).order(:day)
-    return periods.merge(OrderSheet.where(status: ["draft","cancel"])).or(periods.where(order_sheet_id: id))
+    periods = Period.includes([{course: :lead},:teacher]).left_outer_joins(:order_sheet).order(:day)
+    return periods.merge(OrderSheet.where(status: ["draft","cancel"])).or(periods.where(order_sheet_id: id)).or(periods.where(order_sheet_id: nil))
   end
 
   def avail_button(period)
