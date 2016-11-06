@@ -17,7 +17,10 @@ getCourseText = (val) ->
 
     $.each json.periods, () ->
       if teacher_name == this.teacher
-        period_txt = period_txt + this.day + "\n"
+        period_txt = period_txt + this.day
+        if this.break_flg == true
+          period_txt = period_txt + this.break_time
+        period_txt = period_txt + "\n"
 
     $.each json.course_addresses, (i) ->
       ad_text = """
