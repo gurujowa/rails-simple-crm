@@ -8,6 +8,19 @@ class CoursesController < ApplicationController
   def show
     @course = Course.includes({periods: [:order_sheet,{teacher: :director},:period_tasks,:user,:course_address]}).find(params[:id])
     @tasks = CourseTask.where(course_id: @course.id)
+    respond_to do |format|
+      format.html { }
+      format.json {}
+      format.pdf {
+        render pdf: "#{@course.name} (#{@course.lead.name})  - コース詳細",
+               encoding: 'UTF-8',
+               zoom: "0.9",
+               layout: 'pdf.html',
+               no_background: false,
+               orientation: "Landscape",
+               show_as_html: params[:debug].present?
+      }
+    end
   end
 
   def edit
@@ -124,7 +137,7 @@ class CoursesController < ApplicationController
   private
   def course_params
     params.require(:course).permit(:name, :students,:user_id, :address, :tel, :station, :responsible,  :memo,  :lead_id,
-        periods_attributes: [:id, :order_avail, :course_address_id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id,:user_id, :memo,:price, :train_cost, :_destroy],
+        periods_attributes: [:id,:students, :theme, :order_avail, :course_address_id, :day, :start_time, :end_time, :break_start, :break_end, :teacher_id,:user_id, :memo,:price, :train_cost, :_destroy],
         course_addresses_attributes: [:id, :name, :address, :station, :responsible, :tel, :projector,:projector_detail, :board, :board_detail, :memo, :_destroy],
         course_tasks_attributes: [:id, :start,:end, :title,:memo, :_destroy]
         )

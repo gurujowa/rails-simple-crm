@@ -128,29 +128,12 @@ h2 コマ情報
 
 
 .edit_button
+  = link_to 'PDF', course_path(format: "pdf"), :class => "btn btn-default"
   = link_to '編集', edit_course_path, :class => "btn btn-info"
   = link_to '削除', @course, method: :delete, data: { confirm: '本当に削除しますか' }, :class => "btn btn-warning"
-.row
-  .col-sm-12
 
-    h3 コース用タスク
-    table.table.table-bordered.table-striped#tasks_table
-      thead
-        tr
-          th 名前＊
-          th 開始＊
-          th 終了
-          th メモ
-      tbody
-        - @course.course_tasks.each do |t|
-          tr
-            td = t.title
-            td = t.start
-            td = t.end
-            td = t.memo
-
-    h3 メール用　テキスト（コピペ用)
-    .well
-      - @course.periods.each do |p|
-        = p.day.to_s(:jp) + " " + p.start_date.to_s(:time) + "～" + p.end_date.to_s(:time)
-        br
+h3 メール用　テキスト（コピペ用)
+.well
+  - @course.periods.each do |p|
+    = p.day.to_s(:jp) + " " + p.start_date.to_s(:time) + "～" + p.end_date.to_s(:time)
+    br

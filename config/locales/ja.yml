@@ -149,6 +149,8 @@ ja:
         teacher: 講師
         price: 謝金(税込)
         train_cost: 交通費
+        students: 受講者数
+        theme: テーマ
         order_available: 発注可能
         user: 担当者
         course_address: 会場

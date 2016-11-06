@@ -1,0 +1,27 @@
+.content
+  p
+    div 事業所名：#{@course.lead.corp_double_name}
+    div 研修カリキュラム：#{@course.name}
+  p 
+    div  < メモ >
+    div 【#{@course.memo}】
+
+
+table.table_main
+  tr style="background-color:gray;color: white"
+    th 日時
+    th テーマ
+    th 講師
+    th 謝金(税込)
+    th 会場
+    th 人数
+    th 備考
+  - @course.periods.each do |p|
+    tr
+      td style="white-space:nowrap;" = p.datetime_fulltext(lf: true)
+      td = p.theme
+      td = p.teacher.name
+      td style="white-space:nowrap;"= period_price_text(p)
+      td = p.course_address&.name
+      td = p.students
+      td = p.memo

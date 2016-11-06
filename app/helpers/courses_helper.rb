@@ -1,5 +1,13 @@
 module CoursesHelper
 
+  def period_price_text(p)
+    if p.train_cost.present?
+      return "合計#{number_to_currency(p.price + p.train_cost)}<br>(謝金#{number_to_currency(p.price)})<br>(交通費#{number_to_currency(p.train_cost)})".html_safe
+    else
+      return number_to_currency p.price
+    end
+  end
+
   def course_calendar_color(period)
     if period.resume_complete_flag == true
       return "course-calendar-complete"

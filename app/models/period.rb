@@ -80,6 +80,19 @@ class Period < ActiveRecord::Base
     end
   end
 
+  def datetime_fulltext(lf: false)
+    if lf == true
+      lf = "<br />"
+    else
+      lf = ""
+    end
+    text = "#{self.day.to_s(:jp)} #{self.start_time.to_s(:time)}～#{self.end_time.to_s(:time)}#{lf} (合計時間#{self.total_time_format})"
+    if self.break_start.present? && self.break_end.present?
+      text += "#{lf}(休憩：#{self.break_start&.to_s(:time)}～#{self.break_end&.to_s(:time)})"
+    end
+    return text.html_safe
+  end
+
   def title
     return "#{self.course.lead.corp_name} - #{self.course.name} - #{self.teacher.short_name} - #{self.day}"
   end
