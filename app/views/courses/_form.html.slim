@@ -6,7 +6,7 @@ ul
 = f.association :lead,collection: Lead.where(id:@course.lead&.id), input_html:{ class: "search_lead"}, label_method: :corp_double_name, selected: @course.lead&.id, include_blank: true
 
 = f.input :students
-= f.input :memo
+= f.input :memo, hint: "助成金を利用する場合は利用助成金を記入してください。また、送付先も記入してください", :input_html => {:rows => 5}
 
 h1.page-header コマ情報
 .row
