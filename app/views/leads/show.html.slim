@@ -24,13 +24,12 @@ p#notice = notice
       - dm_class_active = @lead.dm_flg == true ? " active" : ""
       = link_to "DM不要", {controller: "leads",action: "add_flg", id: @lead.id, type: "dm_flg"},remote: true, class: "btn btn-default btn-block"+ dm_class_active, id: "btn-lead-add-dm_flg"
       - mark_class_active = @lead.mark_flg == true ? " active" : ""
-      = link_to "マーク客(資料送付済)", {controller: "leads",action: "add_flg", id: @lead.id, type: "mark_flg"},remote: true, class: "btn btn-default btn-block"+ mark_class_active, id: "btn-lead-add-mark_flg"
+      = link_to "資料請求ストック", {controller: "leads",action: "add_flg", id: @lead.id, type: "mark_flg"},remote: true, class: "btn btn-default btn-block"+ mark_class_active, id: "btn-lead-add-mark_flg"
       - nego_class_active = @lead.nego_flg == true ? " active" : ""
-      = link_to "商談中(当月見込み)", {controller: "leads",action: "add_flg", id: @lead.id, type: "nego_flg"},remote: true, class: "btn btn-default btn-block"+ nego_class_active, id: "btn-lead-add-nego_flg"
       - if @lead.other_user?(current_user.id)
         button type="button" class="btn btn-default" disabled=true #{@lead.user.name}が追加済み
       - else
-        = link_to "キープ客(時期改め)", {controller: "leads",action: "add_mylist", id: @lead.id},remote: true, class: "btn btn-default btn-block #{if @lead.mylist?(current_user.id) then "active" end }",id: "btn-lead-add-mylist"
+        = link_to "マイリスト", {controller: "leads",action: "add_mylist", id: @lead.id},remote: true, class: "btn btn-default btn-block #{if @lead.mylist?(current_user.id) then "active" end }",id: "btn-lead-add-mylist"
       - if @lead.contract_flg == true
         = link_to "既存客", contract_lead_path(@lead, flg: false),class: "btn btn-danger btn-block", id: "btn-lead-contract"
       - else
