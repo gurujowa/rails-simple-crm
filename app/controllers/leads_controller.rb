@@ -288,8 +288,8 @@ class LeadsController < ApplicationController
       record = create_airtable_company(@lead,@company_table)
       create_airtable_activity(@lead, @activity_table, record)
     rescue => ex
-        logger.debug(ex.inspect)
-        render plain: ex.message, status: 400
+        logger.info(ex.inspect)
+        render plain: ex.inspect
         return false
     end
 
