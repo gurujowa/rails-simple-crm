@@ -212,7 +212,7 @@ class LeadsController < ApplicationController
         render text: @lead.errors.full_messages, status: 400
       end
     rescue => ex
-        render text: ex.message, status: 400
+        render text: ex.inspect
     end
   end
 
@@ -288,7 +288,8 @@ class LeadsController < ApplicationController
       record = create_airtable_company(@lead,@company_table)
       create_airtable_activity(@lead, @activity_table, record)
     rescue => ex
-        render text: ex.message, status: 400
+        logger.debug(ex.inspect)
+        render plain: ex.message, status: 400
         return false
     end
 
@@ -349,7 +350,7 @@ class LeadsController < ApplicationController
     def create_airtable_company(lead, company_table)
       record = Airtable::Record.new("企業名"=>lead.corp_double_name)
       record["都道府県"] = lead.prefecture if lead.prefecture.present?
-      record["担当営業"] = lead.lead_histories.last.user.name.gsub("　","") if lead.lead_histories.present?
+      record["担当営業"] = lead.lead_histories.last.user.name.gsub("　 ","") if lead.lead_histories.present?
       record["住所"] = lead.full_address(true,false)
       record["電話番号"] = lead.tel
       record["FAX"] = lead.fax
