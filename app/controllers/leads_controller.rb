@@ -281,11 +281,16 @@ class LeadsController < ApplicationController
   end
 
   def airtable
-    @client = Airtable::Client.new(Rails.application.secrets.airtable_key)
-    @company_table = @client.table(Rails.application.secrets.airtable_company_table_id, "会社情報")
-    @activity_table = @client.table(Rails.application.secrets.airtable_company_table_id, "履歴")
-    record = create_airtable_company(@lead,@company_table)
-    create_airtable_activity(@lead, @activity_table, record)
+    begin
+      @client = Airtable::Client.new(Rails.application.secrets.airtable_key)
+      @company_table = @client.table(Rails.application.secrets.airtable_company_table_id, "会社情報")
+      @activity_table = @client.table(Rails.application.secrets.airtable_company_table_id, "履歴")
+      record = create_airtable_company(@lead,@company_table)
+      create_airtable_activity(@lead, @activity_table, record)
+    rescue => ex
+        render text: ex.message, status: 400
+        return false
+    end
 
     @lead.update_attributes!({airtable_id: record.id})
 
