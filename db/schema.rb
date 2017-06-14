@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106084153) do
+ActiveRecord::Schema.define(version: 20170613095305) do
 
   create_table "billing_plan_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "bill_date",                     null: false
@@ -329,6 +329,7 @@ ActiveRecord::Schema.define(version: 20161106084153) do
     t.boolean  "contract_flg",                   default: false, null: false
     t.boolean  "mark_flg"
     t.boolean  "nego_flg"
+    t.string   "airtable_id"
     t.index ["tel"], name: "index_leads_on_tel", unique: true, using: :btree
     t.index ["user_id"], name: "index_leads_on_user_id", using: :btree
   end

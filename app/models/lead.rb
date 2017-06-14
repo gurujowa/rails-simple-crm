@@ -172,9 +172,9 @@ class Lead < ActiveRecord::Base
     end
   end
 
-  def full_address(build=true)
+  def full_address(build=true, prefecture=true)
     address = ""
-    if self.prefecture != nil
+    if self.prefecture != nil and prefecture == true
       address.concat(self.prefecture)    
     end
     if self.city != nil

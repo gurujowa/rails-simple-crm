@@ -13,6 +13,7 @@ Mycrm::Application.routes.draw do
       get "tasks"
       get "get_all_csv"
       get "add_tag"
+      get "airtable"
       post "add_tag_finish"
       get "name"
       post "up_column"

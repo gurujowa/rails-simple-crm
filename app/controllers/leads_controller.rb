@@ -1,5 +1,5 @@
 class LeadsController < ApplicationController
-  before_action :set_lead, only: [:edit, :update, :destroy, :add_flg, :comment, :contract, :update_tasks]
+  before_action :set_lead, only: [:edit, :update, :destroy, :add_flg, :comment, :contract, :update_tasks, :airtable]
   after_action :store_location, only: [:index, :search, :mylist, :approach]
   before_action :set_tag, only: [:index,:show, :edit, :update, :create, :new]
   before_action :authenticate_user!
@@ -279,6 +279,18 @@ class LeadsController < ApplicationController
       render_noty :error, @to.errors.full_messages
     end
   end
+
+  def airtable
+    @client = Airtable::Client.new(Rails.application.secrets.airtable_key)
+    @company_table = @client.table(Rails.application.secrets.airtable_company_table_id, "会社情報")
+    @activity_table = @client.table(Rails.application.secrets.airtable_company_table_id, "履歴")
+    record = create_airtable_company(@lead,@company_table)
+    create_airtable_activity(@lead, @activity_table, record)
+
+    @lead.update_attributes!({airtable_id: record.id})
+
+    redirect_to :action=> 'show', :id => params[:id], notice: 'airtable入力が完了しました'
+  end
   
   def tasks
     lead_subsities = LeadSubsity.includes({lead_subsity: {subsity: :subsity_tasks}}).all
@@ -327,5 +339,28 @@ class LeadsController < ApplicationController
       lead_subsities_attributes:[:id, :name, :subsity_id, :start, :end,:memo,:_destroy],
       lead_tasks_attributes:[:id, :name, :lead_id, :lead_subsity_id, :due_date, :complete_date, :memo, :_destroy],
                                   )
+    end
+
+    def create_airtable_company(lead, company_table)
+      record = Airtable::Record.new("企業名"=>lead.corp_double_name)
+      record["都道府県"] = lead.prefecture if lead.prefecture.present?
+      record["担当営業"] = lead.lead_histories.last.user.name.gsub("　","") if lead.lead_histories.present?
+      record["住所"] = lead.full_address(true,false)
+      record["電話番号"] = lead.tel
+      record["FAX"] = lead.fax
+      record["E-mail"] = lead.email
+      record["取引先担当者"] = lead.person_name
+      repo = company_table.create(record)
+      return repo
+    end
+
+    def create_airtable_activity(lead,table,company_record)
+      lead.lead_histories.each do |lh|
+        record = Airtable::Record.new("日付"=>lh.approach_day)
+        record["会社情報"] = [company_record.id]
+        record["カテゴリ"] = lh.lead_history_status.name
+        record["内容"] = lh.memo
+        repo = table.create(record)
+      end
     end
 end

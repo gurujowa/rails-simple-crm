@@ -76,6 +76,7 @@ gem "ransack", github: "activerecord-hackery/ransack"
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'moji'
 gem 'deep_cloneable'
+gem 'airtable', github: 'airtable/airtable-ruby'
 
 #------------------------------
 #form

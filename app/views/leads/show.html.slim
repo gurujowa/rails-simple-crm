@@ -34,6 +34,10 @@ p#notice = notice
         = link_to "既存客", contract_lead_path(@lead, flg: false),class: "btn btn-danger btn-block", id: "btn-lead-contract"
       - else
         = link_to "未契約", contract_lead_path(@lead, flg: true),class: "btn btn-success btn-block", id: "btn-lead-contract"
+      - if @lead.airtable_id.present?
+        = link_to "airtable入力済み","https://airtable.com/tblRyRuytfLR6ycod/viwX5Ijn4BVOeaCoa/"+@lead.airtable_id, class: "btn btn-success"
+      - else
+        = link_to "airtable記入", {controller: "leads",action: "airtable", id: @lead.id },class: "btn btn-default btn-block"
 ul.nav.nav-tabs#lead-show-tab data-pk="#{@lead.id}"
   li.active
     a href="#info" data-toggle="tab" aria-controls="info" お客様情報
