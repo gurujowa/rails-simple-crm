@@ -125,36 +125,35 @@
         | 再アプローチ日：
         = @lead.next_approach_day
 
-    - unless @lead.airtable_id.present?
-      button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#btn-history" 対応履歴の追加
-      = simple_nested_form_for(@new_lead_history, :html => {:multipart => true}) do |f|
-        =f.error_notification
-        #btn-history.collapse
-          .panel.panel-info
-            .panel-heading 対応履歴の追加
-            .panel-body
-              = f.input :approach_day, as: :datetime_picker
-              table.table.table-bordered.table-lead-history-status
-                - @lead_history_status_progress.each do |status|
-                  tr
-                    th  = status.text
-                    td 
-                      .row
-                        - LeadHistoryStatus.with_progress(status).each do |l|
-                          - if l.display_flg == true
-                            .col-sm-6
-                              = f.label :lead_history_status_id, value: l.id do
-                                .color-box style="background-color:##{l.color}"
-                                = l.name
-                              = f.radio_button :lead_history_status_id, l.id
-              = f.input :next_approach_day, as: :datetime_picker
-              = f.input :memo
-              = f.simple_fields_for :lead_history_attachments do |l|
-                = l.input :attachment, as: :attachment
-              = f.link_to_add "添付ファイル追加", :lead_history_attachments,class: "btn btn-default"
-              = f.hidden_field :lead_id
-            .panel-footer
-              = f.button :submit
+    button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#btn-history" 対応履歴の追加
+    = simple_nested_form_for(@new_lead_history, :html => {:multipart => true}) do |f|
+      =f.error_notification
+      #btn-history.collapse
+        .panel.panel-info
+          .panel-heading 対応履歴の追加
+          .panel-body
+            = f.input :approach_day, as: :datetime_picker
+            table.table.table-bordered.table-lead-history-status
+              - @lead_history_status_progress.each do |status|
+                tr
+                  th  = status.text
+                  td 
+                    .row
+                      - LeadHistoryStatus.with_progress(status).each do |l|
+                        - if l.display_flg == true
+                          .col-sm-6
+                            = f.label :lead_history_status_id, value: l.id do
+                              .color-box style="background-color:##{l.color}"
+                              = l.name
+                            = f.radio_button :lead_history_status_id, l.id
+            = f.input :next_approach_day, as: :datetime_picker
+            = f.input :memo
+            = f.simple_fields_for :lead_history_attachments do |l|
+              = l.input :attachment, as: :attachment
+            = f.link_to_add "添付ファイル追加", :lead_history_attachments,class: "btn btn-default"
+            = f.hidden_field :lead_id
+          .panel-footer
+            = f.button :submit
 
     .panel.panel-info
       .panel-heading 対応履歴
