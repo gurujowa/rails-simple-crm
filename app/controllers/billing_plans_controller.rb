@@ -26,6 +26,10 @@ class BillingPlansController < ApplicationController
                layout: 'pdf.html',
                show_as_html: params[:debug].present?
       }
+      format.csv do
+        filename = 'freee_csv_' + @billing_plan.client_name
+        headers['Content-Disposition'] = "attachment; filename=\"#{filename}.csv\""
+      end
     end
 
   end

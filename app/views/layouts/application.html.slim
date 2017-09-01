@@ -52,6 +52,7 @@ html
               ul.dropdown-menu
                  li = link_to "見積り" , {controller: "estimates", action: "index"}
                  li = link_to "請求予定表" , {controller: "billing_plans", action: "index"}
+                 li = link_to "請求予定表(社長確認用)" , {controller: "billing_plans", action: "index", search: "提出済 未確認"}
                  li = link_to "売上計上表" , {controller: "billing_plans", action: "sales"}
             li.dropdown
               = link_to "コース", "#", {:class => "dropdown-toggle" , "data-toggle" => "dropdown"}

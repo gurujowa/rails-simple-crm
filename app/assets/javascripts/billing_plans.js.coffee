@@ -4,6 +4,11 @@
 
 jQuery ->
   init_month_picker()
+  $('#billing_plan_datatables').dataTable( {
+        "lengthChange":     false,
+        "pageLength":     100,
+        "oSearch": {"sSearch": $('#billing_plan_datatables').data("search")}
+    } );
 $(document).on "nested:fieldAdded", (event) ->
   init_month_picker()
 

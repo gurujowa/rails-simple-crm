@@ -62,8 +62,11 @@ ja:
     flags:
       billing_plan:
         send_flg:
-          flag_on: 発送済
-          flag_off: 未発送
+          flag_on: 提出済
+          flag_off: 未提出
+        check_flg:
+          flag_on: 確認済
+          flag_off: 未確認
       teacher_order_line:
         invoice_flg:
           flag_on: 請求済
@@ -248,6 +251,7 @@ ja:
         name: 請求書名
         lead_id: 会社名
         send_flg: 発行済か
+        check_flg: 発行済か
         display_name: 表示名
         publish_date: 発行日
       lead_interview:
