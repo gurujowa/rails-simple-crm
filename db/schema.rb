@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901045545) do
+ActiveRecord::Schema.define(version: 20170901105448) do
 
   create_table "billing_plan_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "bill_date",                     null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20170901045545) do
     t.boolean  "send_flg",     default: false, null: false
     t.string   "display_name"
     t.integer  "lead_id",                      null: false
-    t.boolean  "check_flg"
+    t.boolean  "check_flg",    default: false, null: false
   end
 
   create_table "campaigns", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
