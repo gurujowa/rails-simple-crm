@@ -14,7 +14,6 @@
 class BillingPlan < ActiveRecord::Base
 
   has_paper_trail 
-  belongs_to :lead
   has_many :billing_plan_lines, :dependent => :destroy
   accepts_nested_attributes_for :billing_plan_lines, :allow_destroy => true, reject_if: :all_blank
   

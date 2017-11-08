@@ -19,8 +19,6 @@ class Estimate < ActiveRecord::Base
   accepts_nested_attributes_for :estimate_lines, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }
   accepts_nested_attributes_for :estimate_subsities, :allow_destroy => true, reject_if: proc { |attributes| attributes['name'].blank? }
 
-  belongs_to :lead
-
   def client_name
     if display_name.present?
       return self.display_name

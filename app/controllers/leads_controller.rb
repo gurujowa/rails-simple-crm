@@ -170,7 +170,7 @@ class LeadsController < ApplicationController
 
   # GET /leads/1
   def show
-    @lead = Lead.includes([{courses: {periods: [:user, {teacher: :director}]}}, {estimates: :estimate_lines}]).find(params[:id])
+    @lead = Lead.includes([{courses: {periods: [:user, {teacher: :director}]}}]).find(params[:id])
     @new_lead_history = LeadHistory.new
     @new_lead_history.lead_id = @lead.id
     @new_lead_history.approach_day = DateTime.now()
