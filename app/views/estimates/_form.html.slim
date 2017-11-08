@@ -1,7 +1,6 @@
 = simple_nested_form_for(@estimate , html: {:class => "form-vertical"}, wrapper: :vertical_form) do |f|
   = f.error_notification 
-  = f.input :lead_id, as: :leadselect
-  = f.input :display_name, hint: "見積書の送付先名を変えたい場合に入力してください。空白の場合は会社名がそのまま記載されます。"
+  = f.input :display_name
   = f.input :publish_date, as: :date_picker
   = f.input :expired, as: :date_picker
   = f.input :memo

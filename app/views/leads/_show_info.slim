@@ -78,12 +78,6 @@
                 span.glyphicon.glyphicon-map-marker
             td = @lead.full_address
           tr
-            th 獲得元
-            td = @lead.campaign
-          tr
-            th 獲得元詳細
-            td = @lead.campaign_detail
-          tr
             th マイリスト登録ユーザー
             td = @lead.user.name if @lead.user.present?
           tr
@@ -101,23 +95,6 @@
     .panel.panel-info
       .panel-heading お客様メモ
       .panel-body = simple_format @lead.memo
-    .panel.panel-info
-      .panel-heading 見積り
-      .panel-body
-        - if @lead.estimates.present?
-          table.table.table-bordered.table-striped
-            thead
-              tr
-                th メモ
-                th 金額
-            tbody
-              - @lead.estimates.each do |e|
-                tr
-                  th = link_to e.memo, edit_estimate_path(e)
-                  th = number_to_currency e.total_price
-      .panel-footer
-        = link_to "新規追加" , { controller: "estimates" ,action: "new"}, class: "btn btn-default"
-        
 
   .col-sm-6
     - if @lead.next_approach_day.present?
@@ -189,29 +166,3 @@
                     | &nbsp;/&nbsp;
                     = link_to '削除', h, method: :delete, data: { confirm: '本当に削除しますか' }
 
-    .panel.panel-info
-      .panel-heading ヒアリング内容
-      .panel-body
-        table.table.table-bordered.table-striped
-          tr
-            th 正規職員人数
-            td 
-              a.lead_interview_editable data-type="text" data-title="正規職員数を入力してください" data-name="regular_staff"
-                = @lead.lead_interview.regular_staff if @lead.lead_interview.present?
-          tr
-            th 非正規職員人数
-            td 
-              a.lead_interview_editable data-type="text" data-title="非正規職員数を入力してください" data-name="nonregular_staff"
-                = @lead.lead_interview.nonregular_staff if @lead.lead_interview.present?
-          tr
-            th 支払余力
-            td 
-              a.lead_interview_editable data-type="text" data-title="支払余力を入力してください" data-name="solvency"
-                = @lead.lead_interview.solvency if @lead.lead_interview.present?
-          tr
-            th 時間余力
-            td 
-              a.lead_interview_editable data-type="text" data-title="時間余力を入力してください" data-name="time"
-                = @lead.lead_interview.time if @lead.lead_interview.present?
-      .panel-footer
-        = link_to '編集', edit_lead_path(@lead), class: "btn btn-info"

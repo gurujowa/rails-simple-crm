@@ -5,7 +5,7 @@ class EstimatesController < ApplicationController
 
   # GET /estimates
   def index
-    @estimates = Estimate.all.includes(:estimate_lines, :lead)
+    @estimates = Estimate.all.includes(:estimate_lines)
   end
 
   # GET /estimates/1
@@ -33,9 +33,6 @@ class EstimatesController < ApplicationController
       @estimate = clone
     else
       @estimate = Estimate.new
-    end
-    if params[:client_id].present?
-      @estimate.lead_id = params[:client_id]
     end
   end
 
@@ -81,7 +78,7 @@ class EstimatesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def estimate_params
-      params.require(:estimate).permit(:title, :display_name, :lead_id, :expired,  :send_flg, :memo, :publish_date,
+      params.require(:estimate).permit(:title, :display_name,  :expired,  :send_flg, :memo, :publish_date,
            estimate_lines_attributes: [:id, :name, :unit_price, :quantity, :_destroy, :tax_rate, :detail],
            estimate_subsities_attributes: [:id, :name, :price, :people, :_destroy])
     end

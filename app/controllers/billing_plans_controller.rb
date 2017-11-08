@@ -4,7 +4,7 @@ class BillingPlansController < ApplicationController
 
   # GET /billing_plans
   def index
-    @billing_plans = BillingPlan.includes([:billing_plan_lines, :lead]).all
+    @billing_plans = BillingPlan.includes([:billing_plan_lines]).all
 
     respond_to do |format|
       format.html
@@ -44,9 +44,6 @@ class BillingPlansController < ApplicationController
       @billing_plan = BillingPlan.new
       @billing_plan.billing_plan_lines.new
       end
-    if params[:lead_id].present?
-      @billing_plan.lead_id = params[:lead_id]
-    end
   end
 
   def sales
@@ -90,12 +87,12 @@ class BillingPlansController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_billing_plan
-      @billing_plan = BillingPlan.includes([:billing_plan_lines,:lead]).find(params[:id])
+      @billing_plan = BillingPlan.includes([:billing_plan_lines]).find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def billing_plan_params
-      params.require(:billing_plan).permit(:name, :display_name, :send_flg, :lead_id, :tax_rate, :status, :memo, :publish_date,
+      params.require(:billing_plan).permit(:name, :display_name, :send_flg , :tax_rate, :status, :memo, :publish_date,
         billing_plan_lines_attributes: [:id,  :bill_date, :accural_date, :price,  :memo, :_destroy]
                                           )
     end

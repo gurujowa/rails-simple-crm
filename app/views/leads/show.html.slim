@@ -23,8 +23,6 @@ p#notice = notice
     .col-sm-2
       - dm_class_active = @lead.dm_flg == true ? " active" : ""
       = link_to "DM不要", {controller: "leads",action: "add_flg", id: @lead.id, type: "dm_flg"},remote: true, class: "btn btn-default btn-block"+ dm_class_active, id: "btn-lead-add-dm_flg"
-      - mark_class_active = @lead.mark_flg == true ? " active" : ""
-      = link_to "資料請求ストック", {controller: "leads",action: "add_flg", id: @lead.id, type: "mark_flg"},remote: true, class: "btn btn-default btn-block"+ mark_class_active, id: "btn-lead-add-mark_flg"
       - nego_class_active = @lead.nego_flg == true ? " active" : ""
       - if @lead.other_user?(current_user.id)
         button type="button" class="btn btn-default" disabled=true #{@lead.user.name}が追加済み
@@ -38,16 +36,6 @@ p#notice = notice
         = link_to "airtable入力済み","https://airtable.com/tblRyRuytfLR6ycod/viwX5Ijn4BVOeaCoa/"+@lead.airtable_id, class: "btn btn-success"
       - else
         = link_to "airtable記入", {controller: "leads",action: "airtable", id: @lead.id },class: "btn btn-default btn-block"
-ul.nav.nav-tabs#lead-show-tab data-pk="#{@lead.id}"
-  li.active
-    a href="#info" data-toggle="tab" aria-controls="info" お客様情報
-  li
-    a href="#task" data-toggle="tab" aria-controls="task" タスク
-  li
-    a href="#course" data-toggle="tab" aria-controls="course" コース
-  li
-    a href="#comment" data-toggle="tab" aria-controls="comment" コメント
-br
 .tab-content
   .tab-pane.active#info
     = render 'show_info'

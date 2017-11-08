@@ -20,14 +20,11 @@ class BillingPlan < ActiveRecord::Base
   
   validates :name, presence: true  
   validates :publish_date, presence: true  
-  validates :lead_id, presence: true, numericality: true
   validates :tax_rate, presence: true, numericality: true
 
   def client_name
     if self.display_name.present?
       return self.display_name
-    elsif self.lead.present?
-      return self.lead.name
     else
       return "no name"
     end

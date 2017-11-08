@@ -1,7 +1,7 @@
 module UsersHelper
       
       def options_from_users(selected_id = nil, currents = false)
-        users = User.all()
+        users = User.where(id: [13,25,29])
         if selected_id.blank? and currents == true
           selected_id = current_user.id
         end

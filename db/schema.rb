@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901105448) do
+ActiveRecord::Schema.define(version: 20171108082225) do
 
   create_table "billing_plan_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "bill_date",                     null: false
