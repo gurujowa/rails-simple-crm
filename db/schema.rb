@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171108082225) do
+ActiveRecord::Schema.define(version: 20171113035751) do
 
   create_table "billing_plan_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.date     "bill_date",                     null: false
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20171108082225) do
     t.date     "publish_date"
     t.boolean  "send_flg",     default: false, null: false
     t.string   "display_name"
-    t.integer  "lead_id",                      null: false
     t.boolean  "check_flg",    default: false, null: false
   end
 
